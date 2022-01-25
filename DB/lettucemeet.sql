@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `email` VARCHAR(255) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
   `enabled` TINYINT NULL,
-  `role` VARCHAR(50) NULL,
+  `role` VARCHAR(75) NULL,
   `first_name` VARCHAR(100) NULL,
   `last_name` VARCHAR(100) NULL,
   `business_name` VARCHAR(150) NULL,
@@ -331,3 +331,23 @@ GRANT SELECT, INSERT, TRIGGER, UPDATE, DELETE ON TABLE * TO 'farmer'@'localhost'
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Data for table `address`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `lettucemeetdb`;
+INSERT INTO `address` (`id`, `street1`, `street2`, `city`, `state`, `zip`) VALUES (1, '1234 Real Street', NULL, 'Hong Kong', 'FR', '80121');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `user`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `lettucemeetdb`;
+INSERT INTO `user` (`id`, `username`, `email`, `password`, `enabled`, `role`, `first_name`, `last_name`, `business_name`, `image_url`, `create_time`, `address_id`) VALUES (1, 'admin', 'admin@email.com', 'admin', true, 'admin', 'admin', 'admin', '', '', '2016-02-26 18:23:39', 1);
+
+COMMIT;
+

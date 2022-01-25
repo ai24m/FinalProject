@@ -7,6 +7,15 @@
 	<provider>org.hibernate.jpa.HibernatePersistenceProvider
     </provider>
 
+	<class>com.skilldistillery.lettucemeet.entities.Address</class>
+	<class>com.skilldistillery.lettucemeet.entities.Market</class>
+	<class>com.skilldistillery.lettucemeet.entities.MarketProduct</class>
+	<class>com.skilldistillery.lettucemeet.entities.MarketRating</class>
+	<class>com.skilldistillery.lettucemeet.entities.Product</class>
+	<class>com.skilldistillery.lettucemeet.entities.ProductComment</class>
+	<class>com.skilldistillery.lettucemeet.entities.ProductRating</class>
+	<class>com.skilldistillery.lettucemeet.entities.SellerRating</class>
+	<class>com.skilldistillery.lettucemeet.entities.Type</class>
 	<class>com.skilldistillery.lettucemeet.entities.User</class>
 	
     <properties>
