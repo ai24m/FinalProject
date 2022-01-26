@@ -1,6 +1,7 @@
 package com.skilldistillery.lettucemeet.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -8,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -19,9 +22,13 @@ public class User {
 	private int id;
 
 	private String username;
+	
 	private String email;
+	
 	private String password;
+	
 	private boolean enabled;
+	
 	private String role;
 
 	@Column(name = "first_name")
@@ -39,7 +46,17 @@ public class User {
 	@CreationTimestamp
 	@Column(name = "create_time")
 	private LocalDateTime created;
-
+	
+	@ManyToOne
+	@Column(name = "address_id")
+	private Address address; 
+	
+	@OneToMany(mappedBy="user")
+	private List<ProductRating> productRatings; 
+	
+	@
+	
+// no arg constructor 
 	public User() {
 		super();
 	}

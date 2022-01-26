@@ -5,6 +5,9 @@ import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 @Entity
@@ -19,7 +22,16 @@ public class MarketRating {
 	
 	private String comment;
 	
-
+	@ManyToOne 
+	@JoinColumn(name="user_id")
+	@MapsId(value="userId")
+	private User user;
+	
+	@ManyToOne 
+	@JoinColumn(name="market_id")
+	@MapsId(value="marketId")
+	private Market market;
+	
 	//--no-arg constructor
 	public MarketRating() {
 		super();
@@ -48,6 +60,22 @@ public class MarketRating {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Market getMarket() {
+		return market;
+	}
+
+	public void setMarket(Market market) {
+		this.market = market;
 	}
 
 	//--hashcode

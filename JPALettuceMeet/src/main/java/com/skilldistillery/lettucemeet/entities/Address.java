@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Address {
@@ -23,6 +25,14 @@ public class Address {
 	private String state;
 	
 	private String zip;
+	
+	@ManyToOne
+	@JoinColumn(name="address_id")
+	private User user;
+	
+	@ManyToOne
+	@JoinColumn(name="address_id")
+	private Market market; 
 
 	public Address() {
 		super();
@@ -76,6 +86,22 @@ public class Address {
 		this.zip = zip;
 	}
 	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Market getMarket() {
+		return market;
+	}
+
+	public void setMarket(Market market) {
+		this.market = market;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

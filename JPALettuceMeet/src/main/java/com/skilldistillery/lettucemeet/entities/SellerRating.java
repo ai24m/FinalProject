@@ -5,6 +5,9 @@ import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 @Entity
@@ -18,10 +21,29 @@ public class SellerRating {
 	private int sellerRating;
 	
 	private String comment;
+	
+	@ManyToOne 
+	@JoinColumn(name="user_id")
+	@MapsId(value="userId")
+	private User user;
+	
+	@ManyToOne 
+	@JoinColumn(name="seller_id")
+	@MapsId(value="sellerId")
+	private User seller;
 
 	//--no-arg constructor
 	public SellerRating() {
 		super();
+	}
+	
+	public SellerRating(SellerRatingId id, int sellerRating, String comment, User user, User seller) {
+		super();
+		this.id = id;
+		this.sellerRating = sellerRating;
+		this.comment = comment;
+		this.user = user;
+		this.seller = seller;
 	}
 
 	//--getter and setter
@@ -48,6 +70,23 @@ public class SellerRating {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public User getSeller() {
+		return seller;
+	}
+
+	public void setSeller(User seller) {
+		this.seller = seller;
+	}
+	
 
 	//--hashcode
 	@Override
