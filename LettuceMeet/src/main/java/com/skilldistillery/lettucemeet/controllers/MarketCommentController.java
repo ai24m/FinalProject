@@ -66,7 +66,7 @@ public class MarketCommentController {
 	}
 	
 	@PutMapping("marketcomments/{mcId}")
-	public Market update(HttpServletRequest req, HttpServletResponse res, Principal principal, @PathVariable Integer mcId, @RequestBody MarketComment marketComment) {
+	public MarketComment update(HttpServletRequest req, HttpServletResponse res, Principal principal, @PathVariable Integer mcId, @RequestBody MarketComment marketComment) {
 		try {
 			User user = userSvc.findByUserName(principal.getName()); 
 			marketComment = mcSvc.update(user, mcId, marketComment);
