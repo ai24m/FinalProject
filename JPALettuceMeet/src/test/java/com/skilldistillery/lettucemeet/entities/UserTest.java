@@ -45,6 +45,17 @@ class UserTest {
 	void test() {
 		assertNotNull(user);
 		assertEquals("admin", user.getUsername());
+		assertEquals("admin@email.com", user.getEmail());
+		assertEquals("admin", user.getPassword());
+		assertEquals("admin", user.getFirstName());
+		assertEquals("admin", user.getLastName());
+	}
+	
+	@Test
+	@DisplayName("user address mapping")
+	void test1() {
+		assertNotNull(user.getAddress());
+		assertEquals(1, user.getAddress().getId());
 	}
 
 }

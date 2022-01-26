@@ -44,17 +44,21 @@ class AddressTest {
 	void test_Address_Mapping() {
 		assertNotNull(address);
 		assertEquals(1, address.getId());
+		assertEquals("1234 Real Street", address.getStreet1());
+		assertEquals(null, address.getStreet2());
+		assertEquals("Hong Kong", address.getCity());
+		assertEquals("80121", address.getZip());
 	}
 	
 	@Test
 	void test_Address_User_Mapping() {
-		assertNotNull(address);
-		assertEquals(1, address.getId());
+		assertNotNull(address.getUsers());
+		assertTrue(address.getUsers().size() > 0);
 	}
 	
 	@Test
 	void test_Address_Market_Mapping() {
-		assertNotNull(address);
-		assertEquals(1, address.getId());
+		assertNotNull(address.getMarkets());
+		assertTrue(address.getMarkets().size() == 0);
 	}
 }
