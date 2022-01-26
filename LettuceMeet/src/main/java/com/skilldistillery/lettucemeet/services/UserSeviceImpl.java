@@ -16,15 +16,21 @@ public class UserSeviceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepo;
-	
+
 	@Autowired
 	private AddressRepository addressRepo;
 
 	@Override
 	public List<User> getAllUser() {
 		// TODO Auto-generated method stub
-		
+
 		return userRepo.findAll();
+	}
+
+	@Override
+	public User findByUserName(String name) {
+		// TODO Auto-generated method stub
+		return userRepo.findByUsername(name);
 	}
 
 	@Override
@@ -32,14 +38,14 @@ public class UserSeviceImpl implements UserService {
 		// TODO Auto-generated method stub
 		Optional<User> op = userRepo.findById(userId);
 		User user = null;
-		if(op.isPresent()) {
+		if (op.isPresent()) {
 			user = op.get();
 		}
 		return user;
 	}
 
 	@Override
-	public User createdUser( User user, Address address) {
+	public User createdUser(User user, Address address) {
 		// TODO Auto-generated method stub
 		addressRepo.saveAndFlush(address);
 		user.setAddress(address);
@@ -49,11 +55,11 @@ public class UserSeviceImpl implements UserService {
 
 	@Override
 	public User updateUser(int id, User user) {
-		
+
 		// TODO Auto-generated method stub
 		Optional<User> op = userRepo.findById(id);
 		User managed = null;
-		if(op.isPresent()) {
+		if (op.isPresent()) {
 			user = op.get();
 			managed.setBusinessName(user.getBusinessName());
 			managed.setEmail(user.getEmail());
@@ -71,8 +77,8 @@ public class UserSeviceImpl implements UserService {
 	public boolean deleteUser(int userId) {
 		// TODO Auto-generated method stub
 		boolean deleted = false;
-		Optional <User> op = userRepo.findById(userId);
-		if(op.isPresent()) {
+		Optional<User> op = userRepo.findById(userId);
+		if (op.isPresent()) {
 			User user = op.get();
 			userRepo.delete(user);
 			deleted = true;
