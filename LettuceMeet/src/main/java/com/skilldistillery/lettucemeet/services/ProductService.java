@@ -10,10 +10,10 @@ public interface ProductService {
 	
 	public Product findById(int prodId);
 	
-	public Product createProduct(Product prod);
+	public Product createProduct(String username, Product prod);
 	
-	public Product updateProduct(int prodId, Product prod);
+	public Product updateProduct(String username, int prodId, Product prod);
 	
-	public boolean deleteProduct(int prodId);
+	public boolean deleteProduct(String username, int prodId);
 
 }
