@@ -1,5 +1,6 @@
 package com.skilldistillery.lettucemeet.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,17 +22,17 @@ import com.skilldistillery.lettucemeet.services.ProductService;
 
 @RestController
 @RequestMapping("api")
-@CrossOrigin({"*", "http://localhost:4300"})
+@CrossOrigin({ "*", "http://localhost:4300" })
 public class ProductController {
-	
+
 	@Autowired
 	private ProductService prodSvc;
-	
+
 	@GetMapping("products")
 	public List<Product> products() {
 		return prodSvc.getProducts();
 	}
-	
+
 	@GetMapping("products/{id}")
 	public Product showProduct(@PathVariable Integer id, HttpServletResponse res) {
 		Product product = prodSvc.findById(id);
@@ -40,11 +41,12 @@ public class ProductController {
 		}
 		return product;
 	}
-	
+
 	@PostMapping("products")
-	public Product createProduct(@RequestBody Product product, HttpServletResponse res, HttpServletRequest req) {
+	public Product createProduct(@RequestBody Product product, HttpServletResponse res, HttpServletRequest req,
+			Principal principal) {
 		try {
-			prodSvc.createProduct(product);
+			prodSvc.createProduct(principal.getName(), product);
 			res.setStatus(201);
 			StringBuffer url = req.getRequestURL();
 			url.append("/").append(product.getId());
@@ -57,11 +59,12 @@ public class ProductController {
 		}
 		return null;
 	}
-	
+
 	@PutMapping("products/{id}")
-	public Product updateProduct(@PathVariable Integer id, @RequestBody Product product, HttpServletResponse res) {
+	public Product updateProduct(@PathVariable Integer id, @RequestBody Product product, HttpServletResponse res,
+			Principal principal) {
 		try {
-			product = prodSvc.updateProduct(id, product);
+			product = prodSvc.updateProduct(principal.getName(), id, product);
 			if (product == null) {
 				res.setStatus(404);
 			}
@@ -72,11 +75,11 @@ public class ProductController {
 		}
 		return product;
 	}
-	
+
 	@DeleteMapping("products/{id}")
-	public void deleteProduct(@PathVariable Integer id, HttpServletResponse res) {
+	public void deleteProduct(@PathVariable Integer id, HttpServletResponse res, Principal principal) {
 		try {
-			if (prodSvc.deleteProduct(id)) {
+			if (prodSvc.deleteProduct(principal.getName(), id)) {
 				res.setStatus(204);
 			} else {
 				res.setStatus(404);

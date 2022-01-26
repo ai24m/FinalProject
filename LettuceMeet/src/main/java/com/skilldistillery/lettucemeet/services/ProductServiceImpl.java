@@ -7,14 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.lettucemeet.entities.Product;
-import com.skilldistillery.lettucemeet.entities.Type;
-import com.skilldistillery.lettucemeet.repositories.ProductReposity;
+import com.skilldistillery.lettucemeet.entities.User;
+import com.skilldistillery.lettucemeet.repositories.ProductRepository;
+import com.skilldistillery.lettucemeet.repositories.UserRepository;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-	
+
 	@Autowired
-	private ProductReposity prodRepo;
+	private ProductRepository prodRepo;
+
+	@Autowired
+	private UserRepository userRepo;
 
 	@Override
 	public List<Product> getProducts() {
@@ -31,41 +35,40 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Product createProduct(Product product) {
-		if (product.getType() == null) {
-			Type type = new Type();
-			type.setId(1);
-			product.setType(type);
-			prodRepo.saveAndFlush(product);
+	public Product createProduct(String username, Product product) {
+		User user = userRepo.findByUsername(username);
+		if (user != null) {
+			product.setUser(user);
+			;
+			return prodRepo.saveAndFlush(product);
 		}
-		return product;
+		return null;
 	}
 
 	@Override
-	public Product updateProduct(int prodId, Product product) {
-		Optional<Product> optProd = prodRepo.findById(prodId);
-		Product managed = null;
-		if (optProd.isPresent()) {
-			managed = optProd.get();
-			managed.setDescription(product.getDescription());
-			managed.setOrganic(product.isOrganic());
-			managed.setPrice(product.getPrice());
-			managed.setImageUrl(product.getImageUrl());
-			managed.setQuantity(product.getQuantity());
-			managed.setAvailableDate(product.getAvailableDate());
+	public Product updateProduct(String username, int prodId, Product product) {
+		Product existing = prodRepo.findByIdAndUserUsername(prodId, username);
+		if (existing != null) {
+			existing.setDescription(product.getDescription());
+			existing.setOrganic(product.isOrganic());
+			existing.setPrice(product.getPrice());
+			existing.setImageUrl(product.getImageUrl());
+			existing.setQuantity(product.getQuantity());
+			existing.setAvailableDate(product.getAvailableDate());
 			if (product.getType() != null) {
-				managed.setType(product.getType());
+				existing.setType(product.getType());
 			}
-			prodRepo.saveAndFlush(managed);
+			prodRepo.saveAndFlush(existing);
 		}
 		return product;
 	}
 
 	@Override
-	public boolean deleteProduct(int prodId) {
+	public boolean deleteProduct(String username, int prodId) {
 		boolean deleted = false;
-		if (prodRepo.existsById(prodId)) {
-			prodRepo.deleteById(prodId);
+		Product prod = prodRepo.findByIdAndUserUsername(prodId, username);
+		if (prod != null) {
+			prodRepo.delete(prod);
 			deleted = true;
 		}
 		return deleted;
