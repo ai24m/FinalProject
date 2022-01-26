@@ -35,8 +35,14 @@ public class MarketCommentServiceImpl implements MarketCommentService{
 	}
 
 	@Override
-	public MarketComment create(MarketComment marketComment, User user) {
+	public MarketComment create(MarketComment marketComment) {
+		if (marketComment.getUser() != null && marketComment.getMarket() != null) {
+			marketComment.setMarket(marketComment.getMarket());
+			marketComment.setUser(marketComment.getUser());
+			marketComment.setMarketComment(marketComment.getMarketComment());
+		}
 		marketComment.setUser(user);
+		
 		mcRepo.saveAndFlush(marketComment);
 		return marketComment;
 	} 
