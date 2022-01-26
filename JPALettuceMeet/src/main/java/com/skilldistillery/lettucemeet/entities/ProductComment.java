@@ -94,6 +94,30 @@ public class ProductComment {
 		this.updated = updated;
 	}
 
+	public ProductComment getProductComment() {
+		return productComment;
+	}
+
+	public void setProductComment(ProductComment productComment) {
+		this.productComment = productComment;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
