@@ -108,11 +108,11 @@ public class Address {
 		this.users = users;
 	}
 
-	public List<Market> getAddresses() {
+	public List<Market> getMarkets() {
 		return markets;
 	}
 
-	public void setAddresses(List<Market> markets) {
+	public void setMarkets(List<Market> markets) {
 		this.markets = markets;
 	}
 

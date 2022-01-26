@@ -213,13 +213,13 @@ public class User {
 	public void addMarketComment(ProductRating productRating) {
 		if (productRatings == null) productRatings = new ArrayList<>();
 		
-//		if (!productRatings.contains(productRating)) {
-//			productRatings.add(productRating);
-//			if (productRating.getUser() != null) {
-//				productRating.getUser().getMarketComments().remove(productRating);
-//			} 
-//			productRating.setMarket(this);
-//		}
+		if (!productRatings.contains(productRating)) {
+			productRatings.add(productRating);
+			if (productRating.getUser() != null) {
+				productRating.getUser().getMarketComments().remove(productRating);
+			} 
+			productRating.setUser(this);
+		}
 	}
 	
 	public void removeMarketComment(MarketComment marketComment) {
