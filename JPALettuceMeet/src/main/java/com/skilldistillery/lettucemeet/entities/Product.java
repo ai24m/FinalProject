@@ -26,6 +26,8 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	private String name; 
+	
 	private String description;
 	
 	private boolean organic;
@@ -73,11 +75,12 @@ public class Product {
 		super();
 	}
 
-	public Product(int id, String description, boolean organic, double price, String imageUrl, int quantity,
+	public Product(int id, String name, String description, boolean organic, double price, String imageUrl, int quantity,
 		LocalDate availableDate, LocalDateTime created, LocalDateTime updated, Type type, User user,
 		List<Market> markets, List<ProductRating> productRating) {
 		super();
 		this.id = id;
+		this.name = name;
 		this.description = description;
 		this.organic = organic;
 		this.price = price;
@@ -98,6 +101,14 @@ public class Product {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDescription() {
