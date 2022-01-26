@@ -12,10 +12,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ProductTest {
+class MarketTest {
+
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Product product;
+	private Market market;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -30,39 +31,34 @@ class ProductTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		product = em.find(Product.class, 1);
+		market = em.find(Market.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		product = null;
-	}
-
-	@Test
-	void test_Product_Mapping() {
-		assertNotNull(product);
-		assertEquals("", product.getDescription());
-		assertEquals(3.02, product.getPrice());
-		assertEquals(68, product.getQuantity());
-		assertTrue(product.isOrganic());
+		market = null;
 	}
 	
 	@Test
-	void test_Product_User_Mapping() {
-		assertNotNull(product.getUser());
-		assertEquals(41, product.getUser().getId());
+	void test_Address_Mapping() {
+		assertNotNull(market);
+		assertEquals(1, market.getId());
+		assertEquals("Jetpulse", market.getName());
+		assertEquals(11, market.getMarketDate().getMonthValue());
+		assertEquals(10, market.getCreateTime().getMonthValue());
+		assertEquals(3, market.getUpdateTime().getMonthValue());
 	}
 	
 	@Test
-	void test_Product_Product_Rating_Mapping() {
-		assertNotNull(product.getProductRating());
-		assertTrue(product.getProductRating().size() == 0);
+	void test_Address_User_Mapping() {
+		assertNotNull(market.getUser());
+		assertEquals(1, market.getUser().getId());
 	}
 	
 	@Test
-	void test_Product_Type_Mapping() {
-		assertNotNull(product.getType());
-		assertEquals(4, product.getType().getId());
+	void test_Address_Address_Mapping() {
+		assertNotNull(market.getUser());
+		assertEquals(168, market.getAddress().getId());
 	}
 }

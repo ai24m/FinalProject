@@ -26,11 +26,11 @@ public class MarketComment {
 	private String comment;
 	
 	@CreationTimestamp
-	@Column(name = "created_time")
+	@Column(name = "create_time")
 	private LocalDateTime created;
 	
 	@UpdateTimestamp
-	@Column(name = "updated_time")
+	@Column(name = "update_time")
 	private LocalDateTime updated;
 	
 	@ManyToOne
