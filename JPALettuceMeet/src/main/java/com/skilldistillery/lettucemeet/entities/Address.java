@@ -1,5 +1,6 @@
 package com.skilldistillery.lettucemeet.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -7,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Address {
@@ -26,16 +27,27 @@ public class Address {
 	
 	private String zip;
 	
-	@ManyToOne
-	@JoinColumn(name="address_id")
-	private User user;
+	@OneToMany(mappedBy="address")
+	private List<User> users;
 	
-	@ManyToOne
-	@JoinColumn(name="address_id")
-	private Market market; 
+	@OneToMany(mappedBy="address")
+	private List <Market> markets; 
 
 	public Address() {
 		super();
+	}
+
+	public Address(int id, String street1, String street2, String city, String state, String zip, List<User> users,
+			List<Market> markets) {
+		super();
+		this.id = id;
+		this.street1 = street1;
+		this.street2 = street2;
+		this.city = city;
+		this.state = state;
+		this.zip = zip;
+		this.users = users;
+		this.markets = markets;
 	}
 
 	public int getId() {
@@ -85,21 +97,21 @@ public class Address {
 	public void setZip(String zip) {
 		this.zip = zip;
 	}
-	
-	public User getUser() {
-		return user;
+
+	public List<User> getUsers() {
+		return users;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 
-	public Market getMarket() {
-		return market;
+	public List<Market> getMarkets() {
+		return markets;
 	}
 
-	public void setMarket(Market market) {
-		this.market = market;
+	public void setMarkets(List<Market> markets) {
+		this.markets = markets;
 	}
 
 	@Override

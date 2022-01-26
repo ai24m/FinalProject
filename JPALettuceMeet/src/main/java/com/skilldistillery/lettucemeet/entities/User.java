@@ -1,6 +1,7 @@
 package com.skilldistillery.lettucemeet.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -48,17 +50,61 @@ public class User {
 	private LocalDateTime created;
 	
 	@ManyToOne
-	@Column(name = "address_id")
+	@JoinColumn(name = "address_id")
 	private Address address; 
 	
 	@OneToMany(mappedBy="user")
 	private List<ProductRating> productRatings; 
 	
 	
+	@OneToMany(mappedBy="user")
+	private List<SellerRating> sellerRatings;
+	
+	@OneToMany(mappedBy="user")
+	private List<SellerRating> userRatings; 
+	
+	@OneToMany(mappedBy="user")
+	private List<MarketRating> marketRatings; 
+	
+	@OneToMany(mappedBy="user")
+	private List<Market> markets; 
+	
+	@OneToMany(mappedBy="user")
+	private List<ProductComment> productComments;
+	
+	@OneToMany(mappedBy="user")
+	private List<MarketComment> marketComments;
 	
 // no arg constructor 
 	public User() {
 		super();
+	}
+
+	public User(int id, String username, String email, String password, boolean enabled, String role, String firstName,
+			String lastName, String businessName, String imageUrl, LocalDateTime created, Address address,
+			List<ProductRating> productRatings, List<SellerRating> sellerRatings, List<SellerRating> userRatings,
+			List<MarketRating> marketRatings, List<Market> markets, List<ProductComment> productComments,
+			List<MarketComment> marketComments) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.enabled = enabled;
+		this.role = role;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.businessName = businessName;
+		this.imageUrl = imageUrl;
+		this.created = created;
+		this.address = address;
+		this.productRatings = productRatings;
+		this.sellerRatings = sellerRatings;
+		this.userRatings = userRatings;
+		this.marketRatings = marketRatings;
+		this.markets = markets;
+		this.productComments = productComments;
+		this.marketComments = marketComments;
 	}
 
 	public int getId() {
@@ -147,6 +193,207 @@ public class User {
 
 	public void setCreated(LocalDateTime created) {
 		this.created = created;
+	}
+	
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public List<ProductRating> getProductRatings() {
+		return productRatings;
+	}
+
+	public void setProductRatings(List<ProductRating> productRatings) {
+		this.productRatings = productRatings;
+	}
+	
+	public void addProductRating(ProductRating productRating) {
+		if (productRatings == null) productRatings = new ArrayList<>();
+		
+		if (!productRatings.contains(productRating)) {
+			productRatings.add(productRating);
+			if (productRating.getUser() != null) {
+				productRating.getUser().getProductRatings().remove(productRating);
+			} 
+			productRating.setUser(this);
+		}
+	}
+	
+	public void removeProductRating(ProductRating productRating) {
+		productRating.setUser(null);
+		if (productRatings != null) {
+			productRatings.remove(productRating);
+		}
+	}
+	
+
+	public List<SellerRating> getSellerRatings() {
+		return sellerRatings;
+	}
+
+	public void setSellerRatings(List<SellerRating> sellerRatings) {
+		this.sellerRatings = sellerRatings;
+	}
+	
+	public void addSellerRating(SellerRating sellRating) {
+		if (sellerRatings == null) productRatings = new ArrayList<>();
+		
+		if (!sellerRatings.contains(sellRating)) {
+			sellerRatings.add(sellRating);
+			if (sellRating.getUser() != null) {
+				sellRating.getUser().getSellerRatings().remove(sellRating);
+			} 
+			sellRating.setUser(this);
+		}
+	}
+	
+	public void removeSellerRating(SellerRating sellRating) {
+		sellRating.setUser(null);
+		if (sellerRatings != null) {
+			sellerRatings.remove(sellRating);
+		}
+	}
+
+	public List<SellerRating> getUserRatings() {
+		return userRatings;
+	}
+
+	public void setUserRatings(List<SellerRating> userRatings) {
+		this.userRatings = userRatings;
+	}
+
+	public void addUserRating(SellerRating userRating) {
+		if (userRatings == null) productRatings = new ArrayList<>();
+		
+		if (!userRatings.contains(userRating)) {
+			userRatings.add(userRating);
+			if (userRating.getUser() != null) {
+				userRating.getUser().getSellerRatings().remove(userRating);
+			} 
+			userRating.setUser(this);
+		}
+	}
+	
+	public void removeUserRating(SellerRating sellRating) {
+		sellRating.setUser(null);
+		if (userRatings != null) {
+			userRatings.remove(sellRating);
+		}
+	}
+	
+	
+	public List<MarketRating> getMarketRatings() {
+		return marketRatings;
+	}
+
+	public void setMarketRatings(List<MarketRating> marketRatings) {
+		this.marketRatings = marketRatings;
+	}
+
+	public void addMarketRating(MarketRating marketRating) {
+		if (marketRatings == null) productRatings = new ArrayList<>();
+		
+		if (!marketRatings.contains(marketRating)) {
+			marketRatings.add(marketRating);
+			if (marketRating.getUser() != null) {
+				marketRating.getUser().getMarketRatings().remove(marketRating);
+			} 
+			marketRating.setUser(this);
+		}
+	}
+	
+	public void removeMarketRating(MarketRating marketRating) {
+		marketRating.setUser(null);
+		if (marketRatings != null) {
+			marketRatings.remove(marketRating);
+		}
+	}
+	
+	
+	public List<Market> getMarkets() {
+		return markets;
+	}
+
+	public void setMarkets(List<Market> markets) {
+		this.markets = markets;
+	}
+
+	public void addMarket(Market market) {
+		if (markets == null) markets = new ArrayList<>();
+		
+		if (!markets.contains(market)) {
+			markets.add(market);
+			if (market.getUser() != null) {
+				market.getUser().getMarkets().remove(market);
+			} 
+			market.setUser(this);
+		}
+	}
+	
+	public void removeMarket(Market market) {
+		market.setUser(null);
+		if (markets != null) {
+			markets.remove(market);
+		}
+	}
+	
+	
+	public List<ProductComment> getProductComments() {
+		return productComments;
+	}
+
+	public void setProductComments(List<ProductComment> productComments) {
+		this.productComments = productComments;
+	}
+
+	public void addProductComment(ProductComment productComment) {
+		if (productComments == null) productComments = new ArrayList<>();
+		
+		if (!productComments.contains(productComment)) {
+			productComments.add(productComment);
+			if (productComment.getUser() != null) {
+				productComment.getUser().getProductComments().remove(productComment);
+			} 
+			productComment.setUser(this);
+		}
+	}
+	
+	public void removeProductComment(ProductComment productComment) {
+		productComment.setUser(null);
+		if (productComments != null) {
+			productComments.remove(productComment);
+		}
+	}
+	
+	public List<MarketComment> getMarketComments() {
+		return marketComments;
+	}
+
+	public void setMarketComments(List<MarketComment> marketComments) {
+		this.marketComments = marketComments;
+	}
+	
+	public void addMarketComment(MarketComment marketComment) {
+		if (marketComments == null) marketComments = new ArrayList<>();
+		
+		if (!marketComments.contains(marketComment)) {
+			marketComments.add(marketComment);
+			if (marketComment.getUser() != null) {
+				marketComment.getUser().getMarketComments().remove(marketComment);
+			} 
+			marketComment.setUser(this);
+		}
+	}
+	
+	public void removeMarketComment(MarketComment marketComment) {
+		marketComment.setUser(null);
+		if (marketComments != null) {
+			marketComments.remove(marketComment);
+		}
 	}
 
 	@Override

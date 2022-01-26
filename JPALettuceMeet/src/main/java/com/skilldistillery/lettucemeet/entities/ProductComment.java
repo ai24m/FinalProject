@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -33,15 +34,15 @@ public class ProductComment {
 	private LocalDateTime updated;
 	
 	@ManyToOne 
-	@Column(name = "comment_id")
+	@JoinColumn(name = "comment_id")
 	private ProductComment productComment; 
 	
 	@ManyToOne
-	@Column(name = "product_id")
+	@JoinColumn(name = "product_id")
 	private Product product;
 	
 	@ManyToOne
-	@Column(name = "user_id")
+	@JoinColumn(name = "user_id")
 	private User user; 
 
 //	no arg constructor 
@@ -91,6 +92,30 @@ public class ProductComment {
 
 	public void setUpdated(LocalDateTime updated) {
 		this.updated = updated;
+	}
+
+	public ProductComment getProductComment() {
+		return productComment;
+	}
+
+	public void setProductComment(ProductComment productComment) {
+		this.productComment = productComment;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override
