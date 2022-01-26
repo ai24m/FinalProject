@@ -368,7 +368,6 @@ public class User {
 		}
 	}
 	
-	
 	public List<MarketComment> getMarketComments() {
 		return marketComments;
 	}
@@ -377,8 +376,24 @@ public class User {
 		this.marketComments = marketComments;
 	}
 	
+	public void addMarketComment(MarketComment marketComment) {
+		if (marketComments == null) marketComments = new ArrayList<>();
+		
+		if (!marketComments.contains(marketComment)) {
+			marketComments.add(marketComment);
+			if (marketComment.getUser() != null) {
+				marketComment.getUser().getMarketComments().remove(marketComment);
+			} 
+			marketComment.setUser(this);
+		}
+	}
 	
-	
+	public void removeMarketComment(MarketComment marketComment) {
+		marketComment.setUser(null);
+		if (marketComments != null) {
+			marketComments.remove(marketComment);
+		}
+	}
 
 	@Override
 	public int hashCode() {
