@@ -15,8 +15,9 @@ public class SellerRatingImpl implements SellerRatingService {
 
 	@Autowired
 	private SellerRatingRepository sellerRatingRepo;
+
 	@Override
-	public List <SellerRating> showAll() {
+	public List<SellerRating> showAll() {
 		// TODO Auto-generated method stub
 		return sellerRatingRepo.findAll();
 	}
@@ -24,12 +25,14 @@ public class SellerRatingImpl implements SellerRatingService {
 	@Override
 	public List<SellerRating> findByUserName(String username) {
 		// TODO Auto-generated method stub
-		return null;
+		username = "%" + username + "%";
+		return sellerRatingRepo.findByUser_Username(username);
 	}
 
 	@Override
-	public SellerRating createSellerRating(SellerRatingId sellerRatingId, SellerRating sellerRating) {
+	public SellerRating createSellerRating(User seller, User user, SellerRating sellerRating) {
 		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -43,12 +46,6 @@ public class SellerRatingImpl implements SellerRatingService {
 	public boolean deleteSellerRating(SellerRatingId sellerRatingId) {
 		// TODO Auto-generated method stub
 		return false;
-	}
-
-	@Override
-	public SellerRating createSellerRating(User seller, User user, SellerRating sellerRating) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
