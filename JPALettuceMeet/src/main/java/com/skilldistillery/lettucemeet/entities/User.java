@@ -210,19 +210,19 @@ public class User {
 		this.productRatings = productRatings;
 	}
 	
-	public void addMarketComment(ProductRating productRating) {
+	public void addProductRating(ProductRating productRating) {
 		if (productRatings == null) productRatings = new ArrayList<>();
 		
 		if (!productRatings.contains(productRating)) {
 			productRatings.add(productRating);
 			if (productRating.getUser() != null) {
-				productRating.getUser().getMarketComments().remove(productRating);
+				productRating.getUser().getProductRatings().remove(productRating);
 			} 
 			productRating.setUser(this);
 		}
 	}
 	
-	public void removeMarketComment(MarketComment marketComment) {
+	public void removeProductRating(ProductRating productRating) {
 		marketComment.setMarket(null);
 		if (productRatings != null) {
 			productRatings.remove(marketComment);

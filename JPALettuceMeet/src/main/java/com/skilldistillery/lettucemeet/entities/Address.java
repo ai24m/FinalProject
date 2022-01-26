@@ -27,12 +27,10 @@ public class Address {
 	
 	private String zip;
 	
-	@OneToMany 
-	@JoinColumn(name="address")
+	@OneToMany(mappedBy="address")
 	private List<User> users;
 	
-	@OneToMany
-	@JoinColumn(name="address")
+	@OneToMany(mappedBy="address")
 	private List <Market> markets; 
 
 	public Address() {
