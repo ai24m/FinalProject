@@ -1,5 +1,6 @@
 package com.skilldistillery.lettucemeet.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -7,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Address {
@@ -26,13 +27,13 @@ public class Address {
 	
 	private String zip;
 	
-	@ManyToOne
+	@OneToMany 
 	@JoinColumn(name="address_id")
-	private User user;
+	private List<User> users;
 	
-	@ManyToOne
+	@OneToMany
 	@JoinColumn(name="address_id")
-	private Market market; 
+	private List <Address> addresses; 
 
 	public Address() {
 		super();
@@ -85,21 +86,21 @@ public class Address {
 	public void setZip(String zip) {
 		this.zip = zip;
 	}
-	
-	public User getUser() {
-		return user;
+
+	public List<User> getUsers() {
+		return users;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 
-	public Market getMarket() {
-		return market;
+	public List<Address> getAddresses() {
+		return addresses;
 	}
 
-	public void setMarket(Market market) {
-		this.market = market;
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
 	}
 
 	@Override
