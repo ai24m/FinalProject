@@ -56,6 +56,7 @@ public class MarketServiceImpl implements MarketService {
 			if (mOpt.isPresent()) {
 				Market updatedMarket = mOpt.get();
 				updatedMarket.setAddress(market.getAddress());
+				return updatedMarket; 
 			}
 		} return null;
 	}

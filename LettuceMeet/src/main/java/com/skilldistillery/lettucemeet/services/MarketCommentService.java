@@ -11,8 +11,10 @@ public interface MarketCommentService {
 
 	MarketComment show(Integer mcId);
 
-	MarketComment create(MarketComment marketComment, User user);
+	MarketComment create(MarketComment marketComment);
 
 	MarketComment update(User user, Integer mcId, MarketComment marketComment);
+
+	boolean destroy(User user, Integer mcId);
 
 }
