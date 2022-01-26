@@ -28,11 +28,11 @@ public class Address {
 	private String zip;
 	
 	@OneToMany 
-	@JoinColumn(name="address_id")
+	@JoinColumn(name="address")
 	private List<User> users;
 	
 	@OneToMany
-	@JoinColumn(name="address_id")
+	@JoinColumn(name="address")
 	private List <Market> markets; 
 
 	public Address() {
