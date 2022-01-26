@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.lettucemeet.entities.Market;
 import com.skilldistillery.lettucemeet.entities.MarketComment;
 import com.skilldistillery.lettucemeet.entities.User;
 import com.skilldistillery.lettucemeet.repositories.MarketCommentRepository;
@@ -40,11 +41,9 @@ public class MarketCommentServiceImpl implements MarketCommentService{
 			marketComment.setMarket(marketComment.getMarket());
 			marketComment.setUser(marketComment.getUser());
 			marketComment.setMarketComment(marketComment.getMarketComment());
-		}
-		marketComment.setUser(user);
-		
-		mcRepo.saveAndFlush(marketComment);
-		return marketComment;
+			mcRepo.saveAndFlush(marketComment);
+			return marketComment;
+		}	return marketComment; 	
 	} 
 	
 	@Override 
@@ -52,12 +51,23 @@ public class MarketCommentServiceImpl implements MarketCommentService{
 		if (marketComment.getUser().getId() == user.getId()) {
 			Optional <MarketComment> mcOpt = mcRepo.findById(mcId);
 			if (mcOpt.isPresent()) {
-				MarketComment marketComment1 = new MarketComment();
-//				MarketComment marketComment = mcOpt.get(); 
-				return marketComment1; 
+				MarketComment updatedMarketComment = mcOpt.get();
+				updatedMarketComment.setMarketComment(marketComment);
+				updatedMarketComment.setUser(marketComment.getUser());
+				updatedMarketComment.setMarket(marketComment.getMarket());
+				return updatedMarketComment; 
 			}
-		}
-		return marketComment;
+		} return marketComment;
 	}
-	
+
+	@Override
+	public boolean destroy(User user, Integer mcId) {
+		boolean deleted = false; 
+		MarketComment marketComment = mcRepo.findByIdAndUser(mcId, user); 
+		if (marketComment != null) {
+			mcRepo.delete(marketComment);
+			deleted = true;
+			return deleted; 
+		} return deleted; 
+	}
 }
