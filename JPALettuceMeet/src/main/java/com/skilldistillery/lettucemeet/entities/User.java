@@ -1,6 +1,7 @@
 package com.skilldistillery.lettucemeet.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -77,8 +78,33 @@ public class User {
 	public User() {
 		super();
 	}
-	
-	
+
+	public User(int id, String username, String email, String password, boolean enabled, String role, String firstName,
+			String lastName, String businessName, String imageUrl, LocalDateTime created, Address address,
+			List<ProductRating> productRatings, List<SellerRating> sellerRatings, List<SellerRating> userRatings,
+			List<MarketRating> marketRatings, List<Market> markets, List<ProductComment> productComments,
+			List<MarketComment> marketComments) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.enabled = enabled;
+		this.role = role;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.businessName = businessName;
+		this.imageUrl = imageUrl;
+		this.created = created;
+		this.address = address;
+		this.productRatings = productRatings;
+		this.sellerRatings = sellerRatings;
+		this.userRatings = userRatings;
+		this.marketRatings = marketRatings;
+		this.markets = markets;
+		this.productComments = productComments;
+		this.marketComments = marketComments;
+	}
 
 	public int getId() {
 		return id;
@@ -168,7 +194,89 @@ public class User {
 		this.created = created;
 	}
 	
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public List<ProductRating> getProductRatings() {
+		return productRatings;
+	}
+
+	public void setProductRatings(List<ProductRating> productRatings) {
+		this.productRatings = productRatings;
+	}
 	
+	public void addMarketComment(ProductRating productRating) {
+		if (productRatings == null) productRatings = new ArrayList<>();
+		
+//		if (!productRatings.contains(productRating)) {
+//			productRatings.add(productRating);
+//			if (productRating.getUser() != null) {
+//				productRating.getUser().getMarketComments().remove(productRating);
+//			} 
+//			productRating.setMarket(this);
+//		}
+	}
+	
+	public void removeMarketComment(MarketComment marketComment) {
+		marketComment.setMarket(null);
+		if (productRatings != null) {
+			productRatings.remove(marketComment);
+		}
+	}
+	
+
+	public List<SellerRating> getSellerRatings() {
+		return sellerRatings;
+	}
+
+	public void setSellerRatings(List<SellerRating> sellerRatings) {
+		this.sellerRatings = sellerRatings;
+	}
+
+	public List<SellerRating> getUserRatings() {
+		return userRatings;
+	}
+
+	public void setUserRatings(List<SellerRating> userRatings) {
+		this.userRatings = userRatings;
+	}
+
+	public List<MarketRating> getMarketRatings() {
+		return marketRatings;
+	}
+
+	public void setMarketRatings(List<MarketRating> marketRatings) {
+		this.marketRatings = marketRatings;
+	}
+
+	public List<Market> getMarkets() {
+		return markets;
+	}
+
+	public void setMarkets(List<Market> markets) {
+		this.markets = markets;
+	}
+
+	public List<ProductComment> getProductComments() {
+		return productComments;
+	}
+
+	public void setProductComments(List<ProductComment> productComments) {
+		this.productComments = productComments;
+	}
+
+	public List<MarketComment> getMarketComments() {
+		return marketComments;
+	}
+
+	public void setMarketComments(List<MarketComment> marketComments) {
+		this.marketComments = marketComments;
+	}
 
 	@Override
 	public int hashCode() {

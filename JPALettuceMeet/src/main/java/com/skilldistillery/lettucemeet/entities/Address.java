@@ -28,15 +28,28 @@ public class Address {
 	private String zip;
 	
 	@OneToMany 
-	@JoinColumn(name="address_id")
+	@JoinColumn(name="address")
 	private List<User> users;
 	
 	@OneToMany
-	@JoinColumn(name="address_id")
-	private List <Address> addresses; 
+	@JoinColumn(name="address")
+	private List <Market> markets; 
 
 	public Address() {
 		super();
+	}
+
+	public Address(int id, String street1, String street2, String city, String state, String zip, List<User> users,
+			List<Market> markets) {
+		super();
+		this.id = id;
+		this.street1 = street1;
+		this.street2 = street2;
+		this.city = city;
+		this.state = state;
+		this.zip = zip;
+		this.users = users;
+		this.markets = markets;
 	}
 
 	public int getId() {
@@ -95,12 +108,12 @@ public class Address {
 		this.users = users;
 	}
 
-	public List<Address> getAddresses() {
-		return addresses;
+	public List<Market> getAddresses() {
+		return markets;
 	}
 
-	public void setAddresses(List<Address> addresses) {
-		this.addresses = addresses;
+	public void setAddresses(List<Market> markets) {
+		this.markets = markets;
 	}
 
 	@Override
