@@ -10,7 +10,7 @@ public interface TypeService {
 	public List<Type> getAllTypes();
 	
 	//get by Type name
-	public Type getTypeByName(String name);
+	public List<Type> getTypeByName(String name);
 	
 	
 	

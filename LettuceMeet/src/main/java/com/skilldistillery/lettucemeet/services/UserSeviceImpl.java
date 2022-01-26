@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.lettucemeet.entities.Address;
 import com.skilldistillery.lettucemeet.entities.User;
+import com.skilldistillery.lettucemeet.repositories.AddressRepository;
 import com.skilldistillery.lettucemeet.repositories.UserRepository;
 
 @Service
@@ -48,14 +49,35 @@ public class UserSeviceImpl implements UserService {
 
 	@Override
 	public User updateUser(int id, User user) {
+		
 		// TODO Auto-generated method stub
-		return null;
+		Optional<User> op = userRepo.findById(id);
+		User managed = null;
+		if(op.isPresent()) {
+			user = op.get();
+			managed.setBusinessName(user.getBusinessName());
+			managed.setEmail(user.getEmail());
+			managed.setFirstName(user.getFirstName());
+			managed.setPassword(user.getPassword());
+			managed.setImageUrl(user.getImageUrl());
+			managed.setLastName(user.getLastName());
+			managed.setUsername(user.getUsername());
+			userRepo.saveAndFlush(managed);
+		}
+		return managed;
 	}
 
 	@Override
 	public boolean deleteUser(int userId) {
 		// TODO Auto-generated method stub
-		return false;
+		boolean deleted = false;
+		Optional <User> op = userRepo.findById(userId);
+		if(op.isPresent()) {
+			User user = op.get();
+			userRepo.delete(user);
+			deleted = true;
+		}
+		return deleted;
 	}
 
 }

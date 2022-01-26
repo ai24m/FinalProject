@@ -16,13 +16,15 @@ public class TypeServiceImpl implements TypeService {
 	@Override
 	public List<Type> getAllTypes() {
 		// TODO Auto-generated method stub
-		return null;
+		
+		return typeRepo.findAll();
 	}
 
 	@Override
-	public Type getTypeByName(String name) {
+	public List <Type> getTypeByName(String name) {
 		// TODO Auto-generated method stub
-		return null;
+		name = "%"+name+"%";
+		return typeRepo.findByName(name);
 	}
 
 }
