@@ -11,11 +11,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Market {
@@ -51,9 +54,14 @@ public class Market {
 	@JoinColumn(name="address_id")
 	private Address address;
 	
+	@ManyToMany(mappedBy = "markets")
+	private List<Product> products;
+	
+	@JsonIgnore
 	@OneToMany(mappedBy="market")
 	private List<MarketRating> marketRatings;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="market")
 	private List<MarketComment> marketComments;
 	
@@ -153,6 +161,14 @@ public class Market {
 
 	public List<MarketRating> getMarketRatings() {
 		return marketRatings;
+	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
 	}
 
 	public void setMarketRatings(List<MarketRating> marketRatings) {

@@ -24,7 +24,7 @@ public class MarketController {
 	private UserService userSvc; 
 	
 	@GetMapping("markets")
-	public List<Market> index(HttpServletRequest req, HttpServletResponse res) {
+	public List<Market> index(HttpServletRequest req, HttpServletResponse res){
 		List<Market> allMarkets = marketSvc.index(); 
 		if (allMarkets == null) {
 			res.setStatus(404);

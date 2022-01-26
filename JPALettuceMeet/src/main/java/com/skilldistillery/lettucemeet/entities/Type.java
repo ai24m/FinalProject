@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Type {
 	
@@ -19,6 +21,7 @@ public class Type {
 	
 	private String name;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="type")
 	private List<Product> products; 
 	
