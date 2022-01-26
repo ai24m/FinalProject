@@ -62,13 +62,15 @@ public class Product {
 	@JoinColumn(name="user_id")
 	private User user; 
 	
+	@JsonIgnore
 	@ManyToMany 
-	@JoinTable(name="market",
+	@JoinTable(name="market_product",
 		joinColumns=@JoinColumn(name="product_id"),
 		inverseJoinColumns=@JoinColumn(name="market_id")
 	)
-	private List<Market> markets; 
+	private List<Market> markets;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="product")
 	private List<ProductRating> productRating; 
 
