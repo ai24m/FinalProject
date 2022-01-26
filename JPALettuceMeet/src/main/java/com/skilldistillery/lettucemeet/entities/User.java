@@ -54,7 +54,7 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<ProductRating> productRatings; 
 	
-	@
+	
 	
 // no arg constructor 
 	public User() {
