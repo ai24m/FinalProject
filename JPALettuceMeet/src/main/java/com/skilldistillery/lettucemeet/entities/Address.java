@@ -7,8 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Address {
@@ -27,9 +28,11 @@ public class Address {
 	
 	private String zip;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="address")
 	private List<User> users;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="address")
 	private List <Market> markets; 
 

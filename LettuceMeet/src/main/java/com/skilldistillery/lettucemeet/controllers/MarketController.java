@@ -23,7 +23,7 @@ public class MarketController {
 	@Autowired 
 	private UserService userSvc; 
 	
-	@GetMapping("market")
+	@GetMapping("markets")
 	public List<Market> index(HttpServletRequest req, HttpServletResponse res) {
 		List<Market> allMarkets = marketSvc.index(); 
 		if (allMarkets == null) {
@@ -31,7 +31,7 @@ public class MarketController {
 		} return allMarkets; 
 	}
 	
-	@GetMapping("market/{mId}")
+	@GetMapping("markets/{mId}")
 	public Market show(HttpServletRequest req, HttpServletResponse res, @PathVariable int mId) {
 		Market market = marketSvc.show(mId);
 		if (market == null) {
@@ -44,7 +44,7 @@ public class MarketController {
 		} return market; 
 	}
 	
-	@PostMapping("market") //must create address with market 
+	@PostMapping("markets") //must create address with market 
 	public Market create(HttpServletRequest req, HttpServletResponse res, Principal principal, @RequestBody Market market,
 			@RequestBody Address address) {
 		try {
@@ -64,7 +64,7 @@ public class MarketController {
 		} return market; 
 	}
 	
-	@PutMapping("market/{mId}")
+	@PutMapping("markets/{mId}")
 	public Market update(HttpServletRequest req, HttpServletResponse res, Principal principal, @PathVariable Integer mId, @RequestBody Market market) {
 		try {
 			User user = userSvc.findByUserName(principal.getName()); 
@@ -81,8 +81,8 @@ public class MarketController {
 		return market;
 	}
 	
-	@DeleteMapping("market/{mId}")
-	public void destroy(HttpServletRequest req, HttpServletResponse res,Principal principal, @PathVariable Integer mId) {
+	@DeleteMapping("markets/{mId}")
+	public void destroy(HttpServletRequest req, HttpServletResponse res, 	 	Principal principal, @PathVariable Integer mId) {
 		try {
 			User user = userSvc.findByUserName(principal.getName()); 
 			if (marketSvc.destroy(user, mId)) {
