@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "market_comment")
 public class MarketComment {
@@ -33,6 +35,8 @@ public class MarketComment {
 	@Column(name = "update_time")
 	private LocalDateTime updated;
 	
+//	@JsonIgnoreProperties({"marketComment"})
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="comment_id")
 	private MarketComment marketComment; 
