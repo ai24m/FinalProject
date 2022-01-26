@@ -18,6 +18,7 @@ public class MarketRating {
 	private int marketRating;
 	
 	private String comment;
+	
 
 	//--no-arg constructor
 	public MarketRating() {
