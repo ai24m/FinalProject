@@ -73,12 +73,12 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<MarketComment> marketComments;
 	
-	
-	
 // no arg constructor 
 	public User() {
 		super();
 	}
+	
+	
 
 	public int getId() {
 		return id;
@@ -167,6 +167,8 @@ public class User {
 	public void setCreated(LocalDateTime created) {
 		this.created = created;
 	}
+	
+	
 
 	@Override
 	public int hashCode() {
