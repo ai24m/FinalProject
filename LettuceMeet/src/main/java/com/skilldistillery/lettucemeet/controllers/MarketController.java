@@ -7,24 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.skilldistillery.lettucemeet.entities.Address;
-import com.skilldistillery.lettucemeet.entities.Market;
-import com.skilldistillery.lettucemeet.entities.User;
-import com.skilldistillery.lettucemeet.services.MarketService;
-import com.skilldistillery.lettucemeet.services.UserService;
+import org.springframework.web.bind.annotation.*;
+import com.skilldistillery.lettucemeet.entities.*;
+import com.skilldistillery.lettucemeet.services.*;
 
 @RestController
 @RequestMapping("api")
-@CrossOrigin({ "*", "http://localhost:4200" })
+@CrossOrigin({ "*", "http://localhost:4200"})
 
 public class MarketController {
 
@@ -90,5 +79,20 @@ public class MarketController {
 			market = null;
 		}
 		return market;
+	}
+	
+	@DeleteMapping("market/{mId}")
+	public void destroy(HttpServletRequest req, HttpServletResponse res,Principal principal, @PathVariable Integer mId) {
+		try {
+			User user = userSvc.findByUserName(principal.getName()); 
+			if (marketSvc.destroy(user, mId)) {
+				res.setStatus(204); // no content
+			} else {
+				res.setStatus(404); // not found, invalid id
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+		}
 	}
 }
