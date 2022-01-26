@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -44,17 +45,35 @@ public class User {
 	private String imageUrl;
 
 	@CreationTimestamp
-	@Column(name = "create_time")
+	@JoinColumn(name = "create_time")
 	private LocalDateTime created;
 	
 	@ManyToOne
-	@Column(name = "address_id")
+	@JoinColumn(name = "address_id")
 	private Address address; 
 	
 	@OneToMany(mappedBy="user")
 	private List<ProductRating> productRatings; 
 	
-	@
+	@OneToMany(mappedBy="user")
+	private List<SellerRating> sellerRatings;
+	
+	@OneToMany(mappedBy="user")
+	private List<SellerRating> userRatings; 
+	
+	@OneToMany(mappedBy="user")
+	private List<MarketRating> marketRatings; 
+	
+	@OneToMany(mappedBy="user")
+	private List<Market> markets; 
+	
+	@OneToMany(mappedBy="user")
+	private List<ProductComment> productComments;
+	
+	@OneToMany(mappedBy="user")
+	private List<MarketComment> marketComments;
+	
+	
 	
 // no arg constructor 
 	public User() {
