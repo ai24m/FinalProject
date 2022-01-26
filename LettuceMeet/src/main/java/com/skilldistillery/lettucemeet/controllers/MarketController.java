@@ -13,7 +13,7 @@ import com.skilldistillery.lettucemeet.services.*;
 
 @RestController
 @RequestMapping("api")
-@CrossOrigin({ "*", "http://localhost:4200"})
+@CrossOrigin({ "*", "http://localhost:4300"})
 
 public class MarketController {
 
