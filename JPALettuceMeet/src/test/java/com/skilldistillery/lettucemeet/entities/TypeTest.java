@@ -1,7 +1,5 @@
 package com.skilldistillery.lettucemeet.entities;
 
-//import static org.junit.jupiter.api.Assertions.*;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -10,14 +8,13 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Test;
 
 class TypeTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
 //	private Type type;
-
+	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		emf = Persistence.createEntityManagerFactory("JPALettuceMeet");
@@ -55,4 +52,5 @@ class TypeTest {
 //	void test_Address_Market_Mapping() {
 //		assertNotNull(type);
 //	}
+
 }
