@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -30,9 +32,34 @@ public class MarketComment {
 	@UpdateTimestamp
 	@Column(name = "updated_time")
 	private LocalDateTime updated;
+	
+	@ManyToOne
+	@JoinColumn(name="comment_id")
+	private MarketComment marketComment; 
+	
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user; 
+	
+	@ManyToOne
+	@JoinColumn(name="market_id")
+	private Market market; 
 
+//	no arg constructor 
 	public MarketComment() {
 		super();
+	}
+
+	public MarketComment(int id, String comment, LocalDateTime created, LocalDateTime updated, MarketComment marketComment,
+		User user, Market market) {
+		super();
+		this.id = id;
+		this.comment = comment;
+		this.created = created;
+		this.updated = updated;
+		this.marketComment = marketComment;
+		this.user = user;
+		this.market = market;
 	}
 
 	public int getId() {
@@ -65,6 +92,30 @@ public class MarketComment {
 
 	public void setUpdated(LocalDateTime updated) {
 		this.updated = updated;
+	}
+
+	public MarketComment getMarketComment() {
+		return marketComment;
+	}
+
+	public void setMarketComment(MarketComment marketComment) {
+		this.marketComment = marketComment;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Market getMarket() {
+		return market;
+	}
+
+	public void setMarket(Market market) {
+		this.market = market;
 	}
 
 	@Override

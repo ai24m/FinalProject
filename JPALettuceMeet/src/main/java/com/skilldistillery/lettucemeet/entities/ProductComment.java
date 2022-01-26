@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -30,9 +31,34 @@ public class ProductComment {
 	@UpdateTimestamp
 	@Column(name = "update_time")
 	private LocalDateTime updated;
+	
+	@ManyToOne 
+	@Column(name = "comment_id")
+	private ProductComment productComment; 
+	
+	@ManyToOne
+	@Column(name = "product_id")
+	private Product product;
+	
+	@ManyToOne
+	@Column(name = "user_id")
+	private User user; 
 
+//	no arg constructor 
 	public ProductComment() {
 		super();
+	}
+
+	public ProductComment(int id, String comment, LocalDateTime created, LocalDateTime updated,
+		ProductComment productComment, Product product, User user) {
+		super();
+		this.id = id;
+		this.comment = comment;
+		this.created = created;
+		this.updated = updated;
+		this.productComment = productComment;
+		this.product = product;
+		this.user = user;
 	}
 
 	public int getId() {

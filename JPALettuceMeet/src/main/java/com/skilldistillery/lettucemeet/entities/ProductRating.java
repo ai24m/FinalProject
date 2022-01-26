@@ -5,6 +5,9 @@ import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 @Entity
@@ -18,10 +21,29 @@ public class ProductRating {
 	private int productRating;
 	
 	private String comment;
+	
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	@MapsId(value="userId")
+	private User user; 
+	
+	@ManyToOne
+	@JoinColumn(name="product_id")
+	@MapsId(value="productId")
+	private Product product; 
 
 	//--no-arg constructor
 	public ProductRating() {
 		super();
+	}
+
+	public ProductRating(ProductRatingId id, int productRating, String comment, User user, Product product) {
+		super();
+		this.id = id;
+		this.productRating = productRating;
+		this.comment = comment;
+		this.user = user;
+		this.product = product;
 	}
 
 	//--getter and setter
