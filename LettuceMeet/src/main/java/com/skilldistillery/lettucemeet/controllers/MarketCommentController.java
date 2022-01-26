@@ -50,7 +50,7 @@ public class MarketCommentController {
 			@RequestBody Address address) {
 		try {
 			User user = userSvc.findByUserName(principal.getName()); 
-			marketComment = mcSvc.create(marketComment, user); 
+			marketComment = mcSvc.create(marketComment); 
 			if (marketComment == null) {
 				res.setStatus(404);
 				return marketComment; 
@@ -81,5 +81,19 @@ public class MarketCommentController {
 		}
 		return marketComment;
 	}
-
+	
+	@DeleteMapping("marketcomments/{mcId}")
+	public void destroy(HttpServletRequest req, HttpServletResponse res, Principal principal, @PathVariable Integer mcId) {
+		try {
+			User user = userSvc.findByUserName(principal.getName()); 
+			if (mcSvc.destroy(user, mcId)) {
+				res.setStatus(204); // no content
+			} else {
+				res.setStatus(404); // not found, invalid id
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+		}
+	}
 }
