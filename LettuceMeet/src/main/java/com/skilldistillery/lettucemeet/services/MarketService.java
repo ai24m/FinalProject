@@ -16,5 +16,7 @@ public interface MarketService {
 
 	Market update(User user, Integer mId, Market market);
 
+	boolean destroy(User user, Integer mId);
+
 
 }

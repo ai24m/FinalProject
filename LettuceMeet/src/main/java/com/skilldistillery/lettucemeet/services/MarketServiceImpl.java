@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.skilldistillery.lettucemeet.entities.Address;
 import com.skilldistillery.lettucemeet.entities.Market;
@@ -12,6 +13,7 @@ import com.skilldistillery.lettucemeet.repositories.AddressRepository;
 import com.skilldistillery.lettucemeet.repositories.MarketRepository;
 import com.skilldistillery.lettucemeet.repositories.UserRepository;
 
+@Service
 public class MarketServiceImpl implements MarketService {
 
 	@Autowired 
@@ -55,10 +57,18 @@ public class MarketServiceImpl implements MarketService {
 				Market updatedMarket = mOpt.get();
 				updatedMarket.setAddress(market.getAddress());
 			}
-		}
-		return null;
+		} return null;
 	}
 
-
+	@Override
+	public boolean destroy(User user, Integer mId) {
+		boolean deleted = false; 
+		Market market = marketRepo.findByIdAndUser(mId, user); 
+		if (market != null) {
+			marketRepo.delete(market);
+			deleted = true;
+			return deleted; 
+		} return deleted; 
+	}
 	
 }
