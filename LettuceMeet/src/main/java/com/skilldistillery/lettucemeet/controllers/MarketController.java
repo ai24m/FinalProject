@@ -82,7 +82,7 @@ public class MarketController {
 	}
 	
 	@DeleteMapping("markets/{mId}")
-	public void destroy(HttpServletRequest req, HttpServletResponse res, 	 	Principal principal, @PathVariable Integer mId) {
+	public void destroy(HttpServletRequest req, HttpServletResponse res, Principal principal, @PathVariable Integer mId) {
 		try {
 			User user = userSvc.findByUserName(principal.getName()); 
 			if (marketSvc.destroy(user, mId)) {
