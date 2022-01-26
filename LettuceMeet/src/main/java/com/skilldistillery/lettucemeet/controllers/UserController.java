@@ -21,9 +21,6 @@ public class UserController {
 	@Autowired
 	private UserService userSev;
 	
-	@Autowired
-	
-	
 
 	@PostMapping("users")
 	public User create(HttpServletRequest req, 
@@ -41,7 +38,7 @@ public class UserController {
 				res.setStatus(201);
 				StringBuffer url = req.getRequestURL();
 				url.append("/").append(user.getId());
-				res.setHeader("lOcation", url.toString());
+				res.setHeader("Location", url.toString());
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
