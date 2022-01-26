@@ -69,6 +69,10 @@ public class User {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="user")
+	private List<Product> products; 
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="user")
 	private List<MarketRating> marketRatings; 
 	
 	@JsonIgnore
@@ -91,8 +95,8 @@ public class User {
 	public User(int id, String username, String email, String password, boolean enabled, String role, String firstName,
 			String lastName, String businessName, String imageUrl, LocalDateTime created, Address address,
 			List<ProductRating> productRatings, List<SellerRating> sellerRatings, List<SellerRating> userRatings,
-			List<MarketRating> marketRatings, List<Market> markets, List<ProductComment> productComments,
-			List<MarketComment> marketComments) {
+			List<Product> products, List<MarketRating> marketRatings, List<Market> markets,
+			List<ProductComment> productComments, List<MarketComment> marketComments) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -109,6 +113,7 @@ public class User {
 		this.productRatings = productRatings;
 		this.sellerRatings = sellerRatings;
 		this.userRatings = userRatings;
+		this.products = products;
 		this.marketRatings = marketRatings;
 		this.markets = markets;
 		this.productComments = productComments;
@@ -401,6 +406,33 @@ public class User {
 		marketComment.setUser(null);
 		if (marketComments != null) {
 			marketComments.remove(marketComment);
+		}
+	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+	
+	public void addProduct(Product product) {
+		if (products == null) products = new ArrayList<>();
+		
+		if (!products.contains(product)) {
+			products.add(product);
+			if (product.getUser() != null) {
+				product.getUser().getProducts().remove(product);
+			} 
+			product.setUser(this);
+		}
+	}
+	
+	public void removeProduct(Product product) {
+		product.setUser(null);
+		if (products != null) {
+			products.remove(product);
 		}
 	}
 
