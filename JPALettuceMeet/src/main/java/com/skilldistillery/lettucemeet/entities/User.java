@@ -56,6 +56,7 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<ProductRating> productRatings; 
 	
+	
 	@OneToMany(mappedBy="user")
 	private List<SellerRating> sellerRatings;
 	
