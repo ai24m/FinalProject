@@ -46,7 +46,7 @@ public class User {
 	private String imageUrl;
 
 	@CreationTimestamp
-	@JoinColumn(name = "create_time")
+	@Column(name = "create_time")
 	private LocalDateTime created;
 	
 	@ManyToOne
@@ -223,9 +223,9 @@ public class User {
 	}
 	
 	public void removeProductRating(ProductRating productRating) {
-		marketComment.setMarket(null);
+		productRating.setUser(null);
 		if (productRatings != null) {
-			productRatings.remove(marketComment);
+			productRatings.remove(productRating);
 		}
 	}
 	
@@ -237,6 +237,25 @@ public class User {
 	public void setSellerRatings(List<SellerRating> sellerRatings) {
 		this.sellerRatings = sellerRatings;
 	}
+	
+	public void addSellerRating(SellerRating sellRating) {
+		if (sellerRatings == null) productRatings = new ArrayList<>();
+		
+		if (!sellerRatings.contains(sellRating)) {
+			sellerRatings.add(sellRating);
+			if (sellRating.getUser() != null) {
+				sellRating.getUser().getSellerRatings().remove(sellRating);
+			} 
+			sellRating.setUser(this);
+		}
+	}
+	
+	public void removeSellerRating(SellerRating sellRating) {
+		sellRating.setUser(null);
+		if (sellerRatings != null) {
+			sellerRatings.remove(sellRating);
+		}
+	}
 
 	public List<SellerRating> getUserRatings() {
 		return userRatings;
@@ -246,6 +265,26 @@ public class User {
 		this.userRatings = userRatings;
 	}
 
+	public void addUserRating(SellerRating userRating) {
+		if (userRatings == null) productRatings = new ArrayList<>();
+		
+		if (!userRatings.contains(userRating)) {
+			userRatings.add(userRating);
+			if (userRating.getUser() != null) {
+				userRating.getUser().getSellerRatings().remove(userRating);
+			} 
+			userRating.setUser(this);
+		}
+	}
+	
+	public void removeUserRating(SellerRating sellRating) {
+		sellRating.setUser(null);
+		if (userRatings != null) {
+			userRatings.remove(sellRating);
+		}
+	}
+	
+	
 	public List<MarketRating> getMarketRatings() {
 		return marketRatings;
 	}
@@ -254,6 +293,26 @@ public class User {
 		this.marketRatings = marketRatings;
 	}
 
+	public void addMarketRating(MarketRating marketRating) {
+		if (marketRatings == null) productRatings = new ArrayList<>();
+		
+		if (!marketRatings.contains(marketRating)) {
+			marketRatings.add(marketRating);
+			if (marketRating.getUser() != null) {
+				marketRating.getUser().getMarketRatings().remove(marketRating);
+			} 
+			marketRating.setUser(this);
+		}
+	}
+	
+	public void removeMarketRating(MarketRating marketRating) {
+		marketRating.setUser(null);
+		if (marketRatings != null) {
+			marketRatings.remove(marketRating);
+		}
+	}
+	
+	
 	public List<Market> getMarkets() {
 		return markets;
 	}
@@ -262,6 +321,26 @@ public class User {
 		this.markets = markets;
 	}
 
+	public void addMarket(Market market) {
+		if (markets == null) markets = new ArrayList<>();
+		
+		if (!markets.contains(market)) {
+			markets.add(market);
+			if (market.getUser() != null) {
+				market.getUser().getMarkets().remove(market);
+			} 
+			market.setUser(this);
+		}
+	}
+	
+	public void removeMarket(Market market) {
+		market.setUser(null);
+		if (markets != null) {
+			markets.remove(market);
+		}
+	}
+	
+	
 	public List<ProductComment> getProductComments() {
 		return productComments;
 	}
@@ -270,6 +349,26 @@ public class User {
 		this.productComments = productComments;
 	}
 
+	public void addProductComment(ProductComment productComment) {
+		if (productComments == null) productComments = new ArrayList<>();
+		
+		if (!productComments.contains(productComment)) {
+			productComments.add(productComment);
+			if (productComment.getUser() != null) {
+				productComment.getUser().getProductComments().remove(productComment);
+			} 
+			productComment.setUser(this);
+		}
+	}
+	
+	public void removeProductComment(ProductComment productComment) {
+		productComment.setUser(null);
+		if (productComments != null) {
+			productComments.remove(productComment);
+		}
+	}
+	
+	
 	public List<MarketComment> getMarketComments() {
 		return marketComments;
 	}
@@ -277,6 +376,9 @@ public class User {
 	public void setMarketComments(List<MarketComment> marketComments) {
 		this.marketComments = marketComments;
 	}
+	
+	
+	
 
 	@Override
 	public int hashCode() {
