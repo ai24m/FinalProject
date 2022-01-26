@@ -31,7 +31,8 @@ class ProductRatingTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		pr = em.find(ProductRating.class, 1);
+		ProductRatingId pri = new ProductRatingId(1, 306);
+		pr = em.find(ProductRating.class, pri);
 	}
 
 	@AfterEach

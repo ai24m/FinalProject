@@ -31,7 +31,8 @@ class MarketRatingTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		mr = em.find(MarketRating.class, 1);
+		MarketRatingId mri = new MarketRatingId(1, 55);
+		mr = em.find(MarketRating.class, mri);
 	}
 
 	@AfterEach
