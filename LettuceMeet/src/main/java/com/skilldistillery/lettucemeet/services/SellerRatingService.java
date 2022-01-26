@@ -3,8 +3,6 @@ package com.skilldistillery.lettucemeet.services;
 import java.util.List;
 
 import com.skilldistillery.lettucemeet.entities.SellerRating;
-import com.skilldistillery.lettucemeet.entities.SellerRatingId;
-import com.skilldistillery.lettucemeet.entities.User;
 
 public interface SellerRatingService {
 
@@ -13,11 +11,14 @@ public interface SellerRatingService {
 	
 	//find By userName
 	List<SellerRating> findByUserName(String username);
+	//find By userName and Id
+	SellerRating findBySellerRatingId(int sellerId, String username);
 	
 	//CRUD
-	SellerRating createSellerRating(User seller, User user, SellerRating sellerRating);
+	SellerRating createSellerRating(int sellerId, String username, SellerRating sellerRating);
 	
-	SellerRating updateSellerRating(SellerRatingId sellerRatingId, SellerRating sellerRating);
+	SellerRating updateSellerRating(int sellerId, String username, SellerRating sellerRating);
 	
-	boolean deleteSellerRating(SellerRatingId sellerRatingId);
+	boolean deleteSellerRating(int sellerId, String username);
+
 }
