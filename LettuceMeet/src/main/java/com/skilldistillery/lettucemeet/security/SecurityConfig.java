@@ -28,6 +28,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/api/**").permitAll() // For CORS, the preflight request
 				.antMatchers(HttpMethod.OPTIONS, "/**").permitAll() // will hit the OPTIONS on the route
+				.antMatchers(HttpMethod.GET, "/api/markets").permitAll() // will hit the OPTIONS on the route
+				.antMatchers(HttpMethod.GET, "/api/markets/**").permitAll() // will hit the OPTIONS on the route
+				.antMatchers(HttpMethod.GET, "/api/marketcomments").permitAll() // will hit the OPTIONS on the route
+				.antMatchers(HttpMethod.GET, "/api/sellerRatings").permitAll() // will hit the OPTIONS on the route
+				.antMatchers(HttpMethod.GET, "/api/productRatings").permitAll() // will hit the OPTIONS on the route
+				.antMatchers(HttpMethod.GET, "/api/marketcomments/**").permitAll() // will hit the OPTIONS on the route
+				.antMatchers(HttpMethod.GET, "/api/products").permitAll() // will hit the OPTIONS on the route
+				.antMatchers(HttpMethod.GET, "/api/products/**").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/markets").permitAll() 
 				.antMatchers(HttpMethod.GET, "/api/markets/**").permitAll() 
 				.antMatchers(HttpMethod.GET, "/api/marketcomments").permitAll() 

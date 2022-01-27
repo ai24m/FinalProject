@@ -36,7 +36,7 @@ public class SellerRatingImpl implements SellerRatingService {
 	@Override
 	public SellerRating findBySellerRatingId(int sellerId, String username) {
 		// TODO Auto-generated method stub
-		SellerRatingId sId = new SellerRatingId(sellerId, userRepo.findByUsername(username).getId());
+		SellerRatingId sId = new SellerRatingId(userRepo.findByUsername(username).getId(),sellerId);
 		Optional <SellerRating> op =sellerRatingRepo.findById(sId);
 		SellerRating sellerRating = null;
 		if(op.isPresent()) {
@@ -49,7 +49,7 @@ public class SellerRatingImpl implements SellerRatingService {
 	public SellerRating createSellerRating(int sellerId, String username, SellerRating sellerRating) {
 		// TODO Auto-generated method stub
 
-		SellerRatingId sId = new SellerRatingId(sellerId, userRepo.findByUsername(username).getId());
+		SellerRatingId sId = new SellerRatingId(userRepo.findByUsername(username).getId(),sellerId);
 		if (sId != null) {
 			Optional<User> op = userRepo.findById(sellerId);
 			User user = userRepo.findByUsername(username);
@@ -70,7 +70,7 @@ public class SellerRatingImpl implements SellerRatingService {
 	public SellerRating updateSellerRating(int sellerId, String username, SellerRating sellerRating) {
 		// TODO Auto-generated method stub
 
-		SellerRatingId sId = new SellerRatingId(sellerId, userRepo.findByUsername(username).getId());
+		SellerRatingId sId = new SellerRatingId(userRepo.findByUsername(username).getId(),sellerId);
 		Optional<SellerRating> op = sellerRatingRepo.findById(sId);
 		SellerRating existing = null;
 		if (op.isPresent()) {
@@ -87,7 +87,7 @@ public class SellerRatingImpl implements SellerRatingService {
 
 		// TODO Auto-generated method stub
 		boolean deleted = false;
-		SellerRatingId sId = new SellerRatingId(sellerId, userRepo.findByUsername(username).getId());
+		SellerRatingId sId = new SellerRatingId( userRepo.findByUsername(username).getId(),sellerId);
 		Optional<SellerRating> op = sellerRatingRepo.findById(sId);
 		SellerRating existing = null;
 		

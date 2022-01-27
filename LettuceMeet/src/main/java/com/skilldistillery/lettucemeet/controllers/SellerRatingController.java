@@ -95,6 +95,7 @@ public class SellerRatingController {
 			if(sellerRating == null) {
 				res.setStatus(404);
 			}
+			return sellerRating;
 		}catch(Exception e) {
 			e.printStackTrace();
 			res.setStatus(400);
