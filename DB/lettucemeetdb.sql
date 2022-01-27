@@ -645,7 +645,7 @@ INSERT INTO `user` (`id`, `username`, `email`, `password`, `enabled`, `role`, `f
 INSERT INTO `user` (`id`, `username`, `email`, `password`, `enabled`, `role`, `first_name`, `last_name`, `business_name`, `image_url`, `create_time`, `address_id`) VALUES (97, 'nupchurch2o', 'nupchurch2o@answers.com', '', true, '', 'Nicholle', 'Upchurch', '', '', '2013-05-15 17:40:15', 97);
 INSERT INTO `user` (`id`, `username`, `email`, `password`, `enabled`, `role`, `first_name`, `last_name`, `business_name`, `image_url`, `create_time`, `address_id`) VALUES (98, 'bgrzelczyk2p', 'bgrzelczyk2p@behance.net', '', true, '', 'Brittan', 'Grzelczyk', '', '', '2011-07-13 07:57:04', 98);
 INSERT INTO `user` (`id`, `username`, `email`, `password`, `enabled`, `role`, `first_name`, `last_name`, `business_name`, `image_url`, `create_time`, `address_id`) VALUES (99, 'edanzelman2q', 'edanzelman2q@cyberchimps.com', '', true, '', 'Erik', 'Danzelman', 'Jatri', '', '2020-08-15 03:44:22', 99);
-INSERT INTO `user` (`id`, `username`, `email`, `password`, `enabled`, `role`, `first_name`, `last_name`, `business_name`, `image_url`, `create_time`, `address_id`) VALUES (100, 'bdalrymple2r', 'bdalrymple2r@liveinternet.ru', '', true, '', 'Byron', 'Dalrymple', '', '', '2011-08-28 14:06:00', 100);
+INSERT INTO `user` (`id`, `username`, `email`, `password`, `enabled`, `role`, `first_name`, `last_name`, `business_name`, `image_url`, `create_time`, `address_id`) VALUES (100, 'user', 'user@email.com', '$2a$10$wCmDBZLXzLSWP8GXce6kIOaRr37dC4XtjAQXaXJoHJsOyG7j0YfPW', true, '', 'user', 'user', '', '', '2011-08-28 14:06:00', 100);
 
 COMMIT;
 
