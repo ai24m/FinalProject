@@ -67,13 +67,13 @@ hr {
 
 .tm-main {
     margin-left: 400px;
-    padding: 80px 100px 25px;
+    padding: 0px 100px;
 }
 
 .tm-post { max-width: 470px; }
 
 .tm-row {
-    max-width: 980px;
+    max-width: 100%;
     justify-content: space-between;
 }
 
@@ -81,7 +81,7 @@ hr {
 
 .tm-nav-item {
     list-style: none;
-    margin-bottom: 30px;
+    margin-bottom: 5%;
 }
 
 .tm-nav-link {
@@ -99,10 +99,9 @@ hr {
 .tm-nav-item .tm-nav-link,
 .tm-nav-item.active .tm-nav-link
  {
-    color: #0CC;
+    color: #526E2A;
     background-color: white;
     text-decoration: none;
-
 }
 
 .tm-nav ul { position: relative; }
@@ -143,7 +142,7 @@ ul {
 }
 
 .tm-social-icon {
-    color: #0CC;
+    color: #526E2A;
     transition: all 0.3s ease;
 }
 
@@ -165,7 +164,7 @@ ul {
     width: 480px;
     margin-right: 30px;
     border-radius: 0;
-    border-color: #0CC;
+    border-color: #526E2A;
     font-size: 1.2rem;
 }
 
