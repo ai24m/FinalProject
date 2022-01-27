@@ -24,65 +24,61 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Product {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	private String name; 
-	
+
+	private String name;
+
 	private String description;
-	
+
 	private boolean organic;
-	
+
 	@Column(name = "unit_price")
 	private double price;
-	
+
 	@Column(name = "image_url")
 	private String imageUrl;
-	
+
 	private int quantity;
-	
+
 	@Column(name = "available_date")
 	private LocalDate availableDate;
-	
+
 	@CreationTimestamp
 	@Column(name = "create_time")
 	private LocalDateTime created;
-	
+
 	@UpdateTimestamp
 	@Column(name = "update_time")
 	private LocalDateTime updated;
-	
+
 	@ManyToOne
-	@JoinColumn(name="type_id")
-	private Type type; 
-	
-	@JsonIgnoreProperties({"products","hibernateLazyInitializer"})
+	@JoinColumn(name = "type_id")
+	private Type type;
+
+	@JsonIgnoreProperties({ "products", "hibernateLazyInitializer" })
 	@ManyToOne
-	@JoinColumn(name="user_id")
-	private User user; 
-	
-	@JsonIgnoreProperties({"products","hibernateLazyInitializer"})
+	@JoinColumn(name = "user_id")
+	private User user;
+
+	@JsonIgnoreProperties({ "products", "hibernateLazyInitializer" })
 //	@ManyToMany(cascade = CascadeType.ALL)
 	@ManyToMany()
-	@JoinTable(name="market_product",
-		joinColumns=@JoinColumn(name="product_id"),
-		inverseJoinColumns=@JoinColumn(name="market_id")
-	)
+	@JoinTable(name = "market_product", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "market_id"))
 	private List<Market> markets;
-	
-	@JsonIgnoreProperties({"product","hibernateLazyInitializer"})
-//	@OneToMany(mappedBy="product", cascade = CascadeType.ALL)
-	@OneToMany(mappedBy="product")
-	private List<ProductRating> productRating; 
-	
-	@JsonIgnoreProperties({"product","hibernateLazyInitializer"})
-//	@OneToMany(mappedBy="product", cascade = CascadeType.ALL)
-	@OneToMany(mappedBy="product")
-	private List<ProductComment> productComment; 
 
-	
+	@JsonIgnoreProperties({ "product", "hibernateLazyInitializer" })
+//	@OneToMany(mappedBy="product", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "product")
+	private List<ProductRating> productRating;
+
+	@JsonIgnoreProperties({ "product", "hibernateLazyInitializer" })
+//	@OneToMany(mappedBy="product", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "product")
+	private List<ProductComment> productComment;
+
 //	no arg contructor 
 	public Product() {
 		super();
@@ -205,7 +201,7 @@ public class Product {
 		this.user = user;
 	}
 
-	//get set , create and remove markets
+	// get set , create and remove markets
 	public List<Market> getMarkets() {
 		List<Market> markets = this.markets;
 		return markets;
@@ -214,43 +210,20 @@ public class Product {
 	public void setMarkets(List<Market> markets) {
 		this.markets = markets;
 	}
-	
-	public boolean addMarket(Market market) {
-		if(markets ==null) {
-			markets = new ArrayList<>();
-		}
-		boolean addedToList = false;
-		if(market !=null) {
-			if(!markets.contains(market)) {
-				addedToList = markets.add(market);
-			}
-			if(!market.getProducts().contains(this)) {
-				market.getProducts().add(this);
-			}
-		}
-		return addedToList;
-		
-	}
-	
-	
-	
-	
-	
 
 	public List<ProductRating> getProductRating() {
-		List<ProductRating>productRating= this.productRating;
+		List<ProductRating> productRating = this.productRating;
 		return productRating;
 	}
 
 	public void setProductRating(List<ProductRating> productRating) {
 		this.productRating = productRating;
 	}
-	
+
 	public List<ProductComment> getProductComment() {
-		List<ProductComment> productComment=this.productComment;
+		List<ProductComment> productComment = this.productComment;
 		return productComment;
 	}
-
 
 	public void setProductComment(List<ProductComment> productComment) {
 		this.productComment = productComment;
@@ -280,5 +253,5 @@ public class Product {
 				+ availableDate + ", created=" + created + ", updated=" + updated + ", type=" + type + ", user=" + user
 				+ "]";
 	}
-	
+
 }
