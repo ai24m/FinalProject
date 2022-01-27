@@ -2,6 +2,7 @@ package com.skilldistillery.lettucemeet.entities;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,7 +20,6 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -64,7 +64,6 @@ public class Product {
 	private User user; 
 	
 	@JsonIgnoreProperties({"products","hibernateLazyInitializer"})
-//	@ManyToMany(cascade = CascadeType.ALL)
 	@ManyToMany()
 	@JoinTable(name="market_product",
 		joinColumns=@JoinColumn(name="product_id"),
@@ -75,12 +74,12 @@ public class Product {
 	@JsonIgnoreProperties({"product","hibernateLazyInitializer"})
 //	@OneToMany(mappedBy="product", cascade = CascadeType.ALL)
 	@OneToMany(mappedBy="product")
-	private List<ProductRating> productRating; 
+	private List<ProductRating> productRatings; 
 	
 	@JsonIgnoreProperties({"product","hibernateLazyInitializer"})
 //	@OneToMany(mappedBy="product", cascade = CascadeType.ALL)
 	@OneToMany(mappedBy="product")
-	private List<ProductComment> productComment; 
+	private List<ProductComment> productComments; 
 
 	
 //	no arg contructor 
@@ -105,8 +104,8 @@ public class Product {
 		this.type = type;
 		this.user = user;
 		this.markets = markets;
-		this.productRating = productRating;
-		this.productComment = productComment;
+		this.productRatings = productRating;
+		this.productComments = productComment;
 	}
 
 	public int getId() {
@@ -205,29 +204,86 @@ public class Product {
 		this.user = user;
 	}
 
+	//get set , create and remove markets
 	public List<Market> getMarkets() {
+		List<Market> markets = this.markets;
 		return markets;
 	}
 
 	public void setMarkets(List<Market> markets) {
 		this.markets = markets;
 	}
-
-	public List<ProductRating> getProductRating() {
-		return productRating;
-	}
-
-	public void setProductRating(List<ProductRating> productRating) {
-		this.productRating = productRating;
+	
+	public void addMarket(Market market) {
+		if (markets == null) markets = new ArrayList<>();
+		
+		if (!markets.contains(market)) {
+			markets.add(market);
+			market.addProduct(this);
+		}
 	}
 	
-	public List<ProductComment> getProductComment() {
-		return productComment;
+	public void removeMarket(Market market) {
+		if (markets != null && markets.contains(market)) {
+			markets.remove(market);
+			market.removeProduct(this);
+		} 
+	}
+
+	public List<ProductRating> getProductRatings() {
+		List<ProductRating> productRatings = this.productRatings;
+		return productRatings;
+	}
+
+	public void setProductRatings(List<ProductRating> productRating) {
+		this.productRatings = productRating;
+	}
+	
+	public void addProductRating(ProductRating productRating) {
+		if (productRatings == null) productRatings = new ArrayList<>();
+		
+		if (!productRatings.contains(productRating)) {
+			productRatings.add(productRating);
+			if (productRating.getProduct() != null) {
+				productRating.getProduct().getProductRatings().remove(productRating);
+			}
+			productRating.setProduct(this);
+		}
+	}
+	public void removeProductRating(ProductRating productRating) {
+		productRating.setProduct(null);
+		if (productRatings != null) {
+			productRatings.remove(productRating); 
+		}
+	}
+	
+	
+	public List<ProductComment> getProductComments() {
+		List<ProductComment> productComments = this.productComments;
+		return productComments;
 	}
 
 
-	public void setProductComment(List<ProductComment> productComment) {
-		this.productComment = productComment;
+	public void setProductComments(List<ProductComment> productComment) {
+		this.productComments = productComment;
+	}
+	
+	public void addProductComment(ProductComment productComment) {
+		if (productComments == null) productComments = new ArrayList<>();
+		
+		if (!productComments.contains(productComment)) {
+			productComments.add(productComment);
+			if (productComment.getProduct() != null) {
+				productComment.getProduct().getProductComments().remove(productComment);
+			}
+			productComment.setProduct(this);
+		}
+	}
+	public void removeProductComment(ProductComment productComment) {
+		productComment.setProduct(null);
+		if (productComments != null) {
+			productComments.remove(productComment); 
+		}
 	}
 
 	@Override
@@ -254,5 +310,7 @@ public class Product {
 				+ availableDate + ", created=" + created + ", updated=" + updated + ", type=" + type + ", user=" + user
 				+ "]";
 	}
+
+
 	
 }

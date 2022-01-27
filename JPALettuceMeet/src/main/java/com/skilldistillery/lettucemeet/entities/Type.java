@@ -54,6 +54,7 @@ public class Type {
 	}
 	
 	public List<Product> getProducts() {
+		List<Product> products = this.products;
 		return products;
 	}
 
