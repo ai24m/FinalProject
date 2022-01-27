@@ -46,8 +46,7 @@ public class MarketCommentController {
 	}
 	
 	@PostMapping("marketcomments") //must create address with market 
-	public MarketComment create(HttpServletRequest req, HttpServletResponse res, Principal principal, @RequestBody MarketComment marketComment,
-			@RequestBody Address address) {
+	public MarketComment create(HttpServletRequest req, HttpServletResponse res, Principal principal, @RequestBody MarketComment marketComment) {
 		try {
 			User user = userSvc.findByUserName(principal.getName()); 
 			marketComment = mcSvc.create(marketComment); 
