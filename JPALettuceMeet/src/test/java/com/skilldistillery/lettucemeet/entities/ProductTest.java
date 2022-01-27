@@ -56,8 +56,8 @@ class ProductTest {
 	
 	@Test
 	void test_Product_Product_Rating_Mapping() {
-		assertNotNull(product.getProductRating());
-		assertTrue(product.getProductRating().size() == 0);
+		assertNotNull(product.getProductRatings());
+		assertTrue(product.getProductRatings().size() == 0);
 	}
 	
 	@Test

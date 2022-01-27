@@ -67,7 +67,7 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<SellerRating> userRatings; 
 	
-	@JsonIgnore
+//	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List<Product> products; 
 	

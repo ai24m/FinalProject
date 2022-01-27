@@ -29,7 +29,8 @@ public class UserController {
 	private UserService userSev;
 
 	@PostMapping("users")
-	public User create(HttpServletRequest req, HttpServletResponse res, @RequestBody User user, @RequestBody Address address) {
+	public User create(HttpServletRequest req, HttpServletResponse res, @RequestBody User user,
+			@RequestBody Address address) {
 
 		try {
 			user = userSev.createdUser(user, address);
@@ -51,42 +52,38 @@ public class UserController {
 	}
 
 	@PutMapping("users/{userId}")
-	public User updateUser(HttpServletRequest req, 
-			HttpServletResponse res, 
-			@PathVariable int userId,
-			@RequestBody User user,
-			Principal principal) {
+	public User updateUser(HttpServletRequest req, HttpServletResponse res, @PathVariable int userId,
+			@RequestBody User user, Principal principal) {
 		try {
 			User user1 = userSev.getUserById(userId);
-			if(principal.getName().equals(user1.getUsername()))
-			user = userSev.updateUser(userId, user);
-				if(user == null) {
-				res.setStatus(404);
+			if (principal.getName().equals(user1.getUsername())) {
+				user = userSev.updateUser(userId, user);
+				if (user == null) {
+					res.setStatus(404);
 				}
 				return user;
-		}catch(Exception e) {
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 			res.setStatus(400);
 			user = null;
 		}
 		return user;
 	}
-	
+
 	@DeleteMapping("users/{userId}")
-	public void deleteUser(HttpServletRequest req, 
-			HttpServletResponse res, 
-			@PathVariable int userId,
+	public void deleteUser(HttpServletRequest req, HttpServletResponse res, @PathVariable int userId,
 			Principal principal) {
 		try {
 			User user = userSev.getUserById(userId);
-			if(principal.getName().equals(user.getUsername())) {
-				if(userSev.deleteUser(userId)) {
+			if (principal.getName().equals(user.getUsername())) {
+				if (userSev.deleteUser(userId)) {
 					res.setStatus(HttpStatus.NO_CONTENT.value());
-				}else {
+				} else {
 					res.setStatus(404);
 				}
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			res.setStatus(400);
 		}
