@@ -54,15 +54,17 @@ public class ProductRatingController {
 	public ProductRating createProductRating(@PathVariable int productId, @RequestBody ProductRating productRating,
 			HttpServletRequest req, HttpServletResponse res, Principal principal) {
 		try {
-			productRating = prodcutRatingSev.createProductRating( principal.getName(),productId, productRating);
+			productRating = prodcutRatingSev.createProductRating(productId, principal.getName(), productRating);
 			if (productRating == null) {
 				res.setStatus(404);
-				return productRating;
+//				return productRating;
 			} else {
 				res.setStatus(201);
 				StringBuffer url = req.getRequestURL();
-				url.append("/").append(productRating.getId());
 				res.setHeader("Location", url.toString());
+				System.out.println("-----------------");
+				System.out.println(productRating);
+				return productRating;
 			}
 
 		} catch (Exception e) {
@@ -70,6 +72,9 @@ public class ProductRatingController {
 			res.setStatus(400);
 			productRating = null;
 		}
+		System.out.println("-----------------");
+		System.out.println(productRating);
+		
 		return productRating;
 	}
 
@@ -81,6 +86,8 @@ public class ProductRatingController {
 			if (productRating == null) {
 				res.setStatus(404);
 			}
+			System.out.println("-----------------");
+			System.out.println(productRating);
 			return productRating;
 		} catch (Exception e) {
 			e.printStackTrace();
