@@ -6,8 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.skilldistillery.lettucemeet.entities.Market;
-import com.skilldistillery.lettucemeet.entities.MarketComment;
+import com.skilldistillery.lettucemeet.entities.Product;
 import com.skilldistillery.lettucemeet.entities.ProductComment;
 import com.skilldistillery.lettucemeet.entities.User;
 import com.skilldistillery.lettucemeet.repositories.ProductCommentRepository;
@@ -62,9 +61,13 @@ public class ProductCommentServiceImpl implements ProductCommentService {
 		boolean deleted = false; 
 		ProductComment productComment = pcRepo.findByIdAndUser(pcId, user); 
 		if (productComment != null) {
-			pcRepo.delete(productComment);
-			deleted = true;
-			return deleted; 
+			Product product = productComment.getProduct();
+			if(product != null && user != null) {
+				
+				pcRepo.delete(productComment);
+				deleted = true;
+//				return deleted; 
+			}
 		} return deleted; 
 	}
 }
