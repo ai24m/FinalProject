@@ -50,22 +50,25 @@ public class ProductRatingImpl implements ProductRatingService {
 	}
 
 	@Override
-	public ProductRating createProductRating( String userName,int productId, ProductRating productRating) {
+	public ProductRating createProductRating(int productId, String userName, ProductRating productRating) {
 		// TODO Auto-generated method stub
 		ProductRatingId pId = new ProductRatingId(userRepo.findByUsername(userName).getId(),productId);
-		if(pId != null) {
-			Optional<Product> opP = productRepo.findById(productId);
+		Optional<ProductRating> op = productRatingRepo.findById(pId);
+		if(!op.isPresent()) {
+			
+			Product product = productRepo.getById(productId);
 			User user = userRepo.findByUsername(userName);
-			if(opP.isPresent() && user!=null) {
-				Product product = opP.get();
-//				userRepo.saveAndFlush(user);
-//				productRepo.saveAndFlush(product);
+			if(product!=null && user!=null) {
+				productRating.setId(pId);
 				productRating.setUser(user);
 				productRating.setProduct(product);
 				productRatingRepo.saveAndFlush(productRating);
 				return productRating;
 			}
-		}
+			}
+		System.out.println("pid is null");
+//		System.out.println(product.getId());
+//		System.out.println(user.getId());
 		return null;
 	}
 
@@ -78,7 +81,7 @@ public class ProductRatingImpl implements ProductRatingService {
 		if(op.isPresent()) {
 			existing = op.get();
 			existing.setComment(productRating.getComment());
-			existing.setProductRating(productRating.getProductRating());
+			existing.setRating(productRating.getRating());
 			productRatingRepo.saveAndFlush(existing);
 
 		}
