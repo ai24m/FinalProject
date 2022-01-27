@@ -2,9 +2,11 @@ package com.skilldistillery.lettucemeet.entities;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -63,7 +65,7 @@ public class Product {
 	private User user; 
 	
 	@JsonIgnore
-	@ManyToMany 
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name="market_product",
 		joinColumns=@JoinColumn(name="product_id"),
 		inverseJoinColumns=@JoinColumn(name="market_id")
@@ -71,8 +73,12 @@ public class Product {
 	private List<Market> markets;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="product")
+	@OneToMany(mappedBy="product", cascade = CascadeType.ALL)
 	private List<ProductRating> productRating; 
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="product", cascade = CascadeType.ALL)
+	private List<ProductComment> productComment; 
 
 	
 //	no arg contructor 
@@ -80,9 +86,9 @@ public class Product {
 		super();
 	}
 
-	public Product(int id, String name, String description, boolean organic, double price, String imageUrl, int quantity,
-		LocalDate availableDate, LocalDateTime created, LocalDateTime updated, Type type, User user,
-		List<Market> markets, List<ProductRating> productRating) {
+	public Product(int id, String name, String description, boolean organic, double price, String imageUrl,
+			int quantity, LocalDate availableDate, LocalDateTime created, LocalDateTime updated, Type type, User user,
+			List<Market> markets, List<ProductRating> productRating, List<ProductComment> productComment) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -98,6 +104,7 @@ public class Product {
 		this.user = user;
 		this.markets = markets;
 		this.productRating = productRating;
+		this.productComment = productComment;
 	}
 
 	public int getId() {
@@ -210,6 +217,15 @@ public class Product {
 
 	public void setProductRating(List<ProductRating> productRating) {
 		this.productRating = productRating;
+	}
+	
+	public List<ProductComment> getProductComment() {
+		return productComment;
+	}
+
+
+	public void setProductComment(List<ProductComment> productComment) {
+		this.productComment = productComment;
 	}
 
 	@Override

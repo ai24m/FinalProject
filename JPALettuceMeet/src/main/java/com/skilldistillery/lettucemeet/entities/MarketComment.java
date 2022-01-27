@@ -3,6 +3,7 @@ package com.skilldistillery.lettucemeet.entities;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +17,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "market_comment")
@@ -37,14 +39,16 @@ public class MarketComment {
 	
 //	@JsonIgnoreProperties({"marketComment"})
 	@JsonIgnore
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="comment_id")
 	private MarketComment marketComment; 
 	
+//	@JsonIgnore 
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user; 
 	
+//	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="market_id")
 	private Market market; 

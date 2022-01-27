@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -54,6 +55,7 @@ public class Market {
 	@JoinColumn(name="address_id")
 	private Address address;
 	
+	
 	@ManyToMany(mappedBy = "markets")
 	private List<Product> products;
 	
@@ -62,7 +64,7 @@ public class Market {
 	private List<MarketRating> marketRatings;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="market")
+	@OneToMany(mappedBy="market", cascade = CascadeType.ALL)
 	private List<MarketComment> marketComments;
 	
 	//no-arg-constructor

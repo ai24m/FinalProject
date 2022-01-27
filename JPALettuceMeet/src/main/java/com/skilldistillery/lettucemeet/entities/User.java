@@ -51,6 +51,7 @@ public class User {
 	@Column(name = "create_time")
 	private LocalDateTime created;
 	
+	@JsonIgnore 
 	@ManyToOne
 	@JoinColumn(name = "address_id")
 	private Address address; 

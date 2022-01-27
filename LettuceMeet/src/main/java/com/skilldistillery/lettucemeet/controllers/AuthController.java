@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.lettucemeet.entities.Address;
 import com.skilldistillery.lettucemeet.entities.User;
 import com.skilldistillery.lettucemeet.services.AuthService;
 

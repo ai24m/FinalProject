@@ -1,6 +1,8 @@
 package com.skilldistillery.lettucemeet.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -10,10 +12,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "product_comment")
@@ -33,9 +39,13 @@ public class ProductComment {
 	@Column(name = "update_time")
 	private LocalDateTime updated;
 	
+	@JsonIgnore
 	@ManyToOne 
 	@JoinColumn(name = "comment_id")
 	private ProductComment productComment; 
+	
+	@OneToMany(mappedBy = "productComment")
+	private List <ProductComment> productComments;
 	
 	@ManyToOne
 	@JoinColumn(name = "product_id")
@@ -117,6 +127,34 @@ public class ProductComment {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	public List<ProductComment> getProductComments() {
+		return productComments;
+	}
+
+	public void setProductComments(List<ProductComment> productComments) {
+		this.productComments = productComments;
+	}
+	
+	public void addProductComment(ProductComment productComment) {
+		if (productComments == null) productComments = new ArrayList<>();
+		
+		if (!productComments.contains(productComment)) {
+			productComments.add(productComment);
+			if (productComment.getProductComment() != null) {
+				productComment.getProductComment().getProductComments().remove(productComment);
+			} 
+			productComment.setProductComment(this);
+		}
+	}
+	
+	public void removeProductComment(ProductComment productComment) {
+		productComment.setProductComment(null);
+		if (productComments != null) {
+			productComments.remove(productComment);
+		}
+	}
+	
 
 	@Override
 	public int hashCode() {

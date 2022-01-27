@@ -39,11 +39,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.GET, "/api/markets").permitAll() 
 				.antMatchers(HttpMethod.GET, "/api/markets/**").permitAll() 
 				.antMatchers(HttpMethod.GET, "/api/marketcomments").permitAll() 
-				.antMatchers(HttpMethod.GET, "/api/sellerRatings").permitAll()
+				.antMatchers(HttpMethod.GET, "/api/sellerRatings/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/api/marketcomments/**").permitAll() 
 				.antMatchers(HttpMethod.GET, "/api/products").permitAll() 
 				.antMatchers(HttpMethod.GET, "/api/products/**").permitAll() 
-				.antMatchers(HttpMethod.PUT, "/api/users/*").hasRole("admin") // return true or false 
+				.antMatchers(HttpMethod.GET, "/api/productcomments").permitAll() 
+				.antMatchers(HttpMethod.GET, "/api/productcomments/**").permitAll() 
+				.antMatchers(HttpMethod.PUT, "/api/users/*").hasAuthority("admin") // return true or false 
 				.antMatchers("/api/**").authenticated() // Requests for our REST API must be authorized.
 				.anyRequest().permitAll() // All other requests are allowed without authorization.
 				.and().httpBasic(); // Use HTTP Basic Authentication
