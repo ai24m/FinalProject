@@ -107,6 +107,7 @@ public class ProductComment {
 	}
 
 	public ProductComment getReplyTo() {
+		ProductComment replyTo= this.replyTo;
 		return replyTo;
 	}
 
@@ -115,6 +116,7 @@ public class ProductComment {
 	}
 
 	public List<ProductComment> getMyReplies() {
+		List<ProductComment> myReplies= this.myReplies;
 		return myReplies;
 	}
 
@@ -123,6 +125,7 @@ public class ProductComment {
 	}
 
 	public Product getProduct() {
+		Product product= this.product;
 		return product;
 	}
 
@@ -131,6 +134,7 @@ public class ProductComment {
 	}
 
 	public User getUser() {
+		User user= this.user;
 		return user;
 	}
 
