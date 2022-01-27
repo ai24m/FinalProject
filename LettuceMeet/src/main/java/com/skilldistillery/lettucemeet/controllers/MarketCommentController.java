@@ -59,8 +59,6 @@ public class MarketCommentController {
 	public MarketComment create(HttpServletRequest req, HttpServletResponse res, Principal principal, @RequestBody MarketComment marketComment,
 			@PathVariable Integer mcId) {
 		try {
-			MarketComment parentMarketComment = mcSvc.show(mcId);
-			marketComment.setMarketComment(parentMarketComment);
 			User user = userSvc.findByUserName(principal.getName()); 
 			mcSvc.create(marketComment, user); 
 			res.setStatus(201);
