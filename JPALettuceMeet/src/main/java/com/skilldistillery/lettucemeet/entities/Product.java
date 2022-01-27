@@ -247,8 +247,10 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", organic=" + organic + ", price=" + price + ", quantity=" + quantity
-				+ ", availableDate=" + availableDate + ", created=" + created + "]";
+		return "Product [id=" + id + ", name=" + name + ", description=" + description + ", organic=" + organic
+				+ ", price=" + price + ", imageUrl=" + imageUrl + ", quantity=" + quantity + ", availableDate="
+				+ availableDate + ", created=" + created + ", updated=" + updated + ", type=" + type + ", user=" + user
+				+ "]";
 	}
 	
 }
