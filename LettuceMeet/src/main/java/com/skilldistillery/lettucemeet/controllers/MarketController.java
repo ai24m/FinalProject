@@ -45,15 +45,11 @@ public class MarketController {
 	}
 	
 	@PostMapping("markets") //must create address with market 
-	public Market create(HttpServletRequest req, HttpServletResponse res, Principal principal, @RequestBody Market market,
-			@RequestBody Address address) {
+	public Market create(HttpServletRequest req, HttpServletResponse res, Principal principal, 
+			@RequestBody Market market) {
 		try {
 			User user = userSvc.findByUserName(principal.getName()); 
-			market = marketSvc.create(market, address, user); 
-			if (market == null) {
-				res.setStatus(404);
-				return market; 
-			}
+			marketSvc.create(market, user); 
 			res.setStatus(201);
 			StringBuffer url = req.getRequestURL();
 			url.append("/").append(market.getId());
@@ -61,17 +57,17 @@ public class MarketController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			res.setStatus(400);
-		} return market; 
+		} return null; 
 	}
 	
 	@PutMapping("markets/{mId}")
-	public Market update(HttpServletRequest req, HttpServletResponse res, Principal principal, @PathVariable Integer mId, @RequestBody Market market) {
+	public Market update(HttpServletRequest req, HttpServletResponse res, Principal principal, 
+			@PathVariable Integer mId, @RequestBody Market market) {
 		try {
-			User user = userSvc.findByUserName(principal.getName()); 
+			User user = userSvc.findByUserName(principal.getName());
 			market = marketSvc.update(user, mId, market);
 			if (market == null) {
 				res.setStatus(404); // 404 request body does not exisy
-				return null;
 			}
 		} catch (Exception e) {
 			res.setStatus(400); // 400 request body is bad data

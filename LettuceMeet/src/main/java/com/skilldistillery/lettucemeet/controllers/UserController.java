@@ -29,7 +29,7 @@ public class UserController {
 	private UserService userSev;
 
 	@PostMapping("users")
-	public User create(HttpServletRequest req, HttpServletResponse res, User user, Address address) {
+	public User create(HttpServletRequest req, HttpServletResponse res, @RequestBody User user, @RequestBody Address address) {
 
 		try {
 			user = userSev.createdUser(user, address);

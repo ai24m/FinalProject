@@ -10,12 +10,16 @@ import com.skilldistillery.lettucemeet.entities.Product;
 import com.skilldistillery.lettucemeet.entities.ProductComment;
 import com.skilldistillery.lettucemeet.entities.User;
 import com.skilldistillery.lettucemeet.repositories.ProductCommentRepository;
+import com.skilldistillery.lettucemeet.repositories.UserRepository;
 
 @Service 
 public class ProductCommentServiceImpl implements ProductCommentService {
 
 	@Autowired 
 	private ProductCommentRepository pcRepo;
+	
+	@Autowired 
+	private UserRepository userRepo;
 
 	@Override
 	public List<ProductComment> index() {
@@ -26,48 +30,39 @@ public class ProductCommentServiceImpl implements ProductCommentService {
 	public ProductComment show(Integer pcId) {
 		Optional<ProductComment> mOpt = pcRepo.findById(pcId); 
 		if (mOpt.isPresent()) {
-			ProductComment market = mOpt.get(); 
-			return market; 
+			ProductComment productComment = mOpt.get(); 
+			return productComment; 
 		} return null;
 	}
 
 	@Override
-	public ProductComment create(ProductComment productComment) {
-		if (productComment.getUser() != null && productComment.getProduct() != null) {
-			productComment.setUser(productComment.getUser());
+	public ProductComment create(ProductComment productComment, User user) {
+		if (user != null) {
+			productComment.setUser(user);
 			productComment.setProduct(productComment.getProduct());
-			productComment.setProductComment(productComment.getProductComment());
-			pcRepo.saveAndFlush(productComment);
-			return productComment; 
-		} return productComment;
+			productComment.setProductComment(productComment);
+			return pcRepo.saveAndFlush(productComment);
+		} return null;
 	}
 
 	@Override
-	public ProductComment update(User user, Integer pcId, ProductComment productComment) {
-		if (productComment.getUser().getId() == user.getId()) {
-			Optional <ProductComment> pcOpt = pcRepo.findById(pcId);
-			if (pcOpt.isPresent()) {
-				ProductComment updatedProductComment = pcOpt.get();
-				updatedProductComment.setProductComment(productComment);
-				updatedProductComment.setUser(user);
-				updatedProductComment.setProduct(productComment.getProduct());
-				return updatedProductComment; 
-			}
-		} return productComment;
+	public ProductComment update(User user, Product product, Integer pcId, ProductComment productComment) {
+		ProductComment existing = pcRepo.findByIdAndUser(pcId, user);
+		if (existing != null) {
+			existing.setComment(productComment.getComment());
+			existing.setProductComment(productComment);
+			existing.setProduct(product);
+			existing.setUser(user);
+			pcRepo.saveAndFlush(existing); 
+		} return existing;
 	}
 
 	@Override
 	public boolean destroy(User user, Integer pcId) {
-		boolean deleted = false; 
+		boolean deleted = false;
 		ProductComment productComment = pcRepo.findByIdAndUser(pcId, user); 
 		if (productComment != null) {
-			Product product = productComment.getProduct();
-			if(product != null && user != null) {
-				
-				pcRepo.delete(productComment);
-				deleted = true;
-//				return deleted; 
-			}
+			deleted = true;
 		} return deleted; 
 	}
 }

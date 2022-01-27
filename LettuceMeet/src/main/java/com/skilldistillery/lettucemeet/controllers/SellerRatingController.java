@@ -105,7 +105,7 @@ public class SellerRatingController {
 	}
 	
 	//Delete
-	@DeleteMapping("sellerRating/{sellerId}")
+	@PutMapping("sellerRating/user/{sellerId}")
 	public void deleteSellerRating(
 			HttpServletRequest req, 
 			HttpServletResponse res, 

@@ -19,46 +19,52 @@ public class MarketServiceImpl implements MarketService {
 	@Autowired 
 	private MarketRepository marketRepo;
 	
-	@Autowired 
-	private UserRepository userRepo;
-	
-	@Autowired 
-	private AddressRepository addressRepo;
-	
 	@Override
 	public List<Market> index() {
 		return marketRepo.findAll();
 	} 
 	
 	@Override
+	public Market findById(Integer mId) {
+		Optional<Market> mOpt = marketRepo.findById(mId);
+		if (mOpt.isPresent()) {
+			Market market = mOpt.get();
+			return market; 
+		} return null; 
+	}
+	
+	@Override
 	public Market show(int mId) {
 		Optional<Market> mOpt = marketRepo.findById(mId); 
 		if (mOpt.isPresent()) {
-			Market market = mOpt.get(); 
-			return market; 
+			return mOpt.get(); 
 		} return null;
 	}
 
 	@Override
-	public Market create(Market market, Address address, User user) {
-		addressRepo.saveAndFlush(address); 
-		userRepo.saveAndFlush(user); 
-		market.setAddress(address);
-		market.setUser(user);
-		marketRepo.saveAndFlush(market); 
+	public Market create(Market market, User user) {
+		if (user != null) {
+			market.setUser(user);
+		    return marketRepo.saveAndFlush(market); 
+		}
+//		market.setAddress(market.getAddress());
+//		market.setProducts(market.getProducts());
+//		market.setUser(user);
+//		marketRepo.saveAndFlush(market); 
 		return market;
 	}
 
 	@Override
 	public Market update(User user, Integer mId, Market market) {
-		if (market.getUser().getId() == user.getId()) {
-			Optional<Market> mOpt = marketRepo.findById(market.getId());
-			if (mOpt.isPresent()) {
-				Market updatedMarket = mOpt.get();
-				updatedMarket.setAddress(market.getAddress());
-				return updatedMarket; 
-			}
-		} return null;
+		Market existing = marketRepo.findByIdAndUser(mId, user);
+		if (existing != null) {
+			existing.setName(market.getName());
+			existing.setDescription(market.getDescription());
+			existing.setImageUrl(market.getImageUrl());
+			existing.setMarketDate(market.getMarketDate());
+			existing.setAddress(market.getAddress());;
+			marketRepo.saveAndFlush(existing);
+		} return market;
 	}
 
 	@Override
@@ -66,10 +72,11 @@ public class MarketServiceImpl implements MarketService {
 		boolean deleted = false; 
 		Market market = marketRepo.findByIdAndUser(mId, user); 
 		if (market != null) {
+			market.setMarketComments(null);
+			market.setMarketRatings(null);
 			marketRepo.delete(market);
 			deleted = true;
-			return deleted; 
 		} return deleted; 
 	}
-	
+
 }
