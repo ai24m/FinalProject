@@ -62,7 +62,6 @@ public class ProductCommentServiceImpl implements ProductCommentService {
 		boolean deleted = false;
 		ProductComment productComment = pcRepo.findByIdAndUser(pcId, user); 
 		if (productComment != null) {
-			pcRepo.delete(productComment);
 			deleted = true;
 		} return deleted; 
 	}

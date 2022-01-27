@@ -87,11 +87,14 @@ public class SellerRatingImpl implements SellerRatingService {
 		
 		if (op.isPresent()) {
 			existing = op.get();
-			existing.setSellerRating(0);
-			existing.setComment(null);
-//			sellerRatingRepo.delete(existing);
-			sellerRatingRepo.saveAndFlush(existing);
-			deleted = true;
+//			existing.setSellerRating(0);
+//			existing.setComment(null);
+			if(existing.getSeller()!=null && existing.getUser()!=null) {
+				
+			sellerRatingRepo.deleteById(sId);
+				sellerRatingRepo.saveAndFlush(existing);
+				deleted = true;
+			}
 		}
 		return deleted;
 	}
