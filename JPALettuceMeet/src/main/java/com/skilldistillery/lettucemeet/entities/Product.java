@@ -20,7 +20,6 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -205,6 +204,7 @@ public class Product {
 		this.user = user;
 	}
 
+	//get set , create and remove markets
 	public List<Market> getMarkets() {
 		List<Market> markets = this.markets;
 		return markets;

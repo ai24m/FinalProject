@@ -108,6 +108,7 @@ public class MarketComment {
 	}
 
 	public MarketComment getReplyTo() {
+		MarketComment replyTo = this.replyTo;
 		return replyTo;
 	}
 
@@ -116,6 +117,7 @@ public class MarketComment {
 	}
 
 	public List<MarketComment> getMyReplies() {
+		List<MarketComment> myReplies= this.myReplies;
 		return myReplies;
 	}
 
@@ -144,6 +146,7 @@ public class MarketComment {
 	
 
 	public User getUser() {
+		User user = this.user;
 		return user;
 	}
 
@@ -152,6 +155,7 @@ public class MarketComment {
 	}
 
 	public Market getMarket() {
+		Market market = this.market;
 		return market;
 	}
 
