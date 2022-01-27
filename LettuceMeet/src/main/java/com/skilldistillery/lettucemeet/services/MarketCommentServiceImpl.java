@@ -41,37 +41,32 @@ public class MarketCommentServiceImpl implements MarketCommentService{
 	@Override
 	public MarketComment create(MarketComment marketComment, User user) {
 		if (user != null) {
-			marketComment.setMarketComment(marketComment);
+			marketComment.setReplyTo(marketComment);
 			marketComment.setMarket(marketComment.getMarket());
 			marketComment.setUser(user);
 			return mcRepo.saveAndFlush(marketComment);
-		}	return marketComment; 	
+		}	return null; 	
 	} 
 	
 	@Override 
 	public MarketComment update(User user, Market market, Integer mcId, MarketComment marketComment) {
-//		if (marketComment.getUser().getId() == user.getId()) {
-			Optional <MarketComment> mcOpt = mcRepo.findById(mcId);
-			MarketComment updatedMarketComment = null;
-			if (mcOpt.isPresent()) {
-				updatedMarketComment = mcOpt.get();
-				updatedMarketComment.setMarketComment(marketComment);
-				updatedMarketComment.setUser(user);
-				updatedMarketComment.setMarket(market);
-				mcRepo.saveAndFlush(updatedMarketComment);
-			} return updatedMarketComment;
-//		}
+		MarketComment existing = mcRepo.findByIdAndUser(mcId, user);
+		if (existing != null) {
+			existing.setComment(marketComment.getComment());
+			existing.setReplyTo(marketComment);
+			existing.setMarket(market);
+			existing.setUser(user);
+			mcRepo.saveAndFlush(existing);
+		} return existing;
 	}
 
 	@Override
 	public boolean destroy(User user, Integer mcId) {
 		boolean deleted = false; 
 		MarketComment marketComment = mcRepo.findByIdAndUser(mcId, user); 
-		marketComment.setMarketComment(marketComment);
 		if (marketComment != null) {
 			mcRepo.delete(marketComment);
 			deleted = true;
-			return deleted; 
 		} return deleted; 
 	}
 }
