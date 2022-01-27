@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,13 +40,13 @@ public class ProductComment {
 	@Column(name = "update_time")
 	private LocalDateTime updated;
 	
-	@JsonIgnore
+//	@JsonIgnore
 	@ManyToOne 
 	@JoinColumn(name = "comment_id")
-	private ProductComment productComment; 
+	private ProductComment replyTo; 
 	
-	@OneToMany(mappedBy = "productComment")
-	private List <ProductComment> productComments;
+	@OneToMany(mappedBy = "replyTo")
+	private List <ProductComment> myReplies;
 	
 	@ManyToOne
 	@JoinColumn(name = "product_id")
@@ -60,14 +61,15 @@ public class ProductComment {
 		super();
 	}
 
-	public ProductComment(int id, String comment, LocalDateTime created, LocalDateTime updated,
-		ProductComment productComment, Product product, User user) {
+	public ProductComment(int id, String comment, LocalDateTime created, LocalDateTime updated, ProductComment replyTo,
+		List<ProductComment> myReplies, Product product, User user) {
 		super();
 		this.id = id;
 		this.comment = comment;
 		this.created = created;
 		this.updated = updated;
-		this.productComment = productComment;
+		this.replyTo = replyTo;
+		this.myReplies = myReplies;
 		this.product = product;
 		this.user = user;
 	}
@@ -104,12 +106,20 @@ public class ProductComment {
 		this.updated = updated;
 	}
 
-	public ProductComment getProductComment() {
-		return productComment;
+	public ProductComment getReplyTo() {
+		return replyTo;
 	}
 
-	public void setProductComment(ProductComment productComment) {
-		this.productComment = productComment;
+	public void setReplyTo(ProductComment replyTo) {
+		this.replyTo = replyTo;
+	}
+
+	public List<ProductComment> getMyReplies() {
+		return myReplies;
+	}
+
+	public void setMyReplies(List<ProductComment> myReplies) {
+		this.myReplies = myReplies;
 	}
 
 	public Product getProduct() {
@@ -128,30 +138,22 @@ public class ProductComment {
 		this.user = user;
 	}
 	
-	public List<ProductComment> getProductComments() {
-		return productComments;
-	}
-
-	public void setProductComments(List<ProductComment> productComments) {
-		this.productComments = productComments;
-	}
-	
 	public void addProductComment(ProductComment productComment) {
-		if (productComments == null) productComments = new ArrayList<>();
+		if (myReplies == null) myReplies = new ArrayList<>();
 		
-		if (!productComments.contains(productComment)) {
-			productComments.add(productComment);
-			if (productComment.getProductComment() != null) {
-				productComment.getProductComment().getProductComments().remove(productComment);
+		if (!myReplies.contains(productComment)) {
+			myReplies.add(productComment);
+			if (productComment.getMyReplies() != null) {
+				productComment.getReplyTo().getMyReplies().remove(productComment);
 			} 
-			productComment.setProductComment(this);
+			productComment.setReplyTo(this);
 		}
 	}
 	
 	public void removeProductComment(ProductComment productComment) {
-		productComment.setProductComment(null);
-		if (productComments != null) {
-			productComments.remove(productComment);
+		productComment.setReplyTo(null);
+		if (myReplies != null) {
+			myReplies.remove(productComment);
 		}
 	}
 	

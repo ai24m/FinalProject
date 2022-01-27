@@ -58,8 +58,6 @@ public class ProductCommentController {
 	public ProductComment create(HttpServletRequest req, HttpServletResponse res, Principal principal, 
 			@RequestBody ProductComment productComment, @PathVariable Integer pcId) {
 		try {
-			ProductComment parentProductComment = pcSvc.show(pcId);
-			productComment.setProductComment(parentProductComment);
 			User user = userSvc.findByUserName(principal.getName()); 
 			pcSvc.create(productComment, user); 
 			res.setStatus(201);

@@ -40,7 +40,7 @@ public class ProductCommentServiceImpl implements ProductCommentService {
 		if (user != null) {
 			productComment.setUser(user);
 			productComment.setProduct(productComment.getProduct());
-			productComment.setProductComment(productComment);
+			productComment.setReplyTo(productComment);
 			return pcRepo.saveAndFlush(productComment);
 		} return null;
 	}
@@ -50,7 +50,7 @@ public class ProductCommentServiceImpl implements ProductCommentService {
 		ProductComment existing = pcRepo.findByIdAndUser(pcId, user);
 		if (existing != null) {
 			existing.setComment(productComment.getComment());
-			existing.setProductComment(productComment);
+			existing.setReplyTo(productComment);
 			existing.setProduct(product);
 			existing.setUser(user);
 			pcRepo.saveAndFlush(existing); 
