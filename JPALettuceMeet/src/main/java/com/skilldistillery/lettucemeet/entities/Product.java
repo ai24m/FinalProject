@@ -2,6 +2,7 @@ package com.skilldistillery.lettucemeet.entities;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,7 +20,6 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -205,15 +205,40 @@ public class Product {
 		this.user = user;
 	}
 
+	//get set , create and remove markets
 	public List<Market> getMarkets() {
+		List<Market> markets = this.markets;
 		return markets;
 	}
 
 	public void setMarkets(List<Market> markets) {
 		this.markets = markets;
 	}
+	
+	public boolean addMarket(Market market) {
+		if(markets ==null) {
+			markets = new ArrayList<>();
+		}
+		boolean addedToList = false;
+		if(market !=null) {
+			if(!markets.contains(market)) {
+				addedToList = markets.add(market);
+			}
+			if(!market.getProducts().contains(this)) {
+				market.getProducts().add(this);
+			}
+		}
+		return addedToList;
+		
+	}
+	
+	
+	
+	
+	
 
 	public List<ProductRating> getProductRating() {
+		List<ProductRating>productRating= this.productRating;
 		return productRating;
 	}
 
@@ -222,6 +247,7 @@ public class Product {
 	}
 	
 	public List<ProductComment> getProductComment() {
+		List<ProductComment> productComment=this.productComment;
 		return productComment;
 	}
 
