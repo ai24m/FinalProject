@@ -40,7 +40,7 @@ public class ProductRatingImpl implements ProductRatingService {
 	@Override
 	public ProductRating findByProductRatingId(int productId, String userName) {
 		// TODO Auto-generated method stub
-		ProductRatingId pId = new ProductRatingId(productId,userRepo.findByUsername(userName).getId());
+		ProductRatingId pId = new ProductRatingId(userRepo.findByUsername(userName).getId(),productId);
 		Optional<ProductRating> op = productRatingRepo.findById(pId);
 		ProductRating productRating = null;
 		if(op.isPresent()) {
@@ -50,16 +50,16 @@ public class ProductRatingImpl implements ProductRatingService {
 	}
 
 	@Override
-	public ProductRating createProductRating(int productId, String userName, ProductRating productRating) {
+	public ProductRating createProductRating( String userName,int productId, ProductRating productRating) {
 		// TODO Auto-generated method stub
-		ProductRatingId pId = new ProductRatingId(productId,userRepo.findByUsername(userName).getId());
+		ProductRatingId pId = new ProductRatingId(userRepo.findByUsername(userName).getId(),productId);
 		if(pId != null) {
-			Optional<ProductRating> op = productRatingRepo.findById(pId);
 			Optional<Product> opP = productRepo.findById(productId);
 			User user = userRepo.findByUsername(userName);
-			if(op.isPresent() && opP.isPresent() && user!=null) {
+			if(opP.isPresent() && user!=null) {
 				Product product = opP.get();
-				productRating= op.get();
+//				userRepo.saveAndFlush(user);
+//				productRepo.saveAndFlush(product);
 				productRating.setUser(user);
 				productRating.setProduct(product);
 				productRatingRepo.saveAndFlush(productRating);
@@ -72,7 +72,7 @@ public class ProductRatingImpl implements ProductRatingService {
 	@Override
 	public ProductRating updateProductRating(int productId, String userName, ProductRating productRating) {
 		// TODO Auto-generated method stub
-		ProductRatingId pId = new ProductRatingId(productId,userRepo.findByUsername(userName).getId());
+		ProductRatingId pId = new ProductRatingId(userRepo.findByUsername(userName).getId(),productId);
 		Optional<ProductRating> op = productRatingRepo.findById(pId);
 		ProductRating existing = null;
 		if(op.isPresent()) {
@@ -80,6 +80,7 @@ public class ProductRatingImpl implements ProductRatingService {
 			existing.setComment(productRating.getComment());
 			existing.setProductRating(productRating.getProductRating());
 			productRatingRepo.saveAndFlush(existing);
+
 		}
 		return existing;
 	}
@@ -88,7 +89,7 @@ public class ProductRatingImpl implements ProductRatingService {
 	public boolean deleteProductRating(int productId, String userName) {
 		// TODO Auto-generated method stub
 		boolean deleted = false;
-		ProductRatingId pId = new ProductRatingId(productId,userRepo.findByUsername(userName).getId());
+		ProductRatingId pId = new ProductRatingId(userRepo.findByUsername(userName).getId(),productId);
 		Optional<ProductRating> op = productRatingRepo.findById(pId);
 		ProductRating existing = null;
 		if(op.isPresent()) {

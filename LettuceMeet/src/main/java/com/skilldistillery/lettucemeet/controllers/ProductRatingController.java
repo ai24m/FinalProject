@@ -42,8 +42,8 @@ public class ProductRatingController {
 	// find one product's rating made by one user
 	@GetMapping("productRatings/{productId}")
 	public ProductRating findByProductRatingId(HttpServletRequest req, HttpServletResponse res,
-			@PathVariable int sellerId, Principal principal) {
-		ProductRating productRating = prodcutRatingSev.findByProductRatingId(sellerId, principal.getName());
+			@PathVariable int productId, Principal principal) {
+		ProductRating productRating = prodcutRatingSev.findByProductRatingId(productId, principal.getName());
 		if (productRating == null) {
 			res.setStatus(404);
 		}
@@ -51,10 +51,10 @@ public class ProductRatingController {
 	}
 
 	@PostMapping("productRatings/{productId}")
-	public ProductRating createProductRating(@PathVariable int sellerId, @RequestBody ProductRating productRating,
+	public ProductRating createProductRating(@PathVariable int productId, @RequestBody ProductRating productRating,
 			HttpServletRequest req, HttpServletResponse res, Principal principal) {
 		try {
-			productRating = prodcutRatingSev.createProductRating(sellerId, principal.getName(), productRating);
+			productRating = prodcutRatingSev.createProductRating( principal.getName(),productId, productRating);
 			if (productRating == null) {
 				res.setStatus(404);
 				return productRating;
@@ -74,10 +74,10 @@ public class ProductRatingController {
 	}
 
 	@PutMapping("productRatings/{productId}")
-	public ProductRating updateProductRating(@PathVariable int sellerId, @RequestBody ProductRating productRating,
+	public ProductRating updateProductRating(@PathVariable int productId, @RequestBody ProductRating productRating,
 			HttpServletRequest req, HttpServletResponse res, Principal principal) {
 		try {
-			productRating = prodcutRatingSev.createProductRating(sellerId, principal.getName(), productRating);
+			productRating = prodcutRatingSev.updateProductRating(productId, principal.getName(), productRating);
 			if (productRating == null) {
 				res.setStatus(404);
 			}
