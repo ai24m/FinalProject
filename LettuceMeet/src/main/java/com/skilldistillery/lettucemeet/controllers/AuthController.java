@@ -26,7 +26,7 @@ public class AuthController {
 		if (user == null) {
 			res.setStatus(400);
 		}
-		user = authSvc.register(user);
+		user = authSvc.register(user, user.getAddress());
 		return user;
 	}
 

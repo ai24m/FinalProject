@@ -50,7 +50,7 @@ public class User {
 	@CreationTimestamp
 	@Column(name = "create_time")
 	private LocalDateTime created;
-	
+	 
 	@ManyToOne
 	@JoinColumn(name = "address_id")
 	private Address address; 

@@ -12,11 +12,13 @@ public interface MarketService {
 
 	List<Market> index();
 
-	Market create(Market market, Address address, User user);
+	Market create(Market market, User user);
 
 	Market update(User user, Integer mId, Market market);
 
 	boolean destroy(User user, Integer mId);
+
+	Market findById(Integer mId);
 
 
 }

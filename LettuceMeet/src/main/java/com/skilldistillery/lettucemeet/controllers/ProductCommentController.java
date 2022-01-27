@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.lettucemeet.entities.Product;
 import com.skilldistillery.lettucemeet.entities.ProductComment;
 import com.skilldistillery.lettucemeet.entities.User;
 import com.skilldistillery.lettucemeet.services.ProductCommentService;
+import com.skilldistillery.lettucemeet.services.ProductService;
 import com.skilldistillery.lettucemeet.services.UserService;
 
 @RestController
@@ -32,6 +34,9 @@ public class ProductCommentController {
 	
 	@Autowired 
 	private UserService userSvc; 
+	
+	@Autowired 
+	private ProductService productSvc; 
 	
 	@GetMapping("productcomments")
 	public List<ProductComment> index(HttpServletRequest req, HttpServletResponse res){
@@ -46,42 +51,39 @@ public class ProductCommentController {
 		ProductComment productComment = pcSvc.show(pcId);
 		if (productComment == null) {
 			res.setStatus(404);
-		} else {
-			res.setStatus(201);
-			StringBuffer url = req.getRequestURL();
-			url.append("/").append(productComment.getId());
-			res.setHeader("location", url.toString());
 		} return productComment; 
 	}
 	
-	@PostMapping("productcomments") //must create address with market 
-	public ProductComment create(HttpServletRequest req, HttpServletResponse res, Principal principal, @RequestBody ProductComment productComment) {
+	@PostMapping("productcomments/{pcId}/comments") //must create address with market 
+	public ProductComment create(HttpServletRequest req, HttpServletResponse res, Principal principal, 
+			@RequestBody ProductComment productComment, @PathVariable Integer pcId) {
 		try {
+			ProductComment parentProductComment = pcSvc.show(pcId);
+			productComment.setProductComment(parentProductComment);
 			User user = userSvc.findByUserName(principal.getName()); 
-			productComment = pcSvc.create(productComment); 
-			if (productComment == null) {
-				res.setStatus(404);
-				return productComment; 
-			}
+			pcSvc.create(productComment, user); 
 			res.setStatus(201);
 			StringBuffer url = req.getRequestURL();
 			url.append("/").append(productComment.getId());
-			res.setHeader("location", url.toString());
+			res.setHeader("Location", url.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.err.println("Invalid entry for new product");
 			res.setStatus(400);
-		} return productComment; 
+			productComment = null;
+		} return null; 
 	}
 	
-	@PutMapping("productcomments/{pcId}")
-	public ProductComment update(HttpServletRequest req, HttpServletResponse res, Principal principal, @PathVariable Integer pcId, @RequestBody ProductComment productComment) {
+	@PutMapping("products/{pId}/productcomments/{pcId}")
+	public ProductComment update(HttpServletRequest req, HttpServletResponse res, Principal principal, 
+			@PathVariable Integer pcId, @RequestBody ProductComment productComment, @PathVariable Integer pId) {
 		try {
+			Product product = productSvc.findById(pId); 
 			User user = userSvc.findByUserName(principal.getName()); 
-			productComment = pcSvc.update(user, pcId, productComment);
+			productComment = pcSvc.update(user, product, pcId, productComment);
 			if (productComment == null) {
 				res.setStatus(404); // 404 request body does not exisy
-				return null;
-			}
+			} 
 		} catch (Exception e) {
 			res.setStatus(400); // 400 request body is bad data
 			e.printStackTrace();
@@ -90,7 +92,7 @@ public class ProductCommentController {
 		return productComment;
 	}
 	
-	@DeleteMapping("productcomments/{pcId}")
+	@DeleteMapping("productcomments/{pcId}/comments")
 	public void destroy(HttpServletRequest req, HttpServletResponse res, Principal principal, @PathVariable Integer pcId) {
 		try {
 			User user = userSvc.findByUserName(principal.getName()); 

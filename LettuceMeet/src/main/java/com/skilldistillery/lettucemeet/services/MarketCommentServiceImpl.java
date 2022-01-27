@@ -10,6 +10,7 @@ import com.skilldistillery.lettucemeet.entities.Market;
 import com.skilldistillery.lettucemeet.entities.MarketComment;
 import com.skilldistillery.lettucemeet.entities.User;
 import com.skilldistillery.lettucemeet.repositories.MarketCommentRepository;
+import com.skilldistillery.lettucemeet.repositories.MarketRepository;
 import com.skilldistillery.lettucemeet.repositories.UserRepository;
 
 @Service 
@@ -20,6 +21,9 @@ public class MarketCommentServiceImpl implements MarketCommentService{
 	
 	@Autowired 
 	private UserRepository userRepo;
+	
+	@Autowired 
+	private MarketRepository marketRepo;
 
 	@Override
 	public List<MarketComment> index() {
@@ -30,40 +34,40 @@ public class MarketCommentServiceImpl implements MarketCommentService{
 	public MarketComment show(Integer mcId) {
 		Optional <MarketComment> mcOpt = mcRepo.findById(mcId);
 		if (mcOpt.isPresent()) {
-			MarketComment mc = mcOpt.get();
-			return mc; 
+			return mcOpt.get();
 		} return null;
 	}
 
 	@Override
-	public MarketComment create(MarketComment marketComment) {
-		if (marketComment.getUser() != null && marketComment.getMarket() != null) {
+	public MarketComment create(MarketComment marketComment, User user) {
+		if (user != null) {
+			marketComment.setMarketComment(marketComment);
 			marketComment.setMarket(marketComment.getMarket());
-			marketComment.setUser(marketComment.getUser());
-			marketComment.setMarketComment(marketComment.getMarketComment());
-			mcRepo.saveAndFlush(marketComment);
-			return marketComment;
+			marketComment.setUser(user);
+			return mcRepo.saveAndFlush(marketComment);
 		}	return marketComment; 	
 	} 
 	
 	@Override 
-	public MarketComment update(User user, Integer mcId, MarketComment marketComment) {
-		if (marketComment.getUser().getId() == user.getId()) {
+	public MarketComment update(User user, Market market, Integer mcId, MarketComment marketComment) {
+//		if (marketComment.getUser().getId() == user.getId()) {
 			Optional <MarketComment> mcOpt = mcRepo.findById(mcId);
+			MarketComment updatedMarketComment = null;
 			if (mcOpt.isPresent()) {
-				MarketComment updatedMarketComment = mcOpt.get();
+				updatedMarketComment = mcOpt.get();
 				updatedMarketComment.setMarketComment(marketComment);
-				updatedMarketComment.setUser(marketComment.getUser());
-				updatedMarketComment.setMarket(marketComment.getMarket());
-				return updatedMarketComment; 
-			}
-		} return marketComment;
+				updatedMarketComment.setUser(user);
+				updatedMarketComment.setMarket(market);
+				mcRepo.saveAndFlush(updatedMarketComment);
+			} return updatedMarketComment;
+//		}
 	}
 
 	@Override
 	public boolean destroy(User user, Integer mcId) {
 		boolean deleted = false; 
 		MarketComment marketComment = mcRepo.findByIdAndUser(mcId, user); 
+		marketComment.setMarketComment(marketComment);
 		if (marketComment != null) {
 			mcRepo.delete(marketComment);
 			deleted = true;
