@@ -39,9 +39,9 @@ public class ProductRatingId implements Serializable {
 		this.productId = productId;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+//	public static long getSerialversionuid() {
+//		return serialVersionUID;
+//	}
 
 	//--hascode
 	@Override

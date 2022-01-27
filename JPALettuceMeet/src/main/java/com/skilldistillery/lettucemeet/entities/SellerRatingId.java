@@ -39,9 +39,9 @@ private static final long serialVersionUID = 1L;
 		this.sellerId = sellerId;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+//	public static long getSerialversionuid() {
+//		return serialVersionUID;
+//	}
 
 	//--hascode
 	@Override
