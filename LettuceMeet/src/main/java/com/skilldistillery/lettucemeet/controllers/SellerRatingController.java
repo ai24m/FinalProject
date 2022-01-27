@@ -105,15 +105,15 @@ public class SellerRatingController {
 	}
 	
 	//Delete
-	@PutMapping("sellerRating/user/{sellerId}")
+	@DeleteMapping("sellerRating/user/{sellerId}")
 	public void deleteSellerRating(
 			HttpServletRequest req, 
 			HttpServletResponse res, 
-			@PathVariable int tid,
+			@PathVariable int sellerId,
 			Principal principal
 			) {
 		try {
-			if(sellerRatingSev.deleteSellerRating(tid, principal.getName())) {
+			if(sellerRatingSev.deleteSellerRating(sellerId, principal.getName())) {
 				res.setStatus(HttpStatus.NO_CONTENT.value());
 			}else {
 				res.setStatus(404);

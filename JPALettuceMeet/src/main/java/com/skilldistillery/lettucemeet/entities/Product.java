@@ -2,11 +2,9 @@ package com.skilldistillery.lettucemeet.entities;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,6 +20,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Product {
@@ -59,25 +58,28 @@ public class Product {
 	@JoinColumn(name="type_id")
 	private Type type; 
 	
-	@JsonIgnore
+	@JsonIgnoreProperties({"products","hibernateLazyInitializer"})
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user; 
 	
-	@JsonIgnore
-	@ManyToMany(cascade = CascadeType.ALL)
+	@JsonIgnoreProperties({"products","hibernateLazyInitializer"})
+//	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany()
 	@JoinTable(name="market_product",
 		joinColumns=@JoinColumn(name="product_id"),
 		inverseJoinColumns=@JoinColumn(name="market_id")
 	)
 	private List<Market> markets;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy="product", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties({"product","hibernateLazyInitializer"})
+//	@OneToMany(mappedBy="product", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="product")
 	private List<ProductRating> productRating; 
 	
-	@JsonIgnore
-	@OneToMany(mappedBy="product", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties({"product","hibernateLazyInitializer"})
+//	@OneToMany(mappedBy="product", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="product")
 	private List<ProductComment> productComment; 
 
 	
