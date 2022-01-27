@@ -58,12 +58,13 @@ public class UserController {
 			Principal principal) {
 		try {
 			User user1 = userSev.getUserById(userId);
-			if(principal.getName().equals(user1.getUsername()))
+			if(principal.getName().equals(user1.getUsername())) {
 			user = userSev.updateUser(userId, user);
 				if(user == null) {
 				res.setStatus(404);
 				}
 				return user;
+			}
 		}catch(Exception e) {
 			e.printStackTrace();
 			res.setStatus(400);
