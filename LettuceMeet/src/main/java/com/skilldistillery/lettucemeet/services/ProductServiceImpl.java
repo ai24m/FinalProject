@@ -39,7 +39,6 @@ public class ProductServiceImpl implements ProductService {
 		User user = userRepo.findByUsername(username);
 		if (user != null) {
 			product.setUser(user);
-			;
 			return prodRepo.saveAndFlush(product);
 		}
 		return null;
