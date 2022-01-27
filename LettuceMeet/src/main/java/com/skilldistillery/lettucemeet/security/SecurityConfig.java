@@ -28,13 +28,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/api/**").permitAll() // For CORS, the preflight request
 				.antMatchers(HttpMethod.OPTIONS, "/**").permitAll() // will hit the OPTIONS on the route
-				.antMatchers(HttpMethod.GET, "/api/markets").permitAll() // will hit the OPTIONS on the route
-				.antMatchers(HttpMethod.GET, "/api/markets/**").permitAll() // will hit the OPTIONS on the route
-				.antMatchers(HttpMethod.GET, "/api/marketcomments").permitAll() // will hit the OPTIONS on the route
-				.antMatchers(HttpMethod.GET, "/api/sellerRatings").permitAll() // will hit the OPTIONS on the route
-				.antMatchers(HttpMethod.GET, "/api/marketcomments/**").permitAll() // will hit the OPTIONS on the route
-				.antMatchers(HttpMethod.GET, "/api/products").permitAll() // will hit the OPTIONS on the route
-				.antMatchers(HttpMethod.GET, "/api/products/**").permitAll() // will hit the OPTIONS on the route
+				.antMatchers(HttpMethod.GET, "/api/markets").permitAll() 
+				.antMatchers(HttpMethod.GET, "/api/markets/**").permitAll() 
+				.antMatchers(HttpMethod.GET, "/api/marketcomments").permitAll() 
+				.antMatchers(HttpMethod.GET, "/api/sellerRatings").permitAll()
+				.antMatchers(HttpMethod.GET, "/api/marketcomments/**").permitAll() 
+				.antMatchers(HttpMethod.GET, "/api/products").permitAll() 
+				.antMatchers(HttpMethod.GET, "/api/products/**").permitAll() 
+				.antMatchers(HttpMethod.PUT, "/api/users/*").hasRole("admin") // return true or false 
 				.antMatchers("/api/**").authenticated() // Requests for our REST API must be authorized.
 				.anyRequest().permitAll() // All other requests are allowed without authorization.
 				.and().httpBasic(); // Use HTTP Basic Authentication
