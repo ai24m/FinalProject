@@ -16,7 +16,7 @@ public interface ProductRatingService {
 	ProductRating findByProductRatingId(int productId, String userName);
 	
 	//CRUD
-	ProductRating createProductRating( String userName, int productId,ProductRating productRating);
+	ProductRating createProductRating(int productId, String userName, ProductRating productRating);
 	
 	ProductRating updateProductRating(int productId, String userName, ProductRating productRating);
 	

@@ -51,7 +51,7 @@ class ProductRatingTest {
 	void test_ProductRating_Product_Mapping() {
 		assertNotNull(pr.getProduct());
 		assertEquals(306, pr.getProduct().getId());
-		assertEquals(2, pr.getProductRating());
+		assertEquals(2, pr.getRating());
 	}
 	
 	@Test

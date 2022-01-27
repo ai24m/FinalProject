@@ -50,13 +50,16 @@ public class SellerRatingImpl implements SellerRatingService {
 		// TODO Auto-generated method stub
 
 		SellerRatingId sId = new SellerRatingId(userRepo.findByUsername(username).getId(),sellerId);
-		if (sId != null) {
-			Optional<User> op = userRepo.findById(sellerId);
+		Optional<SellerRating> op = sellerRatingRepo.findById(sId);
+		if (!op.isPresent()) {
+			Optional<User> ops = userRepo.findById(sellerId);
 			User user = userRepo.findByUsername(username);
-			if (op.isPresent()) {
-				User seller = op.get();
+			if (ops.isPresent()) {
+				User seller = ops.get();
 				userRepo.saveAndFlush(seller);
 				userRepo.saveAndFlush(user);
+				
+				sellerRating.setId(sId);
 				sellerRating.setSeller(seller);
 				sellerRating.setUser(user);
 				sellerRatingRepo.saveAndFlush(sellerRating);
@@ -93,7 +96,10 @@ public class SellerRatingImpl implements SellerRatingService {
 		
 		if (op.isPresent()) {
 			existing = op.get();
-			sellerRatingRepo.delete(existing);
+			existing.setSellerRating(0);
+			existing.setComment(null);
+//			sellerRatingRepo.delete(existing);
+			sellerRatingRepo.saveAndFlush(existing);
 			deleted = true;
 		}
 		return deleted;
