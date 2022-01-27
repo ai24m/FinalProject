@@ -30,7 +30,7 @@ public class AuthController {
 		return user;
 	}
 
-	@GetMapping("/authenticate")
+	@GetMapping("/login")
 	public User authenticate(Principal principal) {
 		return authSvc.findUserByName(principal.getName());
 	}

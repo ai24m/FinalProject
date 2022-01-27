@@ -7,14 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.lettucemeet.entities.Product;
-import com.skilldistillery.lettucemeet.entities.Type;
-import com.skilldistillery.lettucemeet.repositories.ProductReposity;
+import com.skilldistillery.lettucemeet.entities.User;
+import com.skilldistillery.lettucemeet.repositories.ProductRepository;
+import com.skilldistillery.lettucemeet.repositories.UserRepository;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-	
+
 	@Autowired
-	private ProductReposity prodRepo;
+	private ProductRepository prodRepo;
+
+	@Autowired
+	private UserRepository userRepo;
 
 	@Override
 	public List<Product> getProducts() {
@@ -30,63 +34,44 @@ public class ProductServiceImpl implements ProductService {
 		return null;
 	}
 
-//	@Override
-//	public Product createProduct(Product product) {
-//		if (product.getType() == null) {
-//			Type type = new Type();
-//			type.setId(1);
-//			product.setType(type);
-//			prodRepo.saveAndFlush(product);
-//		}
-//		return product;
-//	}
-
-//	@Override
-//	public Product updateProduct(int prodId, Product product) {
-//		Optional<Product> optProd = prodRepo.findById(prodId);
-//		Product managed = null;
-//		if (optProd.isPresent()) {
-//			managed = optProd.get();
-//			managed.setDescription(product.getDescription());
-//			managed.setOrganic(product.isOrganic());
-//			managed.setPrice(product.getPrice());
-//			managed.setImageUrl(product.getImageUrl());
-//			managed.setQuantity(product.getQuantity());
-//			managed.setAvailableDate(product.getAvailableDate());
-//			if (product.getType() != null) {
-//				managed.setType(product.getType());
-//			}
-//			prodRepo.saveAndFlush(managed);
-//		}
-//		return product;
-//	}
-
-//	@Override
-//	public boolean deleteProduct(int prodId) {
-//		boolean deleted = false;
-//		if (prodRepo.existsById(prodId)) {
-//			prodRepo.deleteById(prodId);
-//			deleted = true;
-//		}
-//		return deleted;
-//	}
-
 	@Override
-	public Product createProduct(String username, Product prod) {
-		// TODO Auto-generated method stub
+	public Product createProduct(String username, Product product) {
+		User user = userRepo.findByUsername(username);
+		if (user != null) {
+			product.setUser(user);
+			;
+			return prodRepo.saveAndFlush(product);
+		}
 		return null;
 	}
 
 	@Override
-	public Product updateProduct(String username, int prodId, Product prod) {
-		// TODO Auto-generated method stub
-		return null;
+	public Product updateProduct(String username, int prodId, Product product) {
+		Product existing = prodRepo.findByIdAndUserUsername(prodId, username);
+		if (existing != null) {
+			existing.setDescription(product.getDescription());
+			existing.setOrganic(product.isOrganic());
+			existing.setPrice(product.getPrice());
+			existing.setImageUrl(product.getImageUrl());
+			existing.setQuantity(product.getQuantity());
+			existing.setAvailableDate(product.getAvailableDate());
+			if (product.getType() != null) {
+				existing.setType(product.getType());
+			}
+			prodRepo.saveAndFlush(existing);
+		}
+		return product;
 	}
 
 	@Override
 	public boolean deleteProduct(String username, int prodId) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean deleted = false;
+		Product prod = prodRepo.findByIdAndUserUsername(prodId, username);
+		if (prod != null) {
+			prodRepo.delete(prod);
+			deleted = true;
+		}
+		return deleted;
 	}
 
 }

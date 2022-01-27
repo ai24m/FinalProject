@@ -11,7 +11,7 @@ import com.skilldistillery.lettucemeet.entities.ProductRating;
 import com.skilldistillery.lettucemeet.entities.ProductRatingId;
 import com.skilldistillery.lettucemeet.entities.User;
 import com.skilldistillery.lettucemeet.repositories.ProductRatingRepository;
-import com.skilldistillery.lettucemeet.repositories.ProductReposity;
+import com.skilldistillery.lettucemeet.repositories.ProductRepository;
 import com.skilldistillery.lettucemeet.repositories.UserRepository;
 
 @Service
@@ -24,7 +24,7 @@ public class ProductRatingImpl implements ProductRatingService {
 	private UserRepository userRepo;
 	
 	@Autowired
-	private ProductReposity productRepo;
+	private ProductRepository productRepo;
 	@Override
 	public List<ProductRating> showAll() {
 		// TODO Auto-generated method stub
