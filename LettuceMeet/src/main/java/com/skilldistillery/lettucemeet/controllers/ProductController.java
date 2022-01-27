@@ -41,50 +41,50 @@ public class ProductController {
 		return product;
 	}
 	
-	@PostMapping("products")
-	public Product createProduct(@RequestBody Product product, HttpServletResponse res, HttpServletRequest req) {
-		try {
-			prodSvc.createProduct(product);
-			res.setStatus(201);
-			StringBuffer url = req.getRequestURL();
-			url.append("/").append(product.getId());
-			res.setHeader("Location", url.toString());
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.err.println("Invalid entry for new product");
-			res.setStatus(400);
-			product = null;
-		}
-		return null;
-	}
+//	@PostMapping("products")
+//	public Product createProduct(@RequestBody Product product, HttpServletResponse res, HttpServletRequest req) {
+//		try {
+//			prodSvc.createProduct(product);
+//			res.setStatus(201);
+//			StringBuffer url = req.getRequestURL();
+//			url.append("/").append(product.getId());
+//			res.setHeader("Location", url.toString());
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			System.err.println("Invalid entry for new product");
+//			res.setStatus(400);
+//			product = null;
+//		}
+//		return null;
+//	}
 	
-	@PutMapping("products/{id}")
-	public Product updateProduct(@PathVariable Integer id, @RequestBody Product product, HttpServletResponse res) {
-		try {
-			product = prodSvc.updateProduct(id, product);
-			if (product == null) {
-				res.setStatus(404);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			res.setStatus(400);
-			product = null;
-		}
-		return product;
-	}
+//	@PutMapping("products/{id}")
+//	public Product updateProduct(@PathVariable Integer id, @RequestBody Product product, HttpServletResponse res) {
+//		try {
+//			product = prodSvc.updateProduct(id, product);
+//			if (product == null) {
+//				res.setStatus(404);
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			res.setStatus(400);
+//			product = null;
+//		}
+//		return product;
+//	}
 	
-	@DeleteMapping("products/{id}")
-	public void deleteProduct(@PathVariable Integer id, HttpServletResponse res) {
-		try {
-			if (prodSvc.deleteProduct(id)) {
-				res.setStatus(204);
-			} else {
-				res.setStatus(404);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			res.setStatus(400);
-		}
-	}
+//	@DeleteMapping("products/{id}")
+//	public void deleteProduct(@PathVariable Integer id, HttpServletResponse res) {
+//		try {
+//			if (prodSvc.deleteProduct(id)) {
+//				res.setStatus(204);
+//			} else {
+//				res.setStatus(404);
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			res.setStatus(400);
+//		}
+//	}
 
 }
