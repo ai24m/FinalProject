@@ -27,19 +27,16 @@ public class ProductRatingImpl implements ProductRatingService {
 	private ProductRepository productRepo;
 	@Override
 	public List<ProductRating> showAll() {
-		// TODO Auto-generated method stub
 		return productRatingRepo.findAll();
 	}
 
 	@Override
 	public List<ProductRating> findByUserName(String username) {
-		// TODO Auto-generated method stub
 		return productRatingRepo.findByUser_Username(username);
 	}
 
 	@Override
 	public ProductRating findByProductRatingId(int productId, String userName) {
-		// TODO Auto-generated method stub
 		ProductRatingId pId = new ProductRatingId(userRepo.findByUsername(userName).getId(),productId);
 		Optional<ProductRating> op = productRatingRepo.findById(pId);
 		ProductRating productRating = null;
@@ -51,7 +48,6 @@ public class ProductRatingImpl implements ProductRatingService {
 
 	@Override
 	public ProductRating createProductRating(int productId, String userName, ProductRating productRating) {
-		// TODO Auto-generated method stub
 		ProductRatingId pId = new ProductRatingId(userRepo.findByUsername(userName).getId(),productId);
 		Optional<ProductRating> op = productRatingRepo.findById(pId);
 		if(!op.isPresent()) {
@@ -74,7 +70,6 @@ public class ProductRatingImpl implements ProductRatingService {
 
 	@Override
 	public ProductRating updateProductRating(int productId, String userName, ProductRating productRating) {
-		// TODO Auto-generated method stub
 		ProductRatingId pId = new ProductRatingId(userRepo.findByUsername(userName).getId(),productId);
 		Optional<ProductRating> op = productRatingRepo.findById(pId);
 		ProductRating existing = null;
@@ -90,7 +85,6 @@ public class ProductRatingImpl implements ProductRatingService {
 
 	@Override
 	public boolean deleteProductRating(int productId, String userName) {
-		// TODO Auto-generated method stub
 		boolean deleted = false;
 		ProductRatingId pId = new ProductRatingId(userRepo.findByUsername(userName).getId(),productId);
 		Optional<ProductRating> op = productRatingRepo.findById(pId);
