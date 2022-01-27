@@ -546,7 +546,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `lettucemeetdb`;
-INSERT INTO `user` (`id`, `username`, `email`, `password`, `enabled`, `role`, `first_name`, `last_name`, `business_name`, `image_url`, `create_time`, `address_id`) VALUES (1, 'admin', 'admin@email.com', '', true, 'admin', 'admin', 'admin', '', '', '2016-02-26 18:23:39', 1);
+INSERT INTO `user` (`id`, `username`, `email`, `password`, `enabled`, `role`, `first_name`, `last_name`, `business_name`, `image_url`, `create_time`, `address_id`) VALUES (1, 'admin', 'admin@email.com', '$2a$10$51f0HNB9wi4vjp2ghLi7B.u6bJGFGHxnAMRtJPiteJjwzGxGLdJIW', true, 'admin', 'admin', 'admin', '', '', '2016-02-26 18:23:39', 1);
 INSERT INTO `user` (`id`, `username`, `email`, `password`, `enabled`, `role`, `first_name`, `last_name`, `business_name`, `image_url`, `create_time`, `address_id`) VALUES (2, 'kscholling1', 'kscholling1@bbb.org', '', true, '', 'Katey', 'Scholling', '', '', '2018-12-26 23:49:49', 2);
 INSERT INTO `user` (`id`, `username`, `email`, `password`, `enabled`, `role`, `first_name`, `last_name`, `business_name`, `image_url`, `create_time`, `address_id`) VALUES (3, 'fbygraves2', 'fbygraves2@behance.net', '', true, '', 'Fransisco', 'Bygraves', 'Edgepulse', '', '2012-12-02 21:03:13', 3);
 INSERT INTO `user` (`id`, `username`, `email`, `password`, `enabled`, `role`, `first_name`, `last_name`, `business_name`, `image_url`, `create_time`, `address_id`) VALUES (4, 'mswatten3', 'mswatten3@loc.gov', '', false, '', 'Marie-jeanne', 'Swatten', '', '', '2014-11-09 17:50:46', 4);
