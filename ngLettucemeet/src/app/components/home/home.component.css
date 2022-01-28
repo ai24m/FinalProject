@@ -1,0 +1,24 @@
+.position-absolute  {
+  background-color:#556B2F
+}
+article {
+  background-color: white;
+}
+
+p {
+   color: black;
+}
+
+.tm-color-primary {
+  color: black;
+}
+
+img {
+    background-repeat: no-repeat;
+    /* background-attachment: fixed; */
+    width: 102%;
+    margin-right: 5%;
+    background-repeat: no-repeat;
+    /* background-attachment: fixed; */
+    /* background-size: 100% 100%; */
+}

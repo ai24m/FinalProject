@@ -22,7 +22,7 @@ hr {
 .form-control::placeholder { color: #999; }
 
 .tm-header {
-    background-color: #0CC;
+    background-color: #556B2F;
     color: white;
 
     position: fixed;
@@ -67,7 +67,8 @@ hr {
 
 .tm-main {
     margin-left: 400px;
-    padding: 0px 100px;
+    padding-right: 10px;
+    padding-left: 70px;
 }
 
 .tm-post { max-width: 470px; }
@@ -77,11 +78,12 @@ hr {
     justify-content: space-between;
 }
 
-.tm-nav { margin-bottom: 100px; }
+/* .tm-nav { margin-bottom: 100px; } */
 
 .tm-nav-item {
     list-style: none;
     margin-bottom: 5%;
+    /* background-color: grey; */
 }
 
 .tm-nav-link {
@@ -100,17 +102,17 @@ hr {
 .tm-nav-item.active .tm-nav-link
  {
     color: #526E2A;
-    background-color: white;
+    /* background-color: g; */
     text-decoration: none;
 }
 
 .tm-nav ul { position: relative; }
 
-.tm-nav-item:after,
+/* .tm-nav-item:after,
 .tm-nav-item.active:after {
     content: '';
-    width: 100%;
-    max-width: 300px;
+    width: 80%;
+    max-width: 200px;
     height: 75px;
     display: block;
     border: 1px solid white;
@@ -118,7 +120,7 @@ hr {
     margin-top: -65px;
     position: absolute;
     z-index: -1000;
-}
+} */
 
 .tm-nav-link i { margin-right: 37px; }
 
@@ -191,7 +193,7 @@ ul {
 
 .tm-post-link-inner {
     overflow: hidden;
-    background: #3085a3;
+    background: black;
 }
 
 .tm-post-link img {
@@ -313,7 +315,7 @@ ul {
 .tm-copyright { text-align: right; }
 
 /* Single Post page */
-hr.tm-hr-primary { border-top: 5px solid #0CC; }
+hr.tm-hr-primary { border-top: 5px solid black; }
 
 video {
     width: 100%;
@@ -343,7 +345,7 @@ video {
 figure { margin: 0; }
 figcaption { line-height: 1.4; }
 
-.tm-post-full { max-width: 600px; }
+.tm-post-full { max-width: 400px; }
 
 .tm-post-sidebar {
     max-width: 280px;
@@ -398,8 +400,8 @@ a:hover figcaption { color: #056767; }
     display: block;
     color: white;
     background-color: #0CC;
-    width: 45px;
-    height: 45px;
+    width: 30px;
+    height: 30px;
     margin-right: 15px;
 }
 
@@ -421,11 +423,11 @@ a:hover figcaption { color: #056767; }
 .tm-contact-form .form-group { display: flex; }
 
 @media (max-width: 1540px) {
-    .tm-header { width: 320px; }
+    .tm-header { width: 240px; }
 
     .tm-main {
-        margin-left: 320px;
-        width: calc(100% - 320px);
+        margin-left: 200px;
+        /* width: calc(100% - 320px); */
     }
 }
 
@@ -469,7 +471,7 @@ a:hover figcaption { color: #056767; }
         position: fixed;
         left: 0;
         top: 0;
-        background-color: rgba(56, 204, 204, 0.75);
+        /* background-color: ; */
         color: white;
         padding: 10px 15px;
         transition: all 0.3s ease;
