@@ -19,6 +19,9 @@ public class MarketServiceImpl implements MarketService {
 	@Autowired 
 	private MarketRepository marketRepo;
 	
+	@Autowired
+	private AddressRepository addressRepo;
+	
 	@Override
 	public List<Market> index() {
 		return marketRepo.findAll();
@@ -42,9 +45,10 @@ public class MarketServiceImpl implements MarketService {
 	}
 
 	@Override
-	public Market create(Market market, User user) {
-		if (user != null) {
+	public Market create(Market market, User user, Address addr) {
+		if (user != null && addr !=null) {
 			market.setUser(user);
+			market.setAddress(addressRepo.saveAndFlush(addr));
 		    return marketRepo.saveAndFlush(market); 
 		}
 //		market.setAddress(market.getAddress());
