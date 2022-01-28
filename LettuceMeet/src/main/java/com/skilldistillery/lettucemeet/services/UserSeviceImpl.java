@@ -53,11 +53,10 @@ public class UserSeviceImpl implements UserService {
 		Optional<User> op = userRepo.findById(id);
 		User managed = null;
 		if (op.isPresent()) {
-			user = op.get();
+			managed = op.get();
 			managed.setBusinessName(user.getBusinessName());
 			managed.setEmail(user.getEmail());
 			managed.setFirstName(user.getFirstName());
-			managed.setPassword(user.getPassword());
 			managed.setImageUrl(user.getImageUrl());
 			managed.setLastName(user.getLastName());
 			managed.setUsername(user.getUsername());

@@ -62,7 +62,7 @@ class ProductTest {
 	
 	@Test
 	void test_Product_Type_Mapping() {
-		assertNotNull(product.getType());
+		assertNotNull(product.getType().getName());
 		assertEquals(4, product.getType().getId());
 	}
 }
