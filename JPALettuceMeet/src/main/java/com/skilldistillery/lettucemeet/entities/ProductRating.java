@@ -25,12 +25,13 @@ public class ProductRating {
 	
 	private String comment;
 	
-	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	@MapsId(value="userId")
 	private User user; 
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="product_id")
 	@MapsId(value="productId")

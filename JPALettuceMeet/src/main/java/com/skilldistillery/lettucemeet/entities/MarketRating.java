@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="market_rating")
 public class MarketRating {
@@ -22,11 +24,13 @@ public class MarketRating {
 	
 	private String comment;
 	
+	@JsonIgnore
 	@ManyToOne 
 	@JoinColumn(name="user_id")
 	@MapsId(value="userId")
 	private User user;
 	
+	@JsonIgnore
 	@ManyToOne 
 	@JoinColumn(name="market_id")
 	@MapsId(value="marketId")

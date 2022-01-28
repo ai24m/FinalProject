@@ -20,7 +20,7 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Product {
@@ -58,12 +58,12 @@ public class Product {
 	@JoinColumn(name="type_id")
 	private Type type; 
 	
-	@JsonIgnoreProperties({"products","hibernateLazyInitializer"})
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user; 
 	
-	@JsonIgnoreProperties({"products","hibernateLazyInitializer"})
+	@JsonIgnore
 	@ManyToMany()
 	@JoinTable(name="market_product",
 		joinColumns=@JoinColumn(name="product_id"),
@@ -71,12 +71,12 @@ public class Product {
 	)
 	private List<Market> markets;
 	
-	@JsonIgnoreProperties({"product","hibernateLazyInitializer"})
+	@JsonIgnore
 //	@OneToMany(mappedBy="product", cascade = CascadeType.ALL)
 	@OneToMany(mappedBy="product")
 	private List<ProductRating> productRatings; 
 	
-	@JsonIgnoreProperties({"product","hibernateLazyInitializer"})
+	@JsonIgnore
 //	@OneToMany(mappedBy="product", cascade = CascadeType.ALL)
 	@OneToMany(mappedBy="product")
 	private List<ProductComment> productComments; 

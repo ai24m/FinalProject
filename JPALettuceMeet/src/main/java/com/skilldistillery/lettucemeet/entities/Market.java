@@ -59,11 +59,11 @@ public class Market {
 	@ManyToMany(mappedBy = "markets")
 	private List<Product> products;
 	
-//	@JsonIgnore
+	@JsonIgnore
 	@OneToMany(mappedBy="market")
 	private List<MarketRating> marketRatings;
 	
-//	@JsonIgnore
+	@JsonIgnore
 	@OneToMany(mappedBy="market")
 	private List<MarketComment> marketComments;
 	
