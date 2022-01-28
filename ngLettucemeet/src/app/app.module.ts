@@ -12,19 +12,33 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { SampleTemplateComponent } from './components/sample-template/sample-template.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { ProductRatingComponent } from './components/product-rating/product-rating.component';
+import { ProductRatingService } from './services/product-rating.service';
+import { FormsModule } from '@angular/forms';
+import { LoginOrRegisterComponent } from './components/login-or-register/login-or-register.component';
 
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, HomeComponent, SampleTemplateComponent, CalendarComponent],
-  imports: [BrowserModule,
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    HomeComponent,
+    SampleTemplateComponent,
+    CalendarComponent,
+    ProductRatingComponent,
+    // LoginOrRegisterComponent
+  ],
+  imports: [
+    BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
     })
   ],
-  providers: [AuthService],
+  providers: [AuthService, ProductRatingService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
