@@ -41,7 +41,7 @@ public class UserController {
 				res.setStatus(201);
 				StringBuffer url = req.getRequestURL();
 				url.append("/").append(user.getId());
-				res.setHeader("Location", url.toString());
+				res.setHeader("location", url.toString());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
