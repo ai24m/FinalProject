@@ -39,10 +39,6 @@ public class ProductRatingId implements Serializable {
 		this.productId = productId;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 	//--hascode
 	@Override
 	public int hashCode() {
@@ -60,7 +56,6 @@ public class ProductRatingId implements Serializable {
 		ProductRatingId other = (ProductRatingId) obj;
 		return productId == other.productId && userId == other.userId;
 	}
-
 	
 	//--toString
 	@Override
@@ -74,8 +69,5 @@ public class ProductRatingId implements Serializable {
 		this.userId = userId;
 		this.productId = productId;
 	}
-
-	
-	
 	
 }

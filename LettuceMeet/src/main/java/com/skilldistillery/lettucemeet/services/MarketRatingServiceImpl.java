@@ -14,17 +14,17 @@ import com.skilldistillery.lettucemeet.repositories.MarketRatingRepository;
 import com.skilldistillery.lettucemeet.repositories.MarketRepository;
 import com.skilldistillery.lettucemeet.repositories.UserRepository;
 
-@Service 
+@Service
 public class MarketRatingServiceImpl implements MarketRatingService {
 
-	@Autowired 
+	@Autowired
 	private MarketRatingRepository mrRepo;
-	
-	@Autowired 
-	private UserRepository userRepo; 
-	
-	@Autowired 
-	private MarketRepository marketRepo; 
+
+	@Autowired
+	private UserRepository userRepo;
+
+	@Autowired
+	private MarketRepository marketRepo;
 
 	@Override
 	public List<MarketRating> index(Integer mId) {
@@ -39,47 +39,54 @@ public class MarketRatingServiceImpl implements MarketRatingService {
 	@Override
 	public MarketRating create(Integer userId, Integer mId, MarketRating marketRating) {
 		MarketRatingId mrId = new MarketRatingId(userId, mId);
-		Optional <User> uOpt = userRepo.findById(mId);
+		Optional<User> uOpt = userRepo.findById(userId);
 		if (uOpt.isPresent()) {
 			User user = uOpt.get();
 			marketRating.setUser(user);
 		}
-		Optional <Market> mOpt = marketRepo.findById(mId);
+		Optional<Market> mOpt = marketRepo.findById(mId);
 		if (mOpt.isPresent()) {
 			Market market = mOpt.get();
 			marketRating.setMarket(market);
 		}
 		if (mrId != null) {
 			if (userId != null && mId != null) {
+				marketRating.setId(mrId);
 				mrRepo.saveAndFlush(marketRating);
-				return marketRating; 
+				return marketRating;
 			}
-		} return null;
+		}
+		return null;
 	}
 
 	@Override
 	public MarketRating update(User user, Integer mId, MarketRating marketRating) {
 		MarketRatingId mrId = new MarketRatingId(user.getId(), mId);
-		if (marketRating.getUser().getId() == user.getId()) {
-			Optional<MarketRating> mOpt = mrRepo.findById(mrId);
-			if (mOpt.isPresent()) {
-				MarketRating updatedMarketRating = mOpt.get();
-				return updatedMarketRating; 
-			}
-		} return null;
+		Optional<MarketRating> mOpt = mrRepo.findById(mrId);
+		MarketRating existing = null;
+
+		if (mOpt.isPresent()) {
+			existing = mOpt.get();
+			existing.setComment(marketRating.getComment());
+			existing.setMarketRating(marketRating.getMarketRating());
+			mrRepo.saveAndFlush(existing);
+
+		}
+		return existing;
 	}
-	
-	@Override 
+
+	@Override
 	public boolean destroy(User user, Integer mId) {
-		boolean deleted = false; 
+		boolean deleted = false;
 		MarketRatingId mrId = new MarketRatingId(user.getId(), mId);
 		Optional<MarketRating> mrOpt = mrRepo.findById(mrId);
 		if (mrOpt.isPresent()) {
 			MarketRating marketRating = mrOpt.get();
 			mrRepo.delete(marketRating);
 			deleted = true;
-			return deleted; 
-		} return deleted; 
+			return deleted;
+		}
+		return deleted;
 	}
-	
+
 }

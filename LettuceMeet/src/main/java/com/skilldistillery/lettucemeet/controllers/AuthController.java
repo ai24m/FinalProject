@@ -26,11 +26,11 @@ public class AuthController {
 		if (user == null) {
 			res.setStatus(400);
 		}
-		user = authSvc.register(user);
+		user = authSvc.register(user, user.getAddress());
 		return user;
 	}
 
-	@GetMapping("/authenticate")
+	@GetMapping("/login")
 	public User authenticate(Principal principal) {
 		return authSvc.findUserByName(principal.getName());
 	}

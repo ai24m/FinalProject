@@ -1,6 +1,8 @@
 package com.skilldistillery.lettucemeet.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -10,12 +12,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "market_comment")
@@ -35,16 +39,21 @@ public class MarketComment {
 	@Column(name = "update_time")
 	private LocalDateTime updated;
 	
-//	@JsonIgnoreProperties({"marketComment"})
+	@JsonIgnoreProperties({"marketComment"})
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="comment_id")
-	private MarketComment marketComment; 
+	private MarketComment replyTo; 
 	
+	@OneToMany(mappedBy="replyTo")
+	private List<MarketComment> myReplies; 
+	
+	@JsonIgnore 
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user; 
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="market_id")
 	private Market market; 
@@ -54,14 +63,15 @@ public class MarketComment {
 		super();
 	}
 
-	public MarketComment(int id, String comment, LocalDateTime created, LocalDateTime updated, MarketComment marketComment,
-		User user, Market market) {
+	public MarketComment(int id, String comment, LocalDateTime created, LocalDateTime updated, MarketComment replyTo,
+			List<MarketComment> myReplies, User user, Market market) {
 		super();
 		this.id = id;
 		this.comment = comment;
 		this.created = created;
 		this.updated = updated;
-		this.marketComment = marketComment;
+		this.replyTo = replyTo;
+		this.myReplies = myReplies;
 		this.user = user;
 		this.market = market;
 	}
@@ -98,15 +108,46 @@ public class MarketComment {
 		this.updated = updated;
 	}
 
-	public MarketComment getMarketComment() {
-		return marketComment;
+	public MarketComment getReplyTo() {
+		MarketComment replyTo = this.replyTo;
+		return replyTo;
 	}
 
-	public void setMarketComment(MarketComment marketComment) {
-		this.marketComment = marketComment;
+	public void setReplyTo(MarketComment replyTo) {
+		this.replyTo = replyTo;
 	}
+
+	public List<MarketComment> getMyReplies() {
+		List<MarketComment> myReplies= this.myReplies;
+		return myReplies;
+	}
+
+	public void setMyReplies(List<MarketComment> myReplies) {
+		this.myReplies = myReplies;
+	}
+	
+	public void addMarketComment(MarketComment marketComment) {
+		if (myReplies == null) myReplies = new ArrayList<>();
+		
+		if (!myReplies.contains(marketComment)) {
+			myReplies.add(marketComment);
+			if (marketComment.getMyReplies() != null) {
+				marketComment.getReplyTo().getMyReplies().remove(marketComment);
+			} 
+			marketComment.setReplyTo(this);
+		}
+	}
+	
+	public void removeMarketComment(MarketComment marketComment) {
+		marketComment.setReplyTo(null);
+		if (myReplies != null) {
+			myReplies.remove(marketComment);
+		}
+	}
+	
 
 	public User getUser() {
+		User user = this.user;
 		return user;
 	}
 
@@ -115,6 +156,7 @@ public class MarketComment {
 	}
 
 	public Market getMarket() {
+		Market market = this.market;
 		return market;
 	}
 

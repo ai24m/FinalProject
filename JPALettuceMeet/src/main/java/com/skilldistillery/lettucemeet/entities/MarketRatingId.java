@@ -16,11 +16,15 @@ private static final long serialVersionUID = 1L;
 	@Column(name = "market_id")
 	private int marketId;
 
-	//-----no-arg constructor
 	public MarketRatingId() {
 		super();
 	}
-	//---getter and setter
+
+	public MarketRatingId(int userId, int marketId) {
+		super();
+		this.userId = userId;
+		this.marketId = marketId;
+	}
 
 	public int getUserId() {
 		return userId;
@@ -41,7 +45,6 @@ private static final long serialVersionUID = 1L;
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	//--hashcode
 
 	@Override
 	public int hashCode() {
@@ -59,18 +62,10 @@ private static final long serialVersionUID = 1L;
 		MarketRatingId other = (MarketRatingId) obj;
 		return marketId == other.marketId && userId == other.userId;
 	}
-	//--tostring
 
 	@Override
 	public String toString() {
 		return "MarketRatingId [userId=" + userId + ", marketId=" + marketId + "]";
 	}
-	//--all constructor
-	public MarketRatingId(int userId, int marketId) {
-		super();
-		this.userId = userId;
-		this.marketId = marketId;
-	}
-	
 
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -54,6 +55,7 @@ public class Market {
 	@JoinColumn(name="address_id")
 	private Address address;
 	
+//	@JsonIgnore
 	@ManyToMany(mappedBy = "markets")
 	private List<Product> products;
 	
@@ -159,17 +161,36 @@ public class Market {
 		this.address = address;
 	}
 
-	public List<MarketRating> getMarketRatings() {
-		return marketRatings;
-	}
-
 	public List<Product> getProducts() {
+		List<Product> products = this.products;
 		return products;
 	}
 
 	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
+	
+	public void addProduct(Product product) {
+		if (products == null) products = new ArrayList<>();
+		
+		if (!products.contains(product)) {
+			products.add(product);
+			product.addMarket(this);
+		}
+	}
+	
+	public void removeProduct(Product product) {
+		if (products != null && products.contains(product)) {
+			products.remove(product); 
+			product.removeMarket(this);
+		}
+	}
+	
+	public List<MarketRating> getMarketRatings() {
+		List<MarketRating> marketRatings = this.marketRatings;
+		return marketRatings;
+	}
+	
 
 	public void setMarketRatings(List<MarketRating> marketRatings) {
 		this.marketRatings = marketRatings;
@@ -194,9 +215,12 @@ public class Market {
 		}
 	}
 	
+	
 	public List<MarketComment> getMarketComments() {
+		List<MarketComment> marketComments = this.marketComments;
 		return marketComments;
 	}
+	
 
 	public void setMarketComments(List<MarketComment> marketComments) {
 		this.marketComments = marketComments;

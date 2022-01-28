@@ -1,5 +1,6 @@
 package com.skilldistillery.lettucemeet.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -102,6 +103,7 @@ public class Address {
 	}
 
 	public List<User> getUsers() {
+		List<User> users = this.users;
 		return users;
 	}
 
@@ -110,6 +112,7 @@ public class Address {
 	}
 
 	public List<Market> getMarkets() {
+		List<Market> markets = this.markets;
 		return markets;
 	}
 
@@ -138,6 +141,46 @@ public class Address {
 	public String toString() {
 		return "Address [id=" + id + ", street1=" + street1 + ", street2=" + street2 + ", city=" + city + ", state="
 				+ state + ", zip=" + zip + "]";
+	}
+	
+	public void addUser(User user) {
+		if (users == null) {
+			users = new ArrayList<>();
+		}
+		if (!users.contains(user)) {
+			users.add(user);
+			if (user.getAddress() != null) {
+				user.getAddress().getUsers().remove(user);
+			}
+			user.setAddress(this);
+		}
+	}
+	
+	public void deleteUser(User user) {
+		user.setAddress(null);
+		if (users != null) {
+			users.remove(user);
+		}
+	}
+	
+	public void addMarket(Market market) {
+		if (markets == null) {
+			markets = new ArrayList<>();
+		}
+		if (!markets.contains(market)) {
+			markets.add(market);
+			if (market.getAddress() != null) {
+				market.getAddress().getMarkets().remove(market);
+			}
+			market.setAddress(this);
+		}
+	}
+	
+	public void deleteMarket(Market market) {
+		market.setAddress(null);
+		if (markets != null) {
+			markets.remove(market);
+		}
 	}
 
 }

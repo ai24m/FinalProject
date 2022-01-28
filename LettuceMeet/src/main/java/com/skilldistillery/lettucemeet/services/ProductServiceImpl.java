@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.lettucemeet.entities.Product;
+import com.skilldistillery.lettucemeet.entities.Type;
 import com.skilldistillery.lettucemeet.entities.User;
 import com.skilldistillery.lettucemeet.repositories.ProductRepository;
 import com.skilldistillery.lettucemeet.repositories.UserRepository;
@@ -39,7 +40,11 @@ public class ProductServiceImpl implements ProductService {
 		User user = userRepo.findByUsername(username);
 		if (user != null) {
 			product.setUser(user);
-			;
+			if (product.getType() == null) {
+				Type temp = new Type();
+				temp.setId(10);
+				product.setType(temp);
+			}
 			return prodRepo.saveAndFlush(product);
 		}
 		return null;

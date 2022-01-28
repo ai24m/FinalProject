@@ -10,6 +10,7 @@ import com.skilldistillery.lettucemeet.entities.Market;
 import com.skilldistillery.lettucemeet.entities.MarketComment;
 import com.skilldistillery.lettucemeet.entities.User;
 import com.skilldistillery.lettucemeet.repositories.MarketCommentRepository;
+import com.skilldistillery.lettucemeet.repositories.MarketRepository;
 import com.skilldistillery.lettucemeet.repositories.UserRepository;
 
 @Service 
@@ -20,6 +21,9 @@ public class MarketCommentServiceImpl implements MarketCommentService{
 	
 	@Autowired 
 	private UserRepository userRepo;
+	
+	@Autowired 
+	private MarketRepository marketRepo;
 
 	@Override
 	public List<MarketComment> index() {
@@ -30,34 +34,30 @@ public class MarketCommentServiceImpl implements MarketCommentService{
 	public MarketComment show(Integer mcId) {
 		Optional <MarketComment> mcOpt = mcRepo.findById(mcId);
 		if (mcOpt.isPresent()) {
-			MarketComment mc = mcOpt.get();
-			return mc; 
+			return mcOpt.get();
 		} return null;
 	}
 
 	@Override
-	public MarketComment create(MarketComment marketComment) {
-		if (marketComment.getUser() != null && marketComment.getMarket() != null) {
+	public MarketComment create(MarketComment marketComment, User user) {
+		if (user != null) {
+			marketComment.setReplyTo(marketComment);
 			marketComment.setMarket(marketComment.getMarket());
-			marketComment.setUser(marketComment.getUser());
-			marketComment.setMarketComment(marketComment.getMarketComment());
-			mcRepo.saveAndFlush(marketComment);
-			return marketComment;
-		}	return marketComment; 	
+			marketComment.setUser(user);
+			return mcRepo.saveAndFlush(marketComment);
+		}	return null; 	
 	} 
 	
 	@Override 
-	public MarketComment update(User user, Integer mcId, MarketComment marketComment) {
-		if (marketComment.getUser().getId() == user.getId()) {
-			Optional <MarketComment> mcOpt = mcRepo.findById(mcId);
-			if (mcOpt.isPresent()) {
-				MarketComment updatedMarketComment = mcOpt.get();
-				updatedMarketComment.setMarketComment(marketComment);
-				updatedMarketComment.setUser(marketComment.getUser());
-				updatedMarketComment.setMarket(marketComment.getMarket());
-				return updatedMarketComment; 
-			}
-		} return marketComment;
+	public MarketComment update(User user, Market market, Integer mcId, MarketComment marketComment) {
+		MarketComment existing = mcRepo.findByIdAndUser(mcId, user);
+		if (existing != null) {
+			existing.setComment(marketComment.getComment());
+			existing.setReplyTo(marketComment);
+			existing.setMarket(market);
+			existing.setUser(user);
+			mcRepo.saveAndFlush(existing);
+		} return existing;
 	}
 
 	@Override
@@ -67,7 +67,6 @@ public class MarketCommentServiceImpl implements MarketCommentService{
 		if (marketComment != null) {
 			mcRepo.delete(marketComment);
 			deleted = true;
-			return deleted; 
 		} return deleted; 
 	}
 }

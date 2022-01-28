@@ -50,7 +50,7 @@ public class User {
 	@CreationTimestamp
 	@Column(name = "create_time")
 	private LocalDateTime created;
-	
+	 
 	@ManyToOne
 	@JoinColumn(name = "address_id")
 	private Address address; 
@@ -217,6 +217,7 @@ public class User {
 	}
 
 	public List<ProductRating> getProductRatings() {
+		List<ProductRating> productRatings = this.productRatings;
 		return productRatings;
 	}
 
@@ -245,6 +246,7 @@ public class User {
 	
 
 	public List<SellerRating> getSellerRatings() {
+		List<SellerRating> sellerRatings = this.sellerRatings;
 		return sellerRatings;
 	}
 
@@ -272,6 +274,7 @@ public class User {
 	}
 
 	public List<SellerRating> getUserRatings() {
+		List<SellerRating> userRatings = this.sellerRatings;
 		return userRatings;
 	}
 
@@ -298,8 +301,36 @@ public class User {
 		}
 	}
 	
+	public List<Product> getProducts() {
+		List<Product> products = this.products;
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+	
+	public void addProduct(Product product) {
+		if (products == null) products = new ArrayList<>();
+		
+		if (!products.contains(product)) {
+			products.add(product);
+			if (product.getUser() != null) {
+				product.getUser().getProducts().remove(product);
+			} 
+			product.setUser(this);
+		}
+	}
+	
+	public void removeProduct(Product product) {
+		product.setUser(null);
+		if (products != null) {
+			products.remove(product);
+		}
+	}
 	
 	public List<MarketRating> getMarketRatings() {
+		List<MarketRating> marketRatings = this.marketRatings;
 		return marketRatings;
 	}
 
@@ -328,6 +359,7 @@ public class User {
 	
 	
 	public List<Market> getMarkets() {
+		List<Market> markets = this.markets;
 		return markets;
 	}
 
@@ -356,6 +388,7 @@ public class User {
 	
 	
 	public List<ProductComment> getProductComments() {
+		List<ProductComment> productComments = this.productComments;
 		return productComments;
 	}
 
@@ -383,6 +416,7 @@ public class User {
 	}
 	
 	public List<MarketComment> getMarketComments() {
+		List<MarketComment> marketComments = this.marketComments;
 		return marketComments;
 	}
 
@@ -409,32 +443,7 @@ public class User {
 		}
 	}
 
-	public List<Product> getProducts() {
-		return products;
-	}
 
-	public void setProducts(List<Product> products) {
-		this.products = products;
-	}
-	
-	public void addProduct(Product product) {
-		if (products == null) products = new ArrayList<>();
-		
-		if (!products.contains(product)) {
-			products.add(product);
-			if (product.getUser() != null) {
-				product.getUser().getProducts().remove(product);
-			} 
-			product.setUser(this);
-		}
-	}
-	
-	public void removeProduct(Product product) {
-		product.setUser(null);
-		if (products != null) {
-			products.remove(product);
-		}
-	}
 
 	@Override
 	public int hashCode() {

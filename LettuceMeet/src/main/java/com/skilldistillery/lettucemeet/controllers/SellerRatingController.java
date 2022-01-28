@@ -95,6 +95,7 @@ public class SellerRatingController {
 			if(sellerRating == null) {
 				res.setStatus(404);
 			}
+			return sellerRating;
 		}catch(Exception e) {
 			e.printStackTrace();
 			res.setStatus(400);
@@ -104,15 +105,15 @@ public class SellerRatingController {
 	}
 	
 	//Delete
-	@DeleteMapping("sellerRating/{sellerId}")
+	@DeleteMapping("sellerRating/user/{sellerId}")
 	public void deleteSellerRating(
 			HttpServletRequest req, 
 			HttpServletResponse res, 
-			@PathVariable int tid,
+			@PathVariable int sellerId,
 			Principal principal
 			) {
 		try {
-			if(sellerRatingSev.deleteSellerRating(tid, principal.getName())) {
+			if(sellerRatingSev.deleteSellerRating(sellerId, principal.getName())) {
 				res.setStatus(HttpStatus.NO_CONTENT.value());
 			}else {
 				res.setStatus(404);

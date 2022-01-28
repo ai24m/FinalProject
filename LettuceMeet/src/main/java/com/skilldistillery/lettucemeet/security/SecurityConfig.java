@@ -33,9 +33,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.GET, "/api/markets/**").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/marketcomments").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/sellerRatings").permitAll() // will hit the OPTIONS on the route
+				.antMatchers(HttpMethod.GET, "/api/productRatings").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/marketcomments/**").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/products").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/products/**").permitAll() // will hit the OPTIONS on the route
+				.antMatchers(HttpMethod.GET, "/api/markets").permitAll() 
+				.antMatchers(HttpMethod.GET, "/api/markets/**").permitAll() 
+				.antMatchers(HttpMethod.GET, "/api/marketcomments").permitAll() 
+				.antMatchers(HttpMethod.GET, "/api/sellerRatings/**").permitAll()
+				.antMatchers(HttpMethod.GET, "/api/marketcomments/**").permitAll() 
+				.antMatchers(HttpMethod.GET, "/api/products").permitAll() 
+				.antMatchers(HttpMethod.GET, "/api/products/**").permitAll() 
+				.antMatchers(HttpMethod.GET, "/api/productcomments").permitAll() 
+				.antMatchers(HttpMethod.GET, "/api/productcomments/**").permitAll() 
+				.antMatchers(HttpMethod.OPTIONS, "/api/users/*").hasAuthority("admin") // return true or false 
+				.antMatchers(HttpMethod.PUT, "/api/**").hasAuthority("standard") // return true or false 
+				.antMatchers(HttpMethod.POST, "/api/**").hasAuthority("standard") // return true or false 
 				.antMatchers("/api/**").authenticated() // Requests for our REST API must be authorized.
 				.anyRequest().permitAll() // All other requests are allowed without authorization.
 				.and().httpBasic(); // Use HTTP Basic Authentication

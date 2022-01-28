@@ -22,20 +22,16 @@ public class UserSeviceImpl implements UserService {
 
 	@Override
 	public List<User> getAllUser() {
-		// TODO Auto-generated method stub
-
 		return userRepo.findAll();
 	}
 
 	@Override
 	public User findByUserName(String name) {
-		// TODO Auto-generated method stub
 		return userRepo.findByUsername(name);
 	}
 
 	@Override
 	public User getUserById(int userId) {
-		// TODO Auto-generated method stub
 		Optional<User> op = userRepo.findById(userId);
 		User user = null;
 		if (op.isPresent()) {
@@ -46,7 +42,6 @@ public class UserSeviceImpl implements UserService {
 
 	@Override
 	public User createdUser(User user, Address address) {
-		// TODO Auto-generated method stub
 		addressRepo.saveAndFlush(address);
 		user.setAddress(address);
 		userRepo.saveAndFlush(user);
@@ -55,19 +50,15 @@ public class UserSeviceImpl implements UserService {
 
 	@Override
 	public User updateUser(int id, User user) {
-
-		// TODO Auto-generated method stub
 		Optional<User> op = userRepo.findById(id);
 		User managed = null;
 		if (op.isPresent()) {
-			user = op.get();
+			managed = op.get();
 			managed.setBusinessName(user.getBusinessName());
 			managed.setEmail(user.getEmail());
 			managed.setFirstName(user.getFirstName());
-			managed.setPassword(user.getPassword());
 			managed.setImageUrl(user.getImageUrl());
 			managed.setLastName(user.getLastName());
-			managed.setUsername(user.getUsername());
 			userRepo.saveAndFlush(managed);
 		}
 		return managed;
@@ -75,7 +66,6 @@ public class UserSeviceImpl implements UserService {
 
 	@Override
 	public boolean deleteUser(int userId) {
-		// TODO Auto-generated method stub
 		boolean deleted = false;
 		Optional<User> op = userRepo.findById(userId);
 		if (op.isPresent()) {

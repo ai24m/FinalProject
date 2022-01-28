@@ -16,11 +16,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name="product_rating")
 public class ProductRating {
 	
+	@JsonIgnore
 	@EmbeddedId
 	private ProductRatingId id;
 	
 	@Column(name="product_rating")
-	private int productRating;
+	private int rating;
 	
 	private String comment;
 	
@@ -30,6 +31,7 @@ public class ProductRating {
 	@MapsId(value="userId")
 	private User user; 
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="product_id")
 	@MapsId(value="productId")
@@ -43,7 +45,7 @@ public class ProductRating {
 	public ProductRating(ProductRatingId id, int productRating, String comment, User user, Product product) {
 		super();
 		this.id = id;
-		this.productRating = productRating;
+		this.rating = productRating;
 		this.comment = comment;
 		this.user = user;
 		this.product = product;
@@ -58,12 +60,12 @@ public class ProductRating {
 		this.id = id;
 	}
 
-	public int getProductRating() {
-		return productRating;
+	public int getRating() {
+		return rating;
 	}
 
-	public void setProductRating(int productRating) {
-		this.productRating = productRating;
+	public void setRating(int productRating) {
+		this.rating = productRating;
 	}
 
 	public String getComment() {
@@ -108,10 +110,10 @@ public class ProductRating {
 		return Objects.equals(id, other.id);
 	}
 
-	//--toString
 	@Override
 	public String toString() {
-		return "ProductRating [id=" + id + ", productRating=" + productRating + ", comment=" + comment + "]";
+		return "ProductRating [id=" + id + ", rating=" + rating + ", comment=" + comment + ", user=" + user
+				+ ", product=" + product + "]";
 	}
 	
 	
