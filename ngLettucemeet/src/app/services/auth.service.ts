@@ -70,11 +70,7 @@ export class AuthService {
 
   getCredentials() {
     // return localStorage.getItem('credentials');
-<<<<<<< HEAD
-    return "dXNlcjp1c2Vy";
-=======
     // TAKE OUT AFTER TESTING
     return 'dXNlcjp1c2Vy';
->>>>>>> 93c178a33739a28e9ed1f3f54606e8ac10acc429
   }
 }

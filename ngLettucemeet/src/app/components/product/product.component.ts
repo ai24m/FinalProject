@@ -58,6 +58,8 @@ export class ProductComponent implements OnInit {
     this.editProduct = Object.assign({}, this.selected);
   }
 
+  search(keyword: string) {
 
+  }
 
 }

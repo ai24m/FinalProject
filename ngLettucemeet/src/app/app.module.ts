@@ -1,3 +1,4 @@
+import { MarketService } from './services/market.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
@@ -16,8 +17,9 @@ import { KeywordPipe } from './pipes/keyword.pipe';
 import { ProductCommentComponent } from './components/product-comment/product-comment.component';
 import { ProductRatingComponent } from './components/product-rating/product-rating.component';
 import { ProductRatingService } from './services/product-rating.service';
+import { MarketComponent } from './components/market/market.component';
 import { FormsModule } from '@angular/forms';
-
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { FormsModule } from '@angular/forms';
     SampleTemplateComponent,
     CalendarComponent,
     ProductComponent,
+    MarketComponent,
     KeywordPipe
   ],
   imports: [
@@ -39,9 +42,9 @@ import { FormsModule } from '@angular/forms';
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
-    })
+    }),
   ],
-  providers: [AuthService, ProductService, ProductRatingService],
+  providers: [AuthService, ProductService, ProductRatingService, MarketService, DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
