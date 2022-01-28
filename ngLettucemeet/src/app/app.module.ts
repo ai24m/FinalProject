@@ -12,13 +12,16 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { SampleTemplateComponent } from './components/sample-template/sample-template.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { UserComponent } from './components/user/user.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, HomeComponent, SampleTemplateComponent, CalendarComponent],
+  declarations: [AppComponent, NavbarComponent, HomeComponent, SampleTemplateComponent, CalendarComponent, UserComponent],
   imports: [BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
