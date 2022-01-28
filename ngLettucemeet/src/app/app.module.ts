@@ -12,10 +12,11 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { SampleTemplateComponent } from './components/sample-template/sample-template.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { ProductComponent } from './components/product/product.component';
 
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, HomeComponent, SampleTemplateComponent, CalendarComponent],
+  declarations: [AppComponent, NavbarComponent, HomeComponent, SampleTemplateComponent, CalendarComponent, ProductComponent],
   imports: [BrowserModule,
     AppRoutingModule,
     HttpClientModule,
