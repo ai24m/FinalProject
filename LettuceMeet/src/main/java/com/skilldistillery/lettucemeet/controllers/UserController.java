@@ -29,7 +29,7 @@ public class UserController {
 	private UserService userSev;
 
 	@PostMapping("users")
-	public User create(HttpServletRequest req, HttpServletResponse res, User user, Address address) {
+	public User create(HttpServletRequest req, HttpServletResponse res, @RequestBody User user, @RequestBody Address address) {
 
 		try {
 			user = userSev.createdUser(user, address);
@@ -40,7 +40,7 @@ public class UserController {
 				res.setStatus(201);
 				StringBuffer url = req.getRequestURL();
 				url.append("/").append(user.getId());
-				res.setHeader("Location", url.toString());
+				res.setHeader("location", url.toString());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
