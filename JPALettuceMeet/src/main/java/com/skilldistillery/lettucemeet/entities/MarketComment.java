@@ -19,6 +19,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "market_comment")
@@ -38,8 +39,8 @@ public class MarketComment {
 	@Column(name = "update_time")
 	private LocalDateTime updated;
 	
-//	@JsonIgnoreProperties({"marketComment"})
-//	@JsonIgnore
+	@JsonIgnoreProperties({"marketComment"})
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="comment_id")
 	private MarketComment replyTo; 
@@ -47,12 +48,12 @@ public class MarketComment {
 	@OneToMany(mappedBy="replyTo")
 	private List<MarketComment> myReplies; 
 	
-//	@JsonIgnore 
+	@JsonIgnore 
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user; 
 	
-//	@JsonIgnore
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="market_id")
 	private Market market; 

@@ -29,11 +29,11 @@ public class Address {
 	
 	private String zip;
 	
-//	@JsonIgnore
+	@JsonIgnore
 	@OneToMany(mappedBy="address")
 	private List<User> users;
 	
-//	@JsonIgnore
+	@JsonIgnore
 	@OneToMany(mappedBy="address")
 	private List <Market> markets; 
 

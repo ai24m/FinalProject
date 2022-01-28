@@ -40,7 +40,7 @@ public class ProductComment {
 	@Column(name = "update_time")
 	private LocalDateTime updated;
 	
-//	@JsonIgnore
+	@JsonIgnore
 	@ManyToOne 
 	@JoinColumn(name = "comment_id")
 	private ProductComment replyTo; 
