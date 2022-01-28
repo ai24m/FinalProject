@@ -1,1 +1,53 @@
-<p>product works!</p>
+<div class="container-fluid" style="background-color: #ffcd70">
+  <!-- header -->
+  <main class="tm-main">
+    <!-- forms ? -->
+    <div class="row tm-row">
+      <img class="background" src="assets/images/demo.png" />
+      <div class="col-12">
+      </div>
+
+      <article>
+        <hr class="tm-hr-primary" />
+        <div class="input-group mb-3">
+          <button class="btn btn-#526E2A" type="button" name="keySearch" id="button-addon1">Search</button>
+          <input type="text" class="form-control" placeholder="Keyword Search" aria-label="Example text with button addon" aria-describedby="button-addon1">
+        </div>
+        <div
+          class="d-flex justify-content-between tm-pt-45"
+          *ngFor="let prd of products"
+        >
+          <span class="tm-color-primary">{{ prd.name }}</span>
+          <span class="tm-color-primary">{{ prd.description }}</span>
+          <span class="tm-color-primary">{{ prd.imageUrl }}</span>
+          <span class="tm-color-primary">{{ prd.quantity }}</span>
+          <span class="tm-color-primary">{{ prd.unitPrice }}</span>
+          <span class="tm-color-primary">{{ prd.availableDate }}</span>
+          <hr class="tm-hr-primary" />
+        </div>
+
+        <a href="post.html" class="effect-lily tm-post-link tm-pt-60">
+          <div>
+            link to something + profile pic ->
+            <img
+              src="assets/images/demo.png"
+              style="
+                margin-left: 20%;
+                float: right;
+                width: 20%;
+                height: 40%;
+                border-radius: 10px;
+              "
+            />
+          </div>
+        </a>
+
+        <hr />
+        <div class="d-flex justify-content-between">
+          <!-- <span>36 (count of comments) comments</span>
+                <span>by USERS</span> -->
+        </div>
+      </article>
+    </div>
+  </main>
+</div>

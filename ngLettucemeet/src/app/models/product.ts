@@ -1,7 +1,7 @@
 export class Product {
   id: number;
   name: string;
-  description: string | undefined;
+  description: string;
   organic: boolean | undefined;
   unitPrice: number | undefined;
   imageUrl: string | undefined;
@@ -11,7 +11,7 @@ export class Product {
   constructor(
     id: number = 0,
     name: string = "",
-    description?: string,
+    description: string = "",
     organic?: boolean,
     unitPrice?: number,
     imageUrl?: string,
