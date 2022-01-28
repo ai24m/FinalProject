@@ -59,7 +59,8 @@ public class UserSeviceImpl implements UserService {
 			managed.setFirstName(user.getFirstName());
 			managed.setImageUrl(user.getImageUrl());
 			managed.setLastName(user.getLastName());
-			userRepo.saveAndFlush(managed);
+			managed.setUsername(user.getUsername());
+			return userRepo.saveAndFlush(managed);
 		}
 		return managed;
 	}
