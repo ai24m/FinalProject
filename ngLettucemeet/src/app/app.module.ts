@@ -12,8 +12,11 @@ import { SampleTemplateComponent } from './components/sample-template/sample-tem
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { ProductService } from './services/product.service';
 import { ProductComponent } from './components/product/product.component';
-import { FormsModule } from '@angular/forms';
 import { KeywordPipe } from './pipes/keyword.pipe';
+import { ProductCommentComponent } from './components/product-comment/product-comment.component';
+import { ProductRatingComponent } from './components/product-rating/product-rating.component';
+import { ProductRatingService } from './services/product-rating.service';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -26,7 +29,10 @@ import { KeywordPipe } from './pipes/keyword.pipe';
     ProductComponent,
     KeywordPipe
   ],
-  imports: [BrowserModule,
+  imports: [
+    BrowserModule,
+    ProductRatingComponent,
+    ProductCommentComponent,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
@@ -35,7 +41,7 @@ import { KeywordPipe } from './pipes/keyword.pipe';
       useFactory: adapterFactory,
     })
   ],
-  providers: [AuthService, ProductService],
+  providers: [AuthService, ProductService, ProductRatingService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
