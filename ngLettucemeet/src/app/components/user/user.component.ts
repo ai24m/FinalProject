@@ -4,11 +4,12 @@ import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-login-or-register',
-  templateUrl: './login-or-register.component.html',
-  styleUrls: ['./login-or-register.component.css']
+  selector: 'app-user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.css']
 })
-export class LoginOrRegisterComponent implements OnInit {
+
+export class UserComponent implements OnInit {
   newUser: User = new User();
   user: User | null = null;
 
@@ -19,7 +20,7 @@ export class LoginOrRegisterComponent implements OnInit {
   register(user: User) {
     this.authService.register(user).subscribe({
       next: () => {
-        this.router.navigateByUrl('/todo');
+        this.router.navigateByUrl('/home');
       },
       error: (fail) => {
         console.error('Register Component Error' + fail)
@@ -28,12 +29,12 @@ export class LoginOrRegisterComponent implements OnInit {
     console.log(user + 'registered');
   }
 
-  // login(user: User) {
-  //   this.authService.login(user.username, user.password).subscribe({
-  //     next: () => {
-  //       this.router.navigateByUrl('todo');
-  //     },
-  //     error: (fail) => {'Login Component fail'}
-  //   })
-  // }
+  login(user: User) {
+    this.authService.login(user.username, user.password).subscribe({
+      next: () => {
+        this.router.navigateByUrl('home');
+      },
+      error: (fail) => {'Login Component fail'}
+    })
+  }
 }

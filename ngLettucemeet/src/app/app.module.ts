@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { AppRoutingModule } from './app-routing.module';
@@ -15,7 +13,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { ProductRatingComponent } from './components/product-rating/product-rating.component';
 import { ProductRatingService } from './services/product-rating.service';
 import { FormsModule } from '@angular/forms';
-import { LoginOrRegisterComponent } from './components/login-or-register/login-or-register.component';
+import { ProductCommentComponent } from './components/product-comment/product-comment.component';
 
 
 @NgModule({
@@ -26,6 +24,7 @@ import { LoginOrRegisterComponent } from './components/login-or-register/login-o
     SampleTemplateComponent,
     CalendarComponent,
     ProductRatingComponent,
+    ProductCommentComponent,
     // LoginOrRegisterComponent
   ],
   imports: [
