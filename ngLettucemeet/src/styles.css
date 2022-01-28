@@ -1,4 +1,5 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
 
 html { overflow-x: hidden; }
 
@@ -423,10 +424,12 @@ a:hover figcaption { color: #056767; }
 .tm-contact-form .form-group { display: flex; }
 
 @media (max-width: 1540px) {
-    .tm-header { width: 240px; }
+  /* width of side nav bar here */
+    .tm-header { width: 250px; }
 
     .tm-main {
-        margin-left: 200px;
+      /* changes the width of main body */
+        margin-left: 210px;
         /* width: calc(100% - 320px); */
     }
 }
