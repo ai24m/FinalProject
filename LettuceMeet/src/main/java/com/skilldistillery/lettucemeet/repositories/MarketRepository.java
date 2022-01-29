@@ -8,5 +8,9 @@ import com.skilldistillery.lettucemeet.entities.User;
 public interface MarketRepository extends JpaRepository<Market, Integer> {
 
 	Market findByIdAndUser(Integer mId, User user);
+	
+	Market findByMarketComments_Id(int mCId);
+	
+	Market queryById(int mId);
 
 }
