@@ -1,11 +1,11 @@
 package com.skilldistillery.lettucemeet.entities;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -36,8 +37,8 @@ public class Market {
 	private String imageUrl;
 	
 	@Column(name ="market_date")
-	@CreationTimestamp
-	private LocalDateTime marketDate;
+//	@JsonFormat(pattern="yyyy-MM-dd")
+	private LocalDate marketDate;
 	
 	@Column(name ="create_time")
 	@CreationTimestamp
@@ -72,21 +73,7 @@ public class Market {
 		super();
 	}
 	
-	public Market(int id, String name, String description, String imageUrl, LocalDateTime marketDate,
-			LocalDateTime createTime, LocalDateTime updateTime, User user, Address address,
-			List<MarketRating> marketRatings) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.description = description;
-		this.imageUrl = imageUrl;
-		this.marketDate = marketDate;
-		this.createTime = createTime;
-		this.updateTime = updateTime;
-		this.user = user;
-		this.address = address;
-		this.marketRatings = marketRatings;
-	}
+	
 
 	//--getter and setter
 	public int getId() {
@@ -121,12 +108,30 @@ public class Market {
 		this.imageUrl = imageUrl;
 	}
 
-	public LocalDateTime getMarketDate() {
+	public LocalDate getMarketDate() {
 		return marketDate;
 	}
 
-	public void setMarketDate(LocalDateTime marketDate) {
+	public void setMarketDate(LocalDate marketDate) {
 		this.marketDate = marketDate;
+	}
+
+	public Market(int id, String name, String description, String imageUrl, LocalDate marketDate,
+			LocalDateTime createTime, LocalDateTime updateTime, User user, Address address, List<Product> products,
+			List<MarketRating> marketRatings, List<MarketComment> marketComments) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.imageUrl = imageUrl;
+		this.marketDate = marketDate;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
+		this.user = user;
+		this.address = address;
+		this.products = products;
+		this.marketRatings = marketRatings;
+		this.marketComments = marketComments;
 	}
 
 	public LocalDateTime getCreateTime() {
@@ -263,10 +268,10 @@ public class Market {
 		return id == other.id;
 	}	
 	
-	//--toString
 	@Override
 	public String toString() {
 		return "Market [id=" + id + ", name=" + name + ", description=" + description + ", imageUrl=" + imageUrl
-				+ ", marketDate=" + marketDate + ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
+				+ ", marketDate=" + marketDate + ", createTime=" + createTime + ", updateTime=" + updateTime + ", user="
+				+ user + ", address=" + address + "]";
 	}
 }

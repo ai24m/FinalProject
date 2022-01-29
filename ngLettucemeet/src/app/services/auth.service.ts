@@ -8,6 +8,9 @@ import { User } from '../models/user';
   providedIn: 'root',
 })
 export class AuthService {
+  username = 'user';
+  password = 'user';
+
   private baseUrl = environment.baseUrl;
 
   constructor(private http: HttpClient) {}
@@ -66,6 +69,8 @@ export class AuthService {
   }
 
   getCredentials() {
-    return localStorage.getItem('credentials');
+    // return localStorage.getItem('credentials');
+    // TAKE OUT AFTER TESTING
+    return 'dXNlcjp1c2Vy';
   }
 }

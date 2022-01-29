@@ -12,7 +12,7 @@ public interface MarketService {
 
 	List<Market> index();
 
-	Market create(Market market, User user);
+	Market create(Market market, User user, Address address);
 
 	Market update(User user, Integer mId, Market market);
 
