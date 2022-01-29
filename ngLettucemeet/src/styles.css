@@ -39,7 +39,7 @@ hr {
     overflow-y: scroll;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    padding: 30px;
+    /* padding: 30px; */
     width: 100%;
     height: 100%;
 }
@@ -98,12 +98,11 @@ hr {
     font-size: 1.4rem;
     padding: 30px;
 }
-
-.tm-nav-item .tm-nav-link,
+.tm-nav-item:hover .tm-nav-link,
 .tm-nav-item.active .tm-nav-link
  {
-    color: #526E2A;
-    /* background-color: g; */
+    color: rgba(119, 148, 72, 0.753);
+    background-color: #ffcd70;
     text-decoration: none;
 }
 
@@ -126,8 +125,8 @@ hr {
 .tm-nav-link i { margin-right: 37px; }
 
 ul {
-    margin: 0;
-    padding: 0;
+    /* margin: 0; */
+    /* padding: 0; */
 }
 
 .tm-nav { margin-left: -30px; }
@@ -253,7 +252,7 @@ ul {
 }
 
 .tm-btn-primary {
-    background-color: #0CC;
+    background-color: rgb(57, 105, 60);
     color: white;
     padding: 8px 43px;
     border: none;
@@ -369,7 +368,7 @@ figcaption { line-height: 1.4; }
 .tm-mt-40 { margin-top: 40px; }
 .tm-mt-100 { margin-top: 100px; }
 .tm-mr-20 { margin-right: 20px; }
-.tm-color-primary, span.tm-color-primary { color: #099; }
+.tm-color-primary, span.tm-color-primary { color: rgb(2, 27, 27); }
 a.tm-color-gray, .tm-color-gray { color: #999; }
 a.tm-color-gray:hover { color: #099; }
 .tm-bg-gray { background-color: #F3F4F5; }

@@ -1,1 +1,36 @@
-<p>product-comment works!</p>
+<div style="margin-left: 30%;">
+  <div *ngFor="let pc of productComments.slice(0, 5)">
+    <p>{{pc.comment}}</p>
+    <p>{{pc.updated}}</p>
+    <div *ngFor="let replies of pc.myReplies">
+      <p>replies.length</p>
+    </div>
+      <!-- <input type="button" value="Edit" (click)="showEditForm(pc)">
+      <input type="button" value="Delete" (click)="showDeleteForm(pc)"> -->
+  </div>
+
+
+  <!-- <input type="button" value="Add" (click)="showAddForm()"> -->
+    <!-- test purposes 1 in place of productId -->
+
+
+  <form name="createPR">
+    <textarea name="comment" [(ngModel)]="newProductComment.comment" placeholder="new comment. . ."></textarea><br>
+    <!-- <input (click)="addTodo(newTodo)" type="submit" value="Add Item" /> -->
+    <input type="button" value="Add" (click)="addProductRating(newProductComment, 1)">
+  </form>
+
+
+  <form name="editPR">
+    <textarea name="comment" [(ngModel)]="editProductComment.comment" placeholder="update comment. . ."></textarea><br>
+    <!-- <input (click)="addTodo(newTodo)" type="submit" value="Add Item" /> -->
+    <input type="button" value="Add" (click)="updateProductComment(editProductComment, 1, 1)">
+  </form>
+
+
+  <form name="deletePR" >
+      Are you sure ?
+    <!-- <input (click)="addTodo(newTodo)" type="submit" value="Add Item" /> -->
+    <input type="button" value="Delete" (click)="deleteProductRating(1)">
+  </form>
+  </div>

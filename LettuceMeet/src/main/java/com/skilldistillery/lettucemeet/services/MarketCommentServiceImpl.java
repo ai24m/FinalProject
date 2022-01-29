@@ -57,7 +57,6 @@ public class MarketCommentServiceImpl implements MarketCommentService{
 			Market market = marketRepo.findByMarketComments_Id(marketCommentId);
 			MarketComment marketComment= this.show(marketCommentId);
 			newMarketComment.setReplyTo(marketComment);
-			
 			newMarketComment.setMarket(market);
 			newMarketComment.setUser(user);
 			return mcRepo.saveAndFlush(newMarketComment);

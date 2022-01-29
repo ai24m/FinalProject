@@ -43,8 +43,18 @@ export class ProductCommentService {
     );
   }
 
-  create(productComment: ProductComment, productCommentId: number): Observable<ProductComment> {
+  createReply(productComment: ProductComment, productCommentId: number): Observable<ProductComment> {
     let endpoints = `api/productcomments/${productCommentId}/comments`
+    return this.http.post<ProductComment>(this.baseUrl + endpoints, productComment, this.getOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Create error' + err);
+      })
+    );
+  }
+
+  create(productComment: ProductComment, productCommentId: number) {
+    let endpoints = `api/productcomments/${productCommentId}`
     return this.http.post<ProductComment>(this.baseUrl + endpoints, productComment, this.getOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
