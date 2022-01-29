@@ -9,6 +9,8 @@ import com.skilldistillery.lettucemeet.entities.User;
 public interface MarketService {
 
 	Market show(int mId);
+	
+	Market getByMarketCommentId(int mCId);
 
 	List<Market> index();
 

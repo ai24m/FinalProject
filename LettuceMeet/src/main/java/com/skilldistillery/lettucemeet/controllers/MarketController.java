@@ -30,6 +30,13 @@ public class MarketController {
 			res.setStatus(404);
 		} return allMarkets; 
 	}
+	@GetMapping("markets/marketComment/{mcid}")
+	public Market index1(HttpServletRequest req, HttpServletResponse res,@PathVariable int mcid){
+		Market market = marketSvc.getByMarketCommentId(mcid); 
+		if (market == null) {
+			res.setStatus(404);
+		} return market; 
+	}
 	
 	@GetMapping("markets/{mId}")
 	public Market show(HttpServletRequest req, HttpServletResponse res, @PathVariable int mId) {
