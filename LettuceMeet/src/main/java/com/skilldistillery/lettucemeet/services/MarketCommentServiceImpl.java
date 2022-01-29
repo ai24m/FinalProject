@@ -38,15 +38,32 @@ public class MarketCommentServiceImpl implements MarketCommentService{
 		} return null;
 	}
 
+	
+	
 	@Override
-	public MarketComment create(MarketComment marketComment, User user) {
-		if (user != null) {
+	public MarketComment create(MarketComment marketComment, User user, int MarketId) {
+		if (user != null && MarketId>0) {
+			Market market = marketRepo.queryById(MarketId);
 			marketComment.setReplyTo(marketComment);
-			marketComment.setMarket(marketComment.getMarket());
+			marketComment.setMarket(market);
 			marketComment.setUser(user);
 			return mcRepo.saveAndFlush(marketComment);
 		}	return null; 	
 	} 
+	
+	@Override
+	public MarketComment createReply(int marketCommentId, User user,MarketComment newMarketComment) {
+		if (user != null && marketCommentId>0) {
+			Market market = marketRepo.findByMarketComments_Id(marketCommentId);
+			MarketComment marketComment= this.show(marketCommentId);
+			newMarketComment.setReplyTo(marketComment);
+			
+			newMarketComment.setMarket(market);
+			newMarketComment.setUser(user);
+			return mcRepo.saveAndFlush(newMarketComment);
+		}	return null; 	
+	} 
+	
 	
 	@Override 
 	public MarketComment update(User user, Market market, Integer mcId, MarketComment marketComment) {
@@ -69,4 +86,6 @@ public class MarketCommentServiceImpl implements MarketCommentService{
 			deleted = true;
 		} return deleted; 
 	}
+
+	
 }

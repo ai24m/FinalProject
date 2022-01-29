@@ -83,4 +83,10 @@ public class MarketServiceImpl implements MarketService {
 		} return deleted; 
 	}
 
+	@Override
+	public Market getByMarketCommentId(int mCId) {
+		// TODO Auto-generated method stub
+		return marketRepo.findByMarketComments_Id(mCId);
+	}
+
 }

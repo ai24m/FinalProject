@@ -56,11 +56,27 @@ public class MarketCommentController {
 	}
 	
 	@PostMapping("marketcomments/{mcId}/comments") //must create address with market 
-	public MarketComment create(HttpServletRequest req, HttpServletResponse res, Principal principal, @RequestBody MarketComment marketComment,
+	public MarketComment createReply(HttpServletRequest req, HttpServletResponse res, Principal principal, @RequestBody MarketComment marketComment,
 			@PathVariable Integer mcId) {
 		try {
 			User user = userSvc.findByUserName(principal.getName()); 
-			mcSvc.create(marketComment, user); 
+			mcSvc.createReply(mcId,user,marketComment); 
+			res.setStatus(201);
+			StringBuffer url = req.getRequestURL();
+			url.append("/").append(marketComment.getId());
+			res.setHeader("location", url.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			marketComment = null;
+		} return null; 
+	}
+	@PostMapping("marketcomments/{marketId}") //must create address with market 
+	public MarketComment create(HttpServletRequest req, HttpServletResponse res, Principal principal, @RequestBody MarketComment marketComment,
+			@PathVariable Integer marketId) {
+		try {
+			User user = userSvc.findByUserName(principal.getName()); 
+			mcSvc.create(marketComment,user,marketId); 
 			res.setStatus(201);
 			StringBuffer url = req.getRequestURL();
 			url.append("/").append(marketComment.getId());
