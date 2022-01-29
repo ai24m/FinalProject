@@ -4,18 +4,31 @@
     <!-- forms ? -->
     <div class="row tm-row">
       <img class="background" src="assets/images/demo.png" />
-      <div class="col-12">
-      </div>
+      <div class="col-12"></div>
 
       <article>
         <hr class="tm-hr-primary" />
         <div class="input-group mb-3">
-          <button class="btn btn-#526E2A" type="button" name="keySearch" id="button-addon1">Search</button>
-          <input type="text" class="form-control" placeholder="Keyword Search" aria-label="Example text with button addon" aria-describedby="button-addon1">
+          <button
+            class="btn btn-#526E2A"
+            type="button"
+            name="keySearch"
+            id="button-addon1"
+          >
+            Search
+          </button>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="keyword"
+            placeholder="Keyword Search"
+            aria-label="Example text with button addon"
+            aria-describedby="button-addon1"
+          />
         </div>
         <div
           class="d-flex justify-content-between tm-pt-45"
-          *ngFor="let prd of products"
+          *ngFor="let prd of products | keyword: keyword"
         >
           <span class="tm-color-primary">{{ prd.name }}</span>
           <span class="tm-color-primary">{{ prd.description }}</span>

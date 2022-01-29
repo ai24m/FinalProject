@@ -9,7 +9,7 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
-  keyword: string | null = null;
+  keyword: string = "";
   selected: Product | null = null;
   newProduct: Product = new Product();
   editProduct: Product | null = null;

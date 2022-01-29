@@ -8,6 +8,9 @@ export class KeywordPipe implements PipeTransform {
 
   transform(products: Product[], keyword: string): Product[] {
     const results: Product[] = [];
+    if (keyword === "") {
+      return products;
+    }
     products.forEach((prod) => {
       if (prod.description.includes(keyword) || prod.name.includes(keyword)) {
         results.push(prod);
