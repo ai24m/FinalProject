@@ -12,10 +12,12 @@ public interface ProductCommentService {
 
 	ProductComment show(Integer pId);
 
-	ProductComment create(ProductComment productComment, User user);
+	ProductComment create(ProductComment productComment, User user, Integer productId);
 
 	ProductComment update(User user, Product product, Integer pId, ProductComment productComment);
 
 	boolean destroy(User user, Integer pId);
+
+	ProductComment createReply(Integer pcId, User user, ProductComment newProductComment);
 
 }

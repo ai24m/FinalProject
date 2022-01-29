@@ -13,5 +13,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	Product findByIdAndUserUsername(int id, String username);
 
 	Product queryById(int productId);
+
+	Product findByProductComments_Id(Integer pcId);
 	
 }

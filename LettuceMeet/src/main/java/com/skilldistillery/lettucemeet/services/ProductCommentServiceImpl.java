@@ -6,10 +6,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.lettucemeet.entities.Market;
+import com.skilldistillery.lettucemeet.entities.MarketComment;
 import com.skilldistillery.lettucemeet.entities.Product;
 import com.skilldistillery.lettucemeet.entities.ProductComment;
 import com.skilldistillery.lettucemeet.entities.User;
 import com.skilldistillery.lettucemeet.repositories.ProductCommentRepository;
+import com.skilldistillery.lettucemeet.repositories.ProductRepository;
 import com.skilldistillery.lettucemeet.repositories.UserRepository;
 
 @Service 
@@ -20,6 +23,9 @@ public class ProductCommentServiceImpl implements ProductCommentService {
 	
 	@Autowired 
 	private UserRepository userRepo;
+	
+	@Autowired 
+	private ProductRepository productRepo;
 
 	@Override
 	public List<ProductComment> index() {
@@ -36,14 +42,27 @@ public class ProductCommentServiceImpl implements ProductCommentService {
 	}
 
 	@Override
-	public ProductComment create(ProductComment productComment, User user) {
-		if (user != null) {
+	public ProductComment create(ProductComment productComment, User user, Integer productId) {
+		if (user != null && productId > 0) {
+			Product product = productRepo.queryById(productId);
 			productComment.setUser(user);
-			productComment.setProduct(productComment.getProduct());
+			productComment.setProduct(product);
 			productComment.setReplyTo(productComment);
 			return pcRepo.saveAndFlush(productComment);
 		} return null;
 	}
+	
+	@Override
+	public ProductComment createReply(Integer pcId, User user, ProductComment newProductComment) {
+		if (user != null && pcId>0) {
+			Product product = productRepo.findByProductComments_Id(pcId);
+			ProductComment productComment = this.show(pcId);
+			newProductComment.setReplyTo(productComment);
+			newProductComment.setProduct(product);
+			newProductComment.setUser(user);
+			return pcRepo.saveAndFlush(newProductComment);
+		}	return null; 	
+	} 
 
 	@Override
 	public ProductComment update(User user, Product product, Integer pcId, ProductComment productComment) {

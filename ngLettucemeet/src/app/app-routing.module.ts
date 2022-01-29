@@ -8,18 +8,27 @@ import { ProductRatingComponent } from './components/product-rating/product-rati
 import { MarketComponent } from './components/market/market.component';
 import { SampleTemplateComponent } from './components/sample-template/sample-template.component';
 import { UserComponent } from './components/user/user.component';
+import { SellerRatingComponent } from './components/seller-rating/seller-rating.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { SampleTemplate2Component } from './components/sample-template2/sample-template2.component';
+import { SampleTemplate3Component } from './components/sample-template3/sample-template3.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
+  { path: 'about', component: ContactComponent},
   { path: 'login', component: UserComponent },
   { path: 'sample', component: SampleTemplateComponent },
   { path: 'calendar', component: CalendarComponent },
   { path: 'products', component: ProductComponent },
   { path: 'productrating', component: ProductRatingComponent },
   { path: 'productcomment', component: ProductCommentComponent },
+  { path: 'sellerrating', component: SellerRatingComponent },
   { path: 'market', component: MarketComponent },
-  // {path:'**', component: NotFoundComponent }
+  { path: 'sample2', component: SampleTemplate2Component },
+  { path: 'sample3', component: SampleTemplate3Component },
+  {path:'**', component: NotFoundComponent }
 ];
 
 @NgModule({

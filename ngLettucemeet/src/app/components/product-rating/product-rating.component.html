@@ -1,35 +1,61 @@
-<div style="margin-left: 30%;">
-<div *ngFor="let pr of productRatings.slice(0, 5)">
+ <div style="margin-left: 30%;">
+<!-- <div *ngFor="let pr of productRatings.slice(0, 5)">
   <p>{{pr.comment}}</p>
   <p>{{pr.rating}}</p>
   <p>{{pr.User}}</p>
   <p>{{pr.Product}}</p>
     <input type="button" value="Edit" (click)="showEditForm(pr)">
     <input type="button" value="Delete" (click)="showDeleteForm(pr)">
-</div>
+</div>  -->
 
 
 <input type="button" value="Add" (click)="showAddForm()">
   <!-- test purposes 1 in place of productId -->
 
 
-<form name="createPR" *ngIf="newProductRating && addPR">
-  <textarea name="comment" [(ngModel)]="newProductRating.comment" placeholder="new comment. . ."></textarea><br>
-  <!-- <input (click)="addTodo(newTodo)" type="submit" value="Add Item" /> -->
-  <input type="button" value="Add" (click)="addProductRating(newProductRating, 1)">
+<form (ngSubmit)="addProductRating(newProductRating, 1)" >
+  <input type="number" [(ngModel)]="newProductRating.rating" name="rating" placeholder="rating.."><br>
+  <textarea name="comment" [(ngModel)]="newProductRating.comment" name="comment"placeholder="comment. . ."></textarea><br>
+  <button class="submit-button" type="submit">Submit</button>
 </form>
 
 
-<form name="editPR" *ngIf="editProductRating && editPR">
+<form (ngSubmit)="updateProductRating(editProductRating, 1)">
   <textarea name="comment" [(ngModel)]="newProductRating.comment" placeholder="update comment. . ."></textarea><br>
-  <!-- <input (click)="addTodo(newTodo)" type="submit" value="Add Item" /> -->
-  <input type="button" value="Add" (click)="updateProductRating(editProductRating, 1)">
+  <button class="submit-button" type="submit">Submit</button>
 </form>
 
 
-<form name="deletePR" *ngIf="destroyProductRating && destroyPR">
+<form name="deletePR">
     Are you sure ?
   <!-- <input (click)="addTodo(newTodo)" type="submit" value="Add Item" /> -->
   <input type="button" value="Delete" (click)="deleteProductRating(1)">
 </form>
 </div>
+
+<cdk-accordion class="example-accordion">
+  <cdk-accordion-item *ngFor="let item of productRatings; let index = index;"
+    #accordionItem="cdkAccordionItem"
+    class="example-accordion-item"
+    role="button"
+    tabindex="0"
+    [attr.id]="'accordion-header-' + index"
+    [attr.aria-expanded]="accordionItem.expanded"
+    [attr.aria-controls]="'accordion-body-' + index">
+    <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+      {{ item.product?.name }}
+      <span class="example-accordion-item-description">
+        Click to {{ accordionItem.expanded ? 'close' : 'open' }}
+      </span>
+    </div>
+    <div
+      class="example-accordion-item-body"
+      role="region"
+      [style.display]="accordionItem.expanded ? '' : 'none'"
+      [attr.id]="'accordion-body-' + index"
+      [attr.aria-labelledby]="'accordion-header-' + index">
+      {{ item.comment }}
+    </div>
+  </cdk-accordion-item>
+</cdk-accordion>
+

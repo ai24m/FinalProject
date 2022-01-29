@@ -25,7 +25,15 @@ import { ProductRatingService } from "./services/product-rating.service";
 import { ProductService } from "./services/product.service";
 import { SellerRatingService } from "./services/seller-rating.service";
 import { UserService } from "./services/user.service";
-
+import { SellerRatingComponent } from './components/seller-rating/seller-rating.component';
+import { ProductCommentService } from "./services/product-comment.service";
+import { CdkAccordionModule} from '@angular/cdk/accordion';
+import { ContactComponent } from './components/contact/contact.component';
+import { AnotherTemplateComponent } from './components/sample-template/another-template/another-template.component';
+import { PostTemplateComponent } from './components/sample-template/post-template/post-template.component';
+import { SampleTemplate2Component } from './components/sample-template/sample-template2/sample-template2.component';
+import { SampleTemplate3Component } from './components/sample-template3/sample-template3.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -38,14 +46,22 @@ import { UserService } from "./services/user.service";
     ProductCommentComponent,
     ProductRatingComponent,
     MarketComponent,
+    SellerRatingComponent,
     UserComponent,
-    KeywordPipe
-  ],
+    KeywordPipe,
+    ContactComponent,
+    AnotherTemplateComponent,
+    PostTemplateComponent,
+    SampleTemplate2Component,
+    SampleTemplate3Component,
+    NotFoundComponent
+ ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    CdkAccordionModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
@@ -60,9 +76,10 @@ import { UserService } from "./services/user.service";
     MarketRatingService,
     UserService,
     ProductRatingService,
-    ProductCommentComponent,
+    ProductCommentService,
     SellerRatingService,
-    DatePipe],
+    DatePipe
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

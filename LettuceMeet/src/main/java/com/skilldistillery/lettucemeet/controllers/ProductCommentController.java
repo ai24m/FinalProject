@@ -55,11 +55,29 @@ public class ProductCommentController {
 	}
 	
 	@PostMapping("productcomments/{pcId}/comments") //must create address with market 
-	public ProductComment create(HttpServletRequest req, HttpServletResponse res, Principal principal, 
+	public ProductComment createReply(HttpServletRequest req, HttpServletResponse res, Principal principal, 
 			@RequestBody ProductComment productComment, @PathVariable Integer pcId) {
 		try {
 			User user = userSvc.findByUserName(principal.getName()); 
-			pcSvc.create(productComment, user); 
+			pcSvc.create(productComment, user, pcId); 
+			res.setStatus(201);
+			StringBuffer url = req.getRequestURL();
+			url.append("/").append(productComment.getId());
+			res.setHeader("Location", url.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("Invalid entry for new product");
+			res.setStatus(400);
+			productComment = null;
+		} return null; 
+	}
+	
+	@PostMapping("productcomments/{productId}")
+	public ProductComment create(HttpServletRequest req, HttpServletResponse res, Principal principal, 
+			@RequestBody ProductComment productComment, @PathVariable Integer productId) {
+		try {
+			User user = userSvc.findByUserName(principal.getName()); 
+			pcSvc.create(productComment, user, productId); 
 			res.setStatus(201);
 			StringBuffer url = req.getRequestURL();
 			url.append("/").append(productComment.getId());
