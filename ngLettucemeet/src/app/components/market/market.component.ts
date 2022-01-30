@@ -1,3 +1,4 @@
+import { MarketcommentService } from './../../services/market-comment.service';
 import { MarketService } from './../../services/market.service';
 import { Component, OnInit } from '@angular/core';
 import { Market } from 'src/app/models/market';
@@ -19,13 +20,16 @@ export class MarketComponent implements OnInit {
   constructor(
     private MarketSev: MarketService,
     private currentRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private MarketCommentSev: MarketcommentService
   ) {}
 
   ngOnInit(): void {
     this.reload();
   }
-
+  get(markID: number) {
+    this.MarketCommentSev.destroyByMarketCommentId(markID);
+  }
   reload() {
     this.MarketSev.index().subscribe({
       next: (m) => {
@@ -59,7 +63,7 @@ export class MarketComponent implements OnInit {
         this.reload();
       },
       error: (err) => {
-        console.error('RouteComponent.updateRoute(): Error update Route');
+        console.error('MarketComponent.updateRoute(): Error update market');
         console.error(err);
       },
     });
@@ -74,7 +78,7 @@ export class MarketComponent implements OnInit {
         this.reload();
       },
       error: (fail) => {
-        console.error('RouteComponent.deletedMarket(): Error delete Route');
+        console.error('MarketComponent.deletedMarket(): Error delete market');
         console.error(fail);
       },
     });

@@ -1,3 +1,5 @@
+import { MarketRatingService } from './services/market-rating.service';
+import { MarketcommentService } from './services/market-comment.service';
 import { MarketService } from './services/market.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -15,6 +17,8 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { MarketComponent } from './components/market/market.component';
 import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { MarketCommentComponent } from './components/market-comment/market-comment.component';
+import { MarketRatingComponent } from './components/market-rating/market-rating.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +28,8 @@ import { DatePipe } from '@angular/common';
     SampleTemplateComponent,
     CalendarComponent,
     MarketComponent,
+    MarketCommentComponent,
+    MarketRatingComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +41,13 @@ import { DatePipe } from '@angular/common';
       useFactory: adapterFactory,
     }),
   ],
-  providers: [AuthService, MarketService, DatePipe],
+  providers: [
+    AuthService,
+    MarketService,
+    DatePipe,
+    MarketcommentService,
+    MarketRatingService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
