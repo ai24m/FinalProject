@@ -64,10 +64,10 @@ export class MarketService {
       .put<Market>(this.url + '/' + market.id, market, this.getHttpOptions())
       .pipe(
         catchError((problem: any) => {
-          console.error('TodoService.update(): error deleting todo:');
+          console.error('TodoService.update(): error deleting Market:');
           console.error(problem);
           return throwError(
-            () => new Error('TodoService.update():error update todo')
+            () => new Error('MarketService.update():error update Market')
           );
         })
       );
@@ -77,10 +77,10 @@ export class MarketService {
       .delete<void>(this.url + '/' + marketId, this.getHttpOptions())
       .pipe(
         catchError((problem: any) => {
-          console.error('TodoService.destroy(): error deleting todo:');
+          console.error('MarketService.destroy(): error deleting Market:');
           console.error(problem);
           return throwError(
-            () => new Error('TodoService.destroy():error deleting todo')
+            () => new Error('MarketService.destroy():error deleting Market')
           );
         })
       );

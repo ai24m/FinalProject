@@ -47,6 +47,17 @@ public class MarketCommentController {
 		} return allMarketComments; 
 	}
 	
+	@GetMapping("marketcomments/market/{marketId}")
+	public List<MarketComment> getMakrketCommentByMarketID(
+			HttpServletRequest req, 
+			HttpServletResponse res,
+			@PathVariable Integer marketId){
+		List<MarketComment> MarketComments = mcSvc.getByMarketId(marketId); 
+		if (MarketComments == null) {
+			res.setStatus(404);
+		} return MarketComments; 
+	}
+	
 	@GetMapping("marketcomments/{mcId}")
 	public MarketComment show(HttpServletRequest req, HttpServletResponse res, @PathVariable Integer mcId) {
 		MarketComment marketComment = mcSvc.show(mcId);

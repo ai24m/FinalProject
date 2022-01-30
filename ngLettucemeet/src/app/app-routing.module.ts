@@ -1,3 +1,4 @@
+import { MarketRatingComponent } from './components/market-rating/market-rating.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CalendarComponent } from './components/calendar/calendar.component';
@@ -15,6 +16,7 @@ import { SampleTemplate3Component } from './components/sample-template3/sample-t
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { MarketIdComponent } from './components/market-id/market-id.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { MarketCommentComponent } from './components/market-comment/market-comment.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -32,7 +34,10 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'sample2', component: SampleTemplate2Component },
   { path: 'sample3', component: SampleTemplate3Component },
-  {path:'**', component: NotFoundComponent }
+  { path:'**', component: NotFoundComponent },
+  { path: 'marketComment', component: MarketCommentComponent },
+  { path: 'marketRating', component: MarketRatingComponent },
+  // {path:'**', component: NotFoundComponent }
 ];
 
 @NgModule({

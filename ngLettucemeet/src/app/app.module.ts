@@ -33,6 +33,10 @@ import { SampleTemplate3Component } from './components/sample-template3/sample-t
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { MarketIdComponent } from './components/market-id/market-id.component';
+import { MarketCommentComponent } from "./components/market-comment/market-comment.component";
+import { MarketRatingComponent } from "./components/market-rating/market-rating.component";
+
+
 
 @NgModule({
   declarations: [
@@ -52,8 +56,10 @@ import { MarketIdComponent } from './components/market-id/market-id.component';
     SampleTemplate3Component,
     NotFoundComponent,
     ProfileComponent,
-    MarketIdComponent
- ],
+    MarketIdComponent,
+    MarketCommentComponent,
+    MarketRatingComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -76,7 +82,11 @@ import { MarketIdComponent } from './components/market-id/market-id.component';
     ProductRatingService,
     ProductCommentService,
     SellerRatingService,
-    DatePipe
+    DatePipe,
+    MarketService,
+    DatePipe,
+    MarketcommentService,
+    MarketRatingService
   ],
   bootstrap: [AppComponent],
 })
