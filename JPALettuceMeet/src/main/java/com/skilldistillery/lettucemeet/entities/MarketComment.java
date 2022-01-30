@@ -45,6 +45,7 @@ public class MarketComment {
 	@JoinColumn(name="comment_id")
 	private MarketComment replyTo; 
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="replyTo")
 	private List<MarketComment> myReplies; 
 	

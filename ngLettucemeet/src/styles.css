@@ -485,8 +485,15 @@ a:hover figcaption { color: #056767; }
 
     .tm-main {
         margin-left: 0;
-        padding: 50px 40px;
+        /* padding: 50px 40px; */
+        padding: 0px 0px 10px 10px;
         width: 100%;
+    }
+
+    .tm-main img {
+      padding-right: 30px;
+      margin-left: 0;
+      float: left
     }
 
     .tm-post-sidebar {

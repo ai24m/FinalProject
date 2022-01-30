@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
 import { User } from '../models/user';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -24,15 +24,6 @@ export class UserService {
     };
     return options;
   }
-
-  // create(user: User): Observable<User> {
-  //   return this.http.post<User>(this.url, user, this.getOptions()).pipe(
-  //     catchError((err: any) => {
-  //       console.log(err);
-  //       return throwError('Create error' + err);
-  //     })
-  //   );
-  // }
 
   update(user: User): Observable<User> {
     let endpoints = '/' + user.id;

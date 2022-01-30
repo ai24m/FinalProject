@@ -2,3 +2,13 @@ button {
   background-color: #526E2A;
   text-decoration: none;
 }
+
+.example-accordion {
+  text-transform: uppercase;
+}
+
+
+.example-accordion-item {
+  color: purple;
+  font-weight: bold;
+}

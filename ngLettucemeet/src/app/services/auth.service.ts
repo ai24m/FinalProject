@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { tap, catchError, throwError } from 'rxjs';
+import { tap, catchError, throwError, Observable, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user';
 
@@ -8,8 +8,7 @@ import { User } from '../models/user';
   providedIn: 'root',
 })
 export class AuthService {
-  username = 'user';
-  password = 'user';
+  private currentUserSubject = new BehaviorSubject<any>(null);
 
   private baseUrl = environment.baseUrl;
 
@@ -69,8 +68,12 @@ export class AuthService {
   }
 
   getCredentials() {
-    // return localStorage.getItem('credentials');
+    return localStorage.getItem('credentials');
     // TAKE OUT AFTER TESTING
-    return 'dXNlcjp1c2Vy';
+    // return 'dXNlcjp1c2Vy';
+  }
+
+  getCurrentUser(): Observable<User> {
+    return this.currentUserSubject.asObservable();
   }
 }
