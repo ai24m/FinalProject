@@ -65,19 +65,19 @@
                   </div>
               </div>
           </div>
-          <div class="col-lg-6 tm-mb-60 tm-person-col">
+          <!-- <div class="col-lg-6 tm-mb-60 tm-person-col" *ngFor="let comment of selected?.marketComments">
               <div class="media tm-person">
                   <img src="img/about-03.jpg" alt="Image" class="img-fluid mr-4">
                   <div class="media-body">
-                      <h2 class="tm-color-primary tm-post-title mb-2">Timy Cake</h2>
-                      <h3 class="tm-h3 mb-3">Project Director</h3>
+                      <h2 class="tm-color-primary tm-post-title mb-2">{{comment.updateTime}}</h2>
+                      <h3 class="tm-h3 mb-3">{{comment.user}}</h3>
                       <p class="mb-0 tm-line-height-short">
                           Quisque in bibendum elit, in egestas turpis. Vestibulum ornare sollicitudin congue.
                           Aliquam lorem mi, maximus at iaculis ut.
                       </p>
                   </div>
               </div>
-          </div>
+          </div> -->
          <!--- <div class="col-lg-6 tm-mb-60 tm-person-col">
               <div class="media tm-person">
                   <img src="img/about-04.jpg" alt="Image" class="img-fluid mr-4">
@@ -106,24 +106,25 @@
               </div>
           </div> -->
 
-          <h2>Comments</h2>
+          <app-market-comment [market]="myMarket"></app-market-comment>
+          <!-- <h2>Comments</h2> -->
           <!-- <h2>Average Rating {{averageRating(selected.marketRatings)}}</h2> -->
-          <div class="col-lg-6 tm-mb-60 tm-person-col" *ngFor="let product of selected?.products">
+          <!-- <div class="col-lg-6 tm-mb-60 tm-person-col" *ngFor="let comment of marketComments">
               <div class="media tm-person">
                   <img src="assets/images/products/mushroom1.jpg" alt="Image" class="img-fluid mr-4">
                   <div class="media-body">
-                      <h2 class="tm-color-primary tm-post-title mb-2">{{product.user}}</h2>
-                      <h3 class="tm-h3 mb-3">Organic: {{product.organic}} </h3>
-                      <h3 class="tm-h3 mb-3" >{{product.type}}</h3>
-                      <p class="mb-0 tm-line-height-short">
-                        {{product.description}}
-                        {{product.name}}
-                        {{product.unitPrice}}
+                      <h2 class="tm-color-primary tm-post-title mb-2">{{comment.comment}}</h2>
+                      <h3 class="tm-h3 mb-3">Organic: {{comment.user}} </h3>
+                      <h3 class="tm-h3 mb-3" >{{comment.updateTime}}</h3>
+                      <p class="mb-0 tm-line-height-short" *ngFor="let replies of comment.replies">
+                        {{replies.comment}}
+                        {{replies.user}}
+                        {{replies.updateTime}}
                       </p>
                   </div>
               </div>
-          </div>
-          <div class="col-lg-6 tm-mb-60 tm-person-col">
+          </div> -->
+          <!-- <div class="col-lg-6 tm-mb-60 tm-person-col">
               <div class="media tm-person">
                   <img src="img/about-03.jpg" alt="Image" class="img-fluid mr-4">
                   <div class="media-body">
@@ -135,7 +136,7 @@
                       </p>
                   </div>
               </div>
-          </div>
+          </div> -->
       </div>
   </main>
 </div>

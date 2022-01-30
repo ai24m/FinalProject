@@ -1,3 +1,4 @@
+
 import { DatePipe } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
@@ -33,10 +34,8 @@ import { SampleTemplate3Component } from './components/sample-template3/sample-t
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { MarketIdComponent } from './components/market-id/market-id.component';
-import { MarketCommentComponent } from "./components/market-comment/market-comment.component";
+import { MarketCommentComponent } from "./components/market-id/market-comment/market-comment.component";
 import { MarketRatingComponent } from "./components/market-rating/market-rating.component";
-
-
 
 @NgModule({
   declarations: [
@@ -82,11 +81,7 @@ import { MarketRatingComponent } from "./components/market-rating/market-rating.
     ProductRatingService,
     ProductCommentService,
     SellerRatingService,
-    DatePipe,
-    MarketService,
-    DatePipe,
-    MarketcommentService,
-    MarketRatingService
+    DatePipe
   ],
   bootstrap: [AppComponent],
 })

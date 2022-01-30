@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Market } from 'src/app/models/market';
 import { MarketComment } from 'src/app/models/market-comment';
 import { MarketRating } from 'src/app/models/market-rating';
+import { MarketcommentService } from 'src/app/services/market-comment.service';
 import { MarketRatingService } from 'src/app/services/market-rating.service';
 import { MarketService } from 'src/app/services/market.service';
 
@@ -13,12 +14,13 @@ import { MarketService } from 'src/app/services/market.service';
 })
 export class MarketIdComponent implements OnInit {
   selected: Market | null = null;
+  myMarket: Market = new Market();
   marketComments: MarketComment[] = [];
   marketRatings: MarketRating[] = [];
 
   constructor(
     private MarketSev: MarketService,
-    // private marketCommentSvc: MarketCommentService,
+    private marketCommentSvc: MarketcommentService,
     private marketRatingSvc: MarketRatingService,
     private route: ActivatedRoute,
     private router: Router
@@ -32,6 +34,7 @@ export class MarketIdComponent implements OnInit {
         this.MarketSev.GetByMarketId(id).subscribe({
           next: (market) => {
             this.selected = market;
+            this.myMarket = market;
             this.loadComments(id);
             this.averageRatings(id);
           },
@@ -48,7 +51,11 @@ export class MarketIdComponent implements OnInit {
   }
 
   loadComments(id : number){
-
+    this.marketCommentSvc.getByMarketId(id).subscribe({
+      next: (comments) => {
+        this.marketComments = comments;
+      }
+    })
   }
 
   averageRatings(id : number){

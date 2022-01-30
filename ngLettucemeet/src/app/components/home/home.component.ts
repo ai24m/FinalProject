@@ -38,12 +38,25 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  count(comments: MarketComment[]) {
-    return comments.length;
+
+
+  count(id: number) {
+    this.marketCommentSvc.getByMarketId(id).subscribe({
+      next: (comments) => {
+        this.marketComments = comments;
+        this.getCount(this.marketComments);
+      }
+    });
   }
 
-  findComments(marketId: number) {
-    return this.marketCommentSvc.findByMarketId(marketId).length;
+
+  getCount(marketComments: MarketComment[]) {
+    return marketComments.length;
+
   }
+
+  // findComments(marketId: number) {
+  //   return this.marketCommentSvc.findByMarketId(marketId).length;
+  // }
 
 }
