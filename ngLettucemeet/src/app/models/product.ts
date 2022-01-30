@@ -1,3 +1,5 @@
+import { ProductRating } from "./product-rating";
+
 export class Product {
   id: number;
   name: string;
@@ -7,6 +9,7 @@ export class Product {
   imageUrl: string | undefined;
   quantity: number | undefined;
   availableDate: string | undefined;
+  productRatings: ProductRating[] = [];
 
   constructor(
     id: number = 0,
@@ -16,7 +19,8 @@ export class Product {
     unitPrice?: number,
     imageUrl?: string,
     quantity?: number,
-    availableDate?: string
+    availableDate?: string,
+    productRatings: [] = []
 ) {
     this.id = id
     this.name = name

@@ -70,8 +70,8 @@
           [attr.id]="'accordion-header-' + index"
           [attr.aria-expanded]="accordionItem.expanded"
           [attr.aria-controls]="'accordion-body-' + index">
-          <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
-            hi im accordion, dont forget sample data is in TS {{ prd.name }}
+          <div class="example-accordion-item-header" (click)="accordionItem.toggle()" >
+            {{ prd.name }}  {{ getRatings(prd) }}
             <span class="example-accordion-item-description">
               Click to {{ accordionItem.expanded ? 'close' : 'open' }}
             </span>
