@@ -6,13 +6,13 @@ import { User } from './user';
 
 export class Market {
   id: number;
-  name: string | undefined;
-  description: string | undefined;
-  imageUrl: string | undefined;
-  marketDate: string | undefined;
-  createTime: string | undefined;
-  updateTime: string | undefined;
-  user: User | undefined;
+  name: string;
+  description: string;
+  imageUrl: string;
+  marketDate: string;
+  createTime: string;
+  updateTime: string;
+  user: User;
   address: Address;
   products: Product[] = [];
   marketRatings: MarketRating[] = [];
@@ -20,13 +20,13 @@ export class Market {
 
   constructor(
     id: number = 0,
-    name?: string,
-    description?: string,
-    imageUrl?: string,
-    marketDate?: string,
-    createTime?: string,
-    updateTime?: string,
-    user?: User,
+    name: string = '',
+    description: string = '',
+    imageUrl: string = '',
+    marketDate: string = '',
+    createTime: string = '',
+    updateTime: string = '',
+    user: User = new User(),
     address: Address = new Address(),
     products: Product[] = [],
     marketRatings: MarketRating[] = [],

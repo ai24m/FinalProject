@@ -52,6 +52,16 @@ public class MarketRatingController {
 		} return allMarketRatings; 
 	}
 	
+	@GetMapping("market/averagerating/{marketId}")
+	public Integer show(HttpServletRequest req, HttpServletResponse res, @PathVariable int marketId) {
+		int avegRating = mrSvc.getAvergeRating(marketId);
+		if (avegRating < 0 && this.indexForMarket(req, res, marketId)!=null) {
+			res.setStatus(404);
+		} else {
+			res.setStatus(201);
+		} return avegRating; 
+	}
+	
 //	@GetMapping("marketratings/{mrId}")
 //	public Market show(HttpServletRequest req, HttpServletResponse res, @PathVariable int mcId) {
 //		MarketRating marketRating = mrSvc.show(mrId);

@@ -13,8 +13,8 @@
           <article *ngIf="!selected" >
             <hr class="tm-hr-primary">
             <!-- <div class="d-flex justify-content-between tm-pt-45" *ngFor="let marketComment of marketComments "> -->
-            <div class="d-flex justify-content-between tm-pt-45" *ngFor="let marketComment of market.marketComments ">
-              {{market}}
+            <div class="d-flex justify-content-between tm-pt-45" *ngFor="let marketComment of marketComments ">
+
               <!-- <tr *ngFor="let market of markets "> -->
                 <span class="tm-color-primary">{{ marketComment.id }}</span>
               <span class="tm-color-primary" (click)="displayMarketComment(marketComment)">{{ marketComment.comment }}</span>

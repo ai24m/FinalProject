@@ -1,7 +1,8 @@
 import { MarketcommentService } from '../../../services/market-comment.service';
 import { MarketComment } from '../../../models/market-comment';
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { switchMap } from 'rxjs';
 import { Market } from 'src/app/models/market';
 
 @Component({
@@ -14,22 +15,35 @@ export class MarketCommentComponent implements OnInit {
   selected: MarketComment | null = null;
   newMarketCommet: MarketComment = new MarketComment();
   marketCommentReply: MarketComment = new MarketComment();
-  // market: Market = new Market();
+  marketId: number = 0;
+  market: Market = new Market();
 
-  @Input() market: Market = new Market();
-
-  constructor(private MarketCommentSev: MarketcommentService) {}
+  constructor(private MarketCommentSev: MarketcommentService,
+    private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    if (this.route.parent != null) {
+      let idString = this.route.parent.snapshot.paramMap.get('id');
+      if (idString) {
+        let id = Number.parseInt(idString);
+        if (!isNaN(id)) {
+          this.MarketCommentSev.getByMarketId(id).subscribe({
+            next: (comments) => {
+              this.marketComments = comments;
+            }
+          })
+        }
+
+      }
+    }
     // this.reload();
-    this.getCommentsByMarketId(this.market.id);
-    // this.displayMarketComment(this.market.id);
   }
 
   getCommentsByMarketId(marketId: number){
     this.MarketCommentSev.getByMarketId(marketId).subscribe({
       next: (comments) => {
         this.marketComments = comments;
+        console.log(this.marketComments);
       }
     })
   }

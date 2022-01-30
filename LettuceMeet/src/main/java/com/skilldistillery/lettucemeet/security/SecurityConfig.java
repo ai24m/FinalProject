@@ -38,11 +38,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.GET, "/api/marketcomments/**").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/products").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/products/**").permitAll() // will hit the OPTIONS on the route
-				.antMatchers(HttpMethod.GET, "/api/markets").permitAll() 
-				.antMatchers(HttpMethod.GET, "/api/markets/**").permitAll() 
+				.antMatchers(HttpMethod.GET, "/api/market/**").permitAll() 
 				.antMatchers(HttpMethod.GET, "/api/marketcomments").permitAll() 
 				.antMatchers(HttpMethod.GET, "/api/sellerRatings/**").permitAll()
-				.antMatchers(HttpMethod.GET, "/api/marketcomments/**").permitAll() 
+				.antMatchers(HttpMethod.GET, "/api/marketratings/**").permitAll() 
 				.antMatchers(HttpMethod.GET, "/api/products").permitAll() 
 				.antMatchers(HttpMethod.GET, "/api/products/**").permitAll() 
 				.antMatchers(HttpMethod.GET, "/api/productcomments").permitAll() 

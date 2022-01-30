@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Market } from 'src/app/models/market';
 import { MarketComment } from 'src/app/models/market-comment';
 import { MarketRating } from 'src/app/models/market-rating';
+import { AuthService } from 'src/app/services/auth.service';
 import { MarketcommentService } from 'src/app/services/market-comment.service';
 import { MarketRatingService } from 'src/app/services/market-rating.service';
 import { MarketService } from 'src/app/services/market.service';
@@ -14,7 +15,7 @@ import { MarketService } from 'src/app/services/market.service';
 })
 export class MarketIdComponent implements OnInit {
   selected: Market | null = null;
-  myMarket: Market = new Market();
+  myMarketId: number = 0;
   marketComments: MarketComment[] = [];
   marketRatings: MarketRating[] = [];
 
@@ -30,13 +31,15 @@ export class MarketIdComponent implements OnInit {
     let idString = this.route.snapshot.paramMap.get('id');
     if (!this.selected && idString) {
       let id = Number.parseInt(idString);
+      console.log(id);
       if (!isNaN(id)) {
         this.MarketSev.GetByMarketId(id).subscribe({
           next: (market) => {
             this.selected = market;
-            this.myMarket = market;
+            this.myMarketId = id;
             this.loadComments(id);
             this.averageRatings(id);
+
           },
           error: (fail) => {
             console.error('TodoListComponent.ngoninit()')
