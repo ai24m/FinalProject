@@ -29,11 +29,10 @@ import { SellerRatingComponent } from './components/seller-rating/seller-rating.
 import { ProductCommentService } from "./services/product-comment.service";
 import { CdkAccordionModule} from '@angular/cdk/accordion';
 import { ContactComponent } from './components/contact/contact.component';
-import { AnotherTemplateComponent } from './components/sample-template/another-template/another-template.component';
-import { PostTemplateComponent } from './components/sample-template/post-template/post-template.component';
-import { SampleTemplate2Component } from './components/sample-template/sample-template2/sample-template2.component';
 import { SampleTemplate3Component } from './components/sample-template3/sample-template3.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { MarketIdComponent } from './components/market-id/market-id.component';
 
 @NgModule({
   declarations: [
@@ -50,11 +49,10 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     UserComponent,
     KeywordPipe,
     ContactComponent,
-    AnotherTemplateComponent,
-    PostTemplateComponent,
-    SampleTemplate2Component,
     SampleTemplate3Component,
-    NotFoundComponent
+    NotFoundComponent,
+    ProfileComponent,
+    MarketIdComponent
  ],
   imports: [
     BrowserModule,

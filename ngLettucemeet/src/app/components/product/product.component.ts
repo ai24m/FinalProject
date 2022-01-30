@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
+import { ProductRating } from 'src/app/models/product-rating';
+import { ProductRatingService } from 'src/app/services/product-rating.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -14,9 +16,11 @@ export class ProductComponent implements OnInit {
   newProduct: Product = new Product();
   editProduct: Product | null = null;
   products: Product[] = [];
+  productRatings: ProductRating[] = [];
 
   constructor(
     private prodSvc: ProductService,
+    private prSvc: ProductRatingService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
@@ -35,6 +39,9 @@ export class ProductComponent implements OnInit {
             console.error(err);
           }
         });
+        this.prSvc.index().subscribe({
+          next: (ratings) => { this.productRatings = ratings}
+        })
       } else {
         this.router.navigateByUrl("FOF");
       }

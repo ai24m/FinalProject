@@ -13,6 +13,8 @@ import { ContactComponent } from './components/contact/contact.component';
 import { SampleTemplate2Component } from './components/sample-template2/sample-template2.component';
 import { SampleTemplate3Component } from './components/sample-template3/sample-template3.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { MarketIdComponent } from './components/market-id/market-id.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -26,6 +28,8 @@ const routes: Routes = [
   { path: 'productcomment', component: ProductCommentComponent },
   { path: 'sellerrating', component: SellerRatingComponent },
   { path: 'market', component: MarketComponent },
+  { path: 'market/:id', component: MarketIdComponent },
+  { path: 'profile', component: ProfileComponent },
   { path: 'sample2', component: SampleTemplate2Component },
   { path: 'sample3', component: SampleTemplate3Component },
   {path:'**', component: NotFoundComponent }

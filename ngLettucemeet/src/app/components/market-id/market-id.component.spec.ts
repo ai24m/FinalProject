@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AnotherTemplateComponent } from './another-template.component';
+import { MarketIdComponent } from './market-id.component';
 
-describe('AnotherTemplateComponent', () => {
-  let component: AnotherTemplateComponent;
-  let fixture: ComponentFixture<AnotherTemplateComponent>;
+describe('MarketIdComponent', () => {
+  let component: MarketIdComponent;
+  let fixture: ComponentFixture<MarketIdComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AnotherTemplateComponent ]
+      declarations: [ MarketIdComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AnotherTemplateComponent);
+    fixture = TestBed.createComponent(MarketIdComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

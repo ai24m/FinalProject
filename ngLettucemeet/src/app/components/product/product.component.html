@@ -71,7 +71,11 @@
           [attr.aria-expanded]="accordionItem.expanded"
           [attr.aria-controls]="'accordion-body-' + index">
           <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
-            hi im accordion, dont forget sample data is in TS {{ prd.name }}
+            hi im {{ prd.name }}
+            <ng-container *ngFor="let ratings of prd.ratings">
+              {{ratings.comment}}
+              {{ratings.rating}}
+            </ng-container>
             <span class="example-accordion-item-description">
               Click to {{ accordionItem.expanded ? 'close' : 'open' }}
             </span>
@@ -82,9 +86,11 @@
             [style.display]="accordionItem.expanded ? '' : 'none'"
             [attr.id]="'accordion-body-' + index"
             [attr.aria-labelledby]="'accordion-header-' + index">
-            {{prd.description}}
-            {{prd.quantity}}
-            {{prd.availableDate}}
+            descp {{prd.description}}
+            quantity {{prd.quantity}}
+            date {{prd.availableDate}}
+
+
           </div>
         </cdk-accordion-item>
       </cdk-accordion>

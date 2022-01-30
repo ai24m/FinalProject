@@ -1,3 +1,9 @@
+import { Type } from "./type";
+import { Market } from "./market";
+import { ProductComment } from "./product-comment";
+import { ProductRating } from "./product-rating";
+import { User } from "./user";
+
 export class Product {
   id: number;
   name: string;
@@ -7,6 +13,11 @@ export class Product {
   imageUrl: string | undefined;
   quantity: number | undefined;
   availableDate: string | undefined;
+  type: Type;
+  user: User;
+  ratings: ProductRating[] = [];
+  comments: ProductComment[] = [];
+  markets: Market[] = [];
 
   constructor(
     id: number = 0,
@@ -16,7 +27,12 @@ export class Product {
     unitPrice?: number,
     imageUrl?: string,
     quantity?: number,
-    availableDate?: string
+    availableDate?: string,
+    user: User = new User,
+    type: Type = new Type,
+    ratings: ProductRating[] = [],
+    comments: ProductComment[] = [],
+    markets: Market[] = []
 ) {
     this.id = id
     this.name = name
@@ -26,6 +42,11 @@ export class Product {
     this.imageUrl = imageUrl
     this.quantity = quantity
     this.availableDate = availableDate
+    this.user = user
+    this.type = type
+    this.ratings = ratings
+    this.comments = comments
+    this.markets = markets
   }
 
 }
