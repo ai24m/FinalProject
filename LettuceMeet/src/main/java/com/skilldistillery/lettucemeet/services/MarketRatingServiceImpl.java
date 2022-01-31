@@ -1,5 +1,6 @@
 package com.skilldistillery.lettucemeet.services;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -87,6 +88,21 @@ public class MarketRatingServiceImpl implements MarketRatingService {
 			return deleted;
 		}
 		return deleted;
+	}
+
+	@Override
+	public Integer getAvergRating(int marketId) {
+		// TODO Auto-generated method stub
+		List<MarketRating> allRatings = mrRepo.findByMarket_Id(marketId);
+		int totalRating =0;
+		int aveRating;
+		if(allRatings !=null) {
+		for (MarketRating marketRating : allRatings) {
+			 totalRating += marketRating.getMarketRating();
+		}
+	}
+		aveRating = totalRating/allRatings.size();		
+		return aveRating;
 	}
 
 }

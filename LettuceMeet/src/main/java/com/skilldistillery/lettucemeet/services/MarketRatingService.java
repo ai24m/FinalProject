@@ -16,5 +16,7 @@ public interface MarketRatingService {
 	MarketRating update(User user, Integer mrId, MarketRating marketRating);
 
 	boolean destroy(User user, Integer mrId);
+	
+	Integer getAvergRating(int marketId);
 
 }

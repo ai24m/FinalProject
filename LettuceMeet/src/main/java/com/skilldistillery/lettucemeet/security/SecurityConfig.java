@@ -45,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.GET, "/api/products/**").permitAll() 
 				.antMatchers(HttpMethod.GET, "/api/productcomments").permitAll() 
 				.antMatchers(HttpMethod.GET, "/api/productcomments/**").permitAll() 
+				.antMatchers(HttpMethod.GET, "/api/marketratings/avegrating/**").permitAll() 
 				.antMatchers(HttpMethod.OPTIONS, "/api/users/*").hasAuthority("admin") // return true or false 
 				.antMatchers(HttpMethod.PUT, "/api/**").hasAuthority("standard") // return true or false 
 				.antMatchers(HttpMethod.POST, "/api/**").hasAuthority("standard") // return true or false 
