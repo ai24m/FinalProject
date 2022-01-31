@@ -18,6 +18,8 @@ export class ProductRatingComponent implements OnInit {
   destroyPR: boolean = false;
   selectedProductRating: ProductRating | null = null;
 
+  totalRatings: number = 0;
+
   constructor(
     private _productRatingService: ProductRatingService,
     private route: ActivatedRoute,
@@ -44,6 +46,7 @@ export class ProductRatingComponent implements OnInit {
             next: (ratings) => {
               console.log(ratings);
               this.productRatings = ratings;
+              this.findAverageRating(this.productRatings);
             }
           })
         }
@@ -57,6 +60,14 @@ export class ProductRatingComponent implements OnInit {
       productRating => this.productRatings = productRating,
       err => console.error('Reload error' + err)
     );
+  }
+
+  findAverageRating(productRatings: ProductRating[]){
+    for (let pr of productRatings) {
+      this.totalRatings += pr.rating;
+    }
+    let average = this.totalRatings / this.productRatings.length;
+    this.newProductRating.ratingAverage = average;
   }
 
   showAddForm() {

@@ -16,8 +16,8 @@ export class MarketRatingComponent implements OnInit {
   newMarketRating: MarketRating = new MarketRating();
   market: Market = new Market();
   editMarketRating: MarketRating | null = null;
-  average: number = 0;
-  // ratings: number[] = [];
+  totalRatings: number = 0;
+
 
   constructor(
     private MarketRatingSev: MarketRatingService,
@@ -33,6 +33,7 @@ export class MarketRatingComponent implements OnInit {
             next: (ratings) => {
               console.log(ratings);
               this.marketRatings = ratings;
+              this.findAverageRating(this.marketRatings);
             }
           })
         }
@@ -59,6 +60,16 @@ export class MarketRatingComponent implements OnInit {
       },
     });
   }
+
+  findAverageRating(marketRatings: MarketRating[]) {
+    for (let mr of marketRatings) {
+      this.totalRatings += mr.rating;
+    }
+    let average = this.totalRatings / this.marketRatings.length;
+    this.newMarketRating.ratingAverage = average;
+    // return average;
+  }
+
   addMarket(marketRating: MarketRating, marketId: number) {
     this.MarketRatingSev.create(marketRating, marketId).subscribe({
       next: (m) => {
