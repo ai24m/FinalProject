@@ -22,6 +22,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Product {
@@ -60,12 +61,12 @@ public class Product {
 	@JoinColumn(name="type_id")
 	private Type type; 
 	
-	@JsonIgnore
+	@JsonIgnoreProperties({"products"})
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user; 
 	
-	@JsonIgnore
+	@JsonIgnoreProperties({"products"})
 	@ManyToMany()
 	@JoinTable(name="market_product",
 		joinColumns=@JoinColumn(name="product_id"),
@@ -73,12 +74,12 @@ public class Product {
 	)
 	private List<Market> markets;
 	
-	@JsonIgnore
+	@JsonIgnoreProperties({"product"})
 //	@OneToMany(mappedBy="product", cascade = CascadeType.ALL)
 	@OneToMany(mappedBy="product")
 	private List<ProductRating> productRatings; 
 	
-	@JsonIgnore
+	@JsonIgnoreProperties({"product", "replyTo", "myReplies"})
 //	@OneToMany(mappedBy="product", cascade = CascadeType.ALL)
 	@OneToMany(mappedBy="product")
 	private List<ProductComment> productComments; 

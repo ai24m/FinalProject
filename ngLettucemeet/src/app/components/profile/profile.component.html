@@ -4,46 +4,34 @@
           <div class="col-lg-8 tm-post-col">
               <div class="tm-post-full">
                   <div class="mb-4">
-
-<!-- single post  -->
-
+<!-- profile  -->
                       <h2 class="pt-2 tm-color-primary tm-post-title">Welcome {{user.username}}</h2>
-                      <img src="/assets/images/profile.png" style="border-radius: 50%; width: 40%; padding-left: 10%; padding-right: 8%;" alt="Image" class="mb-3 img-fluid">
+                      <img src="/assets/images/profile.png" id="profile" alt="Image" class="mb-3 img-fluid">
                       <div *ngIf="!edit">
-                      <p class="tm-mb-40"> Profile</p>
                       <h3>Address</h3>
-                        <ul>
-                          <li> {{user.address?.street1}} </li>
-                          <li> {{user.address?.street2}} </li>
-                          <li> {{user.address?.city}} </li>
-                          <li> {{user.address?.state}} </li>
-                          <li> {{user.address?.zip}} </li>
-                        </ul>
-                      <h3>Info</h3>
-                           {{user.imageurl}}
-                        <ul>
-                          <li> {{user.firstname}}</li>
-                          <li> {{user.lastname}}</li>
-                          <li> {{user.businessname}}</li>
-                          <li> {{user.email}}</li>
-                          <li> <input type="submit" (click)="resetPassword()" value="Reset Password"> </li>
-                        </ul>
-
-
+                           {{user.address?.street1}}<br>
+                           {{user.address?.street2}}
+                           {{user.address?.city}}<br>
+                           {{user.address?.state}}<br>
+                           {{user.address?.zip}}<br>
+                      <h3>Profile Info</h3>
+                           {{user.firstname}}<br>
+                           {{user.lastname}}<br>
+                           {{user.businessname}}<br>
+                           {{user.username}}<br>
                       <p>
-                          Duis pretium efficitur nunc. Mauris vehicula nibh nisi. Curabitur gravida neque
-                          dignissim, aliquet nulla sed, condimentum nulla. Pellentesque id venenatis
-                          quam, id cursus velit. Fusce semper tortor ac metus iaculis varius. Praesent
-                          aliquam ex vel lectus ornare tristique. Nunc et eros quis enim feugiat tincidunt
-                          et vitae dui.
+
+                        Velvet Twilight Farms!
+                        Grow produce all year around, visit our Farm!
+
+                        insert map of location here
                       </p></div>
-                      <span class="d-block text-right tm-color-primary">Creative . Design . Business</span>
                   </div>
 
 <!-- Post Comments -->
 
                   <div>
-                      <h2 class="tm-color-primary tm-post-title">Comments</h2>
+                      <!-- <h2 class="tm-color-primary tm-post-title">Comments + Rating: {{showAverageRating()}}</h2> -->
                       <hr class="tm-hr-primary tm-mb-45">
                       <div class="tm-comment tm-mb-45">
                           <figure class="tm-comment-figure">
@@ -56,7 +44,7 @@
                                   Spring Valley Farmer's Market. Highly reccommend!
                               </p>
                               <div class="d-flex justify-content-between">
-                                  <a href="#" class="tm-color-primary">REPLY</a>
+                                  <!-- <a href="#" class="tm-color-primary">REPLY</a> -->
                                   <span class="tm-color-primary">June 14, 2020</span>
                               </div>
                           </div>
@@ -70,10 +58,10 @@
                               <p>
                                   Great produce all year round, farm is family-friendly, highly recommend.
                               </p>
-                              <!-- <div class="d-flex justify-content-between">
-                                  <a href="#" class="tm-color-primary">REPLY</a>
-                                  <span class="tm-color-primary">June 14, 2020</span>
-                              </div> -->
+                              <div class="d-flex justify-content-between">
+
+                              <span class="tm-color-primary">June 27, 2020</span>
+                              </div>
                           </div>
                       </div>
                       <div class="tm-comment-reply tm-mb-45">
@@ -83,34 +71,17 @@
                                   <img src="img/comment-2.jpg" alt="Image" class="mb-2 rounded-circle img-thumbnail">
                                   <figcaption class="tm-color-primary text-center">Jewel Lowe</figcaption>
                               </figure>
+                              <div>
                               <p>
                                   All the produce were cleaned well, sad that Velvet Twilight doesn't appear to
                                   the Sparkleberry Market anymore but definitely stop by their farm in Sumter!
-                              </p>
+                                  </p>
+                                  <div class="d-flex justify-content-between">
+                                  <span class="tm-color-primary">June 14, 2020</span>
+                                  </div>
+                            </div>
                           </div>
-                          <span class="d-block text-right tm-color-primary">June 21, 2020</span>
                       </div>
-
-
-
-<!-- form to add comment -->
-
-
-                      <form action="" class="mb-5 tm-comment-form">
-                          <h2 class="tm-color-primary tm-post-title mb-4">Your comment</h2>
-                          <div class="mb-4">
-                              <input class="form-control" name="name" type="text">
-                          </div>
-                          <div class="mb-4">
-                              <input class="form-control" name="email" type="text">
-                          </div>
-                          <div class="mb-4">
-                              <textarea class="form-control" name="message" rows="6"></textarea>
-                          </div>
-                          <div class="text-right">
-                              <button class="tm-btn tm-btn-primary tm-btn-small">Submit</button>
-                          </div>
-                      </form>
                   </div>
               </div>
           </div>
@@ -118,21 +89,22 @@
               <div class="tm-post-sidebar">
                   <hr class="mb-3 tm-hr-primary">
                   <h2 class="mb-4 tm-post-title tm-color-primary">Product Listings</h2>
-                  <a href="#" class="d-block tm-mb-40" *ngFor="let p of products">
+                  <a  class="d-block tm-mb-40" *ngFor="let p of products">
                     <figure>
-                         <h5>{{p.name}}</h5>
+                         <h5><a [routerLink]="['/markets/',]"> {{p.name}}</a> </h5>
                         <!-- <img src="img/img-05.jpg" alt="Image" class="mb-3 img-fluid"> -->
-                        <figcaption class="tm-color-primary">Unit Price ${{p.unitPrice}} , {{organic(p.organic)}}</figcaption>
+                        <figcaption class="tm-color-primary">{{organic(p.organic)}}, </figcaption>
+                        <figcaption class="tm-color-primary">Available Date: {{p.availableDate}}</figcaption>
                     </figure>
                   </a>
-                  <hr class="mb-3 tm-hr-primary">
+                  <!-- <hr class="mb-3 tm-hr-primary">
                   <h2 class="tm-mb-40 tm-post-title tm-color-primary">Market Participation</h2>
                   <a href="#" class="d-block tm-mb-40" *ngFor="let m of markets">
                       <figure>
                           <img src="img/img-02.jpg" alt="Image" class="mb-3 img-fluid">
                           <figcaption class="tm-color-primary">Duis mollis diam nec ex viverra scelerisque a sit</figcaption>
                       </figure>
-                  </a>
+                  </a> -->
               </div>
           </aside>
       </div>

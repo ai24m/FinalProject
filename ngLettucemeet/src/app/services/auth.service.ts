@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { tap, catchError, throwError, Observable, BehaviorSubject } from 'rxjs';
+import { tap, catchError, throwError, Observable, BehaviorSubject, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user';
 
@@ -14,7 +14,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(username: string, password: string) {
+  login(username: string, password: string): Observable<User> {
     // Make credentials
     const credentials = this.generateBasicAuthCredentials(username, password);
     // Send credentials as Authorization header (this is spring security convention for basic auth)
@@ -26,7 +26,9 @@ export class AuthService {
     };
 
     // create request to authenticate credentials
-    return this.http.get(this.baseUrl + 'login', httpOptions).pipe(
+
+    return this.http.get<User>(this.baseUrl + 'login', httpOptions).pipe(
+
       tap((res) => {
         localStorage.setItem('credentials', credentials);
         return res;
@@ -74,6 +76,33 @@ export class AuthService {
   }
 
   getCurrentUser(): Observable<User> {
-    return this.currentUserSubject.asObservable();
+    // return this.currentUserSubject.asObservable();
+
+    const credentials = this.getCredentials();
+    // Send credentials as Authorization header (this is spring security convention for basic auth)
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Basic ${credentials}`,
+        'X-Requested-With': 'XMLHttpRequest',
+      }),
+    };
+
+    // create request to authenticate credentials
+
+    return this.http.get<User>(this.baseUrl + 'login', httpOptions).pipe(
+
+
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () => new Error('AuthService.login(): error logging in user.')
+        );
+      })
+    );
+
+
+
+
+
   }
 }

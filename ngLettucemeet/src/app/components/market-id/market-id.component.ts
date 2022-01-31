@@ -61,6 +61,10 @@ export class MarketIdComponent implements OnInit {
     })
   }
 
+  // loadUsers(id: product) {
+
+  // }
+
   averageRatings(id : number){
     // show average of ratings call function by marketid to get average ratings
   }
@@ -75,6 +79,16 @@ export class MarketIdComponent implements OnInit {
         console.error(err);
       },
     });
+  }
+
+  organic(organic: boolean) {
+    if (organic) {
+      return 'Organic';
+    } else if (!organic) {
+      return 'Non-organic';
+    } else {
+      return false;
+    }
   }
 
 }
