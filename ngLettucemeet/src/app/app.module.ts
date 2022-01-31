@@ -12,8 +12,8 @@ import { CalendarComponent } from "./components/calendar/calendar.component";
 import { HomeComponent } from "./components/home/home.component";
 import { MarketComponent } from "./components/market/market.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
-import { ProductCommentComponent } from "./components/product-comment/product-comment.component";
-import { ProductRatingComponent } from "./components/product-rating/product-rating.component";
+import { ProductCommentComponent } from "./components/product-id/product-comment/product-comment.component";
+import { ProductRatingComponent } from "./components/product-id/product-rating/product-rating.component";
 import { ProductComponent } from "./components/product/product.component";
 import { SampleTemplateComponent } from "./components/sample-template/sample-template.component";
 import { UserComponent } from "./components/user/user.component";
@@ -35,7 +35,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { MarketIdComponent } from './components/market-id/market-id.component';
 import { MarketCommentComponent } from "./components/market-id/market-comment/market-comment.component";
-import { MarketRatingComponent } from "./components/market-rating/market-rating.component";
+import { MarketRatingComponent } from "./components/market-id/market-rating/market-rating.component";
+import { ProductIdComponent } from './components/product-id/product-id.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { MarketRatingComponent } from "./components/market-rating/market-rating.
     MarketIdComponent,
     MarketCommentComponent,
     MarketRatingComponent,
+    ProductIdComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,15 +74,14 @@ import { MarketRatingComponent } from "./components/market-rating/market-rating.
   ],
   providers: [
     AuthService,
+    UserService,
+    SellerRatingService,
     ProductService,
     ProductRatingService,
+    ProductCommentService,
     MarketService,
     MarketcommentService,
     MarketRatingService,
-    UserService,
-    ProductRatingService,
-    ProductCommentService,
-    SellerRatingService,
     DatePipe
   ],
   bootstrap: [AppComponent],

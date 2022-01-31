@@ -41,6 +41,11 @@ public class ProductController {
 		}
 		return product;
 	}
+	
+	@GetMapping("products/user")
+	public List<Product> products(Principal principal) {
+		return prodSvc.getUserProducts(principal.getName());
+	}
 
 	@PostMapping("products")
 	public Product createProduct(@RequestBody Product product, HttpServletResponse res, HttpServletRequest req,

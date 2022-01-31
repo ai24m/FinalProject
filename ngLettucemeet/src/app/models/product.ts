@@ -8,8 +8,8 @@ export class Product {
   id: number;
   name: string;
   description: string;
-  organic: boolean | undefined;
-  unitPrice: number | undefined;
+  organic: boolean;
+  unitPrice: number;
   imageUrl: string | undefined;
   quantity: number | undefined;
   availableDate: string | undefined;
@@ -18,13 +18,14 @@ export class Product {
   ratings: ProductRating[] = [];
   comments: ProductComment[] = [];
   markets: Market[] = [];
+  hide: boolean | undefined;
 
   constructor(
     id: number = 0,
     name: string = "",
     description: string = "",
-    organic?: boolean,
-    unitPrice?: number,
+    organic: boolean = false,
+    unitPrice: number = 0.0,
     imageUrl?: string,
     quantity?: number,
     availableDate?: string,
@@ -32,7 +33,8 @@ export class Product {
     type: Type = new Type,
     ratings: ProductRating[] = [],
     comments: ProductComment[] = [],
-    markets: Market[] = []
+    markets: Market[] = [],
+    hide: boolean = false
 ) {
     this.id = id
     this.name = name
@@ -47,6 +49,7 @@ export class Product {
     this.ratings = ratings
     this.comments = comments
     this.markets = markets
+    this.hide = hide
   }
 
 }

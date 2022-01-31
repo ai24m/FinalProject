@@ -20,4 +20,6 @@ public interface ProductCommentService {
 
 	ProductComment createReply(Integer pcId, User user, ProductComment newProductComment);
 
+	List<ProductComment> getByProductId(Integer pcId);
+
 }

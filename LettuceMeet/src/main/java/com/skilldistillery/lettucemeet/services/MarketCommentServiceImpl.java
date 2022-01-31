@@ -32,7 +32,6 @@ public class MarketCommentServiceImpl implements MarketCommentService {
 
 	@Override
 	public List<MarketComment> getByMarketId(int marketId) {
-		// TODO Auto-generated method stub
 		return mcRepo.findByMarket_Id(marketId);
 	}
 

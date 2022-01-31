@@ -20,6 +20,7 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -43,6 +44,7 @@ public class Product {
 	
 	private int quantity;
 	
+	@JsonFormat(pattern = "MM-dd-yyyy")
 	@Column(name = "available_date")
 	private LocalDate availableDate;
 	

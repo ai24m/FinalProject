@@ -2,9 +2,9 @@
   background-color: #ffcd70;
   color: black;
 }
-#header {
-  height: 570px;
-  width: 100%;
+img {
+  height: 350px;
+  width: 80%;
 }
 .example-accordion {
   display: block;

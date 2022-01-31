@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Market } from 'src/app/models/market';
 import { MarketComment } from 'src/app/models/market-comment';
 import { MarketRating } from 'src/app/models/market-rating';
+import { User } from 'src/app/models/user';
 import { MarketcommentService } from 'src/app/services/market-comment.service';
 import { MarketRatingService } from 'src/app/services/market-rating.service';
 import { MarketService } from 'src/app/services/market.service';
@@ -15,6 +16,7 @@ export class HomeComponent implements OnInit {
   markets: Market[] = [];
   marketComments: MarketComment[] = [];
   marketRatings: MarketRating[] = [];
+  vendors: User[] = [];
 
   constructor(
     private marketSvc: MarketService,

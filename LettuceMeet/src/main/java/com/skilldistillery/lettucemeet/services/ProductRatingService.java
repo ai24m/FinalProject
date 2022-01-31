@@ -2,6 +2,7 @@ package com.skilldistillery.lettucemeet.services;
 
 import java.util.List;
 
+import com.skilldistillery.lettucemeet.entities.ProductComment;
 import com.skilldistillery.lettucemeet.entities.ProductRating;
 
 public interface ProductRatingService {
@@ -21,4 +22,6 @@ public interface ProductRatingService {
 	ProductRating updateProductRating(int productId, String userName, ProductRating productRating);
 	
 	boolean deleteProductRating(int productId, String userName);
+
+	List<ProductRating> getByProductId(Integer pcId);
 }

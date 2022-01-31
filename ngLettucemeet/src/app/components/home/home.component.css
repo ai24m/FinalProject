@@ -4,15 +4,17 @@
 article {
   background-color: white;
 }
-
+a {
+  text-decoration: none;
+}
 .featured {
   position: absolute;
-  top: 70%;
+  top: 40%;
   left: 85%;
   transform: translate(-50%, -50%);
   text-transform: uppercase;
   font-weight: bold;
-  color: #ffcd70;
+  color: #120c00;
   font-size: 250%;
 }
 
@@ -33,7 +35,7 @@ p {
     background-repeat: no-repeat;
     /* background-attachment: fixed; */
     width: 100%;
-    height: 440px;
+    height: 400px;
 
     /* margin-left: auto;
     margin-right: auto; */
