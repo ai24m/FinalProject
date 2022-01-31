@@ -31,6 +31,11 @@ public class ProductCommentServiceImpl implements ProductCommentService {
 	public List<ProductComment> index() {
 		return pcRepo.findAll();
 	}
+	
+	@Override
+	public List<ProductComment> getByProductId(Integer pcId) {
+		return pcRepo.findByProduct_Id(pcId);
+	}
 
 	@Override
 	public ProductComment show(Integer pcId) {
@@ -84,4 +89,6 @@ public class ProductCommentServiceImpl implements ProductCommentService {
 			deleted = true;
 		} return deleted; 
 	}
+
+
 }

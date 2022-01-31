@@ -77,4 +77,9 @@ public class UserSeviceImpl implements UserService {
 		return deleted;
 	}
 
+	@Override
+	public User getUserByUsername(String username) {
+		return userRepo.findByUsername(username);
+	}
+
 }

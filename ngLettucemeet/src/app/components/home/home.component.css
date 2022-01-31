@@ -4,11 +4,14 @@
 article {
   background-color: white;
 }
-
+a {
+  text-decoration: none;
+}
 .featured {
   position: absolute;
-  top: 70%;
+  top: 50%;
   left: 85%;
+  right: -20%;
   transform: translate(-50%, -50%);
   text-transform: uppercase;
   font-weight: bold;

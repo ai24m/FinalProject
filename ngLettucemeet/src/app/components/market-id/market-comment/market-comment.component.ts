@@ -17,6 +17,8 @@ export class MarketCommentComponent implements OnInit {
   marketCommentReply: MarketComment = new MarketComment();
   marketId: number = 0;
   market: Market = new Market();
+  // @Input()
+  // marketId!: number;
 
   constructor(private MarketCommentSev: MarketcommentService,
     private route: ActivatedRoute) {}
@@ -69,7 +71,7 @@ export class MarketCommentComponent implements OnInit {
     ).subscribe({
       next: (m) => {
         this.newMarketCommet = new MarketComment();
-        this.reload();
+        this.ngOnInit();
       },
       error: (err) => {
         console.error('Error creating A new marketComment');
@@ -87,7 +89,7 @@ export class MarketCommentComponent implements OnInit {
     ).subscribe({
       next: (m) => {
         this.marketCommentReply = new MarketComment();
-        this.reload();
+        this.ngOnInit();
       },
       error: (err) => {
         console.error('Error creating A new marketComment');
@@ -98,7 +100,7 @@ export class MarketCommentComponent implements OnInit {
   deletedMarketComment(marketCommentId: number) {
     this.MarketCommentSev.destroyByMarketCommentId(marketCommentId).subscribe({
       next: () => {
-        this.reload();
+        this.ngOnInit();
       },
       error: (fail) => {
         console.error(

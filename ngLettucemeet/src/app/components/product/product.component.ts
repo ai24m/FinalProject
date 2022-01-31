@@ -26,26 +26,26 @@ export class ProductComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    let idStr = this.route.snapshot.paramMap.get("id");
-    if (!this.selected && idStr) {
-      let id = Number.parseInt(idStr);
-      if (!isNaN(id)) {
-        this.prodSvc.showProduct(id).subscribe({
-          next: (product) => {
-            this.selected = product;
-          },
-          error: (err) => {
-            console.error("ProductComponent.ngOnInit(): invalid productId");
-            console.error(err);
-          }
-        });
-        this.prSvc.index().subscribe({
-          next: (ratings) => { this.productRatings = ratings}
-        })
-      } else {
-        this.router.navigateByUrl("FOF");
-      }
-    }
+    // let idStr = this.route.snapshot.paramMap.get("id");
+    // if (!this.selected && idStr) {
+    //   let id = Number.parseInt(idStr);
+    //   if (!isNaN(id)) {
+    //     this.prodSvc.showProduct(id).subscribe({
+    //       next: (product) => {
+    //         this.selected = product;
+    //       },
+    //       error: (err) => {
+    //         console.error("ProductComponent.ngOnInit(): invalid productId");
+    //         console.error(err);
+    //       }
+    //     });
+    //     this.prSvc.index().subscribe({
+    //       next: (ratings) => { this.productRatings = ratings}
+    //     })
+    //   } else {
+    //     this.router.navigateByUrl("FOF");
+    //   }
+    // }
     this.reloadProdList();
   }
 

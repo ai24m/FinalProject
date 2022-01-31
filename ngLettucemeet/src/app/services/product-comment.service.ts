@@ -25,7 +25,7 @@ export class ProductCommentService {
 
   index(): Observable<ProductComment[]> {
     let endpoint = "api/productcomments";
-    return this.http.get<ProductComment[]>(this.baseUrl + endpoint, this.getOptions()).pipe(
+    return this.http.get<ProductComment[]>(this.baseUrl + endpoint).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(() => new Error('TodoService.index() error'));
@@ -33,9 +33,19 @@ export class ProductCommentService {
     );
   }
 
+  findByProductId(productId: number): Observable<ProductComment[]> {
+    let endPoints = `api/productcomments/product/${productId}`;
+    return this.http.get<ProductComment[]>(this.baseUrl + endPoints).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(() => new Error('TodoService.show() error'));
+      })
+    );
+  }
+
   show(pcId: number): Observable<ProductComment[]> {
     let endPoints = `api/productcomments/${pcId}`;
-    return this.http.get<ProductComment[]>(this.baseUrl + endPoints, this.getOptions()).pipe(
+    return this.http.get<ProductComment[]>(this.baseUrl + endPoints).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(() => new Error('TodoService.show() error'));

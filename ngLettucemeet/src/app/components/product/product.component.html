@@ -71,7 +71,7 @@
           [attr.aria-expanded]="accordionItem.expanded"
           [attr.aria-controls]="'accordion-body-' + index">
           <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
-            hi im {{ prd.name }}
+            hi im {{prd.name}}
             <ng-container *ngFor="let ratings of prd.ratings">
               {{ratings.comment}}
               {{ratings.rating}}
@@ -86,6 +86,7 @@
             [style.display]="accordionItem.expanded ? '' : 'none'"
             [attr.id]="'accordion-body-' + index"
             [attr.aria-labelledby]="'accordion-header-' + index">
+            <a [routerLink]="['find', prd.id]">Learn More {{prd.name}}</a>
             descp {{prd.description}}
             quantity {{prd.quantity}}
             date {{prd.availableDate}}

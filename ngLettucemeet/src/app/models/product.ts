@@ -8,7 +8,7 @@ export class Product {
   id: number;
   name: string;
   description: string;
-  organic: boolean | undefined;
+  organic: boolean;
   unitPrice: number | undefined;
   imageUrl: string | undefined;
   quantity: number | undefined;
@@ -23,7 +23,7 @@ export class Product {
     id: number = 0,
     name: string = "",
     description: string = "",
-    organic?: boolean,
+    organic: boolean = false,
     unitPrice?: number,
     imageUrl?: string,
     quantity?: number,

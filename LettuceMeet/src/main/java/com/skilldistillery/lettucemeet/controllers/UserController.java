@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -28,28 +29,12 @@ public class UserController {
 	@Autowired
 	private UserService userSev;
 
-	@PostMapping("users")
-	public User create(HttpServletRequest req, HttpServletResponse res, @RequestBody User user,
-			@RequestBody Address address) {
-
-		try {
-			user = userSev.createdUser(user, address);
-			if (user == null) {
-				res.setStatus(404);
-				return user;
-			} else {
-				res.setStatus(201);
-				StringBuffer url = req.getRequestURL();
-				url.append("/").append(user.getId());
-				res.setHeader("location", url.toString());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			res.setStatus(400);
-			user = null;
-		}
-		return user;
+	@GetMapping("users/username")
+	public User getUserByUsername(Principal principal) {
+		User toReturn = userSev.getUserByUsername(principal.getName());
+		return toReturn;
 	}
+	
 
 	@PutMapping("users/{userId}")
 	public User updateUser(HttpServletRequest req, HttpServletResponse res, @PathVariable int userId,

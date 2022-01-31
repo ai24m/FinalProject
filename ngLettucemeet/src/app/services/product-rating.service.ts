@@ -27,7 +27,7 @@ export class ProductRatingService {
 
   index(): Observable<ProductRating[]> {
     let endpoint = "api/productRatings";
-    return this.http.get<ProductRating[]>(this.baseUrl + endpoint, this.getOptions()).pipe(
+    return this.http.get<ProductRating[]>(this.baseUrl + endpoint).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(() => new Error('TodoService.index() error'));
@@ -37,7 +37,17 @@ export class ProductRatingService {
 
   show(): Observable<ProductRating[]> {
     let endPoints = "api/productRatings/user";
-    return this.http.get<ProductRating[]>(this.baseUrl + endPoints, this.getOptions()).pipe(
+    return this.http.get<ProductRating[]>(this.baseUrl + endPoints).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(() => new Error('TodoService.show() error'));
+      })
+    );
+  }
+
+  getByProductId(productId: number): Observable<ProductRating[]> {
+    let endPoints = `api/productRatings/product/${productId}`;
+    return this.http.get<ProductRating[]>(this.baseUrl + endPoints).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(() => new Error('TodoService.show() error'));

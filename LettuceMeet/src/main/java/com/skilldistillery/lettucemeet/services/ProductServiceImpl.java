@@ -79,4 +79,9 @@ public class ProductServiceImpl implements ProductService {
 		return deleted;
 	}
 
+	@Override
+	public List<Product> getUserProducts(String username) {
+		return prodRepo.findByUserUsername(username);
+	}
+
 }

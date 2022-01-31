@@ -1,9 +1,11 @@
 <div style="margin-left: 30%;">
-  <div *ngFor="let pc of productComments.slice(0, 5)">
+
+
+  <div *ngFor="let pc of productComments">
     <p>{{pc.comment}}</p>
     <p>{{pc.updated}}</p>
     <div *ngFor="let replies of pc.myReplies">
-      <p>replies.length</p>
+      <p>{{replies.comment}}</p>
     </div>
       <!-- <input type="button" value="Edit" (click)="showEditForm(pc)">
       <input type="button" value="Delete" (click)="showDeleteForm(pc)"> -->
@@ -17,7 +19,7 @@
   <form name="createPR">
     <textarea name="comment" [(ngModel)]="newProductComment.comment" placeholder="new comment. . ."></textarea><br>
     <!-- <input (click)="addTodo(newTodo)" type="submit" value="Add Item" /> -->
-    <input type="button" value="Add" (click)="addProductRating(newProductComment, 1)">
+    <input type="button" value="Add" (click)="addProductComment(newProductComment, 1)">
   </form>
 
 

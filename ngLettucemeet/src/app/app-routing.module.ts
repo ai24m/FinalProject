@@ -27,10 +27,10 @@ const routes: Routes = [
   { path: 'sample', component: SampleTemplateComponent },
   { path: 'calendar', component: CalendarComponent },
   { path: 'products', component: ProductComponent},
-  { path: 'products/:id', component: ProductIdComponent,
+  { path: 'products/find/:id', component: ProductIdComponent,
     children: [
-      {path: 'comments', component: ProductRatingComponent },
-      {path: 'ratings', component: ProductCommentComponent }
+      {path: 'comments', component: ProductCommentComponent },
+      {path: 'ratings', component: ProductRatingComponent }
     ]
   },
   { path: 'sellerrating', component: SellerRatingComponent },

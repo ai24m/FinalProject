@@ -18,11 +18,21 @@ export class UserService {
     //always in form of js object
     let options = {
       headers: {
-        Authorization: 'Basic' + this.auth.getCredentials(),
+        Authorization: 'Basic ' + this.auth.getCredentials(),
         'X-Requested-With': 'XMLHttpRequest',
       },
     };
     return options;
+  }
+
+  getByUsername(): Observable<User>{
+    let endPoints = `/username`
+    return this.http.get<User>(this.url + endPoints, this.getOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(() => new Error ('Error finding User: '));
+      })
+    );
   }
 
   update(user: User): Observable<User> {

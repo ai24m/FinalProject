@@ -16,4 +16,6 @@ public interface ProductService {
 	
 	public boolean deleteProduct(String username, int prodId);
 
+	public List<Product> getUserProducts(String username);
+
 }

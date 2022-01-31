@@ -24,7 +24,7 @@
 
         <div *ngIf="!selected">
           <input type="text" name ="comment" placeholder="commet...." [(ngModel)]="newMarketCommet.comment" class ="form-control">
-          <input type="submit" value ="Add Route" (click)="addANewMarketComment(newMarketCommet.market.id, newMarketCommet)">
+          <input type="submit" value ="Add Comment" (click)="addANewMarketComment(newMarketCommet.market.id, newMarketCommet)">
 
         </div>
 
@@ -32,7 +32,7 @@
         <!-- </div> -->
         <div *ngIf="selected ">
           <input type="text" name ="comment" placeholder="commet...." [(ngModel)]="newMarketCommet.comment" class ="form-control">
-          <input type="submit" value ="Add Route" (click)="addAMarketCommentReply(selected.id, newMarketCommet)">
+          <input type="submit" value ="Add Replies" (click)="addAMarketCommentReply(selected.id, newMarketCommet)">
         </div>
         </div>
       <footer class="row tm-row" style="margin-top:10%">

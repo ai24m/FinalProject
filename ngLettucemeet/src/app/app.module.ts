@@ -74,15 +74,14 @@ import { ProductIdComponent } from './components/product-id/product-id.component
   ],
   providers: [
     AuthService,
+    UserService,
+    SellerRatingService,
     ProductService,
     ProductRatingService,
+    ProductCommentService,
     MarketService,
     MarketcommentService,
     MarketRatingService,
-    UserService,
-    ProductRatingService,
-    ProductCommentService,
-    SellerRatingService,
     DatePipe
   ],
   bootstrap: [AppComponent],

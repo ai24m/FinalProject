@@ -13,43 +13,61 @@ export class ProductCommentComponent implements OnInit {
   newProductComment: ProductComment = new ProductComment();
   editProductComment: ProductComment = new ProductComment();
   destroyProductComment: ProductComment = new ProductComment();
-  editPC: boolean = false;
-  addPC: boolean = false;
-  destroyPC: boolean = false;
-  selectedProductComment: ProductComment | null = null;
+  // editPC: boolean = false;
+  // addPC: boolean = false;
+  // destroyPC: boolean = false;
+  // selectedProductComment: ProductComment | null = null;
 
   constructor(
-    private _productCommentService: ProductCommentService,
+    private productCommentService: ProductCommentService,
     private route: ActivatedRoute,
     private router: Router) { }
 
+  // ngOnInit(): void {
+  //   this._productCommentService.index().subscribe({
+  //     next: (allProductComments) => {
+  //       this.productComments = allProductComments;
+  //       this.reloadProductComment();
+  //     },
+  //     error: (fail) => { console.error('ProductRatingComponent FAIL')}
+  //   })
+  //   this.reloadProductComment();
+  // }
+
   ngOnInit(): void {
-    this._productCommentService.index().subscribe({
-      next: (allProductComments) => {
-        this.productComments = allProductComments;
-        this.reloadProductComment();
-      },
-      error: (fail) => { console.error('ProductRatingComponent FAIL')}
-    })
+    if (this.route.parent != null) {
+      let idString = this.route.parent.snapshot.paramMap.get('id');
+      if (idString) {
+        let id = Number.parseInt(idString);
+        if (!isNaN(id)) {
+          this.productCommentService.findByProductId(id).subscribe({
+            next: (comments) => {
+              this.productComments = comments;
+            }
+          })
+        }
+
+      }
+    }
     this.reloadProductComment();
   }
 
   reloadProductComment() {
-    this._productCommentService.index().subscribe(
+    this.productCommentService.index().subscribe(
       productComment => this.productComments = productComment,
       err => console.error('Reload error' + err)
     );
   }
 
-  addProductRating(productComment: ProductComment, productId: number) {
+  addProductComment(productComment: ProductComment, productId: number) {
     if (productComment.myReplies.length > 0) {
-      this._productCommentService.createReply(productComment, productId).subscribe(
+      this.productCommentService.createReply(productComment, productId).subscribe(
         success => {
           this.reloadProductComment();
         },
       )
     }
-    this._productCommentService.create(productComment, productId).subscribe(
+    this.productCommentService.create(productComment, productId).subscribe(
       success => { //another way to write: function that has parameters todos next: (todos) => { do this function }, error: (wrong) => { }
         this.newProductComment = new ProductComment();
         this.reloadProductComment();
@@ -59,7 +77,7 @@ export class ProductCommentComponent implements OnInit {
   }
 
   updateProductComment(productComment: ProductComment, productCommentId: number, productId: number): void {
-    this._productCommentService.update(productComment, productCommentId, productId).subscribe({
+    this.productCommentService.update(productComment, productCommentId, productId).subscribe({
       next: () => {
         // this.editTodo = null;
         // if (goToDetails) { this.selected = productRating; }
@@ -71,7 +89,7 @@ export class ProductCommentComponent implements OnInit {
   }
 
   deleteProductRating(productId: number) {
-    this._productCommentService.destroy(productId).subscribe({
+    this.productCommentService.destroy(productId).subscribe({
       next: () => { this.reloadProductComment()},
       error: () => { console.error('Destroy component.ts ')}
     });

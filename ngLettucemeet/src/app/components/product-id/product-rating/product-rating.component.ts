@@ -23,14 +23,33 @@ export class ProductRatingComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router) { }
 
-  ngOnInit(): void {
-    this._productRatingService.index().subscribe({
-      next: (allProductRatings) => {
-        this.productRatings = allProductRatings;
-      },
-      error: (fail) => { console.error('ProductRatingComponent FAIL')}
-    })
-    this.reloadProductRating();
+  // ngOnInit(): void {
+  //   this._productRatingService.index().subscribe({
+  //     next: (allProductRatings) => {
+  //       this.productRatings = allProductRatings;
+  //     },
+  //     error: (fail) => { console.error('ProductRatingComponent FAIL')}
+  //   })
+  //   this.reloadProductRating();
+  // }
+
+  ngOnInit(): void{
+    if (this.route.parent != null) {
+      let idString = this.route.parent.snapshot.paramMap.get('id');
+      if (idString) {
+        let id = Number.parseInt(idString);
+        console.log(id);
+        if (!isNaN(id)) {
+          this._productRatingService.getByProductId(id).subscribe({
+            next: (ratings) => {
+              console.log(ratings);
+              this.productRatings = ratings;
+            }
+          })
+        }
+
+      }
+    }
   }
 
   reloadProductRating() {
@@ -86,6 +105,6 @@ export class ProductRatingComponent implements OnInit {
   }
 
 
-  items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
-  expandedIndex = 0;
+  // items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
+  // expandedIndex = 0;
 }

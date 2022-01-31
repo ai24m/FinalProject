@@ -25,7 +25,7 @@ export class ProductService {
   }
 
   productIndex(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.url, this.getHttpOptions()).pipe(
+    return this.http.get<Product[]>(this.url).pipe(
       catchError((err: any) => {
         console.error(err);
         return throwError(() => new Error("ProductService.productIndex(): error retrieving product list:" + err));
@@ -38,6 +38,16 @@ export class ProductService {
       catchError((err: any) => {
         console.error(err);
         return throwError(() => new Error("ProductService.showProduct(): error retrieving product:" + err));
+      })
+    );
+  }
+
+  getUserProduct(): Observable<Product[]> {
+    let endPoints = `/user`;
+    return this.http.get<Product[]>(this.url + endPoints, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.error(err);
+        return throwError(() => new Error("ProductService.createProduct(): error creating product:" + err));
       })
     );
   }

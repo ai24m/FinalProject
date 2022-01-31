@@ -18,29 +18,40 @@
 
 <!-- single post  -->
 
-                      <h2 class="pt-2 tm-color-primary tm-post-title">Single Post of Xtra Blog HTML Template</h2>
-                      <p class="tm-mb-40">June 16, 2020 posted by Admin Nat</p>
-                      <p>
-                          This is a description of the video post. You can also have an image instead of
-                          the video. You can free download
-                          <a rel="nofollow" href="https://templatemo.com/tm-553-xtra-blog" target="_blank">Xtra Blog Template</a>
-                          from TemplateMo website. Phasellus maximus quis est sit amet maximus. Vestibulum vel rutrum
-                          lorem, ac sodales augue. Aliquam erat volutpat. Duis lectus orci, blandit in arcu
-                          est, elementum tincidunt lectus. Praesent vel justo tempor, varius lacus a,
-                  pharetra lacus. </p>
+                      <h2 class="pt-2 tm-color-primary tm-post-title">Welcome {{user.username}}</h2>
+                      <img src="/assets/images/profile.png" style="border-radius: 50%; width: 40%; padding-left: 10%; padding-right: 8%;" alt="Image" class="mb-3 img-fluid">
+                      <div *ngIf="!edit">
+                      <p class="tm-mb-40"> Profile</p>
+                      <h3>Address</h3>
+                        <ul>
+                          <li> {{user.address?.street1}} </li>
+                          <li> {{user.address?.street2}} </li>
+                          <li> {{user.address?.city}} </li>
+                          <li> {{user.address?.state}} </li>
+                          <li> {{user.address?.zip}} </li>
+                        </ul>
+                      <h3>Info</h3>
+                           {{user.imageurl}}
+                        <ul>
+                          <li> {{user.firstname}}</li>
+                          <li> {{user.lastname}}</li>
+                          <li> {{user.businessname}}</li>
+                          <li> {{user.email}}</li>
+                          <li> <input type="submit" (click)="resetPassword()" value="Reset Password"> </li>
+                        </ul>
+
+
                       <p>
                           Duis pretium efficitur nunc. Mauris vehicula nibh nisi. Curabitur gravida neque
                           dignissim, aliquet nulla sed, condimentum nulla. Pellentesque id venenatis
                           quam, id cursus velit. Fusce semper tortor ac metus iaculis varius. Praesent
                           aliquam ex vel lectus ornare tristique. Nunc et eros quis enim feugiat tincidunt
                           et vitae dui.
-                      </p>
+                      </p></div>
                       <span class="d-block text-right tm-color-primary">Creative . Design . Business</span>
                   </div>
 
 <!-- Post Comments -->
-
-
 
                   <div>
                       <h2 class="tm-color-primary tm-post-title">Comments</h2>
@@ -104,23 +115,25 @@
           <aside class="col-lg-4 tm-aside-col">
               <div class="tm-post-sidebar">
                   <hr class="mb-3 tm-hr-primary">
-                  <h2 class="mb-4 tm-post-title tm-color-primary">Products</h2>
-                  <ul class="tm-mb-75 pl-5 tm-category-list" *ngFor="let p of user?.products">
-                      <li><a href="#" class="tm-color-primary">{{p.name}}</a></li>
-                      <li><a href="#" class="tm-color-primary">{{p.quantity}}</a></li>
-                      <li><a href="#" class="tm-color-primary" >{{p.ratings}}</a></li>
-                  </ul>
+                  <h2 class="mb-4 tm-post-title tm-color-primary">Product Listings</h2>
+                  <a href="#" class="d-block tm-mb-40" *ngFor="let p of products">
+                    <figure>
+                         <h5>{{p.name}}</h5>
+                        <!-- <img src="img/img-05.jpg" alt="Image" class="mb-3 img-fluid"> -->
+                        <figcaption class="tm-color-primary">Unit Price ${{p.unitPrice}} , {{organic(p.organic)}}</figcaption>
+                    </figure>
+                  </a>
                   <hr class="mb-3 tm-hr-primary">
-                  <h2 class="tm-mb-40 tm-post-title tm-color-primary">Related Posts</h2>
-                  <a href="#" class="d-block tm-mb-40">
+                  <h2 class="tm-mb-40 tm-post-title tm-color-primary">Market Participation</h2>
+                  <a href="#" class="d-block tm-mb-40" *ngFor="let m of markets">
                       <figure>
                           <img src="img/img-02.jpg" alt="Image" class="mb-3 img-fluid">
                           <figcaption class="tm-color-primary">Duis mollis diam nec ex viverra scelerisque a sit</figcaption>
                       </figure>
                   </a>
-                  <a href="#" class="d-block tm-mb-40">
+                  <!-- <a href="#" class="d-block tm-mb-40">
                       <figure>
-                          <img src="img/img-05.jpg" alt="Image" class="mb-3 img-fluid">
+                          <img src="/assets/images/profile.jpg" alt="Image" class="mb-3 img-fluid">
                           <figcaption class="tm-color-primary">Integer quis lectus eget justo ullamcorper ullamcorper</figcaption>
                       </figure>
                   </a>
@@ -129,7 +142,7 @@
                           <img src="img/img-06.jpg" alt="Image" class="mb-3 img-fluid">
                           <figcaption class="tm-color-primary">Nam lobortis nunc sed faucibus commodo</figcaption>
                       </figure>
-                  </a>
+                  </a> -->
               </div>
           </aside>
       </div>
