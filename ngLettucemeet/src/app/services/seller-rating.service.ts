@@ -55,12 +55,6 @@ export class SellerRatingService {
 
   update(sellerRating: SellerRating, sellerId: number): Observable<SellerRating> {
     let endpoints = `api/sellerRatings/${sellerId}`
-    // if (productRating.completed) {
-      // let tempDate = this.date.transform(Date.now(), 'shortDate');
-      // if (tempDate != null) {productRating.completeDate = tempDate}
-    // } else {
-    //   todo.completeDate === '';
-    // }
     return this.http.put<SellerRating>(this.baseUrl + endpoints, sellerRating, this.getOptions()).pipe(
       catchError((err: any) => {
         console.log(err);

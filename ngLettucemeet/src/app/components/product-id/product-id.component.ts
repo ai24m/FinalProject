@@ -49,7 +49,7 @@ export class ProductIdComponent implements OnInit {
         })
       } else {
         this.router.navigateByUrl('notfound');
-      }this.reload(id);
+      } this.reload(id);
 
     }
   }

@@ -19,9 +19,6 @@ export class ProductRatingComponent implements OnInit {
   addPR: boolean = false;
   destroyPR: boolean = false;
   selectedProductRating: ProductRating | null = null;
-
-  // totalRatings: number = 0;
-  // product: Product = new Product();
   @Input() product: Product = new Product();
 
 
@@ -30,16 +27,6 @@ export class ProductRatingComponent implements OnInit {
     private productSvc: ProductService,
     private route: ActivatedRoute,
     private router: Router) { }
-
-  // ngOnInit(): void {
-  //   this._productRatingService.index().subscribe({
-  //     next: (allProductRatings) => {
-  //       this.productRatings = allProductRatings;
-  //     },
-  //     error: (fail) => { console.error('ProductRatingComponent FAIL')}
-  //   })
-  //   this.reloadProductRating();
-  // }
 
   ngOnInit(): void{
     if (this.route.parent != null) {
@@ -50,11 +37,8 @@ export class ProductRatingComponent implements OnInit {
         if (!isNaN(id)) {
           // this.loadRatingsForProduct(id);
         }
-
       }
     }
-    // this.loadRatingsForProduct(this.product.id);
-
   }
 
   loadRatingsForProduct(productId: number){
@@ -65,19 +49,7 @@ export class ProductRatingComponent implements OnInit {
         this.findAverageRating(this.productRatings);
       }
     })
-    // this.productSvc.showProduct(productId).subscribe({
-    //   next: (product) => {
-    //     this.product = product;
-    //   }
-    // })
   }
-
-  // reloadProductRating() {
-  //   this._productRatingService.index().subscribe(
-  //     productRating => this.productRatings = productRating,
-  //     err => console.error('Reload error' + err)
-  //   );
-  // }
 
   showRating(rating: number) {
     if (rating === 0) {
@@ -93,7 +65,6 @@ export class ProductRatingComponent implements OnInit {
       totalRatings += pr.rating;
     }
     let average = totalRatings / this.productRatings.length;
-    // this.newProductRating.ratingAverage = average;
     return average;
   }
 
@@ -117,12 +88,9 @@ export class ProductRatingComponent implements OnInit {
     this.editPR = !this.editPR;
   }
 
-  // updateTodo(todo: Todo, goToDetails=true): void{
   updateProductRating(productRating: ProductRating, productId: number): void {
     this._productRatingService.update(productRating, productId).subscribe({
       next: (productRating) => {
-        // this.editTodo = null;
-        // if (goToDetails) { this.selected = productRating; }
         this.selectedProductRating = productRating;
         this.loadRatingsForProduct(this.product.id);
       },
@@ -141,8 +109,4 @@ export class ProductRatingComponent implements OnInit {
       error: () => { console.error('Destroy component.ts ')}
     });
   }
-
-
-  // items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
-  // expandedIndex = 0;
 }

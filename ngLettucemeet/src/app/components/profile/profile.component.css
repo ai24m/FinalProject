@@ -1,6 +1,20 @@
 .container-fluid{
   background-color: #ffcd70;
   color: black;
+  overflow: hidden;
+}
+
+#profile {
+  width: 40%;
+  border-radius: 70%;
+  margin-right: 30%;
+
+}
+
+ul, li {
+  list-style-type: none;
+
+  overflow: hidden;
 }
 
 a {

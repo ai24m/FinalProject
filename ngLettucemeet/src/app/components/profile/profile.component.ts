@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Market } from 'src/app/models/market';
 import { Product } from 'src/app/models/product';
+import { SellerRating } from 'src/app/models/seller-rating';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { MarketService } from 'src/app/services/market.service';
 import { ProductService } from 'src/app/services/product.service';
+import { SellerRatingService } from 'src/app/services/seller-rating.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -23,6 +25,7 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private userSvc: UserService,
     private product: ProductService,
+    private rating: SellerRatingService,
     private market: MarketService,
     private auth: AuthService
   ) { }
@@ -35,31 +38,19 @@ export class ProfileComponent implements OnInit {
         console.log(user);
       }
     })
-
-    // this.userSvc.getByUsername().subscribe({
-    //   next: (user) => {
-    //     this.user = user;
-    //     this.getProducts();
-    //   }
-    // })
-
-
   }
 
   resetPassword() {}
 
   organic(organic: boolean) {
     if (organic) {
-      return 'organic';
+      return 'Organic';
     } else if (!organic) {
-      return 'non-organic';
+      return 'Non-Organic';
     } else {
       return false;
     }
   }
-  // getInfo(user: User) {
-  //   if (user != )
-  // }
 
   getProducts() {
     this.product.getUserProduct().subscribe({
@@ -68,18 +59,4 @@ export class ProfileComponent implements OnInit {
       }
     });
   }
-
-  // todo: make method in rest to retrieve markets where products with user id exist
-  // getMarkets() {
-  //   this.market.getMarkets().subscribe({
-  //     next: (markets) => {
-  //       this.markets = markets;
-  //     }
-  //   })
-  // }
-
-  getRatings() {
-
-  }
-
 }
