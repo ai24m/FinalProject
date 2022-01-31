@@ -8,7 +8,7 @@
       <div class="row tm-row tm-mb-45">
           <div class="col-12">
               <hr class="tm-hr-primary tm-mb-55">
-              <img src="/assets/images/markets/one.jpg" alt="Image" class="img-fluid">
+              <img src="/assets/images/markets/one.png" id="headerimage" alt="Image" class="img-fluid">
           </div>
       </div>
       <h2>About</h2>
@@ -51,10 +51,11 @@
               <div class="media tm-person">
                   <img src="assets/images/products/mushroom1.jpg" alt="Image" class="img-fluid mr-4">
                   <div class="media-body">
-                      <h2 class="tm-color-primary tm-post-title mb-2">{{product.user}}</h2>
-                      <h3 class="tm-h3 mb-3">Organic: {{product.organic}} </h3>
-                      <h3 class="tm-h3 mb-3" >{{product.type}}</h3>
+                      <h2 class="tm-color-primary tm-post-title mb-2">{{product.user.username}}</h2>
+                      <h3 class="tm-h3 mb-3">{{organic(product.organic)}} </h3>
+                      <h3 class="tm-h3 mb-3" >Category: {{product.type.name}}</h3>
                       <p class="mb-0 tm-line-height-short">
+                        Info on Product:
                         {{product.description}}
                         {{product.name}}
                         {{product.unitPrice}}

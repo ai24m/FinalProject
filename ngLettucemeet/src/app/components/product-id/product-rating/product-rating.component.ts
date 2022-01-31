@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { ProductRating } from 'src/app/models/product-rating';
@@ -11,7 +11,7 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./product-rating.component.css']
 })
 export class ProductRatingComponent implements OnInit {
-  productRatings: ProductRating[] = [];
+  @Input() productRatings: ProductRating[] = [];
   newProductRating: ProductRating = new ProductRating;
   editProductRating: ProductRating = new ProductRating;
   destroyProductRating: ProductRating = new ProductRating;
@@ -20,8 +20,10 @@ export class ProductRatingComponent implements OnInit {
   destroyPR: boolean = false;
   selectedProductRating: ProductRating | null = null;
 
-  totalRatings: number = 0;
-  product: Product = new Product();
+  // totalRatings: number = 0;
+  // product: Product = new Product();
+  @Input() product: Product = new Product();
+
 
   constructor(
     private _productRatingService: ProductRatingService,
@@ -46,30 +48,36 @@ export class ProductRatingComponent implements OnInit {
         let id = Number.parseInt(idString);
         console.log(id);
         if (!isNaN(id)) {
-          this._productRatingService.getByProductId(id).subscribe({
-            next: (ratings) => {
-              console.log(ratings);
-              this.productRatings = ratings;
-              this.findAverageRating(this.productRatings);
-            }
-          }),
-          this.productSvc.showProduct(id).subscribe({
-            next: (product) => {
-              this.product = product;
-            }
-          })
+          // this.loadRatingsForProduct(id);
         }
 
       }
     }
+    // this.loadRatingsForProduct(this.product.id);
+
   }
 
-  reloadProductRating() {
-    this._productRatingService.index().subscribe(
-      productRating => this.productRatings = productRating,
-      err => console.error('Reload error' + err)
-    );
+  loadRatingsForProduct(productId: number){
+    this._productRatingService.getByProductId(productId).subscribe({
+      next: (ratings) => {
+        console.log(ratings);
+        this.productRatings = ratings;
+        this.findAverageRating(this.productRatings);
+      }
+    })
+    // this.productSvc.showProduct(productId).subscribe({
+    //   next: (product) => {
+    //     this.product = product;
+    //   }
+    // })
   }
+
+  // reloadProductRating() {
+  //   this._productRatingService.index().subscribe(
+  //     productRating => this.productRatings = productRating,
+  //     err => console.error('Reload error' + err)
+  //   );
+  // }
 
   showRating(rating: number) {
     if (rating === 0) {
@@ -80,11 +88,13 @@ export class ProductRatingComponent implements OnInit {
   }
 
   findAverageRating(productRatings: ProductRating[]){
+    let  totalRatings = 0;
     for (let pr of productRatings) {
-      this.totalRatings += pr.rating;
+      totalRatings += pr.rating;
     }
-    let average = this.totalRatings / this.productRatings.length;
-    this.newProductRating.ratingAverage = average;
+    let average = totalRatings / this.productRatings.length;
+    // this.newProductRating.ratingAverage = average;
+    return average;
   }
 
   showAddForm() {
@@ -114,7 +124,7 @@ export class ProductRatingComponent implements OnInit {
         // this.editTodo = null;
         // if (goToDetails) { this.selected = productRating; }
         this.selectedProductRating = productRating;
-        this.reloadProductRating();
+        this.loadRatingsForProduct(this.product.id);
       },
       error: (fail) => { console.error('Error updating' + fail);}
     });
@@ -127,7 +137,7 @@ export class ProductRatingComponent implements OnInit {
 
   deleteProductRating(productId: number) {
     this._productRatingService.destroy(productId).subscribe({
-      next: () => { this.reloadProductRating()},
+      next: () => { this.loadRatingsForProduct(this.product.id)},
       error: () => { console.error('Destroy component.ts ')}
     });
   }

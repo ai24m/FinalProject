@@ -15,7 +15,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ProfileComponent implements OnInit {
   user: User = new User();
-  edit: boolean = true;
+  edit: boolean = false;
   products: Product[] = [];
   markets: Market[] = [];
 
@@ -28,20 +28,20 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.auth.getCurrentUser().subscribe({
-    //   next: (user) => {
-    //     this.user = user;
-    //     this.getProducts();
-    //     console.log(user);
-    //   }
-    // })
-
-    this.userSvc.getByUsername().subscribe({
+    this.auth.getCurrentUser().subscribe({
       next: (user) => {
         this.user = user;
         this.getProducts();
+        console.log(user);
       }
     })
+
+    // this.userSvc.getByUsername().subscribe({
+    //   next: (user) => {
+    //     this.user = user;
+    //     this.getProducts();
+    //   }
+    // })
 
 
   }

@@ -2,10 +2,18 @@
   background-color: #ffcd70;
   color: black;
 }
-#header {
-  height: 570px;
+#headerimage {
+  height: 470px;
   width: 100%;
 }
+.media-body{
+  color: black;
+}
+
+.img-fluid {
+  border-radius: 10px;
+}
+
 .example-accordion {
   display: block;
   max-width: 500px;
