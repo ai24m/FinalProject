@@ -1,0 +1,115 @@
+<div class="container-fluid">
+  <main class="tm-main">
+      <div class="row tm-row">
+          <div class="col-lg-8 tm-post-col">
+              <div class="tm-post-full">
+                  <div class="mb-4">
+<!-- profile  -->
+                      <h2 class="pt-2 tm-color-primary tm-post-title">Welcome {{user.username}}</h2>
+                      <img src="/assets/images/profile.png" id="profile" alt="Image" class="mb-3 img-fluid">
+                      <div *ngIf="!edit">
+                      <h3>Address</h3>
+                           {{user.address?.street1}}<br>
+                           {{user.address?.street2}}
+                           {{user.address?.city}}<br>
+                           {{user.address?.state}}<br>
+                           {{user.address?.zip}}<br>
+                      <h3>Profile Info</h3>
+                           {{user.firstname}}<br>
+                           {{user.lastname}}<br>
+                           {{user.businessname}}<br>
+                           {{user.username}}<br>
+                      <p>
+
+                        Velvet Twilight Farms!
+                        Grow produce all year around, visit our Farm!
+
+                        insert map of location here
+                      </p></div>
+                  </div>
+
+<!-- Post Comments -->
+
+                  <div>
+                      <!-- <h2 class="tm-color-primary tm-post-title">Comments + Rating: {{showAverageRating()}}</h2> -->
+                      <hr class="tm-hr-primary tm-mb-45">
+                      <div class="tm-comment tm-mb-45">
+                          <figure class="tm-comment-figure">
+                              <img src="img/comment-1.jpg" alt="Image" class="mb-2 rounded-circle img-thumbnail">
+                              <figcaption class="tm-color-primary text-center">Mark Sonny</figcaption>
+                          </figure>
+                          <div>
+                              <p>
+                                  Had really nice kale and mustard greens during the earlier part of April at the
+                                  Spring Valley Farmer's Market. Highly reccommend!
+                              </p>
+                              <div class="d-flex justify-content-between">
+                                  <!-- <a href="#" class="tm-color-primary">REPLY</a> -->
+                                  <span class="tm-color-primary">June 14, 2020</span>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="tm-comment tm-mb-45">
+                          <figure class="tm-comment-figure">
+                              <img src="img/comment-1.jpg" alt="Image" class="mb-2 rounded-circle img-thumbnail">
+                              <figcaption class="tm-color-primary text-center">Hans Davidson</figcaption>
+                          </figure>
+                          <div>
+                              <p>
+                                  Great produce all year round, farm is family-friendly, highly recommend.
+                              </p>
+                              <div class="d-flex justify-content-between">
+
+                              <span class="tm-color-primary">June 27, 2020</span>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="tm-comment-reply tm-mb-45">
+                          <hr>
+                          <div class="tm-comment">
+                              <figure class="tm-comment-figure">
+                                  <img src="img/comment-2.jpg" alt="Image" class="mb-2 rounded-circle img-thumbnail">
+                                  <figcaption class="tm-color-primary text-center">Jewel Lowe</figcaption>
+                              </figure>
+                              <div>
+                              <p>
+                                  All the produce were cleaned well, sad that Velvet Twilight doesn't appear to
+                                  the Sparkleberry Market anymore but definitely stop by their farm in Sumter!
+                                  </p>
+                                  <div class="d-flex justify-content-between">
+                                  <span class="tm-color-primary">June 14, 2020</span>
+                                  </div>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <aside class="col-lg-4 tm-aside-col">
+              <div class="tm-post-sidebar">
+                  <hr class="mb-3 tm-hr-primary">
+                  <h2 class="mb-4 tm-post-title tm-color-primary">Product Listings</h2>
+                  <a  class="d-block tm-mb-40" *ngFor="let p of products">
+                    <figure>
+                         <h5><a [routerLink]="['/markets/',]"> {{p.name}}</a> </h5>
+                        <!-- <img src="img/img-05.jpg" alt="Image" class="mb-3 img-fluid"> -->
+                        <figcaption class="tm-color-primary">{{organic(p.organic)}}, </figcaption>
+                        <figcaption class="tm-color-primary">Available Date: {{p.availableDate}}</figcaption>
+                    </figure>
+                  </a>
+                  <!-- <hr class="mb-3 tm-hr-primary">
+                  <h2 class="tm-mb-40 tm-post-title tm-color-primary">Market Participation</h2>
+                  <a href="#" class="d-block tm-mb-40" *ngFor="let m of markets">
+                      <figure>
+                          <img src="img/img-02.jpg" alt="Image" class="mb-3 img-fluid">
+                          <figcaption class="tm-color-primary">Duis mollis diam nec ex viverra scelerisque a sit</figcaption>
+                      </figure>
+                  </a> -->
+              </div>
+          </aside>
+      </div>
+      <footer class="row tm-row">
+        <hr>
+      </footer>
+  </main>
+</div>

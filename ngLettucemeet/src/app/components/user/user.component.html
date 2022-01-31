@@ -1,21 +1,72 @@
-<form class="register" style="margin-left: 50%;">
-  <fieldset>
-    <label for="email"><span>Email <span class='required'>*</span></span><input type="text" class='input-field'
-        name='email' [(ngModel)]="newUser.email"></label><br>
-    <label for="username"><span>Username <span class='required'>*</span></span><input type="text" class='input-field'
-        name='username' [(ngModel)]="newUser.username"></label><br>
-    <label for="password"><span>Password <span class='required'>*</span></span><input type="text" class='input-field'
-        name='password' [(ngModel)]="newUser.password"></label><br>
-    <label for="register"><span></span><input (click)='register(newUser)' type="submit" value="Register"></label>
-  </fieldset>
-</form>
+<body >
+<div class="upper" *ngIf="new">
+  <div class="login-div">
+      <form class="login" >
+          <h1><input (click)="new = !new">Sign In</h1>
+          <div class="input-text">
+              <input type="text" class='input-field' name='email' [(ngModel)]="newUser.email" placeholder="Email or phone number" />
+              <div class="warning-input" id="warningEmail">
+                  Please enter a valid email.
+              </div>
+          </div>
 
-<form class="login" style="margin-left: 50%;">
-  <fieldset>
-    <label for="username"><span>Username <span class='required'>*</span></span><input type="text" class='input-field'
-        name='username' [(ngModel)]="newUser.username"></label>
-    <label for="password"><span>Password <span class='required'>*</span></span><input type="text" class='input-field'
-        name='password' [(ngModel)]="newUser.password"></label>
-    <label for="verify"><span></span><input (click)='login(newUser)' type="submit" value="submit"></label>
-  </fieldset>
-</form>
+          <div class="input-text">
+              <input type="text" class='input-field' name='username' [(ngModel)]="newUser.username" placeholder="Password" />
+              <div class="warning-input" id="warningPassword">
+                  Please enter valid username.
+              </div>
+          </div>
+
+          <div class="input-text">
+              <input type="password" class='input-field' name='password' [(ngModel)]="newUser.password" placeholder="Password" />
+              <div class="warning-input" id="warningPassword">
+                  Your password must contain between 4 and 60 characters.
+              </div>
+          </div>
+
+          <div  class="new-members">
+              <input (click)='register(newUser)' type="submit" value="Register">
+          </div>
+          <!-- <div class="remember-flex">
+          </div> -->
+          <!-- <div class="new-members">
+            <input (click)='register(newUser)' type="submit" value="Register">
+          </div> -->
+      </form>
+  </div>
+</div>
+
+
+<div class="upper" *ngIf="!new">
+  <div class="login-div" >
+      <form class="login">
+          <h1>Sign In</h1>
+          <div class="input-text">
+              <input type="text" class='input-field' name='username' [(ngModel)]="newUser.username" placeholder="Username" />
+              <div class="warning-input" id="warningPassword">
+                  Incorrect username
+              </div>
+          </div>
+
+          <div class="input-text">
+              <input type="password" class='input-field' name='password' [(ngModel)]="newUser.password" placeholder="Password" />
+              <div class="warning-input" id="warningPassword">
+                  Incorrect password
+              </div>
+          </div>
+
+          <div class="new-members">
+              <input (click)='login(newUser)' type="submit" value="Sign In">
+          </div>
+          <div class="remember-flex">
+          </div>
+          <div class="new-members">
+              <h3>New?</h3><input type="submit" (click)="new = !new" value="Register">.
+          </div>
+      </form>
+  </div>
+</div>
+
+
+
+</body>

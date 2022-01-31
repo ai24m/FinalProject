@@ -12,10 +12,17 @@ import { AuthService } from 'src/app/services/auth.service';
 export class UserComponent implements OnInit {
   newUser: User = new User();
   user: User | null = null;
+  new: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.newUser = this.newUser;
+  }
+
+  load(){
+
+  }
 
   register(user: User) {
     this.authService.register(user).subscribe({
@@ -32,7 +39,7 @@ export class UserComponent implements OnInit {
   login(user: User) {
     this.authService.login(user.username, user.password).subscribe({
       next: () => {
-        this.router.navigateByUrl('home');
+        this.router.navigateByUrl('profile');
       },
       error: (fail) => {'Login Component fail'}
     })

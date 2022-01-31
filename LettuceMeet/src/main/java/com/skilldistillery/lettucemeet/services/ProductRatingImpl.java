@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.lettucemeet.entities.Product;
+import com.skilldistillery.lettucemeet.entities.ProductComment;
 import com.skilldistillery.lettucemeet.entities.ProductRating;
 import com.skilldistillery.lettucemeet.entities.ProductRatingId;
 import com.skilldistillery.lettucemeet.entities.User;
@@ -34,6 +35,11 @@ public class ProductRatingImpl implements ProductRatingService {
 	@Override
 	public List<ProductRating> findByUserName(String username) {
 		return productRatingRepo.findByUser_Username(username);
+	}
+	
+	@Override
+	public List<ProductRating> getByProductId(Integer pcId) {
+		return productRatingRepo.findByProduct_Id(pcId);
 	}
 
 	@Override
@@ -94,5 +100,7 @@ public class ProductRatingImpl implements ProductRatingService {
 		}
 		return deleted;
 	}
+
+
 
 }

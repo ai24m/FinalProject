@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,6 +19,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
@@ -40,14 +40,19 @@ public class ProductComment {
 	@Column(name = "update_time")
 	private LocalDateTime updated;
 	
-	@JsonIgnore
+	@JsonIgnoreProperties({"myReplies", "replyTo"})
+//	@JsonIgnore 
 	@ManyToOne 
 	@JoinColumn(name = "comment_id")
 	private ProductComment replyTo; 
 	
+//	@JsonIgnoreProperties({"replyTo", "myReplies"})
+	@JsonIgnore
 	@OneToMany(mappedBy = "replyTo")
 	private List <ProductComment> myReplies;
 	
+//	@JsonIgnoreProperties({"productComments"})
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "product_id")
 	private Product product;

@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Product } from 'src/app/models/product';
 import { ProductRating } from 'src/app/models/product-rating';
 import { ProductRatingService } from 'src/app/services/product-rating.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-product-rating',
@@ -9,35 +11,61 @@ import { ProductRatingService } from 'src/app/services/product-rating.service';
   styleUrls: ['./product-rating.component.css']
 })
 export class ProductRatingComponent implements OnInit {
-  productRatings: ProductRating[] = [];
-  newProductRating: ProductRating = new ProductRating();
-  editProductRating: ProductRating = new ProductRating();
-  destroyProductRating: ProductRating = new ProductRating();
+  @Input() productRatings: ProductRating[] = [];
+  newProductRating: ProductRating = new ProductRating;
+  editProductRating: ProductRating = new ProductRating;
+  destroyProductRating: ProductRating = new ProductRating;
   editPR: boolean = false;
   addPR: boolean = false;
   destroyPR: boolean = false;
   selectedProductRating: ProductRating | null = null;
+  @Input() product: Product = new Product();
+
 
   constructor(
     private _productRatingService: ProductRatingService,
+    private productSvc: ProductService,
     private route: ActivatedRoute,
     private router: Router) { }
 
-  ngOnInit(): void {
-    this._productRatingService.index().subscribe({
-      next: (allProductRatings) => {
-        this.productRatings = allProductRatings;
-      },
-      error: (fail) => { console.error('ProductRatingComponent FAIL')}
-    })
-    this.reloadProductRating();
+  ngOnInit(): void{
+    if (this.route.parent != null) {
+      let idString = this.route.parent.snapshot.paramMap.get('id');
+      if (idString) {
+        let id = Number.parseInt(idString);
+        console.log(id);
+        if (!isNaN(id)) {
+          // this.loadRatingsForProduct(id);
+        }
+      }
+    }
   }
 
-  reloadProductRating() {
-    this._productRatingService.index().subscribe(
-      productRating => this.productRatings = productRating,
-      err => console.error('Reload error' + err)
-    );
+  loadRatingsForProduct(productId: number){
+    this._productRatingService.getByProductId(productId).subscribe({
+      next: (ratings) => {
+        console.log(ratings);
+        this.productRatings = ratings;
+        this.findAverageRating(this.productRatings);
+      }
+    })
+  }
+
+  showRating(rating: number) {
+    if (rating === 0) {
+      return 'Not Rated Yet! Be the First!'
+    } else {
+      return rating + ' / 5 Rating'
+    }
+  }
+
+  findAverageRating(productRatings: ProductRating[]){
+    let  totalRatings = 0;
+    for (let pr of productRatings) {
+      totalRatings += pr.rating;
+    }
+    let average = totalRatings / this.productRatings.length;
+    return average;
   }
 
   showAddForm() {
@@ -49,7 +77,7 @@ export class ProductRatingComponent implements OnInit {
     this._productRatingService.create(productRating, productId).subscribe(
       success => { //another way to write: function that has parameters todos next: (todos) => { do this function }, error: (wrong) => { }
         this.newProductRating = new ProductRating();
-        this.reloadProductRating();
+        this.ngOnInit();
       },
       err => console.error('Addtodo error' + err)
     );
@@ -60,14 +88,11 @@ export class ProductRatingComponent implements OnInit {
     this.editPR = !this.editPR;
   }
 
-  // updateTodo(todo: Todo, goToDetails=true): void{
   updateProductRating(productRating: ProductRating, productId: number): void {
     this._productRatingService.update(productRating, productId).subscribe({
       next: (productRating) => {
-        // this.editTodo = null;
-        // if (goToDetails) { this.selected = productRating; }
         this.selectedProductRating = productRating;
-        this.reloadProductRating();
+        this.loadRatingsForProduct(this.product.id);
       },
       error: (fail) => { console.error('Error updating' + fail);}
     });
@@ -80,9 +105,8 @@ export class ProductRatingComponent implements OnInit {
 
   deleteProductRating(productId: number) {
     this._productRatingService.destroy(productId).subscribe({
-      next: () => { this.reloadProductRating()},
+      next: () => { this.loadRatingsForProduct(this.product.id)},
       error: () => { console.error('Destroy component.ts ')}
     });
   }
-
 }

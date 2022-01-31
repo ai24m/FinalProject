@@ -2,19 +2,23 @@ import { Product } from "./product";
 import { User } from "./user";
 
 export class ProductRating {
-  rating: number | undefined;
+  rating: number;
+  ratingAverage: number;
   comment: string | undefined;
-  User: User | undefined;
-  Product: Product | undefined;
+  user: User | undefined;
+  product: Product;
 
   constructor(
-    rating?: number,
+    rating: number = 0,
+    ratingAverage: number = 0,
     comment?: string,
-    User?: User,
-    Product?: Product) {
+    user?: User,
+    product: Product = new Product()
+    ) {
     this.rating = rating;
+    this.ratingAverage = ratingAverage;
     this.comment = comment;
-    this.User = User;
-    this.Product = Product;
+    this.user = user;
+    this.product = product;
   }
 }

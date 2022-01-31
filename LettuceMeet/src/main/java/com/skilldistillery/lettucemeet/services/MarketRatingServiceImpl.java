@@ -89,4 +89,17 @@ public class MarketRatingServiceImpl implements MarketRatingService {
 		return deleted;
 	}
 
+	@Override
+	public Integer getAvergeRating(int marketId) {
+		List<MarketRating> allRatings = mrRepo.findByMarket_Id(marketId);
+		int totalRating =0;
+		int aveRating;
+		if(allRatings !=null) {
+		for (MarketRating marketRating : allRatings) {
+			 totalRating += marketRating.getMarketRating();
+		}
+	}
+		aveRating = totalRating/allRatings.size();		
+		return aveRating;
+	}
 }

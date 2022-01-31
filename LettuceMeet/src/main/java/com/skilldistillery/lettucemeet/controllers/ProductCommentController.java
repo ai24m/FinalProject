@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.lettucemeet.entities.MarketComment;
 import com.skilldistillery.lettucemeet.entities.Product;
 import com.skilldistillery.lettucemeet.entities.ProductComment;
 import com.skilldistillery.lettucemeet.entities.User;
@@ -54,12 +55,41 @@ public class ProductCommentController {
 		} return productComment; 
 	}
 	
+	@GetMapping("productcomments/product/{pcId}")
+	public List<ProductComment> getProductCommentByProductId(
+			HttpServletRequest req, 
+			HttpServletResponse res,
+			@PathVariable Integer pcId){
+		List<ProductComment> ProductComments = pcSvc.getByProductId(pcId); 
+		if (ProductComments == null) {
+			res.setStatus(404);
+		} return ProductComments; 
+	}
+	
 	@PostMapping("productcomments/{pcId}/comments") //must create address with market 
-	public ProductComment create(HttpServletRequest req, HttpServletResponse res, Principal principal, 
+	public ProductComment createReply(HttpServletRequest req, HttpServletResponse res, Principal principal, 
 			@RequestBody ProductComment productComment, @PathVariable Integer pcId) {
 		try {
 			User user = userSvc.findByUserName(principal.getName()); 
-			pcSvc.create(productComment, user); 
+			pcSvc.create(productComment, user, pcId); 
+			res.setStatus(201);
+			StringBuffer url = req.getRequestURL();
+			url.append("/").append(productComment.getId());
+			res.setHeader("Location", url.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("Invalid entry for new product");
+			res.setStatus(400);
+			productComment = null;
+		} return null; 
+	}
+	
+	@PostMapping("productcomments/{productId}")
+	public ProductComment create(HttpServletRequest req, HttpServletResponse res, Principal principal, 
+			@RequestBody ProductComment productComment, @PathVariable Integer productId) {
+		try {
+			User user = userSvc.findByUserName(principal.getName()); 
+			pcSvc.create(productComment, user, productId); 
 			res.setStatus(201);
 			StringBuffer url = req.getRequestURL();
 			url.append("/").append(productComment.getId());
