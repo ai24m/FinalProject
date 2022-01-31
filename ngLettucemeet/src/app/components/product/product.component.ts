@@ -31,6 +31,15 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.reloadProdList();
+    this.rateSvc.index().subscribe({
+      next: (rate) => {
+        this.ratings = rate;
+      },
+      error: (err) => {
+        console.error("ProductComponent.ngOnInit(): error loading ratings");
+        console.error(err);
+      }
+    });
   }
 
   reloadProdList() {
