@@ -11,47 +11,48 @@ import com.skilldistillery.lettucemeet.entities.Market;
 import com.skilldistillery.lettucemeet.entities.User;
 import com.skilldistillery.lettucemeet.repositories.AddressRepository;
 import com.skilldistillery.lettucemeet.repositories.MarketRepository;
-import com.skilldistillery.lettucemeet.repositories.UserRepository;
 
 @Service
 public class MarketServiceImpl implements MarketService {
 
-	@Autowired 
+	@Autowired
 	private MarketRepository marketRepo;
-	
+
+	@Autowired
+	private AddressRepository addrRepo;
+
 	@Override
 	public List<Market> index() {
 		return marketRepo.findAll();
-	} 
-	
+	}
+
 	@Override
 	public Market findById(Integer mId) {
 		Optional<Market> mOpt = marketRepo.findById(mId);
 		if (mOpt.isPresent()) {
 			Market market = mOpt.get();
-			return market; 
-		} return null; 
-	}
-	
-	@Override
-	public Market show(int mId) {
-		Optional<Market> mOpt = marketRepo.findById(mId); 
-		if (mOpt.isPresent()) {
-			return mOpt.get(); 
-		} return null;
+			return market;
+		}
+		return null;
 	}
 
 	@Override
-	public Market create(Market market, User user) {
-		if (user != null) {
-			market.setUser(user);
-		    return marketRepo.saveAndFlush(market); 
+	public Market show(int mId) {
+		Optional<Market> mOpt = marketRepo.findById(mId);
+		if (mOpt.isPresent()) {
+			return mOpt.get();
 		}
-//		market.setAddress(market.getAddress());
-//		market.setProducts(market.getProducts());
-//		market.setUser(user);
-//		marketRepo.saveAndFlush(market); 
-		return market;
+		return null;
+	}
+
+	@Override
+	public Market create(Market market, User user, Address addr) {
+		if (user != null && addr != null) {
+			market.setUser(user);
+			market.setAddress(addrRepo.saveAndFlush(addr));
+			return marketRepo.saveAndFlush(market);
+		}
+		return null;
 	}
 
 	@Override
@@ -62,21 +63,24 @@ public class MarketServiceImpl implements MarketService {
 			existing.setDescription(market.getDescription());
 			existing.setImageUrl(market.getImageUrl());
 			existing.setMarketDate(market.getMarketDate());
-			existing.setAddress(market.getAddress());;
+			existing.setAddress(market.getAddress());
+			;
 			marketRepo.saveAndFlush(existing);
-		} return market;
+		}
+		return market;
 	}
 
 	@Override
 	public boolean destroy(User user, Integer mId) {
-		boolean deleted = false; 
-		Market market = marketRepo.findByIdAndUser(mId, user); 
+		boolean deleted = false;
+		Market market = marketRepo.findByIdAndUser(mId, user);
 		if (market != null) {
 			market.setMarketComments(null);
 			market.setMarketRatings(null);
 			marketRepo.delete(market);
 			deleted = true;
-		} return deleted; 
+		}
+		return deleted;
 	}
 
 }
