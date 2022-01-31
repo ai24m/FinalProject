@@ -1,88 +1,130 @@
-<div class="container-fluid" style="background-color: #ffcd70;">
+<div class="container-fluid d-flex flex-column" style="background-color: #ffcd70">
+  <main class="tm-main">
+    <!-- Search form -->
+    <img class="background" src="assets/images/background.png" />
+    <p class="featured">Support Your Local Farmer's Markets</p>
+    <div class="row tm-row">
+      <div class="col-12">
+        <!-- add search functions here ? -->
+      </div>
+    </div>
 
-  <main class="tm-main" >
-      <!-- Search form -->
-      <img class="background" src="assets/images/background.png">
-      <h2 class="featured">Support Your Local Farmer's Markets</h2>
-      <div class="row tm-row" >
-          <div class="col-12">
-            <!-- add search functions here ? -->
+    <div class="row tm-row" style="margin-left: 0.1%">
+      <article
+        class="col-12 col-md-6 tm-post"
+        *ngFor="let market of markets.slice(0, 3)"
+      >
+        <hr class="tm-hr-primary" />
+        <a
+          [routerLink]="['/markets/', market.id]"
+          class="effect-lily tm-post-link tm-pt-60"
+        >
+          <div class="tm-post-link-inner">
+            <!-- right now images are hard coded, need to insert into database -->
+            <img
+              src="assets/images/markets/one.png"
+              alt="Image"
+              class="img-fluid"
+            />
           </div>
-      </div>
+          <span class="position-absolute tm-new-badge">New</span>
+          <h2 class="tm-pt-30 tm-color-primary tm-post-title">
+            {{ market.name }}
+          </h2>
+        </a>
+        <p class="tm-pt-30">
+          Featured Vendors: >>print featured list of vendors
+        </p>
+        <div class="d-flex justify-content-between tm-pt-45">
+          <span class="tm-color-primary"
+            >{{ market.address.city }}, {{ market.address.state }}</span
+          >
+          <span class="tm-color-primary"> {{ market.marketDate }}</span>
+        </div>
+        <hr />
+        <div class="d-flex justify-content-between">
+          <span>Organizer: {{ market.user?.username }}</span>
+        </div>
+      </article>
+      <article
+        class="col-12 col-md-6 tm-post"
+        *ngFor="let market of markets.slice(4, 7)"
+      >
+        <hr class="tm-hr-primary" />
+        <a
+          [routerLink]="['markets', market.id]"
+          class="effect-lily tm-post-link tm-pt-60"
+        >
+          <div class="tm-post-link-inner">
+            <img
+              src="assets/images/markets/two.jpg"
+              alt="Image"
+              class="img-fluid"
+            />
+          </div>
+          <span class="position-absolute tm-new-badge">New</span>
+          <h2 class="tm-pt-30 tm-color-primary tm-post-title">
+            {{ market.name }}
+          </h2>
+        </a>
+        <p class="tm-pt-30">
+          {{ market.address.city }}
+        </p>
+        <div class="d-flex justify-content-between tm-pt-45">
+          <span class="tm-color-primary"
+            >{{ market.products[0]?.name }}, {{ market.products[1]?.name }},
+            {{ market.products[2]?.name }}</span
+          >
+          <span class="tm-color-primary"> {{ market.marketDate }}</span>
+        </div>
+        <hr />
+        <div class="d-flex justify-content-between">
+          <!-- <span>{{count(market.id)}} comments</span> -->
+          <span>Organizer: {{ market.user?.username }}</span>
+        </div>
+      </article>
+    </div>
+    <!-- <div class="row tm-row tm-mt-100 tm-mb-75">
+      Page navigation buttons
 
-      <div class="row tm-row"  style="margin-left: .1%;" >
-          <article class="col-12 col-md-6 tm-post" *ngFor="let market of markets.slice(0, 3)">
-              <hr class="tm-hr-primary">
-              <a [routerLink]="['/markets/', market.id]" class="effect-lily tm-post-link tm-pt-60">
-                  <div class="tm-post-link-inner">
-                    <!-- right now images are hard coded, need to insert into database -->
-                      <img src="assets/images/markets/one.jpg" alt="Image" class="img-fluid">
-                  </div>
-                  <span class="position-absolute tm-new-badge">New</span>
-                  <h2 class="tm-pt-30 tm-color-primary tm-post-title">{{market.name}}</h2>
-              </a>
-              <p class="tm-pt-30">
-                Featured Vendors:
-                >>print featured list of vendors
-              </p>
-              <div class="d-flex justify-content-between tm-pt-45">
-                  <span class="tm-color-primary">{{market.address.city}}, {{market.address.state}}</span>
-                  <span class="tm-color-primary"> {{market.marketDate}}</span>
-              </div>
-              <hr>
-              <div class="d-flex justify-content-between">
-                  <span>Organizer: {{market.user?.username}}</span>
-              </div>
-          </article>
-          <article class="col-12 col-md-6 tm-post" *ngFor="let market of markets.slice(4, 7)">
-              <hr class="tm-hr-primary">
-              <a [routerLink]="['markets', market.id]"  class="effect-lily tm-post-link tm-pt-60">
-                  <div class=" tm-post-link-inner">
-                      <img src="assets/images/markets/two.jpg" alt="Image" class="img-fluid">
-                  </div>
-                  <span class="position-absolute tm-new-badge">New</span>
-                  <h2 class="tm-pt-30 tm-color-primary tm-post-title">{{market.name}}</h2>
-              </a>
-              <p class="tm-pt-30">
-                {{market.address.city}}
-              </p>
-              <div class="d-flex justify-content-between tm-pt-45">
-                  <span class="tm-color-primary">{{market.products[0]?.name}}, {{market.products[1]?.name}}, {{market.products[2]?.name}}</span>
-                  <span class="tm-color-primary"> {{market.marketDate}}</span>
-              </div>
-              <hr>
-              <div class="d-flex justify-content-between">
-                <!-- <span>{{count(market.id)}} comments</span> -->
-                <span>Organizer: {{market.user?.username}}</span>
-            </div>
-          </article>
+      <div class="tm-prev-next-wrapper">
+        <a
+          href="#"
+          style="background-color: black"
+          class="mb-2 tm-btn tm-btn-primary tm-prev-next disabled tm-mr-20"
+          >Prev</a
+        >
+        <a
+          href="#"
+          style="background-color: grey"
+          class="mb-2 tm-btn tm-btn-primary tm-prev-next"
+          >Next</a
+        >
       </div>
-      <div class="row tm-row tm-mt-100 tm-mb-75">
-          <div class="tm-prev-next-wrapper">
-              <a href="#" style="background-color: black;" class="mb-2 tm-btn tm-btn-primary tm-prev-next disabled tm-mr-20">Prev</a>
-              <a href="#" style="background-color: grey;" class="mb-2 tm-btn tm-btn-primary tm-prev-next">Next</a>
-          </div>
-          <div class="tm-paging-wrapper">
-              <nav class="tm-paging-nav d-inline-block">
-                  <ul>
-                      <li class="tm-paging-item active">
-                          <a href="#" style="background-color: grey;" class="mb-2 tm-btn tm-paging-link">1</a>
-                      </li>
-                      <li class="tm-paging-item">
-                          <a href="#" class="mb-2 tm-btn tm-paging-link">2</a>
-                      </li>
-                      <li class="tm-paging-item">
-                          <a href="#" class="mb-2 tm-btn tm-paging-link">3</a>
-                      </li>
-                      <li class="tm-paging-item">
-                          <a href="#" class="mb-2 tm-btn tm-paging-link">4</a>
-                      </li>
-                  </ul>
-              </nav>
-          </div>
+      <div class="tm-paging-wrapper">
+        <nav class="tm-paging-nav d-inline-block">
+          <ul>
+            <li class="tm-paging-item active">
+              <a
+                href="#"
+                style="background-color: grey"
+                class="mb-2 tm-btn tm-paging-link"
+                >1</a
+              >
+            </li>
+            <li class="tm-paging-item">
+              <a href="#" class="mb-2 tm-btn tm-paging-link">2</a>
+            </li>
+            <li class="tm-paging-item">
+              <a href="#" class="mb-2 tm-btn tm-paging-link">3</a>
+            </li>
+            <li class="tm-paging-item">
+              <a href="#" class="mb-2 tm-btn tm-paging-link">4</a>
+            </li>
+          </ul>
+        </nav>
       </div>
-      <footer class="row tm-row">
-      </footer>
+    </div> -->
+    <footer class="row tm-row"></footer>
   </main>
 </div>
-
