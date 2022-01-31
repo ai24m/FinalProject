@@ -1,142 +1,62 @@
 <div class="container-fluid" style="background-color: #ffcd70;">
 
-  <main class="tm-main">
+  <main class="tm-main" >
       <!-- Search form -->
+      <img class="background" src="assets/images/background.png">
+      <h2 class="featured">Support Your Local Farmer's Markets</h2>
       <div class="row tm-row" >
-        <img class="background" src="assets/images/background.jpeg">
           <div class="col-12">
             <!-- add search functions here ? -->
           </div>
       </div>
-      <div class="row tm-row"   >
-          <article class="col-12 col-md-6 tm-post" >
+
+      <div class="row tm-row"  style="margin-left: .1%;" >
+          <article class="col-12 col-md-6 tm-post" *ngFor="let market of markets.slice(0, 3)">
               <hr class="tm-hr-primary">
-              <a [routerLink]="['/sample']" class="effect-lily tm-post-link tm-pt-60">
+              <a [routerLink]="['/markets/', market.id]" class="effect-lily tm-post-link tm-pt-60">
                   <div class="tm-post-link-inner">
-                      <img src="assets/images/demo.png" alt="Image" class="img-fluid">
+                    <!-- right now images are hard coded, need to insert into database -->
+                      <img src="assets/images/markets/one.jpg" alt="Image" class="img-fluid">
                   </div>
                   <span class="position-absolute tm-new-badge">New</span>
-                  <h2 class="tm-pt-30 tm-color-primary tm-post-title">sample</h2>
+                  <h2 class="tm-pt-30 tm-color-primary tm-post-title">{{market.name}}</h2>
               </a>
               <p class="tm-pt-30">
-
-                CONTENTS
-
+                Featured Vendors:
+                >>print featured list of vendors
               </p>
               <div class="d-flex justify-content-between tm-pt-45">
-                  <span class="tm-color-primary">Travel . Events</span>
-                  <span class="tm-color-primary">June 24, 2020</span>
+                  <span class="tm-color-primary">{{market.address.city}}, {{market.address.state}}</span>
+                  <span class="tm-color-primary"> {{market.marketDate}}</span>
               </div>
               <hr>
               <div class="d-flex justify-content-between">
-                  <span>36 comments</span>
-                  <span>by USERS</span>
+                  <!-- <span>{{count(market.marketComments)}} comments</span> -->
+                  <span>{{count(market.id)}} comments</span>
+                  <span>Organizer: {{market.user?.username}}</span>
               </div>
           </article>
-          <article class="col-12 col-md-6 tm-post">
+          <article class="col-12 col-md-6 tm-post" *ngFor="let market of markets.slice(4, 7)">
               <hr class="tm-hr-primary">
-              <a [routerLink]="['/calendar']"  class="effect-lily tm-post-link tm-pt-60">
+              <a [routerLink]="['markets', market.id]"  class="effect-lily tm-post-link tm-pt-60">
                   <div class=" tm-post-link-inner">
-                      <img src="assets/images/demo.png" alt="Image" class="img-fluid">
+                      <img src="assets/images/markets/two.jpg" alt="Image" class="img-fluid">
                   </div>
                   <span class="position-absolute tm-new-badge">New</span>
-                  <h2 class="tm-pt-30 tm-color-primary tm-post-title">calendar</h2>
+                  <h2 class="tm-pt-30 tm-color-primary tm-post-title">{{market.name}}</h2>
               </a>
               <p class="tm-pt-30">
-                CONTENTS
+                {{market.address.city}}
               </p>
               <div class="d-flex justify-content-between tm-pt-45">
-                  <span class="tm-color-primary">Creative . Design . Business</span>
-                  <span class="tm-color-primary">June 16, 2020</span>
+                  <span class="tm-color-primary">{{market.products[0]?.name}}, {{market.products[1]?.name}}, {{market.products[2]?.name}}</span>
+                  <span class="tm-color-primary"> {{market.marketDate}}</span>
               </div>
               <hr>
               <div class="d-flex justify-content-between">
-                  <span>48 comments</span>
-                  <span>by USERS</span>
-              </div>
-          </article>
-          <article class="col-12 col-md-6 tm-post">
-              <hr class="tm-hr-primary">
-              <a [routerLink]="['/product-rating']" class="effect-lily tm-post-link tm-pt-20">
-                  <div class="tm-post-link-inner">
-                      <img src="assets/images/demo.png" alt="Image" class="img-fluid">
-                  </div>
-                  <h2 class="tm-pt-30 tm-color-primary tm-post-title">link</h2>
-              </a>
-              <p class="tm-pt-30">
-                CONTENTS
-              </p>
-              <div class="d-flex justify-content-between tm-pt-45">
-                  <span class="tm-color-primary">Music . Audio</span>
-                  <span class="tm-color-primary">June 11, 2020</span>
-              </div>
-              <hr>
-              <div class="d-flex justify-content-between">
-                  <span>24 comments</span>
-                  <span>by USERS</span>
-              </div>
-          </article>
-          <article class="col-12 col-md-6 tm-post">
-              <hr class="tm-hr-primary">
-              <a href="post.html" class="effect-lily tm-post-link tm-pt-20">
-                  <div class="tm-post-link-inner">
-                      <img src="assets/images/demo.png" alt="Image" class="img-fluid">
-                  </div>
-                  <h2 class="tm-pt-30 tm-color-primary tm-post-title">link</h2>
-              </a>
-              <p class="tm-pt-30">
-                CONTENTS
-              <div class="d-flex justify-content-between tm-pt-45">
-                  <span class="tm-color-primary">Artworks . Design</span>
-                  <span class="tm-color-primary">June 4, 2020</span>
-              </div>
-              <hr>
-              <div class="d-flex justify-content-between">
-                  <span>72 comments</span>
-                  <span>by USERS</span>
-              </div>
-          </article>
-          <article class="col-12 col-md-6 tm-post">
-              <hr class="tm-hr-primary">
-              <a href="post.html" class="effect-lily tm-post-link tm-pt-20">
-                  <div class="tm-post-link-inner">
-                      <img src="assets/images/demo.png" alt="Image" class="img-fluid">
-                  </div>
-                  <h2 class="tm-pt-30 tm-color-primary tm-post-title">Clink</h2>
-              </a>
-              <p class="tm-pt-30">
-                CONTENTS
-              </p>
-              <div class="d-flex justify-content-between tm-pt-45">
-                  <span class="tm-color-primary">Creative . Video . Audio</span>
-                  <span class="tm-color-primary">May 31, 2020</span>
-              </div>
-              <hr>
-              <div class="d-flex justify-content-between">
-                  <span>84 comments</span>
-                  <span>by USERS</span>
-              </div>
-          </article>
-          <article class="col-12 col-md-6 tm-post">
-              <hr class="tm-hr-primary">
-              <a href="post.html" class="effect-lily tm-post-link tm-pt-20">
-                  <div class="tm-post-link-inner">
-                      <img src="assets/images/demo.png" alt="Image" class="img-fluid">
-                  </div>
-                  <h2 class="tm-pt-30 tm-color-primary tm-post-title">link</h2>
-              </a>
-              <p class="tm-pt-30">
-                CONTENTS
-              </p>
-              <div class="d-flex justify-content-between tm-pt-45">
-                  <span class="tm-color-primary">Visual . Artworks</span>
-                  <span class="tm-color-primary">June 16, 2020</span>
-              </div>
-              <hr>
-              <div class="d-flex justify-content-between">
-                  <span>96 comments</span>
-                  <span>by USERS</span>
-              </div>
+                <!-- <span>{{count(market.id)}} comments</span> -->
+                <span>Organizer: {{market.user?.username}}</span>
+            </div>
           </article>
       </div>
       <div class="row tm-row tm-mt-100 tm-mb-75">
@@ -167,3 +87,4 @@
       </footer>
   </main>
 </div>
+

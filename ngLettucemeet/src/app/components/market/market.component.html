@@ -82,9 +82,10 @@
         <div *ngIf="selected && !editMarket">
           <label for="id">ID :</label> <p>{{ selected.id }}</p>
           <label for="name">Name :</label> <p>{{ selected.name }}</p>
-          <label for="description">Description :</label> <p>{{ selected.description }} miles</p>
+          <label for="description">Description :</label> <p>{{ selected.description }} </p>
           <label for="imageUrl">Image_Url :</label> <p>{{ selected.imageUrl }}</p>
           <label for="marketDate">Market Date :</label> <p>{{ selected.marketDate }}</p>
+          <!-- <label for="marketDate">Market Comment :</label> <p>{{ delete(selected.id) }}</p> -->
           <button (click)="displayTable()">Back</button>
           <button (click)="setEditMarket()">Edit</button>
         </div>

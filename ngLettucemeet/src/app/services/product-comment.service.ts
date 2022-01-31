@@ -25,7 +25,7 @@ export class ProductCommentService {
 
   index(): Observable<ProductComment[]> {
     let endpoint = "api/productcomments";
-    return this.http.get<ProductComment[]>(this.baseUrl + endpoint, this.getOptions()).pipe(
+    return this.http.get<ProductComment[]>(this.baseUrl + endpoint).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(() => new Error('TodoService.index() error'));
@@ -33,9 +33,9 @@ export class ProductCommentService {
     );
   }
 
-  show(pcId: number): Observable<ProductComment[]> {
-    let endPoints = `api/productcomments/${pcId}`;
-    return this.http.get<ProductComment[]>(this.baseUrl + endPoints, this.getOptions()).pipe(
+  findByProductId(productId: number): Observable<ProductComment[]> {
+    let endPoints = `api/productcomments/product/${productId}`;
+    return this.http.get<ProductComment[]>(this.baseUrl + endPoints).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(() => new Error('TodoService.show() error'));
@@ -43,8 +43,28 @@ export class ProductCommentService {
     );
   }
 
-  create(productComment: ProductComment, productCommentId: number): Observable<ProductComment> {
+  show(pcId: number): Observable<ProductComment[]> {
+    let endPoints = `api/productcomments/${pcId}`;
+    return this.http.get<ProductComment[]>(this.baseUrl + endPoints).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(() => new Error('TodoService.show() error'));
+      })
+    );
+  }
+
+  createReply(productComment: ProductComment, productCommentId: number): Observable<ProductComment> {
     let endpoints = `api/productcomments/${productCommentId}/comments`
+    return this.http.post<ProductComment>(this.baseUrl + endpoints, productComment, this.getOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Create error' + err);
+      })
+    );
+  }
+
+  create(productComment: ProductComment, productCommentId: number) {
+    let endpoints = `api/productcomments/${productCommentId}`
     return this.http.post<ProductComment>(this.baseUrl + endpoints, productComment, this.getOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
