@@ -18,10 +18,10 @@ export class MarketRatingComponent implements OnInit {
   editMarketRating: MarketRating | null = null;
   totalRatings: number = 0;
 
-
   constructor(
     private MarketRatingSev: MarketRatingService,
-    private route: ActivatedRoute) {}
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     if (this.route.parent != null) {
@@ -34,18 +34,13 @@ export class MarketRatingComponent implements OnInit {
               console.log(ratings);
               this.marketRatings = ratings;
               this.findAverageRating(this.marketRatings);
-            }
-          })
+            },
+          });
         }
-
       }
     }
     // this.reload();
   }
-
-
-
-
 
   reload(marketId: number) {
     this.MarketRatingSev.GetByMarketId(marketId).subscribe({
@@ -134,10 +129,13 @@ export class MarketRatingComponent implements OnInit {
 
   findAverage(ratings: number[]) {
     if (ratings != null) {
-      const sum = ratings.reduce((a,b)=> a+ b, 0);
-      const avg = (sum / ratings.length) || 0;
+      const sum = ratings.reduce((a, b) => a + b, 0);
+      const avg = sum / ratings.length || 0;
       return avg;
     }
     return null;
   }
+}
+function Input() {
+  throw new Error('Function not implemented.');
 }

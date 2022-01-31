@@ -11,10 +11,10 @@ import { MarketService } from 'src/app/services/market.service';
 @Component({
   selector: 'app-market-id',
   templateUrl: './market-id.component.html',
-  styleUrls: ['./market-id.component.css']
+  styleUrls: ['./market-id.component.css'],
 })
 export class MarketIdComponent implements OnInit {
-  selected: Market | null = null;
+  selected: Market = new Market();
   myMarketId: number = 0;
   marketComments: MarketComment[] = [];
   marketRatings: MarketRating[] = [];
@@ -25,11 +25,11 @@ export class MarketIdComponent implements OnInit {
     private marketRatingSvc: MarketRatingService,
     private route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     let idString = this.route.snapshot.paramMap.get('id');
-    if (!this.selected && idString) {
+    if (idString) {
       let id = Number.parseInt(idString);
       console.log(id);
       if (!isNaN(id)) {
@@ -39,33 +39,32 @@ export class MarketIdComponent implements OnInit {
             this.myMarketId = id;
             this.loadComments(id);
             this.averageRatings(id);
-
           },
           error: (fail) => {
-            console.error('TodoListComponent.ngoninit()')
+            console.error('TodoListComponent.ngoninit()');
             this.router.navigateByUrl('notfound'); //fall through in app router
-          }
-        })
+          },
+        });
       } else {
         this.router.navigateByUrl('notfound');
-      }this.reload(id);
-
+      }
+      this.reload(id);
     }
   }
 
-  loadComments(id : number){
+  loadComments(id: number) {
     this.marketCommentSvc.getByMarketId(id).subscribe({
       next: (comments) => {
         this.marketComments = comments;
-      }
-    })
+      },
+    });
   }
 
   // loadUsers(id: product) {
 
   // }
 
-  averageRatings(id : number){
+  averageRatings(id: number) {
     // show average of ratings call function by marketid to get average ratings
   }
 
@@ -90,5 +89,4 @@ export class MarketIdComponent implements OnInit {
       return false;
     }
   }
-
 }

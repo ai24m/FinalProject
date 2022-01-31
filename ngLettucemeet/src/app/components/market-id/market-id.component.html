@@ -32,9 +32,12 @@
                   <h2 class="tm-color-primary tm-post-title mb-2"></h2>
                   <h3 class="tm-h3 mb-3"></h3>
                   <p class="mb-0 tm-line-height-short">
-                    Rating: <app-market-rating></app-market-rating>
-                    <app-market-comment></app-market-comment>
+                    Rating: <app-market-rating ></app-market-rating>
+
                   </p>
+                  <div>
+                    Comments:<app-market-comment [market]="selected" [marketComments]="marketComments"></app-market-comment>
+                  </div>
               </div>
           </div>
       </div>
