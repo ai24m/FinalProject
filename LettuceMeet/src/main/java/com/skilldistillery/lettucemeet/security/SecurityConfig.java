@@ -29,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/api/**").permitAll() // For CORS, the preflight request
 				.antMatchers(HttpMethod.OPTIONS, "/**").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.POST, "/api/users/").permitAll() // will hit the OPTIONS on the route
+				.antMatchers(HttpMethod.POST, "/api/login/").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.POST, "/api/users").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/markets").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/markets/**").permitAll() // will hit the OPTIONS on the route

@@ -25,6 +25,16 @@ export class UserService {
     return options;
   }
 
+  getUserByProduct(productId: number): Observable<User>{
+    let endPoints = `/findUserByProduct/${productId}`
+    return this.http.get<User>(this.url + endPoints).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(() => new Error ('Error finding User: '));
+      })
+    );
+  }
+
   getByUsername(): Observable<User>{
     let endPoints = `/username`
     return this.http.get<User>(this.url + endPoints, this.getOptions()).pipe(

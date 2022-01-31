@@ -34,7 +34,6 @@ public class UserController {
 		User toReturn = userSev.getUserByUsername(principal.getName());
 		return toReturn;
 	}
-	
 
 	@PutMapping("users/{userId}")
 	public User updateUser(HttpServletRequest req, HttpServletResponse res, @PathVariable int userId,

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Product } from 'src/app/models/product';
 import { ProductRating } from 'src/app/models/product-rating';
 import { ProductRatingService } from 'src/app/services/product-rating.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-product-rating',
@@ -19,9 +21,11 @@ export class ProductRatingComponent implements OnInit {
   selectedProductRating: ProductRating | null = null;
 
   totalRatings: number = 0;
+  product: Product = new Product();
 
   constructor(
     private _productRatingService: ProductRatingService,
+    private productSvc: ProductService,
     private route: ActivatedRoute,
     private router: Router) { }
 
@@ -48,6 +52,11 @@ export class ProductRatingComponent implements OnInit {
               this.productRatings = ratings;
               this.findAverageRating(this.productRatings);
             }
+          }),
+          this.productSvc.showProduct(id).subscribe({
+            next: (product) => {
+              this.product = product;
+            }
           })
         }
 
@@ -60,6 +69,14 @@ export class ProductRatingComponent implements OnInit {
       productRating => this.productRatings = productRating,
       err => console.error('Reload error' + err)
     );
+  }
+
+  showRating(rating: number) {
+    if (rating === 0) {
+      return 'Not Rated Yet! Be the First!'
+    } else {
+      return rating + ' / 5 Rating'
+    }
   }
 
   findAverageRating(productRatings: ProductRating[]){
@@ -79,7 +96,7 @@ export class ProductRatingComponent implements OnInit {
     this._productRatingService.create(productRating, productId).subscribe(
       success => { //another way to write: function that has parameters todos next: (todos) => { do this function }, error: (wrong) => { }
         this.newProductRating = new ProductRating();
-        this.reloadProductRating();
+        this.ngOnInit();
       },
       err => console.error('Addtodo error' + err)
     );

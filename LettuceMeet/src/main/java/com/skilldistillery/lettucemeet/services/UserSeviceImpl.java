@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.skilldistillery.lettucemeet.entities.Address;
 import com.skilldistillery.lettucemeet.entities.User;
 import com.skilldistillery.lettucemeet.repositories.AddressRepository;
+import com.skilldistillery.lettucemeet.repositories.ProductRepository;
 import com.skilldistillery.lettucemeet.repositories.UserRepository;
 
 @Service
@@ -19,6 +20,9 @@ public class UserSeviceImpl implements UserService {
 
 	@Autowired
 	private AddressRepository addressRepo;
+	
+	@Autowired 
+	private ProductRepository productRepo;
 
 	@Override
 	public List<User> getAllUser() {
@@ -81,5 +85,7 @@ public class UserSeviceImpl implements UserService {
 	public User getUserByUsername(String username) {
 		return userRepo.findByUsername(username);
 	}
+
+
 
 }

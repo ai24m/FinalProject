@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.skilldistillery.lettucemeet.entities.Product;
+import com.skilldistillery.lettucemeet.entities.User;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 

@@ -1,17 +1,23 @@
-<div style="margin-left: 30%;">
+<footer class="row tm-row">
+  <h2 class="tm-mb-40 tm-post-title tm-color-primary">{{showRating(newProductRating.ratingAverage)}}</h2>
+  <div class="text-right">
+  <button class="tm-btn tm-btn-primary tm-btn-small" type="submit" value="Add Rating" (click)="addPR = true; destroyPR = false">Add Rating</button>
+    </div>
 
-<div>AVERAGE RATINGS {{newProductRating.ratingAverage}} / 5</div>
-
-<input type="button" value="Add" (click)="showAddForm()">
-
-<form (ngSubmit)="addProductRating(newProductRating, 1)" >
-  <input type="number" [(ngModel)]="newProductRating.rating" min="1" max="5" name="rating" placeholder="rating.."><br>
-  <button class="submit-button" type="submit">Submit</button>
+  <form *ngIf="addPR" class="mb-5 tm-comment-form">
+    <h2 class="tm-color-primary tm-post-title mb-4">Rate Here</h2>
+    <div class="mb-4">
+        <input class="form-control" name="name" type="number" [(ngModel)]="newProductRating.rating" min="1" max="5" name="rating">
+    </div>
+    <div class="text-right">
+        <button class="tm-btn tm-btn-primary tm-btn-small" (click)="addProductRating(newProductRating, product.id); product.hide = true">Submit</button>
+    </div>
 </form>
 
-<form name="deletePR">
-    Are you sure ?
-  <input type="button" value="Delete" (click)="deleteProductRating(1)">
-</form>
-</div>
+  <form *ngIf="destroyPR" class="mb-5 tm-comment-form" name="deletePR">
+    <h2 class="tm-color-primary tm-post-title mb-4">Are you sure ?</h2>
+    <input type="button" value="Delete" (click)="deleteProductRating(1)">
+  </form>
+<footer class="row tm-row">
+
 

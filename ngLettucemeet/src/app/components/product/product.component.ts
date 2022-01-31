@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { ProductRating } from 'src/app/models/product-rating';
+import { User } from 'src/app/models/user';
 import { ProductRatingService } from 'src/app/services/product-rating.service';
 import { ProductService } from 'src/app/services/product.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-product',
@@ -17,35 +19,17 @@ export class ProductComponent implements OnInit {
   editProduct: Product | null = null;
   products: Product[] = [];
   productRatings: ProductRating[] = [];
+  user: User = new User;
 
   constructor(
     private prodSvc: ProductService,
     private prSvc: ProductRatingService,
+    private userSvc: UserService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    // let idStr = this.route.snapshot.paramMap.get("id");
-    // if (!this.selected && idStr) {
-    //   let id = Number.parseInt(idStr);
-    //   if (!isNaN(id)) {
-    //     this.prodSvc.showProduct(id).subscribe({
-    //       next: (product) => {
-    //         this.selected = product;
-    //       },
-    //       error: (err) => {
-    //         console.error("ProductComponent.ngOnInit(): invalid productId");
-    //         console.error(err);
-    //       }
-    //     });
-    //     this.prSvc.index().subscribe({
-    //       next: (ratings) => { this.productRatings = ratings}
-    //     })
-    //   } else {
-    //     this.router.navigateByUrl("FOF");
-    //   }
-    // }
     this.reloadProdList();
   }
 
@@ -61,12 +45,17 @@ export class ProductComponent implements OnInit {
     });
   }
 
+  organic(organic: boolean) {
+    if (organic) {
+      return 'organic';
+    } else if (!organic) {
+      return 'non-organic';
+    } else {
+      return false;
+    }
+  }
+
   setEditProduct() {
     this.editProduct = Object.assign({}, this.selected);
   }
-
-  search(keyword: string) {
-
-  }
-
 }

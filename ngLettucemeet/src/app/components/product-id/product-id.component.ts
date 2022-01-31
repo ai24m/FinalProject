@@ -12,7 +12,7 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./product-id.component.css']
 })
 export class ProductIdComponent implements OnInit {
-  selected: Product | null = null;
+  selected: Product = new Product();
   myProductId: number = 0;
   productComments: ProductComment[] =[];
   productRating: ProductRating[] = [];
@@ -47,6 +47,16 @@ export class ProductIdComponent implements OnInit {
         this.router.navigateByUrl('notfound');
       }this.reload(id);
 
+    }
+  }
+
+  organic(organic: boolean) {
+    if (organic) {
+      return 'organic';
+    } else if (!organic) {
+      return 'non-organic';
+    } else {
+      return false;
     }
   }
 

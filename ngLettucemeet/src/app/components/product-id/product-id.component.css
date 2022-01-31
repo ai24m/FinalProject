@@ -2,6 +2,10 @@
   background-color: #ffcd70;
   color: black;
 }
+img {
+  height: 350px;
+  width: 80%;
+}
 .example-accordion {
   display: block;
   max-width: 500px;

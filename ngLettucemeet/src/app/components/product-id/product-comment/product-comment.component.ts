@@ -13,6 +13,7 @@ export class ProductCommentComponent implements OnInit {
   newProductComment: ProductComment = new ProductComment();
   editProductComment: ProductComment = new ProductComment();
   destroyProductComment: ProductComment = new ProductComment();
+  productId: number = 0;
   // editPC: boolean = false;
   // addPC: boolean = false;
   // destroyPC: boolean = false;
@@ -39,6 +40,7 @@ export class ProductCommentComponent implements OnInit {
       let idString = this.route.parent.snapshot.paramMap.get('id');
       if (idString) {
         let id = Number.parseInt(idString);
+        this.productId = id;
         if (!isNaN(id)) {
           this.productCommentService.findByProductId(id).subscribe({
             next: (comments) => {

@@ -34,7 +34,7 @@ export class ProductService {
   }
 
   showProduct(id: number): Observable<Product> {
-    return this.http.get<Product>(this.url + "/" + id, this.getHttpOptions()).pipe(
+    return this.http.get<Product>(this.url + "/" + id).pipe(
       catchError((err: any) => {
         console.error(err);
         return throwError(() => new Error("ProductService.showProduct(): error retrieving product:" + err));

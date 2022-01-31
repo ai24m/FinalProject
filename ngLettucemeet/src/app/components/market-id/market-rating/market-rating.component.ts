@@ -67,7 +67,6 @@ export class MarketRatingComponent implements OnInit {
     }
     let average = this.totalRatings / this.marketRatings.length;
     this.newMarketRating.ratingAverage = average;
-    // return average;
   }
 
   addMarket(marketRating: MarketRating, marketId: number) {
