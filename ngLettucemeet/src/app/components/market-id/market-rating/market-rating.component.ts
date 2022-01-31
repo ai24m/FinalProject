@@ -1,8 +1,9 @@
-import { MarketRatingService } from './../../services/market-rating.service';
+import { MarketRatingService } from '../../../services/market-rating.service';
 import { Component, OnInit } from '@angular/core';
 import { MarketRating } from 'src/app/models/market-rating';
 import { Market } from 'src/app/models/market';
 import { NumberSymbol } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-market-rating',
@@ -15,10 +16,37 @@ export class MarketRatingComponent implements OnInit {
   newMarketRating: MarketRating = new MarketRating();
   market: Market = new Market();
   editMarketRating: MarketRating | null = null;
+  totalRatings: number = 0;
 
-  constructor(private MarketRatingSev: MarketRatingService) {}
 
-  ngOnInit(): void {}
+  constructor(
+    private MarketRatingSev: MarketRatingService,
+    private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    if (this.route.parent != null) {
+      let idString = this.route.parent.snapshot.paramMap.get('id');
+      if (idString) {
+        let id = Number.parseInt(idString);
+        if (!isNaN(id)) {
+          this.MarketRatingSev.GetByMarketId(id).subscribe({
+            next: (ratings) => {
+              console.log(ratings);
+              this.marketRatings = ratings;
+              this.findAverageRating(this.marketRatings);
+            }
+          })
+        }
+
+      }
+    }
+    // this.reload();
+  }
+
+
+
+
+
   reload(marketId: number) {
     this.MarketRatingSev.GetByMarketId(marketId).subscribe({
       next: (m) => {
@@ -32,6 +60,15 @@ export class MarketRatingComponent implements OnInit {
       },
     });
   }
+
+  findAverageRating(marketRatings: MarketRating[]) {
+    for (let mr of marketRatings) {
+      this.totalRatings += mr.rating;
+    }
+    let average = this.totalRatings / this.marketRatings.length;
+    this.newMarketRating.ratingAverage = average;
+  }
+
   addMarket(marketRating: MarketRating, marketId: number) {
     this.MarketRatingSev.create(marketRating, marketId).subscribe({
       next: (m) => {
@@ -87,5 +124,20 @@ export class MarketRatingComponent implements OnInit {
   }
   displayMarket(marketRating: MarketRating) {
     this.selected = marketRating;
+  }
+
+  // storeAverage(rating: number) {
+  //   let allRatings: number[] = [];
+  //   allRatings.push(rating);
+
+  // }
+
+  findAverage(ratings: number[]) {
+    if (ratings != null) {
+      const sum = ratings.reduce((a,b)=> a+ b, 0);
+      const avg = (sum / ratings.length) || 0;
+      return avg;
+    }
+    return null;
   }
 }

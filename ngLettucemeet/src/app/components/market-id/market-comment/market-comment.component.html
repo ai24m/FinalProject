@@ -12,20 +12,27 @@
 
           <article *ngIf="!selected" >
             <hr class="tm-hr-primary">
-            <div class="d-flex justify-content-between tm-pt-45" *ngFor="let marketComment of marketComments.slice(1,10) ">
+            <!-- <div class="d-flex justify-content-between tm-pt-45" *ngFor="let marketComment of marketComments "> -->
+            <div class="d-flex justify-content-between tm-pt-45" *ngFor="let marketComment of marketComments ">
+
               <!-- <tr *ngFor="let market of markets "> -->
                 <span class="tm-color-primary">{{ marketComment.id }}</span>
               <span class="tm-color-primary" (click)="displayMarketComment(marketComment)">{{ marketComment.comment }}</span>
               <!-- </tr> -->
           </div>
         </article>
+
         <div *ngIf="!selected">
-        <input type="text" name ="comment" placeholder="commet...." [(ngModel)]="newMarketCommet.comment" class ="form-control">
-        <input type="submit" value ="Add Route" (click)="addANewMarketComment(newMarketCommet.market.id, newMarketCommet)">
+          <input type="text" name ="comment" placeholder="commet...." [(ngModel)]="newMarketCommet.comment" class ="form-control">
+          <input type="submit" value ="Add Comment" (click)="addANewMarketComment(newMarketCommet.market.id, newMarketCommet)">
+
         </div>
+
+
+        <!-- </div> -->
         <div *ngIf="selected ">
           <input type="text" name ="comment" placeholder="commet...." [(ngModel)]="newMarketCommet.comment" class ="form-control">
-          <input type="submit" value ="Make Reply" (click)="addAMarketCommentReply(selected.id, newMarketCommet)">
+          <input type="submit" value ="Add Replies" (click)="addAMarketCommentReply(selected.id, newMarketCommet)">
         </div>
         </div>
       <footer class="row tm-row" style="margin-top:10%">

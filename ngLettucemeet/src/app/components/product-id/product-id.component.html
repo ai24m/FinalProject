@@ -1,0 +1,52 @@
+<div class="container-fluid">
+  <main class="tm-main">
+      <div class="row tm-row">
+          <div class="col-12">
+              <hr class="tm-hr-primary tm-mb-55">
+              <img src="/assets/images/props/angusbeef.jpeg" alt="Image">
+          </div>
+      </div>
+      <div class="row tm-row">
+          <div class="col-lg-8 tm-post-col">
+              <div class="tm-post-full">
+                  <div class="mb-4">
+                      <h2 class="pt-2 tm-color-primary tm-post-title">About {{selected?.name}}</h2>
+                      <p class="tm-mb-40">
+                        Provided By User/business info:
+                        {{selected.user.username}}
+                        {{selected.user.businessname}}
+                        {{selected.user.address?.city}}
+                        {{selected.user.address?.state}}</p>
+                        <p>
+                       </p>
+                      <p>
+                          {{selected?.description}}
+                          {{organic(selected.organic)}}
+                      </p>
+                      <span class="d-block text-right tm-color-primary">{{selected.type.name}}</span>
+                  </div>
+
+                  <!-- Comments -->
+                  <app-product-comment [product]="selected" [productComments]="productComments"  >   </app-product-comment>
+              </div>
+          </div>
+          <aside class="col-lg-4 tm-aside-col">
+              <div class="tm-post-sidebar">
+                <app-product-rating [product]="selected" [productRatings]="productRatings"></app-product-rating>
+
+                  <hr class="mb-3 tm-hr-primary">
+                  <h2 class="mb-4 tm-post-title tm-color-primary"  >See Them At The Farmer's Market!</h2>
+                  <ul class="tm-mb-75 pl-5 tm-category-list" *ngFor="let m of selected.markets">
+                      <li><a href="#" class="tm-color-primary">{{m.name}}</a></li>
+                      <li><a href="#" class="tm-color-primary">{{m.address.city}}, {{m.address.state}}</a></li>
+                      <li><a href="#" class="tm-color-primary">{{m.marketDate}}</a></li>
+                  </ul>
+              </div>
+          </aside>
+      </div>
+      <footer class="row tm-row">
+
+      </footer>
+  </main>
+</div>
+

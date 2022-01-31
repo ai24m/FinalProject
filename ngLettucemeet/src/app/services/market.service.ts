@@ -23,7 +23,7 @@ export class MarketService {
     return options;
   }
   index(): Observable<Market[]> {
-    return this.http.get<Market[]>(this.url, this.getHttpOptions()).pipe(
+    return this.http.get<Market[]>(this.url).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
@@ -35,7 +35,8 @@ export class MarketService {
   }
   GetByMarketId(marketId: number): Observable<Market> {
     return this.http
-      .get<Market>(this.url + '/' + marketId, this.getHttpOptions())
+      // .get<Market>(this.url + '/' + marketId, this.getHttpOptions())
+      .get<Market>(this.url + '/' + marketId)
       .pipe(
         catchError((err: any) => {
           console.log(err);

@@ -22,7 +22,7 @@ export class MarketcommentService {
     return options;
   }
   index(): Observable<MarketComment[]> {
-    return this.http.get<MarketComment[]>(this.url, this.getHttpOptions()).pipe(
+    return this.http.get<MarketComment[]>(this.url).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
@@ -50,6 +50,29 @@ export class MarketcommentService {
         })
       );
   }
+  // array of market comments belonging to market Id
+  getByMarketId(marketId: number): Observable<MarketComment[]> {
+    return this.http
+      .get<MarketComment[]>(
+        this.url + '/market/' + marketId,
+        // this.getHttpOptions()
+      )
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError(
+            () =>
+              'MarketCommentService.GetByMarketCommentId(): error retrieving MarketComment :' +
+              err
+          );
+        })
+      );
+  }
+
+
+
+
+
   createAMarketCommentReply(
     marketCommentId: number,
     marketComment: MarketComment

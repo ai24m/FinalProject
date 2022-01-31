@@ -104,5 +104,4 @@ public class MarketRatingServiceImpl implements MarketRatingService {
 		aveRating = totalRating/allRatings.size();		
 		return aveRating;
 	}
-
 }

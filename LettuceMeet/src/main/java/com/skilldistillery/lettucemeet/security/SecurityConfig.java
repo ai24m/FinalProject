@@ -28,19 +28,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/api/**").permitAll() // For CORS, the preflight request
 				.antMatchers(HttpMethod.OPTIONS, "/**").permitAll() // will hit the OPTIONS on the route
+				.antMatchers(HttpMethod.POST, "/api/users/").permitAll() // will hit the OPTIONS on the route
+				.antMatchers(HttpMethod.POST, "/api/login/").permitAll() // will hit the OPTIONS on the route
+				.antMatchers(HttpMethod.POST, "/api/users").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/markets").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/markets/**").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/marketcomments").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/sellerRatings").permitAll() // will hit the OPTIONS on the route
-				.antMatchers(HttpMethod.GET, "/api/productRatings").permitAll() // will hit the OPTIONS on the route
+				.antMatchers(HttpMethod.GET, "/api/productRatings/**").permitAll() // will hit the OPTIONS on the route
+				.antMatchers(HttpMethod.GET, "/api/productRatings/").permitAll() // will hit the OPTIONS on the route
+				.antMatchers(HttpMethod.GET, "/api/productratings/**").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/marketcomments/**").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/products").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/products/**").permitAll() // will hit the OPTIONS on the route
-				.antMatchers(HttpMethod.GET, "/api/markets").permitAll() 
-				.antMatchers(HttpMethod.GET, "/api/markets/**").permitAll() 
+				.antMatchers(HttpMethod.GET, "/api/market/**").permitAll() 
 				.antMatchers(HttpMethod.GET, "/api/marketcomments").permitAll() 
 				.antMatchers(HttpMethod.GET, "/api/sellerRatings/**").permitAll()
-				.antMatchers(HttpMethod.GET, "/api/marketcomments/**").permitAll() 
+				.antMatchers(HttpMethod.GET, "/api/marketratings/**").permitAll() 
 				.antMatchers(HttpMethod.GET, "/api/products").permitAll() 
 				.antMatchers(HttpMethod.GET, "/api/products/**").permitAll() 
 				.antMatchers(HttpMethod.GET, "/api/productcomments").permitAll() 

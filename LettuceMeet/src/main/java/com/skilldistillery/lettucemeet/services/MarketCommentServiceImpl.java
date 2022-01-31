@@ -32,7 +32,6 @@ public class MarketCommentServiceImpl implements MarketCommentService {
 
 	@Override
 	public List<MarketComment> getByMarketId(int marketId) {
-		// TODO Auto-generated method stub
 		return mcRepo.findByMarket_Id(marketId);
 	}
 
@@ -63,7 +62,6 @@ public class MarketCommentServiceImpl implements MarketCommentService {
 			Market market = marketRepo.findByMarketComments_Id(marketCommentId);
 			MarketComment marketComment = this.show(marketCommentId);
 			newMarketComment.setReplyTo(marketComment);
-
 			newMarketComment.setMarket(market);
 			newMarketComment.setUser(user);
 			return mcRepo.saveAndFlush(newMarketComment);

@@ -56,7 +56,7 @@ public class MarketController {
 			@RequestBody Market market) {
 		try {
 			User user = userSvc.findByUserName(principal.getName()); 
-			marketSvc.create(market, user,market.getAddress()); 
+			marketSvc.create(market, user, market.getAddress()); 
 			res.setStatus(201);
 			StringBuffer url = req.getRequestURL();
 			url.append("/").append(market.getId());

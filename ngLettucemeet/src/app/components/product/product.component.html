@@ -1,0 +1,66 @@
+<div class="container-fluid" style="background-color: #ffcd70">
+  <!-- header -->
+  <main class="tm-main">
+    <!-- forms ? -->
+    <div class="row tm-row">
+      <img class="background" src="/assets/images/productsearchbackground.png" />
+      <div class="col-12">Search For Local, Fresh Products Near You</div>
+      <article>
+        <hr class="tm-hr-primary" />
+        <div class="input-group mb-3">
+          <button
+            class="btn btn-#526E2A"
+            type="button"
+            name="keySearch"
+            id="button-addon1">
+            Search
+          </button>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="keyword"
+            placeholder="Keyword Search"
+            aria-label="Example text with button addon"
+            aria-describedby="button-addon1"
+          />
+        </div>
+        <hr/>
+        <div class="d-flex justify-content-between">
+        </div>
+      </article>
+      <cdk-accordion class="example-accordion">
+        <cdk-accordion-item *ngFor="let prd of products | keyword: keyword; let index = index;"
+          #accordionItem="cdkAccordionItem"
+          class="example-accordion-item"
+          role="button"
+          tabindex="0"
+          [attr.id]="'accordion-header-' + index"
+          [attr.aria-expanded]="accordionItem.expanded"
+          [attr.aria-controls]="'accordion-body-' + index">
+          <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+            {{prd.name}}
+            <ng-container *ngFor="let ratings of prd.ratings">
+              {{ratings.comment}}
+              {{ratings.rating}}
+            </ng-container>
+            <span class="example-accordion-item-description">
+              {{ accordionItem.expanded ? '' : ' ' }}
+            </span>
+          </div>
+          <div
+            class="example-accordion-item-body"
+            role="region"
+            [style.display]="accordionItem.expanded ? '' : 'none'"
+            [attr.id]="'accordion-body-' + index"
+            [attr.aria-labelledby]="'accordion-header-' + index">
+            <a [routerLink]="['/products/find/', prd.id]">Learn More About {{prd.name}}</a>
+            <!-- <br>Sold By {{prd.user.username}} {{prd.user.businessname}}<br> -->
+            {{prd.description}}<br>
+            Quantity and Unit Price: {{prd.quantity}} / {{prd.unitPrice}}<br>
+            Dates Available For Sale: {{prd.availableDate}}
+          </div>
+        </cdk-accordion-item>
+      </cdk-accordion>
+    </div>
+  </main>
+</div>

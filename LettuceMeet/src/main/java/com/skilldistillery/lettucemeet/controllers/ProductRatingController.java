@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.lettucemeet.entities.ProductComment;
 import com.skilldistillery.lettucemeet.entities.ProductRating;
 import com.skilldistillery.lettucemeet.services.ProductRatingService;
 
@@ -48,6 +49,17 @@ public class ProductRatingController {
 			res.setStatus(404);
 		}
 		return productRating;
+	}
+	
+	@GetMapping("productRatings/product/{pcId}")
+	public List<ProductRating> getProductRatingsByProductId(
+			HttpServletRequest req, 
+			HttpServletResponse res,
+			@PathVariable Integer pcId){
+		List<ProductRating> ProductRatings = prodcutRatingSev.getByProductId(pcId); 
+		if (ProductRatings == null) {
+			res.setStatus(404);
+		} return ProductRatings; 
 	}
 
 	@PostMapping("productRatings/{productId}")

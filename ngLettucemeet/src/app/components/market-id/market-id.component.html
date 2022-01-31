@@ -1,0 +1,83 @@
+<div class="container-fluid">
+  <main class="tm-main">
+      <!-- Search form -->
+      <div class="row tm-row">
+          <div class="col-12">
+          </div>
+      </div>
+      <div class="row tm-row tm-mb-45">
+          <div class="col-12">
+              <hr class="tm-hr-primary tm-mb-55">
+              <img src="/assets/images/markets/one.png" id="headerimage" alt="Image" class="img-fluid">
+          </div>
+      </div>
+      <h2>About</h2>
+      <div class="col-lg-6 tm-mb-60 tm-person-col">
+          <div class="media tm-person">
+              <div class="media-body">
+                  <!-- <h2 class="tm-color-primary tm-post-title mb-2">Organizer{{selected?.user}}</h2> -->
+                  <!-- <h3 class="tm-h3 mb-3">Organic: {{organic(product.organic)}} </h3> -->
+                  <h3 class="tm-h3 mb-3" >Upcoming Dates: {{selected?.marketDate}}</h3>
+                  <p class="mb-0 tm-line-height-short">
+                    Address:
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d100612.89571518767!2d-122.5307028!3d37.9968918!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808599d6d3170783%3A0xd80faf4fa75345c!2sSunday%20Marin%20Farmers&#39;%20Market!5e0!3m2!1sen!2sus!4v1643626263272!5m2!1sen!2sus" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                  </p>
+              </div>
+          </div>
+      </div>
+      <div class="col-lg-6 tm-mb-60 tm-person-col">
+          <div class="media tm-person">
+              <img src="img/about-03.jpg" alt="Image" class="img-fluid mr-4">
+              <div class="media-body">
+                  <h2 class="tm-color-primary tm-post-title mb-2"></h2>
+                  <h3 class="tm-h3 mb-3"></h3>
+                  <p class="mb-0 tm-line-height-short">
+                    Rating: <app-market-rating></app-market-rating>
+                    <app-market-comment></app-market-comment>
+                  </p>
+              </div>
+          </div>
+      </div>
+      <div class="row tm-row tm-mb-120">
+          <div class="col-lg-4 tm-about-col">
+          </div>
+      </div>
+      <div class="row tm-row tm-mb-60">
+          <div class="col-12">
+              <hr class="tm-hr-primary  tm-mb-55">
+          </div>
+          <h2>Vendors</h2>
+          <div class="col-lg-6 tm-mb-60 tm-person-col" *ngFor="let product of selected?.products">
+              <div class="media tm-person">
+                  <img src="assets/images/products/mushroom1.jpg" alt="Image" class="img-fluid mr-4">
+                  <div class="media-body">
+                      <h2 class="tm-color-primary tm-post-title mb-2">{{product.user.username}}</h2>
+                      <h3 class="tm-h3 mb-3">{{organic(product.organic)}} </h3>
+                      <h3 class="tm-h3 mb-3" >Category: {{product.type.name}}</h3>
+                      <p class="mb-0 tm-line-height-short">
+                        Info on Product:
+                        {{product.description}}
+                        {{product.name}}
+                        {{product.unitPrice}}
+                      </p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-6 tm-mb-60 tm-person-col" *ngFor="let comment of selected?.marketComments">
+              <div class="media tm-person">
+                  <img src="img/about-03.jpg" alt="Image" class="img-fluid mr-4">
+                  <div class="media-body">
+                      <h2 class="tm-color-primary tm-post-title mb-2">{{comment.updateTime}}</h2>
+                      <h3 class="tm-h3 mb-3">{{comment.user}}</h3>
+                      <p class="mb-0 tm-line-height-short">
+                          Quisque in bibendum elit, in egestas turpis. Vestibulum ornare sollicitudin congue.
+                          Aliquam lorem mi, maximus at iaculis ut.
+                      </p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </main>
+</div>
+
+

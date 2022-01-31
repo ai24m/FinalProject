@@ -9,6 +9,8 @@ export class MarketComment {
   replyTo: string;
   user: User | undefined;
   market: Market;
+  replies: MarketComment[] = []
+
   constructor(
     id: number = 0,
     comment: string = '',
@@ -16,7 +18,8 @@ export class MarketComment {
     updateTime?: string,
     replyTo: string = '',
     user?: User,
-    market: Market = new Market()
+    market: Market = new Market(),
+    replies: MarketComment[] = []
   ) {
     this.id = id;
     this.comment = comment;
@@ -25,5 +28,6 @@ export class MarketComment {
     this.replyTo = replyTo;
     this.user = user;
     this.market = market;
+    this.replies = replies;
   }
 }

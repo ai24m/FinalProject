@@ -24,7 +24,7 @@ export class MarketRatingService {
     return this.http
       .get<MarketRating[]>(
         this.url + '/' + marketId + '/' + 'marketratings',
-        this.getHttpOptions()
+        // this.getHttpOptions()
       )
       .pipe(
         catchError((err: any) => {
@@ -37,6 +37,24 @@ export class MarketRatingService {
         })
       );
   }
+
+  // showAverageRatings(marketId: number): number {
+  //   return this.http
+  //     .get(
+  //       this.url + `/marketratings/avegrating/${marketId}`
+  //     )
+  //     .pipe(
+  //       catchError((err: any) => {
+  //         console.log(err);
+  //         return throwError(
+  //           () =>
+  //             'MarketRatingService.GetByMarketId(): error retrieving marketRating :' +
+  //             err
+  //         );
+  //       })
+  //     );
+  // }
+
   create(
     marketRating: MarketRating,
     marketId: number

@@ -1,0 +1,24 @@
+<footer class="row tm-row">
+  <h2 class="tm-mb-40 tm-post-title tm-color-primary" *ngIf="productRatings.length > 0">Rating {{findAverageRating(productRatings)}} / 5</h2>
+  <h2 class="tm-mb-40 tm-post-title tm-color-primary" *ngIf="productRatings.length === 0"> Not Rated Yet!</h2>
+  <div class="text-right">
+  <button class="tm-btn tm-btn-primary tm-btn-small" type="submit" value="Add Rating" (click)="addPR = true; destroyPR = false">Add Rating</button>
+    </div>
+
+  <form *ngIf="addPR" class="mb-5 tm-comment-form">
+    <h2 class="tm-color-primary tm-post-title mb-4">Rate Here</h2>
+    <div class="mb-4">
+        <input class="form-control" name="name" type="number" [(ngModel)]="newProductRating.rating" min="1" max="5" name="rating">
+    </div>
+    <div class="text-right">
+        <button class="tm-btn tm-btn-primary tm-btn-small" (click)="addProductRating(newProductRating, product.id); product.hide = true">Submit</button>
+    </div>
+</form>
+
+  <form *ngIf="destroyPR" class="mb-5 tm-comment-form" name="deletePR">
+    <h2 class="tm-color-primary tm-post-title mb-4">Are you sure ?</h2>
+    <input type="button" value="Delete" (click)="deleteProductRating(1)">
+  </form>
+<footer class="row tm-row">
+
+

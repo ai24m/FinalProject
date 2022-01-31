@@ -54,17 +54,17 @@ public class MarketRatingController {
 			res.setStatus(404); 
 		} return allMarketRatings; 
 	}
-	
-	@GetMapping("marketratings/avegrating/{marketId}")
+
+	@GetMapping("market/averagerating/{marketId}")
 	public Integer show(HttpServletRequest req, HttpServletResponse res, @PathVariable int marketId) {
 		int avegRating = mrSvc.getAvergRating(marketId);
-		
-		if ( this.indexForMarket(req, res, marketId)==null) {
+		if (avegRating < 0 && this.indexForMarket(req, res, marketId)!=null) {
 			res.setStatus(404);
 		} else {
 			res.setStatus(201);
 		} return avegRating; 
 	}
+
 	
 	@PostMapping("market/{mId}/marketratings")
 	public MarketRating create(HttpServletRequest req, HttpServletResponse res, Principal principal, @RequestBody MarketRating marketRating,

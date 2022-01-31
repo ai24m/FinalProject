@@ -1,0 +1,15 @@
+.container-fluid{
+  background-color: #ffcd70;
+  color: black;
+}
+
+a {
+  text-decoration: none;
+}
+
+h5 {
+  color: rgb(143, 54, 22);
+  border-radius: 5%;
+  padding: 3%;
+  background-color: rgba(244, 52, 19, 0.502);
+}

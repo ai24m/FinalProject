@@ -1,50 +1,41 @@
 <header class="tm-header" id="tm-header" >
-  <nav class="navbar-expand-lg navbar-light bg-light border-bottom" style ="background-color: #556B2F">
+  <div class = "tm-header-wrapper">
+  <nav class="navbar-expand-lg navbar-light" >
       <!-- <button class="navbar-toggler" type="button" aria-label="Toggle navigation" name="Menu">
           <i class="fas fa-bars"></i>
       </button> -->
       <nav class="tm-nav" id="tm-nav">
-        <img src="assets/images/logo.png" style="background-color: #ffcd70;">
+        <img id="navbar-image" src="assets/images/logo.png" >
           <ul >
-              <li class="tm-nav-item active" ><a href="index.html" class="tm-nav-link">
-                  <i class="fas fa-home"></i>
+              <li class="tm-nav-item" ><a [routerLink]="['/home']" class="tm-nav-link">
                   Home
               </a></li>
-              <li class="tm-nav-item" style="height: 40px; background-color: #556B2F"><a href="about.html" class="tm-nav-link">
-                  <i class="fas fa-users"></i>
+              <li *ngIf="loggedIn()" class="tm-nav-item">
+                <a [routerLink]="['/profile']" class="tm-nav-link">Profile</a></li>
+              <li class="tm-nav-item"><a [routerLink]="['/about']" class="tm-nav-link">
                   About
               </a></li>
-              <li class="tm-nav-item" style="height: 40px; background-color: #556B2F"><a href="contact.html" class="tm-nav-link">
-                  <i class="far fa-comments"></i>
-                  Events
+              <!-- <li class="tm-nav-item"><a [routerLink]="['/market']" class="tm-nav-link">
+                Market
+              </a></li> -->
+              <li class="tm-nav-item"><a [routerLink]="['/products']" class="tm-nav-link">
+                  Products
               </a></li>
-              <li class="tm-nav-item" style="height: 40px; background-color: #556B2F"><a href="contact.html" class="tm-nav-link">
-                  <i class="far fa-comments"></i>
+              <li *ngIf="!loggedIn()" class="tm-nav-item"><a [routerLink]="['/login']" class="tm-nav-link">
                   Login
               </a></li>
-              <li class="tm-nav-item" style="height: 40px; background-color: #556B2F"><a href="contact.html" class="tm-nav-link">
-                  <i class="far fa-comments"></i>
+              <!-- <li *ngIf="!loggedIn()" class="tm-nav-item"><a href="contact.html" class="tm-nav-link">
                   Register
-              </a></li>
-              <li class="tm-nav-item" style="height: 40px; background-color: #556B2F"><a href="contact.html" class="tm-nav-link">
-                  <i class="far fa-comments"></i>
-                  Market
-              </a></li>
+              </a></li> -->
+              <li *ngIf="loggedIn()" class="tm-nav-item" (click)='logout()'>
+                <a [routerLink]="['/home']" class="tm-nav-link">Logout</a>
+
+                <!-- <a href="contact.html" class="tm-nav-link"> -->
+                <!-- <input  type="submit" value="Logout" style=""> -->
+              <!-- </a> -->
+            </li>
           </ul>
       </nav>
-      <!-- <div class="tm-mb-65">
-          <a rel="nofollow" href="https://fb.com/templatemo" class="tm-social-link">
-              <i class="fab fa-facebook tm-social-icon"></i>
-          </a>
-          <a href="https://twitter.com" class="tm-social-link">
-              <i class="fab fa-twitter tm-social-icon"></i>
-          </a>
-          <a href="https://instagram.com" class="tm-social-link">
-              <i class="fab fa-instagram tm-social-icon"></i>
-          </a>
-          <a href="https://linkedin.com" class="tm-social-link">
-              <i class="fab fa-linkedin tm-social-icon"></i>
-          </a>
-      </div> -->
-  </nav>
+    </nav>
+    </div>
 </header>

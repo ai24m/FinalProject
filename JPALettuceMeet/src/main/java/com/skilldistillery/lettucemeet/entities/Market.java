@@ -19,8 +19,8 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Market {
@@ -56,7 +56,7 @@ public class Market {
 	@JoinColumn(name="address_id")
 	private Address address;
 	
-//	@JsonIgnore
+	@JsonIgnoreProperties({"markets"})
 	@ManyToMany(mappedBy = "markets")
 	private List<Product> products;
 	
