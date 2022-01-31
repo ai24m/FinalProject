@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class User {
@@ -51,6 +52,7 @@ public class User {
 	@Column(name = "create_time")
 	private LocalDateTime created;
 	 
+	@JsonIgnoreProperties({"users", "markets"})
 	@ManyToOne
 	@JoinColumn(name = "address_id")
 	private Address address; 
