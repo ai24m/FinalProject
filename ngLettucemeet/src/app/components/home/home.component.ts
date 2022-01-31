@@ -25,10 +25,6 @@ export class HomeComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.reload();
-  }
-
-  reload() {
     this.marketSvc.index().subscribe({
       next: (m) => {
         this.markets = m;
@@ -40,25 +36,21 @@ export class HomeComponent implements OnInit {
     });
   }
 
-
-
-  count(id: number) {
-    this.marketCommentSvc.getByMarketId(id).subscribe({
-      next: (comments) => {
-        this.marketComments = comments;
-        this.getCount(this.marketComments);
-      }
-    });
-  }
-
+  // reload() {
+  //   this.marketSvc.index().subscribe({
+  //     next: (m) => {
+  //       this.markets = m;
+  //     },
+  //     error: (err) => {
+  //       console.error('MarketComponent(): Error retrieving markets');
+  //       console.error(err);
+  //     },
+  //   });
+  // }
 
   getCount(marketComments: MarketComment[]) {
     return marketComments.length;
 
   }
-
-  // findComments(marketId: number) {
-  //   return this.marketCommentSvc.findByMarketId(marketId).length;
-  // }
 
 }
