@@ -65,10 +65,10 @@ export class MarketCommentComponent implements OnInit {
   // getBymarketId(marketid: number) {}
   addANewMarketComment(marketId: number, marketComment: MarketComment) {
     this.MarketCommentSev.createANewMarketComment(
-      marketId,
-      marketComment
+      marketComment,
+      marketId
     ).subscribe({
-      next: (m) => {
+      next: (marketComment) => {
         this.newMarketCommet = new MarketComment();
         this.ngOnInit();
       },

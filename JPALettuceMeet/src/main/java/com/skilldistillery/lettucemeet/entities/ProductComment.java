@@ -40,18 +40,15 @@ public class ProductComment {
 	@Column(name = "update_time")
 	private LocalDateTime updated;
 	
-	@JsonIgnoreProperties({"myReplies", "replyTo"})
-//	@JsonIgnore 
+	@JsonIgnore 
 	@ManyToOne 
 	@JoinColumn(name = "comment_id")
 	private ProductComment replyTo; 
 	
-//	@JsonIgnoreProperties({"replyTo", "myReplies"})
 	@JsonIgnore
 	@OneToMany(mappedBy = "replyTo")
 	private List <ProductComment> myReplies;
 	
-//	@JsonIgnoreProperties({"productComments"})
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "product_id")

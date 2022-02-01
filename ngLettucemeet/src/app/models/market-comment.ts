@@ -6,17 +6,17 @@ export class MarketComment {
   comment: string;
   createTime: string | undefined;
   updateTime: string | undefined;
-  replyTo: string;
+  replyTo: string | undefined;
   user: User | undefined;
   market: Market;
-  replies: MarketComment[] = []
+  replies: MarketComment[] = [];
 
   constructor(
     id: number = 0,
     comment: string = '',
     createTime?: string,
     updateTime?: string,
-    replyTo: string = '',
+    replyTo?: string,
     user?: User,
     market: Market = new Market(),
     replies: MarketComment[] = []

@@ -39,8 +39,8 @@ public class MarketComment {
 	@Column(name = "update_time")
 	private LocalDateTime updated;
 	
-	@JsonIgnoreProperties({"myReplies", "replyTo"})
-//	@JsonIgnore
+//	@JsonIgnoreProperties({"myReplies", "replyTo"})
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="comment_id")
 	private MarketComment replyTo; 
