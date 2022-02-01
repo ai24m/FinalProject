@@ -19,6 +19,7 @@ export class Product {
   comments: ProductComment[] = [];
   markets: Market[] = [];
   hide: boolean | undefined;
+  disabled: boolean = false;
 
   constructor(
     id: number = 0,
@@ -34,7 +35,8 @@ export class Product {
     ratings: ProductRating[] = [],
     comments: ProductComment[] = [],
     markets: Market[] = [],
-    hide: boolean = false
+    hide: boolean = false,
+    disabled: boolean = false
 ) {
     this.id = id
     this.name = name
@@ -50,6 +52,7 @@ export class Product {
     this.comments = comments
     this.markets = markets
     this.hide = hide
+    this.disabled = disabled
   }
 
 }

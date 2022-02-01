@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Market } from 'src/app/models/market';
 import { Product } from 'src/app/models/product';
@@ -19,11 +19,19 @@ import { TypeService } from 'src/app/services/type.service';
 export class ProfileComponent implements OnInit {
   user: User = new User();
   edit: boolean = false;
+  users: User[] = [];
   products: Product[] = [];
   markets: Market[] = [];
-  types: Type[] =[];
+  types: Type[] = [];
   newProduct: Product = new Product();
   addProductToMarket: boolean = false;
+  adminLogin: boolean = false;
+  userEdit: User | null = null;
+  userSelect: User | null = null;
+  prodEdit: Product | null = null;
+  prodSelect: Product | null = null;
+  mrktEdit: Market | null = null;
+  mrktSelect: Market | null = null;
 
   constructor(
     private router: Router,
@@ -39,6 +47,9 @@ export class ProfileComponent implements OnInit {
     this.auth.getCurrentUser().subscribe({
       next: (user) => {
         this.user = user;
+        if (this.user.role === "admin") {
+          this.adminLogin = true;
+        }
         this.getProducts();
         this.getTypes();
         console.log(user);
@@ -46,7 +57,7 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-  resetPassword() {}
+  resetPassword() { }
 
   organic(organic: boolean) {
     if (organic) {
@@ -77,7 +88,7 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  getTypes(){
+  getTypes() {
     this.typeSvc.index().subscribe({
       next: (types) => {
         this.types = types;
@@ -94,6 +105,89 @@ export class ProfileComponent implements OnInit {
         console.error('Register Component Error' + fail)
       }
     })
+  }
+
+  productIndex() {
+    this.product.productIndex().subscribe({
+      next: (prods) => {
+        this.products = prods;
+      }
+    });
+    throw new Error('Function not implemented.');
+  }
+
+  getMarkets() {
+    this.market.index().subscribe({
+      next: (mrkts) => {
+        this.markets = mrkts;
+      }
+    })
+    throw new Error('Function not implemented.');
+  }
+
+  getUsers() {
+    this.userSvc.index().subscribe({
+      next: (user) => {
+        this.users = user;
+      },
+      error: (fail) => {
+        console.error("Error getting users" + fail);
+      }
+    });
+  }
+
+  deleteUser(user: User) {
+    if (user.disabled == true) {
+      user.disabled = false;
+    } else {
+      user.disabled = true;
+    }
+    this.userSvc.update(user).subscribe({
+      next: () => {
+        this.userEdit = null;
+        this.userSelect = user;
+        this.getUsers();
+      },
+      error: (fail) => {
+        console.error("Error deleting user" + fail);
+      }
+    });
+  }
+
+  deleteProduct(prod: Product) {
+    if (prod.disabled == true) {
+      prod.disabled = false;
+    } else {
+      prod.disabled = true;
+    }
+    this.product.updateProduct(prod).subscribe({
+      next: () => {
+        this.prodEdit = null;
+        this.prodSelect = prod;
+        this.getProducts();
+      },
+      error: (fail) => {
+        console.error("Error deleting user" + fail);
+      }
+    });
+  }
+
+  deleteMarket(mrkt: Market) {
+    if (mrkt.disabled == true) {
+      mrkt.disabled = false;
+    } else {
+      mrkt.disabled = true;
+    }
+    this.market.update(mrkt).subscribe({
+      next: () => {
+        this.mrktEdit = null;
+        this.mrktSelect = mrkt;
+        this.getMarkets;
+      },
+      error: (fail) => {
+        console.error("Error deleting user" + fail);
+      }
+    });
   }
 
 }

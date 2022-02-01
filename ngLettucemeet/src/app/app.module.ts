@@ -38,6 +38,9 @@ import { MarketCommentComponent } from "./components/market-id/market-comment/ma
 import { MarketRatingComponent } from "./components/market-id/market-rating/market-rating.component";
 import { ProductIdComponent } from './components/product-id/product-id.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { UserDeletePipe } from './pipes/user-delete.pipe';
+import { MarketDeletePipe } from './pipes/market-delete.pipe';
+import { ProductDeletePipe } from './pipes/product-delete.pipe';
 
 @NgModule({
   declarations: [
@@ -62,6 +65,9 @@ import { AdminComponent } from './components/admin/admin.component';
     MarketRatingComponent,
     ProductIdComponent,
     AdminComponent,
+    UserDeletePipe,
+    MarketDeletePipe,
+    ProductDeletePipe,
   ],
   imports: [
     BrowserModule,

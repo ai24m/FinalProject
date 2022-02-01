@@ -32,18 +32,21 @@ export class NavbarComponent implements OnInit {
     this.router.navigateByUrl('/home');
   }
 
-  admin(): boolean {
-    this.auth.getCurrentUser().subscribe({
-      next: (user) => {
-        if (user.role === 'admin') {
-          return true;
-        } else {
-          return false;
-        }
-      }
-    })
-    return false;
-  }
+  // admin(): boolean {
+  //   this.auth.getCurrentUser().subscribe({
+  //     next: (user) => {
+  //       if (user.role === 'admin') {
+  //         return true;
+  //       } else {
+  //         return false;
+  //       }
+  //     },
+  //     error: (error) => {
+  //       console.error("NavbarComponent.admin(): error on admin check" + error);
+  //     }
+  //   });
+  //   return false;
+  // }
 
 }
 

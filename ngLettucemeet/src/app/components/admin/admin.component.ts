@@ -32,9 +32,6 @@ export class AdminComponent implements OnInit {
     this.authSvc.getCurrentUser().subscribe({
       next: (user) => {
         this.admin = user;
-        this.getMarkets();
-        this.getUsers();
-        this.getProducts();
       },
       error: (err) => {
         console.error("AdminComponent.ngOnInit(): error getting current user");
@@ -43,31 +40,6 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  getMarkets() {
-    this.mrktSvc.index().subscribe({
-      next: (mrkts) => {
-        this.markets = mrkts;
-      }
-    })
-    throw new Error('Function not implemented.');
-  }
 
-  getUsers() {
-    this.userSvc.index().subscribe({
-      next: (user) => {
-        this.users = user;
-      }
-    })
-    throw new Error('Function not implemented.');
-  }
-
-  getProducts() {
-    this.prodSvc.productIndex().subscribe({
-      next: (product) => {
-        this.products = product;
-      }
-    })
-    throw new Error('Function not implemented.');
-  }
 
 }

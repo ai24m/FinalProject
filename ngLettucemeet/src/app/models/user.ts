@@ -26,12 +26,13 @@ export class User {
   markets: Market[] = [];
   productcomments: ProductComment[] = [];
   marketcomments: MarketComment[] = [];
+  disabled: boolean = false;
 
 
   constructor(id: number = 0, username: string = '', password: string = '', email?: string, role: string = "",
   firstname: string = '', lastname: string = '', businessname: string = '', imageurl: string = '', address?: Address,
   productrating: ProductRating[] = [],  sellerratings: SellerRating[] = [],   userratings: SellerRating[] = [], products: Product[] = [],
-  marketratings: MarketRating[] = [], markets: Market[] = [], productcomments: ProductComment[] = [], marketcomments: MarketComment[] = []) {
+  marketratings: MarketRating[] = [], markets: Market[] = [], productcomments: ProductComment[] = [], marketcomments: MarketComment[] = [], disabled: boolean = false) {
     this.id = id;
     this.username = username;
     this.password = password;
@@ -50,5 +51,6 @@ export class User {
     this.markets = markets;
     this.productcomments = productcomments;
     this.marketcomments = marketcomments;
+    this.disabled = disabled;
   }
 }
