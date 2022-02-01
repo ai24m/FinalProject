@@ -132,7 +132,7 @@ export class MarketcommentService {
   destroyByMarketCommentId(marketCommentId: number): Observable<void> {
     return this.http
       .delete<void>(
-        this.url + '/' + marketCommentId + '/' + 'comments',
+        this.url + '/' + marketCommentId,
         this.getHttpOptions()
       )
       .pipe(

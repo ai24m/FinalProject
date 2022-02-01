@@ -41,12 +41,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.GET, "/api/productRatings/").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/productratings/**").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/marketcomments/**").permitAll() // will hit the OPTIONS on the route
-				.antMatchers(HttpMethod.GET, "/api/products").permitAll() // will hit the OPTIONS on the route
-				.antMatchers(HttpMethod.GET, "/api/products/**").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/market/**").permitAll() 
 				.antMatchers(HttpMethod.PUT, "/api/markets/**").hasAuthority("standard")
 				.antMatchers(HttpMethod.PUT, "/api/markets/**").hasAuthority("user")
-				.antMatchers(HttpMethod.GET, "/api/marketcomments").permitAll() 
 				.antMatchers(HttpMethod.GET, "/api/sellerRatings/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/api/marketratings/**").permitAll() 
 				.antMatchers(HttpMethod.GET, "/api/products").permitAll() 
@@ -58,6 +55,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.PUT, "/api/users/**").hasAuthority("user")
 				.antMatchers(HttpMethod.POST, "/api/productcomments/**").permitAll() 
 				.antMatchers(HttpMethod.PUT, "/api/productcomments/**").permitAll() 
+				.antMatchers(HttpMethod.DELETE, "/api/marketcomments/**").hasAuthority("user")
+				.antMatchers(HttpMethod.DELETE, "/api/marketcomments/**").hasAuthority("standard")
 				.antMatchers(HttpMethod.OPTIONS, "/api/users/*").hasAuthority("admin") // return true or false 
 				.antMatchers(HttpMethod.PUT, "/api/**").hasAuthority("standard") // return true or false 
 				.antMatchers(HttpMethod.POST, "/api/**").hasAuthority("standard") // return true or false 
