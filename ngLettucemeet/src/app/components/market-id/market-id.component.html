@@ -16,7 +16,7 @@
         <div class="tm-post-sidebar">
           <hr class="mb-3 tm-hr-primary">
           <h2 class="mb-4 tm-post-title tm-color-primary">Feature Your Product!</h2>
-            <div class="mb-4" >
+            <div class="mb-4">
               <label for="types">Select From Current Listings</label>
                   <select name="product" [(ngModel)]="productToAdd.id">
                     <option *ngFor="let p of products" value={{p.id}}>{{p.name}}</option>

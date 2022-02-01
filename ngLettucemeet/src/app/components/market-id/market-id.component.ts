@@ -120,8 +120,9 @@ export class MarketIdComponent implements OnInit {
   addProductToMarket(productToAddId: number) {
     this.product.showProduct(productToAddId).subscribe({
       next: (product) => {
-        product = product;
+        product = this.productToAdd;
         product.user = this.user;
+        this.products.push(this.productToAdd);
         this.MarketSev.update(this.selected).subscribe({
           next: (updatedMarketWithProducts) => {
             this.selected = updatedMarketWithProducts;
@@ -140,9 +141,5 @@ export class MarketIdComponent implements OnInit {
     });
     this.reload(this.selected.id);
   }
-
-
-
-
 }
 
