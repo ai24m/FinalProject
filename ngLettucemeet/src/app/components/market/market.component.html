@@ -59,7 +59,7 @@
 
           <article *ngIf="!selected" >
             <hr class="tm-hr-primary">
-            <div class="d-flex justify-content-between tm-pt-45" *ngFor="let market of markets.slice(99,102) ">
+            <div class="d-flex justify-content-between tm-pt-45" *ngFor="let market of markets.slice(0,7) ">
               <!-- <tr *ngFor="let market of markets "> -->
               <span class="tm-color-primary" (click)="displayMarket(market)">{{ market.name }}</span>
               <span class="tm-color-primary">{{ market.marketDate }}</span>
