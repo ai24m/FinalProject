@@ -18,14 +18,17 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { MarketCommentComponent } from './components/market-id/market-comment/market-comment.component';
 import { MarketRatingComponent } from './components/market-id/market-rating/market-rating.component';
 import { ProductIdComponent } from './components/product-id/product-id.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
   { path: 'about', component: ContactComponent},
+  { path: 'admin', component: AdminComponent},
   { path: 'login', component: UserComponent },
   { path: 'sample', component: SampleTemplateComponent },
   { path: 'calendar', component: CalendarComponent },
+  { path: 'users', component: UserComponent },
   { path: 'products', component: ProductComponent},
   { path: 'products/find/:id', component: ProductIdComponent,
     children: [

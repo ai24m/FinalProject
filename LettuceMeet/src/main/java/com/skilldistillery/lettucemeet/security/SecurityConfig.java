@@ -28,6 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/api/**").permitAll() // For CORS, the preflight request
 				.antMatchers(HttpMethod.OPTIONS, "/**").permitAll() // will hit the OPTIONS on the route
+				.antMatchers(HttpMethod.GET, "/api/users").hasAuthority("admin") // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.POST, "/api/users/").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.POST, "/api/login/").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.POST, "/api/users").permitAll() // will hit the OPTIONS on the route

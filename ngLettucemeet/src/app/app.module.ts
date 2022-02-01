@@ -37,6 +37,7 @@ import { MarketIdComponent } from './components/market-id/market-id.component';
 import { MarketCommentComponent } from "./components/market-id/market-comment/market-comment.component";
 import { MarketRatingComponent } from "./components/market-id/market-rating/market-rating.component";
 import { ProductIdComponent } from './components/product-id/product-id.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { ProductIdComponent } from './components/product-id/product-id.component
     MarketCommentComponent,
     MarketRatingComponent,
     ProductIdComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,

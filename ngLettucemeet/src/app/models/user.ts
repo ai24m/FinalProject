@@ -12,7 +12,7 @@ export class User {
   username: string;
   password: string;
   email: string | undefined;
-  role: string | undefined;
+  role: string;
   firstname: string;
   lastname: string;
   businessname: string;
@@ -28,7 +28,7 @@ export class User {
   marketcomments: MarketComment[] = [];
 
 
-  constructor(id: number = 0, username: string = '', password: string = '', email?: string, role?: string,
+  constructor(id: number = 0, username: string = '', password: string = '', email?: string, role: string = "",
   firstname: string = '', lastname: string = '', businessname: string = '', imageurl: string = '', address?: Address,
   productrating: ProductRating[] = [],  sellerratings: SellerRating[] = [],   userratings: SellerRating[] = [], products: Product[] = [],
   marketratings: MarketRating[] = [], markets: Market[] = [], productcomments: ProductComment[] = [], marketcomments: MarketComment[] = []) {

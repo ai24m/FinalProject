@@ -7,15 +7,13 @@
       <nav class="tm-nav" id="tm-nav">
         <img id="navbar-image" src="assets/images/logo.png" >
           <ul >
-            <li *ngIf="admin()" class="tm-nav-item">
-              <a [routerLink]="['/profile']" class="tm-nav-link">Admin</a></li>
               <li class="tm-nav-item" ><a [routerLink]="['/home']" class="tm-nav-link">
-                  Home
+                  Users
               </a></li>
-              <li *ngIf="loggedIn()" class="tm-nav-item">
+              <li class="tm-nav-item">
                 <a [routerLink]="['/profile']" class="tm-nav-link">Profile</a></li>
-              <li class="tm-nav-item"><a [routerLink]="['/about']" class="tm-nav-link">
-                  About
+              <li class="tm-nav-item"><a [routerLink]="['/markets']" class="tm-nav-link">
+                  Markets
               </a></li>
               <!-- <li class="tm-nav-item"><a [routerLink]="['/market']" class="tm-nav-link">
                 Market
@@ -23,13 +21,13 @@
               <li class="tm-nav-item"><a [routerLink]="['/products']" class="tm-nav-link">
                   Products
               </a></li>
-              <li *ngIf="!loggedIn()" class="tm-nav-item"><a [routerLink]="['/login']" class="tm-nav-link">
+              <li class="tm-nav-item"><a [routerLink]="['/login']" class="tm-nav-link">
                   Login
               </a></li>
               <!-- <li *ngIf="!loggedIn()" class="tm-nav-item"><a href="contact.html" class="tm-nav-link">
                   Register
               </a></li> -->
-              <li *ngIf="loggedIn()" class="tm-nav-item" (click)='logout()'>
+              <li class="tm-nav-item" >
                 <a [routerLink]="['/home']" class="tm-nav-link">Logout</a>
 
                 <!-- <a href="contact.html" class="tm-nav-link"> -->

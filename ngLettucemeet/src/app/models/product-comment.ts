@@ -11,6 +11,7 @@ export class ProductComment {
   myReplies: ProductComment[] = [];
   product: Product;
   user: User | undefined;
+  disabled: boolean = false;
 
   constructor(
     id: number = 0,
@@ -20,7 +21,8 @@ export class ProductComment {
     replyTo: string = '',
     myReplies: ProductComment[] = [],
     user?: User,
-    product: Product = new Product()
+    product: Product = new Product(),
+    disabled: boolean = false
     ) {
       this.id = id;
       this.comment = comment;
@@ -30,5 +32,6 @@ export class ProductComment {
       this.myReplies = myReplies;
       this.product = product;
       this.user = user;
+      this.disabled = disabled;
   }
 }

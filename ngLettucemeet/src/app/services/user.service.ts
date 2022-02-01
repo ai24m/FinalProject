@@ -10,7 +10,7 @@ import { AuthService } from './auth.service';
 })
 
 export class UserService {
-  constructor(private http: HttpClient, private auth: AuthService) {}
+  constructor(private http: HttpClient, private auth: AuthService) { }
 
   private url = environment.baseUrl + 'api/users';
 
@@ -25,22 +25,22 @@ export class UserService {
     return options;
   }
 
-  getUserByProduct(productId: number): Observable<User>{
+  getUserByProduct(productId: number): Observable<User> {
     let endPoints = `/findUserByProduct/${productId}`
     return this.http.get<User>(this.url + endPoints).pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError(() => new Error ('Error finding User: '));
+        return throwError(() => new Error('Error finding User: '));
       })
     );
   }
 
-  getByUsername(): Observable<User>{
+  getByUsername(): Observable<User> {
     let endPoints = `/username`
     return this.http.get<User>(this.url + endPoints, this.getOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError(() => new Error ('Error finding User: '));
+        return throwError(() => new Error('Error finding User: '));
       })
     );
   }
@@ -50,7 +50,7 @@ export class UserService {
     return this.http.put<User>(this.url + endpoints, user, this.getOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError(() => new Error ('Error updating User: ' + user));
+        return throwError(() => new Error('Error updating User: ' + user));
       })
     );
   }
@@ -66,4 +66,16 @@ export class UserService {
       })
     );
   }
+
+  index(): Observable<User[]> {
+    return this.http.get<User[]>(this.url).pipe(
+      catchError((err: any) => {
+        console.error(err);
+        return throwError(
+          () => new Error('Error indexing users')
+        );
+      })
+    );
+  }
+
 }

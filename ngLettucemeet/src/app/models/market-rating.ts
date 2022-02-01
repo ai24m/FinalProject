@@ -7,6 +7,7 @@ export class MarketRating {
   comment: string;
   user: User | undefined;
   market: Market;
+  disabled: boolean = false;
 
   constructor(
     rating: number = 0,
@@ -14,11 +15,13 @@ export class MarketRating {
     comment: string ='',
     user?: User,
     market: Market = new Market(),
+    disabled: boolean = false
   ) {
     this.market = market;
     this.user = user;
     this.comment = comment;
     this.rating = rating;
     this.ratingAverage = ratingAverage;
+    this.disabled = disabled;
   }
 }
