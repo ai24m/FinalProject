@@ -1,8 +1,7 @@
 import { MarketcommentService } from '../../../services/market-comment.service';
 import { MarketComment } from '../../../models/market-comment';
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { switchMap } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 import { Market } from 'src/app/models/market';
 
 @Component({
@@ -88,7 +87,7 @@ export class MarketCommentComponent implements OnInit {
     ).subscribe({
       next: (m) => {
         this.marketCommentReply = new MarketComment();
-        this.ngOnInit();
+        // this.ngOnInit();
       },
       error: (err) => {
         console.error('Error creating A new marketComment');
@@ -99,7 +98,7 @@ export class MarketCommentComponent implements OnInit {
   deletedMarketComment(marketCommentId: number) {
     this.MarketCommentSev.destroyByMarketCommentId(marketCommentId).subscribe({
       next: () => {
-        this.ngOnInit();
+        // this.ngOnInit();
       },
       error: (fail) => {
         console.error(

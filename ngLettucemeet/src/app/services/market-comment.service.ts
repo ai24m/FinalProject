@@ -17,6 +17,7 @@ export class MarketcommentService {
       headers: {
         Authorization: 'Basic ' + this.auth.getCredentials(),
         'X-Requested-With': 'XMLHttpRequest',
+        'Content-Type': 'application/json'
       },
     };
     return options;
