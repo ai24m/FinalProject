@@ -1,41 +1,60 @@
-<div class="container-fluid" style="background-color: #ffcd70;">
-  <!-- header -->
-  <main class="tm-main">
-      <!-- forms ? -->
-      <div class="row tm-row" >
-        <img class="background" src="assets/images/demo.png">
 
-          <div class="col-12">
-            <!-- add search functions here ? -->
+<div *ngFor="let mc of marketComments">
+  <h2 class="tm-color-primary tm-post-title">Comments</h2>
+  <hr class="tm-hr-primary tm-mb-45">
+  <div class="tm-comment tm-mb-45">
+      <figure class="tm-comment-figure">
+          <img src="img/comment-1.jpg" alt="Image" class="mb-2 rounded-circle img-thumbnail">
+          <figcaption class="tm-color-primary text-center">{{mc.user?.username}}</figcaption>
+      </figure>
+      <div>
+          <p *ngIf="!selected" (click)="displayMarketComment(mc)">
+              {{mc.comment}}
+          </p>
+          <div class="d-flex justify-content-between">
+              <!-- <a href="#" class="tm-color-primary" (click)="addReply()">REPLY</a> -->
+              <span class="tm-color-primary">{{mc.updateTime}}</span>
           </div>
+      </div>
+  </div>
+
+  <div class="tm-comment-reply tm-mb-45" >
+
+  </div>
+      <hr>
+      <div class="tm-comment" *ngFor="let replies of mc.replies">
+          <figure class="tm-comment-figure">
+              <img src="img/comment-2.jpg" alt="Image" class="mb-2 rounded-circle img-thumbnail">
+              <figcaption class="tm-color-primary text-center">Jewel Soft</figcaption>
+          </figure>
+          <p>
+            {{replies.comment}}</p>
+      </div>
+      <span class="d-block text-right tm-color-primary">June 21, 2020</span>
+  </div>
+  <form action="" class="mb-5 tm-comment-form" *ngIf="!selected">
+      <h2 class="tm-color-primary tm-post-title mb-4">Your comment</h2>
+      <div class="mb-4">
+          <input class="form-control" name="comment" [(ngModel)]="newMarketCommet.comment" type="text">
+      </div>
+      <div class="text-right">
+          <button class="tm-btn tm-btn-primary tm-btn-small" value="Add" (click)="addANewMarketComment(market.id, newMarketCommet)">Submit</button>
+      </div>
+  </form>
+  <form action="" class="mb-5 tm-comment-form" *ngIf="selected">
+      <h2 class="tm-color-primary tm-post-title mb-4">Your Reply</h2>
+      <div class="mb-4">
+          <input class="form-control" name="comment" [(ngModel)]="newMarketCommet.comment" type="text">
+      </div>
+      <div class="text-right">
+          <button class="tm-btn tm-btn-primary tm-btn-small" value="Add" (click)="addAMarketCommentReply(selected.id, newMarketCommet)">Reply</button>
+      </div>
+  </form>
+  <form name="deletePR" *ngIf="selected">
+      Are you sure ?
+    <!-- <input (click)="addTodo(newTodo)" type="submit" value="Add Item" /> -->
+    <input type="button" value="Delete" (click)="deletedMarketComment(selected.id)">
+  </form>
 
 
-          <article *ngIf="!selected" >
-            <hr class="tm-hr-primary">
-            <!-- <div class="d-flex justify-content-between tm-pt-45" *ngFor="let marketComment of marketComments "> -->
-            <div class="d-flex justify-content-between tm-pt-45" *ngFor="let marketComment of marketComments ">
 
-              <!-- <tr *ngFor="let market of markets "> -->
-                <span class="tm-color-primary">{{ marketComment.id }}</span>
-              <span class="tm-color-primary" (click)="displayMarketComment(marketComment)">{{ marketComment.comment }}</span>
-              <!-- </tr> -->
-          </div>
-        </article>
-
-        <div *ngIf="!selected">
-          <input type="text" name ="comment" placeholder="commet...." [(ngModel)]="newMarketCommet.comment" class ="form-control">
-          <input type="submit" value ="Add Comment" (click)="addANewMarketComment(newMarketCommet.market.id, newMarketCommet)">
-
-        </div>
-
-
-        <!-- </div> -->
-        <div *ngIf="selected ">
-          <input type="text" name ="comment" placeholder="commet...." [(ngModel)]="newMarketCommet.comment" class ="form-control">
-          <input type="submit" value ="Add Replies" (click)="addAMarketCommentReply(selected.id, newMarketCommet)">
-        </div>
-        </div>
-      <footer class="row tm-row" style="margin-top:10%">
-      </footer>
-  </main>
-</div>

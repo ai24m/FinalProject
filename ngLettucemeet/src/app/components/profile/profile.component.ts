@@ -19,11 +19,14 @@ import { TypeService } from 'src/app/services/type.service';
 export class ProfileComponent implements OnInit {
   user: User = new User();
   edit: boolean = false;
+  delete: boolean = false;
   products: Product[] = [];
   markets: Market[] = [];
   types: Type[] =[];
   newProduct: Product = new Product();
   addProductToMarket: boolean = false;
+  ProductBeingEdited: Product = new Product();
+  ProductBeingDeleted: Product = new Product();
 
   constructor(
     private router: Router,
@@ -64,7 +67,33 @@ export class ProfileComponent implements OnInit {
         this.newProduct = new Product();
         this.ngOnInit();
       },
-      err => console.error('Addtodo error' + err)
+      err => console.error('Add Product error' + err)
+    );
+  }
+
+  editForm(product: Product){
+    this.ProductBeingEdited = product;
+  }
+
+  updateProduct(ProductBeingEdited: Product) {
+    this.product.updateProduct(ProductBeingEdited).subscribe(
+      success => {
+        this.ngOnInit();
+      },
+      err => console.error('Edit Product error' + err)
+    );
+  }
+
+  deleteForm(product: Product){
+    this.ProductBeingDeleted = product;
+  }
+
+  deleteProduct(product: Product) {
+    this.product.destroyProduct(product.id).subscribe(
+      success => {
+        this.ngOnInit();
+      },
+      err => console.error('Delete Product error')
     );
   }
 
@@ -85,15 +114,5 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-  listProduct(newProduct: Product) {
-    this.product.createProduct(newProduct).subscribe({
-      next: () => {
-        this.router.navigateByUrl('profile');
-      },
-      error: (fail) => {
-        console.error('Register Component Error' + fail)
-      }
-    })
-  }
 
 }

@@ -1,5 +1,6 @@
 package com.skilldistillery.lettucemeet.services;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -90,7 +91,8 @@ public class MarketRatingServiceImpl implements MarketRatingService {
 	}
 
 	@Override
-	public Integer getAvergeRating(int marketId) {
+	public Integer getAvergRating(int marketId) {
+		// TODO Auto-generated method stub
 		List<MarketRating> allRatings = mrRepo.findByMarket_Id(marketId);
 		int totalRating =0;
 		int aveRating;

@@ -32,12 +32,26 @@
                   <h2 class="tm-color-primary tm-post-title mb-2"></h2>
                   <h3 class="tm-h3 mb-3"></h3>
                   <p class="mb-0 tm-line-height-short">
-                    Rating: <app-market-rating></app-market-rating>
-                    <app-market-comment></app-market-comment>
                   </p>
+                  <div>
+                    <app-market-comment [market]="selected" [marketComments]="marketComments"></app-market-comment>
+                  </div>
               </div>
           </div>
       </div>
+      <aside class="col-lg-4 tm-aside-col">
+        <div class="tm-post-sidebar">
+          <app-market-rating [market]="selected" [marketRatings]="marketRatings"></app-market-rating>
+
+            <hr class="mb-3 tm-hr-primary">
+            <h2 class="mb-4 tm-post-title tm-color-primary"  >See Them At The Farmer's Market!</h2>
+            <ul class="tm-mb-75 pl-5 tm-category-list" >
+                <li><a href="#" class="tm-color-primary">{{selected.name}}</a></li>
+                <li><a href="#" class="tm-color-primary">{{selected.address.city}}, {{selected.address.state}}</a></li>
+                <li><a href="#" class="tm-color-primary">{{selected.marketDate}}</a></li>
+            </ul>
+        </div>
+    </aside>
       <div class="row tm-row tm-mb-120">
           <div class="col-lg-4 tm-about-col">
           </div>

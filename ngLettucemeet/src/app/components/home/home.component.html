@@ -34,7 +34,7 @@
                   <span>Organizer: {{market.user?.username}}</span>
               </div>
           </article>
-          <article class="col-12 col-md-6 tm-post" *ngFor="let market of markets.slice(4, 7)">
+          <article class="col-12 col-md-6 tm-post" *ngFor="let market of markets.slice(3, 8)">
               <hr class="tm-hr-primary">
               <a [routerLink]="['markets', market.id]"  class="effect-lily tm-post-link tm-pt-60">
                   <div class=" tm-post-link-inner">
@@ -57,6 +57,7 @@
             </div>
           </article>
       </div>
+
       <div class="row tm-row tm-mt-100 tm-mb-75">
           <div class="tm-prev-next-wrapper">
               <a href="#" style="background-color: black;" class="mb-2 tm-btn tm-btn-primary tm-prev-next disabled tm-mr-20">Prev</a>

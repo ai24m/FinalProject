@@ -11,17 +11,17 @@ import { Market } from 'src/app/models/market';
   styleUrls: ['./market-comment.component.css'],
 })
 export class MarketCommentComponent implements OnInit {
-  marketComments: MarketComment[] = [];
+  @Input() marketComments: MarketComment[] = [];
   selected: MarketComment | null = null;
   newMarketCommet: MarketComment = new MarketComment();
   marketCommentReply: MarketComment = new MarketComment();
   marketId: number = 0;
-  market: Market = new Market();
-  // @Input()
-  // marketId!: number;
+  @Input() market: Market = new Market();
 
-  constructor(private MarketCommentSev: MarketcommentService,
-    private route: ActivatedRoute) {}
+  constructor(
+    private MarketCommentSev: MarketcommentService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     if (this.route.parent != null) {
@@ -32,22 +32,21 @@ export class MarketCommentComponent implements OnInit {
           this.MarketCommentSev.getByMarketId(id).subscribe({
             next: (comments) => {
               this.marketComments = comments;
-            }
-          })
+            },
+          });
         }
-
       }
     }
     // this.reload();
   }
 
-  getCommentsByMarketId(marketId: number){
+  getCommentsByMarketId(marketId: number) {
     this.MarketCommentSev.getByMarketId(marketId).subscribe({
       next: (comments) => {
         this.marketComments = comments;
         console.log(this.marketComments);
-      }
-    })
+      },
+    });
   }
 
   reload() {
@@ -66,10 +65,10 @@ export class MarketCommentComponent implements OnInit {
   // getBymarketId(marketid: number) {}
   addANewMarketComment(marketId: number, marketComment: MarketComment) {
     this.MarketCommentSev.createANewMarketComment(
-      marketId,
-      marketComment
+      marketComment,
+      marketId
     ).subscribe({
-      next: (m) => {
+      next: (marketComment) => {
         this.newMarketCommet = new MarketComment();
         this.ngOnInit();
       },
