@@ -12,13 +12,13 @@ export class TypeService {
 
   constructor(private http: HttpClient, private auth: AuthService) { }
 
-  private url = environment.baseUrl + 'api/users';
+  private url = environment.baseUrl + 'api/types';
 
   getOptions() {
     //always in form of js object
     let options = {
       headers: {
-        Authorization: 'Basic' + this.auth.getCredentials(),
+        Authorization: 'Basic ' + this.auth.getCredentials(),
         'X-Requested-With': 'XMLHttpRequest',
       },
     };
@@ -26,10 +26,10 @@ export class TypeService {
   }
 
     index(): Observable<Type[]> {
-      return this.http.get<Type[]>(this.url, this.getOptions()).pipe(
+      return this.http.get<Type[]>(this.url).pipe(
         catchError((err: any) => {
           console.log(err);
-          return throwError(() => new Error('TodoService.index() error'));
+          return throwError(() => new Error('TypeService.index() error'));
         })
       );
     }

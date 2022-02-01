@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { Market } from 'src/app/models/market';
 import { Product } from 'src/app/models/product';
-import { SellerRating } from 'src/app/models/seller-rating';
 import { User } from 'src/app/models/user';
+import { Type } from 'src/app/models/type';
 import { AuthService } from 'src/app/services/auth.service';
 import { MarketService } from 'src/app/services/market.service';
 import { ProductService } from 'src/app/services/product.service';
 import { SellerRatingService } from 'src/app/services/seller-rating.service';
 import { UserService } from 'src/app/services/user.service';
+import { TypeService } from 'src/app/services/type.service';
 
 @Component({
   selector: 'app-profile',
@@ -20,6 +21,9 @@ export class ProfileComponent implements OnInit {
   edit: boolean = false;
   products: Product[] = [];
   markets: Market[] = [];
+  types: Type[] =[];
+  newProduct: Product = new Product();
+  addProductToMarket: boolean = false;
 
   constructor(
     private router: Router,
@@ -27,7 +31,8 @@ export class ProfileComponent implements OnInit {
     private product: ProductService,
     private rating: SellerRatingService,
     private market: MarketService,
-    private auth: AuthService
+    private auth: AuthService,
+    private typeSvc: TypeService
   ) { }
 
   ngOnInit(): void {
@@ -35,6 +40,7 @@ export class ProfileComponent implements OnInit {
       next: (user) => {
         this.user = user;
         this.getProducts();
+        this.getTypes();
         console.log(user);
       }
     })
@@ -52,6 +58,17 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  addProduct(newProduct: Product) {
+    this.product.createProduct(newProduct).subscribe(
+      success => { //another way to write: function that has parameters todos next: (todos) => { do this function }, error: (wrong) => { }
+        this.newProduct = new Product();
+        this.ngOnInit();
+      },
+      err => console.error('Addtodo error' + err)
+    );
+  }
+
+
   getProducts() {
     this.product.getUserProduct().subscribe({
       next: (products) => {
@@ -59,4 +76,24 @@ export class ProfileComponent implements OnInit {
       }
     });
   }
+
+  getTypes(){
+    this.typeSvc.index().subscribe({
+      next: (types) => {
+        this.types = types;
+      }
+    })
+  }
+
+  listProduct(newProduct: Product) {
+    this.product.createProduct(newProduct).subscribe({
+      next: () => {
+        this.router.navigateByUrl('profile');
+      },
+      error: (fail) => {
+        console.error('Register Component Error' + fail)
+      }
+    })
+  }
+
 }
