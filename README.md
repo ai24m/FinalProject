@@ -1,6 +1,7 @@
 # FinalProject
 
-# Lettuce Meet : Find Your Local Farmers and Farmer's Markets! 
+## Lettuce Meet : Find Your Local Farmers and Farmer's Markets! 
+Lettuce Meet invites private farms, businesses and local enthusiasts to gather and share products and experiences alike 🥕 
 
 ## Team : 
 -Scrum Master: Chris Delong 
