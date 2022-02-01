@@ -8,27 +8,27 @@ import { ProductService } from 'src/app/services/product.service';
 @Component({
   selector: 'app-product-rating',
   templateUrl: './product-rating.component.html',
-  styleUrls: ['./product-rating.component.css']
+  styleUrls: ['./product-rating.component.css'],
 })
 export class ProductRatingComponent implements OnInit {
   @Input() productRatings: ProductRating[] = [];
-  newProductRating: ProductRating = new ProductRating;
-  editProductRating: ProductRating = new ProductRating;
-  destroyProductRating: ProductRating = new ProductRating;
+  newProductRating: ProductRating = new ProductRating();
+  editProductRating: ProductRating = new ProductRating();
+  destroyProductRating: ProductRating = new ProductRating();
   editPR: boolean = false;
   addPR: boolean = false;
   destroyPR: boolean = false;
   selectedProductRating: ProductRating | null = null;
   @Input() product: Product = new Product();
 
-
   constructor(
     private _productRatingService: ProductRatingService,
     private productSvc: ProductService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router
+  ) {}
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     if (this.route.parent != null) {
       let idString = this.route.parent.snapshot.paramMap.get('id');
       if (idString) {
@@ -41,26 +41,26 @@ export class ProductRatingComponent implements OnInit {
     }
   }
 
-  loadRatingsForProduct(productId: number){
+  loadRatingsForProduct(productId: number) {
     this._productRatingService.getByProductId(productId).subscribe({
       next: (ratings) => {
         console.log(ratings);
         this.productRatings = ratings;
         this.findAverageRating(this.productRatings);
-      }
-    })
+      },
+    });
   }
 
-  showRating(rating: number) {
-    if (rating === 0) {
-      return 'Not Rated Yet! Be the First!'
-    } else {
-      return rating + ' / 5 Rating'
-    }
-  }
+  // showRating(rating: number) {
+  //   if (rating === 0) {
+  //     return 'Not Rated Yet! Be the First!';
+  //   } else {
+  //     return rating + ' / 5 Rating';
+  //   }
+  // }
 
-  findAverageRating(productRatings: ProductRating[]){
-    let  totalRatings = 0;
+  findAverageRating(productRatings: ProductRating[]) {
+    let totalRatings = 0;
     for (let pr of productRatings) {
       totalRatings += pr.rating;
     }
@@ -69,17 +69,18 @@ export class ProductRatingComponent implements OnInit {
   }
 
   showAddForm() {
-      this.newProductRating = this.newProductRating;
-      this.addPR = !this.addPR;
+    this.newProductRating = this.newProductRating;
+    this.addPR = !this.addPR;
   }
 
   addProductRating(productRating: ProductRating, productId: number) {
     this._productRatingService.create(productRating, productId).subscribe(
-      success => { //another way to write: function that has parameters todos next: (todos) => { do this function }, error: (wrong) => { }
+      (success) => {
+        //another way to write: function that has parameters todos next: (todos) => { do this function }, error: (wrong) => { }
         this.newProductRating = new ProductRating();
         this.ngOnInit();
       },
-      err => console.error('Addtodo error' + err)
+      (err) => console.error('Addtodo error' + err)
     );
   }
 
@@ -94,7 +95,9 @@ export class ProductRatingComponent implements OnInit {
         this.selectedProductRating = productRating;
         this.loadRatingsForProduct(this.product.id);
       },
-      error: (fail) => { console.error('Error updating' + fail);}
+      error: (fail) => {
+        console.error('Error updating' + fail);
+      },
     });
   }
 
@@ -105,8 +108,12 @@ export class ProductRatingComponent implements OnInit {
 
   deleteProductRating(productId: number) {
     this._productRatingService.destroy(productId).subscribe({
-      next: () => { this.loadRatingsForProduct(this.product.id)},
-      error: () => { console.error('Destroy component.ts ')}
+      next: () => {
+        this.loadRatingsForProduct(this.product.id);
+      },
+      error: () => {
+        console.error('Destroy component.ts ');
+      },
     });
   }
 }

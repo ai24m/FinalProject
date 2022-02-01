@@ -48,7 +48,7 @@ export class MarketIdComponent implements OnInit {
             this.selected = market;
             this.myMarketId = id;
             this.loadComments(id);
-            this.averageRatings(id);
+            this.loadingRatings(id);
           },
           error: (fail) => {
             console.error('TodoListComponent.ngoninit()');
@@ -71,12 +71,15 @@ export class MarketIdComponent implements OnInit {
     });
   }
 
-  // loadUsers(id: product) {
-
-  // }
-
-  averageRatings(id: number) {
+  loadingRatings(id: number) {
     // show average of ratings call function by marketid to get average ratings
+    this.marketRatingSvc.GetByMarketId(id).subscribe({
+      next: (ratings) => {
+        console.log('Ratings');
+        console.log(ratings);
+        this.marketRatings = ratings;
+      },
+    });
   }
 
   reload(id: number) {

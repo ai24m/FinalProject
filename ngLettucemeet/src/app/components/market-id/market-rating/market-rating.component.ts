@@ -16,7 +16,6 @@ export class MarketRatingComponent implements OnInit {
   newMarketRating: MarketRating = new MarketRating();
   @Input() market: Market = new Market();
   editMarketRating: MarketRating | null = null;
-  totalRatings: number = 0;
   editMR: boolean = false;
   addMR: boolean = false;
   destroyMR: boolean = false;
@@ -32,13 +31,13 @@ export class MarketRatingComponent implements OnInit {
       if (idString) {
         let id = Number.parseInt(idString);
         if (!isNaN(id)) {
-          this.MarketRatingSev.GetByMarketId(id).subscribe({
-            next: (ratings) => {
-              console.log(ratings);
-              this.marketRatings = ratings;
-              this.findAverageRating(this.marketRatings);
-            },
-          });
+          // this.MarketRatingSev.GetByMarketId(id).subscribe({
+          //   next: (ratings) => {
+          //     console.log(ratings);
+          //     this.marketRatings = ratings;
+          //     this.findAverageRating(this.marketRatings);
+          //   },
+          // });
         }
       }
     }
@@ -59,11 +58,22 @@ export class MarketRatingComponent implements OnInit {
     });
   }
 
-  findAverageRating(marketRatings: MarketRating[]) {
-    for (let mr of marketRatings) {
-      this.totalRatings += mr.rating;
+  // showRating(rating: number) {
+  //   if (rating === 0) {
+  //     return 'Not Rated Yet! Be the First!';
+  //   } else {
+  //     return rating + ' / 5 Rating';
+  //   }
+  // }
+
+  findAverageRating() {
+    let totalRatings: number = 0;
+    for (let mr of this.marketRatings) {
+      totalRatings += mr.marketRating;
+      console.log(mr.marketRating);
+      console.log(mr);
     }
-    let average = this.totalRatings / this.marketRatings.length;
+    let average = totalRatings / this.marketRatings.length;
     // this.newMarketRating.ratingAverage = average;
     return average;
   }
