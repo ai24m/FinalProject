@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.lettucemeet.entities.Market;
 import com.skilldistillery.lettucemeet.entities.MarketRating;
 import com.skilldistillery.lettucemeet.entities.User;
 import com.skilldistillery.lettucemeet.services.MarketRatingService;
+import com.skilldistillery.lettucemeet.services.MarketService;
 import com.skilldistillery.lettucemeet.services.UserService;
 
 @RestController
@@ -34,6 +34,9 @@ public class MarketRatingController {
 	
 	@Autowired 
 	private UserService userSvc; 
+	
+	@Autowired
+	private MarketService marketSev;
 	
 	@GetMapping("market/{mId}/marketratings")
 	public List<MarketRating> indexForMarket(HttpServletRequest req, HttpServletResponse res, @PathVariable Integer mId){
@@ -51,29 +54,17 @@ public class MarketRatingController {
 			res.setStatus(404); 
 		} return allMarketRatings; 
 	}
-	
+
 	@GetMapping("market/averagerating/{marketId}")
 	public Integer show(HttpServletRequest req, HttpServletResponse res, @PathVariable int marketId) {
-		int avegRating = mrSvc.getAvergeRating(marketId);
+		int avegRating = mrSvc.getAvergRating(marketId);
 		if (avegRating < 0 && this.indexForMarket(req, res, marketId)!=null) {
 			res.setStatus(404);
 		} else {
 			res.setStatus(201);
 		} return avegRating; 
 	}
-	
-//	@GetMapping("marketratings/{mrId}")
-//	public Market show(HttpServletRequest req, HttpServletResponse res, @PathVariable int mcId) {
-//		MarketRating marketRating = mrSvc.show(mrId);
-//		if (marketRating == null) {
-//			res.setStatus(404);
-//		} else {
-//			res.setStatus(201);
-//			StringBuffer url = req.getRequestURL();
-//			url.append("/").append(marketRating.getId());
-//			res.setHeader("location", url.toString());
-//		} return marketRating; 
-//	}
+
 	
 	@PostMapping("market/{mId}/marketratings")
 	public MarketRating create(HttpServletRequest req, HttpServletResponse res, Principal principal, @RequestBody MarketRating marketRating,

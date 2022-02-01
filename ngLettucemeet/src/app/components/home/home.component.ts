@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   marketComments: MarketComment[] = [];
   marketRatings: MarketRating[] = [];
   vendors: User[] = [];
+  keyword: string = '';
 
   constructor(
     private marketSvc: MarketService,

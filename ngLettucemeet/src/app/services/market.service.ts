@@ -65,7 +65,7 @@ export class MarketService {
       .put<Market>(this.url + '/' + market.id, market, this.getHttpOptions())
       .pipe(
         catchError((problem: any) => {
-          console.error('TodoService.update(): error deleting Market:');
+          console.error('MarketService.update(): error deleting Market:');
           console.error(problem);
           return throwError(
             () => new Error('MarketService.update():error update Market')

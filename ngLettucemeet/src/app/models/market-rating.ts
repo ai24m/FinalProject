@@ -2,7 +2,7 @@ import { Market } from './market';
 import { User } from './user';
 
 export class MarketRating {
-  rating: number;
+  marketRating: number;
   ratingAverage: number;
   comment: string;
   user: User | undefined;
@@ -10,9 +10,9 @@ export class MarketRating {
   disabled: boolean = false;
 
   constructor(
-    rating: number = 0,
+    marketRating: number = 0,
     ratingAverage: number = 0,
-    comment: string ='',
+    comment: string = '',
     user?: User,
     market: Market = new Market(),
     disabled: boolean = false
@@ -20,7 +20,7 @@ export class MarketRating {
     this.market = market;
     this.user = user;
     this.comment = comment;
-    this.rating = rating;
+    this.marketRating = marketRating;
     this.ratingAverage = ratingAverage;
     this.disabled = disabled;
   }

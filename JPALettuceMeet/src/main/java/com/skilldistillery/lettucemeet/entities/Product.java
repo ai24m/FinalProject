@@ -45,7 +45,7 @@ public class Product {
 	
 	private int quantity;
 	
-	@JsonFormat(pattern = "MM-dd-yyyy")
+//	@JsonFormat(pattern = "MM-dd-yyyy")
 	@Column(name = "available_date")
 	private LocalDate availableDate;
 	

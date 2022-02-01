@@ -12,12 +12,12 @@ export class User {
   username: string;
   password: string;
   email: string | undefined;
-  role: string;
-  firstname: string;
-  lastname: string;
+  role: string | undefined;
+  firstName: string;
+  lastName: string;
   businessname: string;
   imageurl: string;
-  address: Address | undefined;
+  address: Address;
   productratings: ProductRating[] = [];
   sellerratings: SellerRating[] = [];
   userratings: SellerRating[] = [];
@@ -29,8 +29,8 @@ export class User {
   disabled: boolean = false;
 
 
-  constructor(id: number = 0, username: string = '', password: string = '', email?: string, role: string = "",
-  firstname: string = '', lastname: string = '', businessname: string = '', imageurl: string = '', address?: Address,
+  constructor(id: number = 0, username: string = '', password: string = '', email?: string, role?: string,
+  firstName: string = '', lastName: string = '', businessname: string = '', imageurl: string = '', address: Address = new Address(),
   productrating: ProductRating[] = [],  sellerratings: SellerRating[] = [],   userratings: SellerRating[] = [], products: Product[] = [],
   marketratings: MarketRating[] = [], markets: Market[] = [], productcomments: ProductComment[] = [], marketcomments: MarketComment[] = [], disabled: boolean = false) {
     this.id = id;
@@ -38,8 +38,8 @@ export class User {
     this.password = password;
     this.email = email;
     this.role = role;
-    this.firstname = firstname;
-    this.lastname = lastname;
+    this.firstName = firstName;
+    this.lastName = lastName;
     this.businessname = businessname;
     this.imageurl = imageurl;
     this.address = address;

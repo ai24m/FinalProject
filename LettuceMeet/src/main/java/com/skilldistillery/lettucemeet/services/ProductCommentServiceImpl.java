@@ -80,12 +80,24 @@ public class ProductCommentServiceImpl implements ProductCommentService {
 			pcRepo.saveAndFlush(existing); 
 		} return existing;
 	}
+	
+	@Override
+	public ProductComment update(User user, Integer pcId, ProductComment productComment) {
+		ProductComment existing = pcRepo.findByIdAndUser(pcId, user);
+		if (existing != null) {
+			existing.setComment(productComment.getComment());
+			pcRepo.saveAndFlush(existing); 
+		} return existing;
+	}
+	
+	
 
 	@Override
 	public boolean destroy(User user, Integer pcId) {
 		boolean deleted = false;
 		ProductComment productComment = pcRepo.findByIdAndUser(pcId, user); 
 		if (productComment != null) {
+			pcRepo.delete(productComment);
 			deleted = true;
 		} return deleted; 
 	}

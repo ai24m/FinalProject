@@ -117,7 +117,7 @@ public class MarketCommentController {
 		return marketComment;
 	}
 	
-	@DeleteMapping("marketcomments/{mcId}/comments")
+	@DeleteMapping("marketcomments/{mcId}")
 	public void destroy(HttpServletRequest req, HttpServletResponse res, Principal principal, @PathVariable Integer mcId) {
 		try {
 			User user = userSvc.findByUserName(principal.getName()); 

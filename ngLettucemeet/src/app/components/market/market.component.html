@@ -1,51 +1,3 @@
-<!-- <div *ngIf="!selected">
-  <table class="table table-striped table-hover">
-    <thead class="table-dark">
-      <tr>
-        <th>Id</th>
-        <th>Name</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr  *ngFor="let market of markets ">
-        <td >{{ market.id }}</td>
-        <td (click)="displayMarket(market)">{{ market.name }}</td>
-        <!-- <td><input (change)='updateRoute(route,false)'type="checkbox" name ="completed" [(ngModel)]="todo.completed" class="from-check"></td>
-        <td>{{ todo.completed }}</td> -->
-        <!-- <td><button class='btn-danger' (click)="deletedMarket(market.id)">X</button></td> -->
-      <!-- </tr>
-    </tbody>
-  </table> -->
-     <!-- showall? <input type="checkbox" name ="showComplete" [(ngModel)]='showComplete'> -->
-      <!-- <input type="number" name ="liftId" placeholder="Lift Id"  [(ngModel)]="liftId" class ="form-control">
-      <input type="text" name ="name" placeholder="Route Name" [(ngModel)]="newRoute.name" class ="form-control">
-      <input type="text" name ="distance" placeholder="distance miles" [(ngModel)]="newRoute.distance" class ="form-control">
-      <input type="text" name ="level" placeholder="Green,Black etc" [(ngModel)]="newRoute.level" class ="form-control">
-      <input type="text" name ="snowCondition" placeholder="Icy,Groomed etc" [(ngModel)]="newRoute.snowCondition" class ="form-control">
-      <input type="submit" value ="Add Route" (click)="addRoute(newRoute,liftId)"> -->
-<!-- </div> -->
-
-<!-- <div *ngIf="selected && !editMarket">
-  <label for="id">ID :</label> <p>{{ selected.id }}</p>
-  <label for="name">Name :</label> <p>{{ selected.name }}</p>
-  <label for="description">Description :</label> <p>{{ selected.description }} miles</p>
-  <label for="imageUrl">Image_Url :</label> <p>{{ selected.imageUrl }}</p>
-  <label for="marketDate">Market Date :</label> <p>{{ selected.marketDate }}</p>
-  <button (click)="displayTable()">Back</button>
-  <button (click)="setEditMarket()">Edit</button>
-</div> -->
-
-<!-- <div *ngIf="editMarket">
-
-  <input type="text" name="name" [(ngModel)]="editMarket.name" placeholder="name" class ="form-control">
-  <input type="text" name="description" [(ngModel)]="editMarket.description" placeholder="distance miles" class ="form-control">
-  <input type="text" name="marketDate" [(ngModel)]="editMarket.marketDate" placeholder="Green,Black etc" class ="form-control">
-  <input type="text" name="imageUrl" [(ngModel)]="editMarket.imageUrl"  placeholder="Icy, Groomed etc" class ="form-control">
-  <!-- <button (click)="update(editRoute)">Save</button> -->
-  <!-- <button (click)="editMarket = null;">Cancel</button>
-
-</div> -->
-
 <div class="container-fluid" style="background-color: #ffcd70;">
   <!-- header -->
   <main class="tm-main">
@@ -55,11 +7,30 @@
 
           <div class="col-12">
             <!-- add search functions here ? -->
+            <hr class="tm-hr-primary" />
+            <div class="input-group mb-3">
+              <button
+                class="btn btn-#526E2A"
+                type="button"
+                name="keySearch"
+                id="button-addon1">
+                Search
+              </button>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="keyword"
+                placeholder="Keyword Search"
+                aria-label="Example text with button addon"
+                aria-describedby="button-addon1"
+              />
+            </div>
           </div>
 
           <article *ngIf="!selected" >
             <hr class="tm-hr-primary">
-            <div class="d-flex justify-content-between tm-pt-45" *ngFor="let market of markets.slice(99,102) ">
+            <!-- <div class="d-flex justify-content-between tm-pt-45" *ngFor="let market of markets | homeSearch: keyword; "> -->
+            <div class="d-flex justify-content-between tm-pt-45" *ngFor="let market of markets.slice(0,7) ">
               <!-- <tr *ngFor="let market of markets "> -->
               <span class="tm-color-primary" (click)="displayMarket(market)">{{ market.name }}</span>
               <span class="tm-color-primary">{{ market.marketDate }}</span>

@@ -17,7 +17,7 @@ export class UserComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    this.newUser = this.newUser;
+    // this.newUser = this.newUser;
   }
 
   load() {
@@ -27,7 +27,15 @@ export class UserComponent implements OnInit {
   register(newUser: User) {
     this.authService.register(newUser).subscribe({
       next: () => {
-        this.router.navigateByUrl('profile');
+        this.authService.login(newUser.username, newUser.password).subscribe({
+          next: (user) => {
+            this.router.navigateByUrl('profile');
+          },
+          error: (err) => {
+            console.error('register usercomponent error after logging in');
+          }
+        })
+
       },
       error: (fail) => {
         console.error('Register Component Error' + fail)

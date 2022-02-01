@@ -17,7 +17,8 @@ export class ProductCommentService {
     let options = {
       headers: {
         Authorization: 'Basic ' + this.auth.getCredentials(),
-        'X-Requested-With': 'XMLHttpRequest'
+        'X-Requested-With': 'XMLHttpRequest',
+        'Content-Type': 'application/json'
       }
     };
     return options;
@@ -58,7 +59,7 @@ export class ProductCommentService {
     return this.http.post<ProductComment>(this.baseUrl + endpoints, productComment, this.getOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError('Create error' + err);
+        return throwError(() => new Error ('Create reply error'));
       })
     );
   }
@@ -68,13 +69,13 @@ export class ProductCommentService {
     return this.http.post<ProductComment>(this.baseUrl + endpoints, productComment, this.getOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError('Create error' + err);
+        return throwError(() => new Error ('Create error'));
       })
     );
   }
 
   update(productComment: ProductComment, productCommentId: number, productId: number): Observable<ProductComment> {
-    let endpoints = `api/products/${productId}/productcomments/${productCommentId}`
+    let endpoints = `api/productcomments/${productCommentId}`
     // if (productRating.completed) {
       // let tempDate = this.date.transform(Date.now(), 'shortDate');
       // if (tempDate != null) {productRating.completeDate = tempDate}
@@ -89,8 +90,8 @@ export class ProductCommentService {
     );
   }
 
-  destroy(productId: number) {
-    let endpoints = `api/productRatings/${productId}`
+  destroy(commentId: number) {
+    let endpoints = `api/productcomments/${commentId}`
     return this.http.delete<ProductComment>(this.baseUrl + endpoints, this.getOptions()).pipe(
       catchError((err: any) => {
         console.error(err);

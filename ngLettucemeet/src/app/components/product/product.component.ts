@@ -10,16 +10,16 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
+  styleUrls: ['./product.component.css'],
 })
 export class ProductComponent implements OnInit {
-  keyword: string = "";
+  keyword: string = '';
   selected: Product | null = null;
   newProduct: Product = new Product();
   editProduct: Product | null = null;
   products: Product[] = [];
   productRatings: ProductRating[] = [];
-  user: User = new User;
+  user: User = new User();
 
   constructor(
     private prodSvc: ProductService,
@@ -27,7 +27,7 @@ export class ProductComponent implements OnInit {
     private userSvc: UserService,
     private route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.reloadProdList();
@@ -39,9 +39,11 @@ export class ProductComponent implements OnInit {
         this.products = products;
       },
       error: (err) => {
-        console.error("ProductComponent.reloadProdList(): error retrieving products");
+        console.error(
+          'ProductComponent.reloadProdList(): error retrieving products'
+        );
         console.error(err);
-      }
+      },
     });
   }
 
