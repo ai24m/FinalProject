@@ -17,6 +17,7 @@ export class MarketcommentService {
       headers: {
         Authorization: 'Basic ' + this.auth.getCredentials(),
         'X-Requested-With': 'XMLHttpRequest',
+        'Content-Type': 'application/json'
       },
     };
     return options;
@@ -54,7 +55,7 @@ export class MarketcommentService {
   getByMarketId(marketId: number): Observable<MarketComment[]> {
     return this.http
       .get<MarketComment[]>(
-        this.url + '/market/' + marketId,
+        this.url + '/market/' + marketId
         // this.getHttpOptions()
       )
       .pipe(
@@ -68,10 +69,6 @@ export class MarketcommentService {
         })
       );
   }
-
-
-
-
 
   createAMarketCommentReply(
     marketCommentId: number,
@@ -97,8 +94,8 @@ export class MarketcommentService {
       );
   }
   createANewMarketComment(
-    marketId: number,
-    marketComment: MarketComment
+    marketComment: MarketComment,
+    marketId: number
   ): Observable<MarketComment> {
     console.log(marketComment);
 
@@ -136,7 +133,7 @@ export class MarketcommentService {
   destroyByMarketCommentId(marketCommentId: number): Observable<void> {
     return this.http
       .delete<void>(
-        this.url + '/' + marketCommentId + '/' + 'comments',
+        this.url + '/' + marketCommentId,
         this.getHttpOptions()
       )
       .pipe(

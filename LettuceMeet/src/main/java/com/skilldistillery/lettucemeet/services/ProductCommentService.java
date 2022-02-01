@@ -15,6 +15,8 @@ public interface ProductCommentService {
 	ProductComment create(ProductComment productComment, User user, Integer productId);
 
 	ProductComment update(User user, Product product, Integer pId, ProductComment productComment);
+	
+	ProductComment update(User user, Integer pcId, ProductComment productComment);
 
 	boolean destroy(User user, Integer pId);
 

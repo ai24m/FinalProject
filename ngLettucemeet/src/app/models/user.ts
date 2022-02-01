@@ -13,11 +13,11 @@ export class User {
   password: string;
   email: string | undefined;
   role: string | undefined;
-  firstname: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
   businessname: string;
   imageurl: string;
-  address: Address | undefined;
+  address: Address;
   productratings: ProductRating[] = [];
   sellerratings: SellerRating[] = [];
   userratings: SellerRating[] = [];
@@ -26,19 +26,20 @@ export class User {
   markets: Market[] = [];
   productcomments: ProductComment[] = [];
   marketcomments: MarketComment[] = [];
+  disabled: boolean = false;
 
 
   constructor(id: number = 0, username: string = '', password: string = '', email?: string, role?: string,
-  firstname: string = '', lastname: string = '', businessname: string = '', imageurl: string = '', address?: Address,
+  firstName: string = '', lastName: string = '', businessname: string = '', imageurl: string = '', address: Address = new Address(),
   productrating: ProductRating[] = [],  sellerratings: SellerRating[] = [],   userratings: SellerRating[] = [], products: Product[] = [],
-  marketratings: MarketRating[] = [], markets: Market[] = [], productcomments: ProductComment[] = [], marketcomments: MarketComment[] = []) {
+  marketratings: MarketRating[] = [], markets: Market[] = [], productcomments: ProductComment[] = [], marketcomments: MarketComment[] = [], disabled: boolean = false) {
     this.id = id;
     this.username = username;
     this.password = password;
     this.email = email;
     this.role = role;
-    this.firstname = firstname;
-    this.lastname = lastname;
+    this.firstName = firstName;
+    this.lastName = lastName;
     this.businessname = businessname;
     this.imageurl = imageurl;
     this.address = address;
@@ -50,5 +51,6 @@ export class User {
     this.markets = markets;
     this.productcomments = productcomments;
     this.marketcomments = marketcomments;
+    this.disabled = disabled;
   }
 }

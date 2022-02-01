@@ -17,6 +17,8 @@ export class Market {
   products: Product[] = [];
   marketRatings: MarketRating[] = [];
   marketComments: MarketComment[] = [];
+  hide: boolean | undefined;
+  disabled: boolean = false;
 
   constructor(
     id: number = 0,
@@ -30,7 +32,9 @@ export class Market {
     address: Address = new Address(),
     products: Product[] = [],
     marketRatings: MarketRating[] = [],
-    marketComments: MarketComment[] = []
+    marketComments: MarketComment[] = [],
+    hide: boolean = false,
+    disabled: boolean = false
   ) {
     this.id = id;
     this.name = name;
@@ -44,5 +48,7 @@ export class Market {
     this.products = products;
     this.marketRatings = marketRatings;
     this.marketComments = marketComments;
+    this.hide = hide;
+    this.disabled = disabled;
   }
 }

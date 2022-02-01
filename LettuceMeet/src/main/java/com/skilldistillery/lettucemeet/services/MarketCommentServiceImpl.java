@@ -85,10 +85,12 @@ public class MarketCommentServiceImpl implements MarketCommentService {
 	@Override
 	public boolean destroy(User user, Integer mcId) {
 		boolean deleted = false;
-		MarketComment marketComment = this.show(mcId);
-		int marketId = marketComment.getMarket().getId();
-		int userId = marketComment.getUser().getId();
-		if (marketRepo.existsById(marketId) && userRepo.existsById(userId)) {
+//		MarketComment marketComment = this.show(mcId);
+		MarketComment marketComment = mcRepo.findByIdAndUser(mcId, user);
+//		int marketId = marketComment.getMarket().getId();
+//		int userId = marketComment.getUser().getId();
+//		if (marketRepo.existsById(marketId) && userRepo.existsById(userId)) {
+		if (marketComment != null) {
 			mcRepo.delete(marketComment);
 			deleted = true;
 		}

@@ -13,24 +13,40 @@ export class NavbarComponent implements OnInit {
   title = 'angularbootstrap';
 
 
-  constructor(private auth: AuthService, private router : Router) {}
+  constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
 
-   $("#menu-toggle").click(function(e) {
-     e.preventDefault();
-     $("#wrapper").toggleClass("toggled");
-   });
- }
+    $("#menu-toggle").click(function (e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  }
 
- loggedIn(): boolean {
-  return this.auth.checkLogin();
-}
+  loggedIn(): boolean {
+    return this.auth.checkLogin();
+  }
 
-logout(){
-  this.auth.logout();
-  this.router.navigateByUrl('/home');
-}
+  logout() {
+    this.auth.logout();
+    this.router.navigateByUrl('/home');
+  }
+
+  // admin(): boolean {
+  //   this.auth.getCurrentUser().subscribe({
+  //     next: (user) => {
+  //       if (user.role === 'admin') {
+  //         return true;
+  //       } else {
+  //         return false;
+  //       }
+  //     },
+  //     error: (error) => {
+  //       console.error("NavbarComponent.admin(): error on admin check" + error);
+  //     }
+  //   });
+  //   return false;
+  // }
 
 }
 

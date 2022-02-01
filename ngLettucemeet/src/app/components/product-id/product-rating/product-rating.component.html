@@ -1,5 +1,5 @@
 <footer class="row tm-row">
-  <h2 class="tm-mb-40 tm-post-title tm-color-primary" *ngIf="productRatings.length > 0">Rating {{findAverageRating(productRatings)}} / 5</h2>
+  <h2 class="tm-mb-40 tm-post-title tm-color-primary" *ngIf="productRatings.length > 0">Rating {{findAverageRating(productRatings)|number: '1.0-0'}} / 5</h2>
   <h2 class="tm-mb-40 tm-post-title tm-color-primary" *ngIf="productRatings.length === 0"> Not Rated Yet!</h2>
   <div class="text-right">
   <button class="tm-btn tm-btn-primary tm-btn-small" type="submit" value="Add Rating" (click)="addPR = true; destroyPR = false">Add Rating</button>

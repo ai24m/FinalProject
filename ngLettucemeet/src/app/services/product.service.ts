@@ -18,7 +18,8 @@ export class ProductService {
     let options = {
       headers: {
         Authorization: "Basic " + this.auth.getCredentials(),
-        "X-Requested-With": "XMLHttpRequest"
+        "X-Requested-With": "XMLHttpRequest",
+        'Content-Type': 'application/json'
       }
     };
     return options;

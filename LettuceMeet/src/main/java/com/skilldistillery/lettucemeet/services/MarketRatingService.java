@@ -17,6 +17,6 @@ public interface MarketRatingService {
 
 	boolean destroy(User user, Integer mrId);
 	
-	Integer getAvergeRating(int marketId);
+	Integer getAvergRating(int marketId);
 
 }
