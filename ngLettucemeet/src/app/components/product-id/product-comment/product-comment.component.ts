@@ -19,6 +19,7 @@ export class ProductCommentComponent implements OnInit {
   productId: number = 0;
   @Input() product: Product = new Product();
   user: User = new User();
+  editComments: string[] = [];
   // editPC: boolean = false;
   // addPC: boolean = false;
   // destroyPC: boolean = false;
@@ -104,6 +105,7 @@ export class ProductCommentComponent implements OnInit {
   }
 
   updateProductComment(productComment: ProductComment, productCommentId: number, productId: number): void {
+    productComment.comment = this.editComments[productCommentId];
     this.productCommentService.update(productComment, productCommentId, productId).subscribe({
       next: () => {
         this.loadCommentsForProduct(this.product.id);

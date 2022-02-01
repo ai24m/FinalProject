@@ -20,9 +20,9 @@
   </div>
   <div *ngIf="pc.user?.id === user.id">
     <form name="editPR">
-      <textarea name="comment" [(ngModel)]="editProductComment.comment" placeholder="update comment. . ."></textarea><br>
+      <textarea name="comment" [(ngModel)]="editComments[pc.id]" placeholder="update comment. . ."></textarea><br>
       <!-- <input (click)="addTodo(newTodo)" type="submit" value="Add Item" /> -->
-      <input type="button" value="Add" (click)="updateProductComment(editProductComment, pc.id, pc.product.id)">
+      <input type="button" value="Update" (click)="updateProductComment(editProductComment, pc.id, pc.product.id)">
     </form>
 
 

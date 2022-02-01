@@ -17,7 +17,8 @@ export class ProductCommentService {
     let options = {
       headers: {
         Authorization: 'Basic ' + this.auth.getCredentials(),
-        'X-Requested-With': 'XMLHttpRequest'
+        'X-Requested-With': 'XMLHttpRequest',
+        'Content-Type': 'application/json'
       }
     };
     return options;
@@ -74,7 +75,7 @@ export class ProductCommentService {
   }
 
   update(productComment: ProductComment, productCommentId: number, productId: number): Observable<ProductComment> {
-    let endpoints = `api/products/${productId}/productcomments/${productCommentId}`
+    let endpoints = `api/productcomments/${productCommentId}`
     // if (productRating.completed) {
       // let tempDate = this.date.transform(Date.now(), 'shortDate');
       // if (tempDate != null) {productRating.completeDate = tempDate}
