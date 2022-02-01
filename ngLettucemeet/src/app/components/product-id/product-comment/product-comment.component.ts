@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { ProductComment } from 'src/app/models/product-comment';
+import { User } from 'src/app/models/user';
+import { AuthService } from 'src/app/services/auth.service';
 import { ProductCommentService } from 'src/app/services/product-comment.service';
 
 @Component({
@@ -16,6 +18,7 @@ export class ProductCommentComponent implements OnInit {
   destroyProductComment: ProductComment = new ProductComment();
   productId: number = 0;
   @Input() product: Product = new Product();
+  user: User = new User();
   // editPC: boolean = false;
   // addPC: boolean = false;
   // destroyPC: boolean = false;
@@ -24,7 +27,8 @@ export class ProductCommentComponent implements OnInit {
   constructor(
     private productCommentService: ProductCommentService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private auth: AuthService) { }
 
   // ngOnInit(): void {
   //   this._productCommentService.index().subscribe({
@@ -51,6 +55,12 @@ export class ProductCommentComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this.auth.getCurrentUser().subscribe({
+      next: (user) => {
+        this.user = user;
+      }
+    })
 
     if (this.route.parent != null) {
       let idString = this.route.parent.snapshot.paramMap.get('id');
@@ -107,8 +117,8 @@ export class ProductCommentComponent implements OnInit {
     });
   }
 
-  deleteProductRating(productId: number) {
-    this.productCommentService.destroy(productId).subscribe({
+  deleteProductComment(comementId: number) {
+    this.productCommentService.destroy(comementId).subscribe({
 
       next: () => {
         this.loadCommentsForProduct(this.product.id);

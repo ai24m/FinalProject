@@ -7,7 +7,7 @@ export class ProductComment {
   comment: string;
   created: string | undefined;
   updated: string | undefined;
-  replyTo: string;
+  replyTo: string | undefined;
   myReplies: ProductComment[] = [];
   product: Product;
   user: User | undefined;
@@ -17,7 +17,7 @@ export class ProductComment {
     comment: string = '',
     created?: string,
     updated?: string,
-    replyTo: string = '',
+    replyTo?: string,
     myReplies: ProductComment[] = [],
     user?: User,
     product: Product = new Product()

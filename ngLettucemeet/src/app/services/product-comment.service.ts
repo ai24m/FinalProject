@@ -58,7 +58,7 @@ export class ProductCommentService {
     return this.http.post<ProductComment>(this.baseUrl + endpoints, productComment, this.getOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError('Create error' + err);
+        return throwError(() => new Error ('Create reply error'));
       })
     );
   }
@@ -68,7 +68,7 @@ export class ProductCommentService {
     return this.http.post<ProductComment>(this.baseUrl + endpoints, productComment, this.getOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError('Create error' + err);
+        return throwError(() => new Error ('Create error'));
       })
     );
   }
@@ -89,8 +89,8 @@ export class ProductCommentService {
     );
   }
 
-  destroy(productId: number) {
-    let endpoints = `api/productRatings/${productId}`
+  destroy(commentId: number) {
+    let endpoints = `api/productcomments/${commentId}`
     return this.http.delete<ProductComment>(this.baseUrl + endpoints, this.getOptions()).pipe(
       catchError((err: any) => {
         console.error(err);

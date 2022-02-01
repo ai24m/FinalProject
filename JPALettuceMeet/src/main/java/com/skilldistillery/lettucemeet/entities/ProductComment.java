@@ -40,8 +40,7 @@ public class ProductComment {
 	@Column(name = "update_time")
 	private LocalDateTime updated;
 	
-	@JsonIgnoreProperties({"myReplies", "replyTo"})
-//	@JsonIgnore 
+	@JsonIgnore 
 	@ManyToOne 
 	@JoinColumn(name = "comment_id")
 	private ProductComment replyTo; 
@@ -52,7 +51,7 @@ public class ProductComment {
 	private List <ProductComment> myReplies;
 	
 //	@JsonIgnoreProperties({"productComments"})
-	@JsonIgnore
+//	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "product_id")
 	private Product product;
