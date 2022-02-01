@@ -24,16 +24,16 @@ export class UserComponent implements OnInit {
 
   }
 
-  register(user: User) {
-    this.authService.register(user).subscribe({
+  register(newUser: User) {
+    this.authService.register(newUser).subscribe({
       next: () => {
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('profile');
       },
       error: (fail) => {
         console.error('Register Component Error' + fail)
       }
     })
-    console.log(user + 'registered');
+    console.log(newUser + 'registered');
   }
 
   login(user: User) {

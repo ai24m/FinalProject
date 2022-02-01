@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.lettucemeet.entities.Product;
+import com.skilldistillery.lettucemeet.entities.Type;
 import com.skilldistillery.lettucemeet.services.ProductService;
+import com.skilldistillery.lettucemeet.services.TypeService;
 
 @RestController
 @RequestMapping("api")
@@ -27,10 +29,18 @@ public class ProductController {
 
 	@Autowired
 	private ProductService prodSvc;
+	
+	@Autowired 
+	private TypeService typeSvc; 
 
 	@GetMapping("products")
 	public List<Product> products() {
 		return prodSvc.getProducts();
+	}
+	
+	@GetMapping("types")
+	public List<Type> types() {
+		return typeSvc.getAllTypes();
 	}
 
 	@GetMapping("products/{id}")

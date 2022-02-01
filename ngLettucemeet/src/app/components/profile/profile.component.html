@@ -22,16 +22,13 @@
                            {{user.businessname}}<br>
                            {{user.username}}<br>
                       <p>
-
                         Velvet Twilight Farms!
                         Grow produce all year around, visit our Farm!
 
                         insert map of location here
                       </p></div>
                   </div>
-
 <!-- Post Comments -->
-
                   <div>
                       <h2 class="tm-color-primary tm-post-title">Comments</h2>
                       <hr class="tm-hr-primary tm-mb-45">
@@ -98,17 +95,98 @@
                         <!-- <img src="img/img-05.jpg" alt="Image" class="mb-3 img-fluid"> -->
                         <figcaption class="tm-color-primary">{{organic(p.organic)}}, </figcaption>
                         <figcaption class="tm-color-primary">Available Date: {{p.availableDate}}</figcaption>
-                    </figure>
-                  </a>
-                  <!-- <hr class="mb-3 tm-hr-primary">
-                  <h2 class="tm-mb-40 tm-post-title tm-color-primary">Market Participation</h2>
-                  <a href="#" class="d-block tm-mb-40" *ngFor="let m of markets">
-                      <figure>
-                          <img src="img/img-02.jpg" alt="Image" class="mb-3 img-fluid">
-                          <figcaption class="tm-color-primary">Duis mollis diam nec ex viverra scelerisque a sit</figcaption>
+                        <figcaption class="tm-color-primary" *ngIf="p.markets != null">
+                          <figcaption class="tm-color-primary" *ngFor="let m of p.markets ">Vendor At: {{m.name}}, {{m.address.city}}</figcaption>
+                        </figcaption>
+                        <figcaption class="tm-color-primary" *ngIf="p.markets == null">
+                          <div class="text-right">
+                            <button (click)='addProductToMarket = !addProductToMarket' value="Add To Market" class="tm-btn tm-btn-primary tm-btn-small">Submit</button>
+                          </div>
+                          <figcaption class="tm-color-primary"><input type="button" >
+
+
+                          </figcaption></figcaption>
+
+
                       </figure>
-                  </a> -->
+                  </a>
+ <!-- Add New Product -->
+                  <hr class="mb-3 tm-hr-primary">
+                      <figure>
+                          <form action="" class="mb-5 tm-comment-form">
+                            <h2 class="tm-color-primary tm-post-title mb-4">Add New Listing</h2>
+                            <div class="mb-4">
+                              <input class="form-control" [(ngModel)]="newProduct.name" name="name" placeholder="name" type="text">
+                            </div>
+                            <div class="mb-4">
+                              <textarea class="form-control"[(ngModel)]="newProduct.description" name="description" placeholder="description" rows="6"></textarea>
+                            </div>
+                            <div class="mb-4">
+                              <!-- <app-file-upload formControlName="image" [progress]="progress"></app-file-upload> -->
+                              <textarea class="form-control" [(ngModel)]="newProduct.imageUrl" name="imageUrl" placeholder="imageUrl" rows="6"></textarea>
+                            </div>
+                            <div class="mb-4">
+                              <!-- <app-file-upload formControlName="image" [progress]="progress"></app-file-upload> -->
+                              <input type="Date" class="form-control" [(ngModel)]="newProduct.availableDate" name="availableDate">
+                            </div>
+                            <div class="mb-4">
+                              <label for="types">Please Select One</label>
+                                  <select id="type" [(ngModel)]="newProduct.organic">
+                                    <option>---Select---</option>
+                                    <option value="true">Organic</option>
+                                    <option value="false">Non-Organic</option>
+                                  </select>
+                            </div>
+                            <div class="mb-4">
+                              <label for="types">Type of Product</label>
+                                  <select name="type" [(ngModel)]="newProduct.type.id">
+                                    <option *ngFor="let t of types" value="{{t.id}}">{{t.name}}</option>
+                                  </select>
+                            </div>
+                            <div class="text-right">
+                                <button (click)='addProduct(newProduct)' value="Add Product" class="tm-btn tm-btn-primary tm-btn-small">Submit</button>
+                            </div>
+                        </form>
+                      </figure>
               </div>
+ <!-- Add Product To Market -->
+
+ <figure *ngIf="!addProductToMarket">
+  <form action="" class="mb-5 tm-comment-form">
+    <h2 class="tm-color-primary tm-post-title mb-4">Add New Listing</h2>
+    <div class="mb-4">
+      <input class="form-control" [(ngModel)]="newProduct.name" name="name" placeholder="name" type="text">
+    </div>
+    <div class="mb-4">
+      <textarea class="form-control"[(ngModel)]="newProduct.description" name="description" placeholder="description" rows="6"></textarea>
+    </div>
+    <div class="mb-4">
+      <!-- <app-file-upload formControlName="image" [progress]="progress"></app-file-upload> -->
+      <textarea class="form-control" [(ngModel)]="newProduct.imageUrl" name="imageUrl" placeholder="imageUrl" rows="6"></textarea>
+    </div>
+    <div class="mb-4">
+      <!-- <app-file-upload formControlName="image" [progress]="progress"></app-file-upload> -->
+      <input type="Date" class="form-control" [(ngModel)]="newProduct.availableDate" name="availableDate">
+    </div>
+    <div class="mb-4">
+      <label for="types">Please Select One</label>
+          <select id="type" [(ngModel)]="newProduct.organic">
+            <option>---Select---</option>
+            <option value="true">Organic</option>
+            <option value="false">Non-Organic</option>
+          </select>
+    </div>
+    <div class="mb-4">
+      <label for="types">Type of Product</label>
+          <select name="type" [(ngModel)]="newProduct.type.id">
+            <option *ngFor="let t of types" value="{{t.id}}">{{t.name}}</option>
+          </select>
+    </div>
+    <div class="text-right">
+        <button (click)='addProduct(newProduct)' value="Add Product" class="tm-btn tm-btn-primary tm-btn-small">Submit</button>
+    </div>
+</form>
+</figure>
           </aside>
       </div>
       <footer class="row tm-row">
