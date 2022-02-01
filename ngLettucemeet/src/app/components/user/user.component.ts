@@ -17,7 +17,7 @@ export class UserComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    this.newUser = this.newUser;
+    // this.newUser = this.newUser;
   }
 
   load(){

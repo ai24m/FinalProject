@@ -3,30 +3,81 @@
       <div class="row tm-row">
           <div class="col-lg-8 tm-post-col">
               <div class="tm-post-full">
-                  <div class="mb-4">
+                  <div *ngIf="!bioedit" class="mb-4">
 <!-- profile  -->
-                      <h2 class="pt-2 tm-color-primary tm-post-title">
-                        Welcome {{user.username}}
-                        <img src="/assets/images/profile/profile.png" id="profile" alt="Image" class="mb-3 img-fluid">
-                      </h2>
+                      <h1 class="pt-2 tm-color-primary tm-post-title">
+                        Welcome <span style="text-transform: uppercase;">{{user.username}}</span>
+                        <img class="bioeditbtn" (click)="bioedit = !bioedit" src="/assets/images/profile/profile.png">
+                      </h1>
                       <div>
                       <h4>Address</h4>
+                      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22941.6448504215!2d-122.09927422712359!3d47.71801681253284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54900cebac7a0923%3A0x88a5c2ea00b1ce4a!2sUnion%20Hill-Novelty%20Hill!5e1!3m2!1sen!2sus!4v1643683153784!5m2!1sen!2sus" width="400" height="200" style="border:0; float: right;" allowfullscreen="" loading="lazy"></iframe>
                            {{user.address?.street1}}<br>
                            {{user.address?.street2}}
-                           {{user.address?.city}}<br>
-                           {{user.address?.state}}<br>
+                           {{user.address?.city}}, {{user.address?.state}}<br>
                            {{user.address?.zip}}<br>
                       <h4>Profile Info</h4>
-                           {{user.firstname}}<br>
-                           {{user.lastname}}<br>
-                           {{user.businessname}}<br>
-                           {{user.username}}<br>
-                      <p>
-                        Welcome to Velvet Twilight Farms!
-                        Grow produce all year around, stop by and visit our Farm!
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22941.6448504215!2d-122.09927422712359!3d47.71801681253284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54900cebac7a0923%3A0x88a5c2ea00b1ce4a!2sUnion%20Hill-Novelty%20Hill!5e1!3m2!1sen!2sus!4v1643683153784!5m2!1sen!2sus" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                           <span>Firstname: </span><br> {{user.firstName}}<br>
+                           <span>Lastname:</span><br>   {{user.lastName}}<br>
+                           <span>Business Name: </span><br>  {{user.businessname}}<br>
+                           <span>Username: {{user.username}}</span>
+                      <p class="bio">
+                        Bio: We grow produce all year around, stop by and visit our Farm!
                       </p></div>
+
                   </div>
+<!-- edit info div -->
+
+                  <div>
+
+                    <figure *ngIf="bioedit" id="editbioform">
+                      <form style="margin-top: 5%;" class="mb-5 tm-comment-form">
+
+                        <h4>Update Your Profile</h4>
+
+                        <h4>Address</h4>
+
+                        <div class="mb-4">
+                         <span> Street1</span> <input type="text" class="form-control" placeholder={{user.address?.street1}} [(ngModel)]="addressUpdatingInfo.street1"  name="street1">
+                        </div>
+                        <div class="mb-4">
+                          <span>Street2</span> <input type="text" class="form-control" placeholder={{user.address?.street2}} [(ngModel)]="addressUpdatingInfo.street2" name="street2">
+                        </div>
+                        <div class="mb-4">
+                          <span>City</span><input type="text" class="form-control" placeholder={{user.address?.city}} [(ngModel)]="addressUpdatingInfo.city" name="city">
+                        </div>
+                        <div class="mb-4">
+                          <span>Address</span><input type="text" class="form-control" placeholder="Example: CO, GA . . ." [(ngModel)]="addressUpdatingInfo.state" name="state">
+                        </div>
+                        <div class="mb-4">
+                          <span>State Abbrev</span><input type="text" class="form-control" placeholder={{user.address?.zip}} [(ngModel)]="addressUpdatingInfo.zip" name="zip">
+                        </div>
+                        <h4>Profile Info</h4>
+                        <div class="mb-4">
+                          <span>Firstname</span><input type="text" class="form-control" placeholder={{user.firstName}} [(ngModel)]="userUpdatingInfo.firstName" name="firstName">
+                        </div>
+                        <div class="mb-4">
+                          <span>Lastname</span><input type="text" class="form-control" placeholder={{user.lastName}} [(ngModel)]="userUpdatingInfo.lastName" name="lastName">
+                        </div>
+                        <div class="mb-4">
+                          <span>Business name</span><input type="text" class="form-control" placeholder={{user.businessname}} [(ngModel)]="userUpdatingInfo.businessname" name="businessname">
+                        </div>
+                        <div class="mb-4">
+                          <span>Email</span> <input type="text" class="form-control" placeholder={{user.email}} [(ngModel)]="userUpdatingInfo.email" name="email">
+                        </div>
+
+                        <div class="text-right">
+                            <button (click)='updateBio(userUpdatingInfo, addressUpdatingInfo); bioedit = !bioedit' value="Update Product" class="tm-btn tm-btn-primary tm-btn-small">Submit</button>
+                            <button (click)="bioedit = !bioedit" value="Back" class="tm-btn tm-btn-primary tm-btn-small">Cancel</button>
+                        </div>
+                    </form>
+                    </figure>
+
+
+
+
+                  </div>
+
 <!-- Post Comments -->
                   <div>
                       <h2 class="tm-color-primary tm-post-title">Comments</h2>
@@ -110,7 +161,9 @@
                         </figcaption>
                         <figcaption class="tm-color-primary" *ngIf="p.markets.length === 0">
                           <div class="text-right">
+                             <a [routerLink]="['/home']">
                             <button (click)='addProductToMarket = !addProductToMarket' value="Add To Market" class="tm-btn tm-btn-primary tm-btn-small">Add To Market</button>
+                              </a>
                           </div>
                          </figcaption>
                       </figure>
@@ -173,10 +226,9 @@
                       <!-- <app-file-upload formControlName="image" [progress]="progress"></app-file-upload> -->
                       <input type="Date" class="form-control" [(ngModel)]="ProductBeingEdited.availableDate" name="availableDate">
                     </div>
-                    <div class="mb-4">
+                    <div class="mb-4" >
                       <label for="types">Please Select One</label>
-                          <select id="type" [(ngModel)]="ProductBeingEdited.organic">
-                            <option>---Select---</option>
+                          <select placeholder="---Select---" name="organic" [(ngModel)]="ProductBeingEdited.organic">
                             <option value="true">Organic</option>
                             <option value="false">Non-Organic</option>
                           </select>
@@ -184,7 +236,7 @@
                     <div class="mb-4">
                       <label for="types">Type of Product</label>
                           <select name="type" [(ngModel)]="ProductBeingEdited.type.id">
-                            <option *ngFor="let t of types" value="{{t.id}}">{{t.name}}</option>
+                            <option *ngFor="let t of types" value={{t.id}}>{{t.name}}</option>
                           </select>
                     </div>
                     <div class="text-right">

@@ -10,6 +10,7 @@ import { ProductService } from 'src/app/services/product.service';
 import { SellerRatingService } from 'src/app/services/seller-rating.service';
 import { UserService } from 'src/app/services/user.service';
 import { TypeService } from 'src/app/services/type.service';
+import { Address } from 'src/app/models/address';
 
 @Component({
   selector: 'app-profile',
@@ -27,6 +28,9 @@ export class ProfileComponent implements OnInit {
   addProductToMarket: boolean = false;
   ProductBeingEdited: Product = new Product();
   ProductBeingDeleted: Product = new Product();
+  bioedit: boolean = false;
+  userUpdatingInfo: User = new User();
+  addressUpdatingInfo: Address = new Address();
 
   constructor(
     private router: Router,
@@ -44,6 +48,7 @@ export class ProfileComponent implements OnInit {
         this.user = user;
         this.getProducts();
         this.getTypes();
+        this.userUpdatingInfo = user;
         console.log(user);
       }
     })
@@ -78,7 +83,7 @@ export class ProfileComponent implements OnInit {
   updateProduct(ProductBeingEdited: Product) {
     this.product.updateProduct(ProductBeingEdited).subscribe(
       success => {
-        this.ngOnInit();
+        window.location.reload();
       },
       err => console.error('Edit Product error' + err)
     );
@@ -97,11 +102,13 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-
   getProducts() {
     this.product.getUserProduct().subscribe({
       next: (products) => {
         this.products = products;
+      },
+      error: (error) => {
+        console.log(error);
       }
     });
   }
@@ -110,6 +117,21 @@ export class ProfileComponent implements OnInit {
     this.typeSvc.index().subscribe({
       next: (types) => {
         this.types = types;
+      },
+      error: (error) => {
+        console.log(error + 'get types error in profilecomponent');
+      }
+    });
+  }
+
+  updateBio(user: User, address: Address){
+    this.user.address.id = address.id;
+    this.userSvc.update(user).subscribe({
+      next: () => {
+        this.ngOnInit();
+      },
+      error: (err) => {
+        console.log(err + 'update bio error in profilecomponent');
       }
     })
   }

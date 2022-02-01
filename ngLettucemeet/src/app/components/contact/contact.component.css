@@ -6,3 +6,7 @@
 address, span {
   color:black
 }
+
+#details {
+  font-size: 110%;
+}

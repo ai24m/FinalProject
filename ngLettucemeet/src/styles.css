@@ -347,6 +347,7 @@ figcaption { line-height: 1.4; }
 
 .tm-post-full { max-width: 400px; }
 
+/* width of sidebar  */
 .tm-post-sidebar {
     max-width: 280px;
     margin-left: auto;

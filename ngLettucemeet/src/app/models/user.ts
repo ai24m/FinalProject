@@ -13,11 +13,11 @@ export class User {
   password: string;
   email: string | undefined;
   role: string | undefined;
-  firstname: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
   businessname: string;
   imageurl: string;
-  address: Address | undefined;
+  address: Address;
   productratings: ProductRating[] = [];
   sellerratings: SellerRating[] = [];
   userratings: SellerRating[] = [];
@@ -29,7 +29,7 @@ export class User {
 
 
   constructor(id: number = 0, username: string = '', password: string = '', email?: string, role?: string,
-  firstname: string = '', lastname: string = '', businessname: string = '', imageurl: string = '', address?: Address,
+  firstName: string = '', lastName: string = '', businessname: string = '', imageurl: string = '', address: Address = new Address(),
   productrating: ProductRating[] = [],  sellerratings: SellerRating[] = [],   userratings: SellerRating[] = [], products: Product[] = [],
   marketratings: MarketRating[] = [], markets: Market[] = [], productcomments: ProductComment[] = [], marketcomments: MarketComment[] = []) {
     this.id = id;
@@ -37,8 +37,8 @@ export class User {
     this.password = password;
     this.email = email;
     this.role = role;
-    this.firstname = firstname;
-    this.lastname = lastname;
+    this.firstName = firstName;
+    this.lastName = lastName;
     this.businessname = businessname;
     this.imageurl = imageurl;
     this.address = address;
