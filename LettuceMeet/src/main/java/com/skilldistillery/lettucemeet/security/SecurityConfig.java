@@ -28,9 +28,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/api/**").permitAll() // For CORS, the preflight request
 				.antMatchers(HttpMethod.OPTIONS, "/**").permitAll() // will hit the OPTIONS on the route
+<<<<<<< HEAD
 //				.antMatchers(HttpMethod.POST, "/api/users/").permitAll() // will hit the OPTIONS on the route
 //				.antMatchers(HttpMethod.POST, "/api/login/").permitAll() // will hit the OPTIONS on the route
 //				.antMatchers(HttpMethod.POST, "/api/users").permitAll() // will hit the OPTIONS on the route
+=======
+				.antMatchers(HttpMethod.OPTIONS, "/api/user").hasAuthority("admin") // will hit the OPTIONS on the route
+				.antMatchers(HttpMethod.OPTIONS, "/api/users").hasAuthority("admin") // will hit the OPTIONS on the route
+				.antMatchers(HttpMethod.POST, "/api/users/").permitAll() // will hit the OPTIONS on the route
+				.antMatchers(HttpMethod.POST, "/api/login/").permitAll() // will hit the OPTIONS on the route
+				.antMatchers(HttpMethod.POST, "/api/users").permitAll() // will hit the OPTIONS on the route
+>>>>>>> 0007fb1e254d80bfe22999e3fc2f5583dfd263d9
 				.antMatchers(HttpMethod.GET, "/api/types/").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/types").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/markets").permitAll() // will hit the OPTIONS on the route
@@ -49,6 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.GET, "/api/products/**").permitAll() 
 				.antMatchers(HttpMethod.GET, "/api/productcomments").permitAll() 
 				.antMatchers(HttpMethod.GET, "/api/productcomments/**").permitAll() 
+<<<<<<< HEAD
 //				.antMatchers(HttpMethod.DELETE, "/api/productcomments/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/api/marketratings/avegrating/**").permitAll() 
 //				.antMatchers(HttpMethod.PUT, "/api/users/**").hasAuthority("user")
@@ -62,6 +71,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/api/**").hasAuthority("admin") // return true or false 
 //				.antMatchers(HttpMethod.PUT, "/api/**").hasAuthority("user") // return true or false 
 //				.antMatchers(HttpMethod.POST, "/api/**").hasAuthority("user") // return true or false 
+=======
+				.antMatchers(HttpMethod.OPTIONS, "/api/users/**").hasAuthority("admin") // return true or false 
+				.antMatchers(HttpMethod.PUT, "/api/**").hasAuthority("standard") // return true or false 
+				.antMatchers(HttpMethod.POST, "/api/**").hasAuthority("standard") // return true or false 
+				.antMatchers(HttpMethod.POST, "/api/**").hasAuthority("user") // return true or false 
+				.antMatchers(HttpMethod.DELETE, "/api/productcomments/**").permitAll() 
+				.antMatchers(HttpMethod.DELETE, "/api/products/**").hasAuthority("admin") // will hit the OPTIONS on the route
+				.antMatchers(HttpMethod.DELETE, "/api/users/**").hasAuthority("admin") // will hit the OPTIONS on the route
+				.antMatchers(HttpMethod.DELETE, "/api/markets/**").hasAuthority("admin") // will hit the OPTIONS on the route
+				.antMatchers(HttpMethod.DELETE, "/api/**").hasAuthority("user") // return true or false 
+				.antMatchers(HttpMethod.DELETE, "/api/**").hasAuthority("standard") // return true or false 
+>>>>>>> 0007fb1e254d80bfe22999e3fc2f5583dfd263d9
 				.antMatchers("/api/**").authenticated() // Requests for our REST API must be authorized.
 				.anyRequest().permitAll() // All other requests are allowed without authorization.
 				.and().httpBasic(); // Use HTTP Basic Authentication

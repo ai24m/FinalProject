@@ -89,3 +89,7 @@ span {
   border: none;
   margin-left: 4%;
 }
+tr.disabled > td {
+  color: darkred;
+  text-decoration: line-through;
+}

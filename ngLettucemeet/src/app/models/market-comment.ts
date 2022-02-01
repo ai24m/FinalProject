@@ -10,6 +10,7 @@ export class MarketComment {
   user: User | undefined;
   market: Market;
   replies: MarketComment[] = [];
+  disabled: boolean = false;
 
   constructor(
     id: number = 0,
@@ -19,7 +20,8 @@ export class MarketComment {
     replyTo?: string,
     user?: User,
     market: Market = new Market(),
-    replies: MarketComment[] = []
+    replies: MarketComment[] = [],
+    disabled: boolean = false
   ) {
     this.id = id;
     this.comment = comment;
@@ -29,5 +31,6 @@ export class MarketComment {
     this.user = user;
     this.market = market;
     this.replies = replies;
+    this.disabled = disabled;
   }
 }

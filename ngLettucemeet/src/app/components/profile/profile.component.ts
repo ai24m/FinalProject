@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Market } from 'src/app/models/market';
 import { Product } from 'src/app/models/product';
@@ -21,9 +21,10 @@ export class ProfileComponent implements OnInit {
   user: User = new User();
   edit: boolean = false;
   delete: boolean = false;
+  users: User[] = [];
   products: Product[] = [];
   markets: Market[] = [];
-  types: Type[] =[];
+  types: Type[] = [];
   newProduct: Product = new Product();
   addProductToMarket: boolean = false;
   ProductBeingEdited: Product = new Product();
@@ -31,6 +32,13 @@ export class ProfileComponent implements OnInit {
   bioedit: boolean = false;
   userUpdatingInfo: User = new User();
   addressUpdatingInfo: Address = new Address();
+  adminLogin: boolean = false;
+  userEdit: User | null = null;
+  userSelect: User | null = null;
+  prodEdit: Product | null = null;
+  prodSelect: Product | null = null;
+  mrktEdit: Market | null = null;
+  mrktSelect: Market | null = null;
 
   constructor(
     private router: Router,
@@ -45,16 +53,25 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.auth.getCurrentUser().subscribe({
       next: (user) => {
-        this.user = user;
-        this.getProducts();
-        this.getTypes();
-        this.userUpdatingInfo = user;
-        console.log(user);
+       this.reloadPage(user);
       }
     })
   }
 
-  resetPassword() {}
+  reloadPage(user: User){
+    this.user = user;
+    if (this.user.role === "admin") {
+      this.adminLogin = true;
+    }
+    this.getProducts();
+    this.getTypes();
+    this.userUpdatingInfo = user;
+    console.log(user);
+  }
+
+  // resetPassword() {
+
+  // }
 
   organic(organic: boolean) {
     if (organic) {
@@ -71,7 +88,7 @@ export class ProfileComponent implements OnInit {
     this.product.createProduct(newProduct).subscribe(
       success => { //another way to write: function that has parameters todos next: (todos) => { do this function }, error: (wrong) => { }
         this.newProduct = new Product();
-        this.ngOnInit();
+        this.reloadPage(this.user);
       },
       err => console.error('Add Product error' + err)
     );
@@ -94,14 +111,14 @@ export class ProfileComponent implements OnInit {
     this.ProductBeingDeleted = product;
   }
 
-  deleteProduct(product: Product) {
-    this.product.destroyProduct(product.id).subscribe(
-      success => {
-        this.ngOnInit();
-      },
-      err => console.error('Delete Product error')
-    );
-  }
+  // deleteProduct(product: Product) {
+  //   this.product.destroyProduct(product.id).subscribe(
+  //     success => {
+  //       this.ngOnInit();
+  //     },
+  //     err => console.error('Delete Product error')
+  //   );
+  // }
 
   getProducts() {
     this.product.getUserProduct().subscribe({
@@ -114,7 +131,7 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  getTypes(){
+  getTypes() {
     this.typeSvc.index().subscribe({
       next: (types) => {
         this.types = types;
@@ -129,7 +146,7 @@ export class ProfileComponent implements OnInit {
     this.user.address.id = address.id;
     this.userSvc.update(user).subscribe({
       next: () => {
-        this.ngOnInit();
+        this.reloadPage(this.user);
       },
       error: (err) => {
         console.log(err + 'update bio error in profilecomponent');
@@ -137,5 +154,87 @@ export class ProfileComponent implements OnInit {
     })
   }
 
+  productIndex() {
+    this.product.productIndex().subscribe({
+      next: (prods) => {
+        this.products = prods;
+      }
+    });
+    throw new Error('Function not implemented.');
+  }
+
+  getMarkets() {
+    this.market.index().subscribe({
+      next: (mrkts) => {
+        this.markets = mrkts;
+      }
+    })
+    throw new Error('Function not implemented.');
+  }
+
+  getUsers() {
+    this.userSvc.index().subscribe({
+      next: (user) => {
+        this.users = user;
+      },
+      error: (fail) => {
+        console.error("Error getting users" + fail);
+      }
+    });
+  }
+
+  deleteUser(user: User) {
+    if (user.disabled == true) {
+      user.disabled = false;
+    } else {
+      user.disabled = true;
+    }
+    this.userSvc.update(user).subscribe({
+      next: () => {
+        this.userEdit = null;
+        this.userSelect = user;
+        this.getUsers();
+      },
+      error: (fail) => {
+        console.error("Error deleting user" + fail);
+      }
+    });
+  }
+
+  deleteProduct(prod: Product) {
+    if (prod.disabled == true) {
+      prod.disabled = false;
+    } else {
+      prod.disabled = true;
+    }
+    this.product.updateProduct(prod).subscribe({
+      next: () => {
+        this.prodEdit = null;
+        this.prodSelect = prod;
+        this.getProducts();
+      },
+      error: (fail) => {
+        console.error("Error deleting user" + fail);
+      }
+    });
+  }
+
+  deleteMarket(mrkt: Market) {
+    if (mrkt.disabled == true) {
+      mrkt.disabled = false;
+    } else {
+      mrkt.disabled = true;
+    }
+    this.market.update(mrkt).subscribe({
+      next: () => {
+        this.mrktEdit = null;
+        this.mrktSelect = mrkt;
+        this.getMarkets;
+      },
+      error: (fail) => {
+        console.error("Error deleting user" + fail);
+      }
+    });
+  }
 
 }

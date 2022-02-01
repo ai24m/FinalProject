@@ -9,7 +9,7 @@ a {
 }
 .featured {
   position: absolute;
-  top: 40%;
+  top: 10%;
   left: 85%;
   transform: translate(-50%, -50%);
   text-transform: uppercase;
@@ -41,4 +41,8 @@ button {
   background-color: #526E2A;
   text-decoration: none;
   font-size: 100%;
+}
+
+container-fluid {
+  height: 100vh;
 }

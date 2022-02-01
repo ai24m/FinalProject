@@ -20,7 +20,7 @@ export class UserComponent implements OnInit {
     // this.newUser = this.newUser;
   }
 
-  load(){
+  load() {
 
   }
 
@@ -47,9 +47,13 @@ export class UserComponent implements OnInit {
   login(user: User) {
     this.authService.login(user.username, user.password).subscribe({
       next: () => {
-        this.router.navigateByUrl('profile');
+        if (user.role === "admin") {
+          this.router.navigateByUrl('admin');
+        } else {
+          this.router.navigateByUrl('profile');
+        }
       },
-      error: (fail) => {'Login Component fail'}
+      error: (fail) => { 'Login Component fail' }
     })
   }
 }
