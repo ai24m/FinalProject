@@ -4,8 +4,11 @@
 
 ## Team : 
 -Scrum Master: Chris Delong 
+
 -Database Administrator: Graham Anderson
+
 -Angular Project Owner: Wangcheng Ni 
+
 -Github Repo Owner: Allysa Powell 
 
 ## Description : 
