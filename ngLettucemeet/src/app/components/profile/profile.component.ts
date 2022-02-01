@@ -67,6 +67,7 @@ export class ProfileComponent implements OnInit {
   }
 
   addProduct(newProduct: Product) {
+    console.log(newProduct);
     this.product.createProduct(newProduct).subscribe(
       success => { //another way to write: function that has parameters todos next: (todos) => { do this function }, error: (wrong) => { }
         this.newProduct = new Product();

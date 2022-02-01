@@ -28,15 +28,19 @@ export class MarketCommentComponent implements OnInit {
       if (idString) {
         let id = Number.parseInt(idString);
         if (!isNaN(id)) {
-          this.MarketCommentSev.getByMarketId(id).subscribe({
-            next: (comments) => {
-              this.marketComments = comments;
-            },
-          });
+         this.loadMarketComments(id);
         }
       }
     }
     // this.reload();
+  }
+
+  loadMarketComments(id: number){
+    this.MarketCommentSev.getByMarketId(id).subscribe({
+      next: (comments) => {
+        this.marketComments = comments;
+      },
+    });
   }
 
   getCommentsByMarketId(marketId: number) {
@@ -69,7 +73,8 @@ export class MarketCommentComponent implements OnInit {
     ).subscribe({
       next: (marketComment) => {
         this.newMarketCommet = new MarketComment();
-        this.ngOnInit();
+        // this.ngOnInit();
+        this.loadMarketComments(this.market.id);
       },
       error: (err) => {
         console.error('Error creating A new marketComment');
@@ -99,6 +104,7 @@ export class MarketCommentComponent implements OnInit {
     this.MarketCommentSev.destroyByMarketCommentId(marketCommentId).subscribe({
       next: () => {
         // this.ngOnInit();
+        this.loadMarketComments(this.market.id);
       },
       error: (fail) => {
         console.error(

@@ -28,9 +28,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/api/**").permitAll() // For CORS, the preflight request
 				.antMatchers(HttpMethod.OPTIONS, "/**").permitAll() // will hit the OPTIONS on the route
-				.antMatchers(HttpMethod.POST, "/api/users/").permitAll() // will hit the OPTIONS on the route
-				.antMatchers(HttpMethod.POST, "/api/login/").permitAll() // will hit the OPTIONS on the route
-				.antMatchers(HttpMethod.POST, "/api/users").permitAll() // will hit the OPTIONS on the route
+//				.antMatchers(HttpMethod.POST, "/api/users/").permitAll() // will hit the OPTIONS on the route
+//				.antMatchers(HttpMethod.POST, "/api/login/").permitAll() // will hit the OPTIONS on the route
+//				.antMatchers(HttpMethod.POST, "/api/users").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/types/").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/types").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/markets").permitAll() // will hit the OPTIONS on the route
@@ -42,32 +42,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.GET, "/api/productratings/**").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/marketcomments/**").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/market/**").permitAll() 
-				.antMatchers(HttpMethod.PUT, "/api/markets/**").hasAuthority("standard")
-				.antMatchers(HttpMethod.PUT, "/api/markets/**").hasAuthority("user")
+//				.antMatchers(HttpMethod.PUT, "/api/markets/**").hasAuthority("user")
 				.antMatchers(HttpMethod.GET, "/api/sellerRatings/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/api/marketratings/**").permitAll() 
 				.antMatchers(HttpMethod.GET, "/api/products").permitAll() 
 				.antMatchers(HttpMethod.GET, "/api/products/**").permitAll() 
 				.antMatchers(HttpMethod.GET, "/api/productcomments").permitAll() 
 				.antMatchers(HttpMethod.GET, "/api/productcomments/**").permitAll() 
-				.antMatchers(HttpMethod.DELETE, "/api/productcomments/**").permitAll()
+//				.antMatchers(HttpMethod.DELETE, "/api/productcomments/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/api/marketratings/avegrating/**").permitAll() 
-				.antMatchers(HttpMethod.PUT, "/api/users/**").hasAuthority("user")
-				.antMatchers(HttpMethod.POST, "/api/productcomments/**").permitAll() 
-				.antMatchers(HttpMethod.PUT, "/api/productcomments/**").permitAll() 
-				.antMatchers(HttpMethod.DELETE, "/api/marketcomments/**").hasAuthority("user")
-				.antMatchers(HttpMethod.DELETE, "/api/marketcomments/**").hasAuthority("standard")
-				.antMatchers(HttpMethod.OPTIONS, "/api/users/*").hasAuthority("admin") // return true or false 
-				.antMatchers(HttpMethod.PUT, "/api/**").hasAuthority("standard") // return true or false 
-				.antMatchers(HttpMethod.POST, "/api/**").hasAuthority("standard") // return true or false 
-				.antMatchers(HttpMethod.POST, "/api/**").hasAuthority("user") // return true or false 
-				.antMatchers(HttpMethod.PUT, "/api/**").hasAuthority("user") // return true or false 
-				.antMatchers(HttpMethod.PUT, "/api/**").hasAuthority("standard") // return true or false 
-				.antMatchers(HttpMethod.DELETE, "/api/**").hasAuthority("user") // return true or false 
-				.antMatchers(HttpMethod.DELETE, "/api/**").hasAuthority("standard") // return true or false 
+//				.antMatchers(HttpMethod.PUT, "/api/users/**").hasAuthority("user")
+//				.antMatchers(HttpMethod.POST, "/api/productcomments/**").permitAll() 
+//				.antMatchers(HttpMethod.PUT, "/api/productcomments/**").permitAll() 
+//				.antMatchers(HttpMethod.DELETE, "/api/marketcomments/**").hasAuthority("user")
+//				.antMatchers(HttpMethod.OPTIONS, "/api/users/*").hasAuthority("admin") // return true or false 
+//				.antMatchers(HttpMethod.POST, "/api/**").hasAuthority("user") // return true or false 
+//				.antMatchers(HttpMethod.PUT, "/api/**").hasAuthority("user") // return true or false 
+//				.antMatchers(HttpMethod.DELETE, "/api/**").hasAuthority("user") // return true or false 
 				.antMatchers("/api/**").hasAuthority("admin") // return true or false 
-				.antMatchers(HttpMethod.PUT, "/api/**").hasAuthority("user") // return true or false 
-				.antMatchers(HttpMethod.POST, "/api/**").hasAuthority("user") // return true or false 
+//				.antMatchers(HttpMethod.PUT, "/api/**").hasAuthority("user") // return true or false 
+//				.antMatchers(HttpMethod.POST, "/api/**").hasAuthority("user") // return true or false 
 				.antMatchers("/api/**").authenticated() // Requests for our REST API must be authorized.
 				.anyRequest().permitAll() // All other requests are allowed without authorization.
 				.and().httpBasic(); // Use HTTP Basic Authentication

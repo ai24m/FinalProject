@@ -5,11 +5,11 @@
           <div class="col-12">
           </div>
       </div>
-      <h1>{{selected.name}}</h1>
+
       <div class="row tm-row tm-mb-45">
           <div class="col-12">
               <hr class="tm-hr-primary tm-mb-55">
-              <img src="/assets/images/markets/one.png" id="headerimage" alt="Image" class="img-fluid">
+              <img src={{selected.imageUrl}} id="headerimage" alt="Image" class="img-fluid">
           </div>
       </div>
         <!-- Add Product to Market -->
@@ -26,8 +26,9 @@
             <button (click)='addProductToMarket(productToAdd.id)' value="Update Product" class="tm-btn tm-btn-primary tm-btn-small">Submit</button>
           </div>
         </div>
-
-      <h2>About :{{selected.description}}</h2>
+        <h1>About {{selected.name}}</h1>
+        <hr class="tm-hr-primary tm-mb-45" style="width: 50%;">
+      <h2>{{selected.description}}</h2>
       <div class="col-lg-6 tm-mb-60 tm-person-col">
           <div class="media tm-person">
               <div class="media-body">
@@ -44,7 +45,6 @@
       </div>
       <div class="col-lg-6 tm-mb-60 tm-person-col">
           <div class="media tm-person">
-              <img src="img/about-03.jpg" alt="Image" class="img-fluid mr-4">
               <div class="media-body">
                   <h2 class="tm-color-primary tm-post-title mb-2"></h2>
                   <h3 class="tm-h3 mb-3"></h3>
@@ -57,17 +57,6 @@
           </div>
       </div>
       <aside class="col-lg-4 tm-aside-col">
-        <div class="tm-post-sidebar">
-          <app-market-rating [market]="selected" [marketRatings]="marketRatings"></app-market-rating>
-
-            <hr class="mb-3 tm-hr-primary">
-            <h2 class="mb-4 tm-post-title tm-color-primary"  >See Them At The Farmer's Market!</h2>
-            <ul class="tm-mb-75 pl-5 tm-category-list" >
-                <li><a href="#" class="tm-color-primary">{{selected.name}}</a></li>
-                <li><a href="#" class="tm-color-primary">{{selected.address.city}}, {{selected.address.state}}</a></li>
-                <li><a href="#" class="tm-color-primary">{{selected.marketDate}}</a></li>
-            </ul>
-        </div>
     </aside>
       <div class="row tm-row tm-mb-120">
           <div class="col-lg-4 tm-about-col">
@@ -82,7 +71,7 @@
               <div class="media tm-person">
                   <img src="assets/images/products/mushroom1.jpg" alt="Image" class="img-fluid mr-4">
                   <div class="media-body">
-                      <h2 class="tm-color-primary tm-post-title mb-2">{{product.user.username}}</h2>
+                      <h2 class="tm-color-primary tm-post-title mb-2">Vendor Owner: {{product.user.firstName}} {{product.user.lastName}}</h2>
                       <h3 class="tm-h3 mb-3">{{organic(product.organic)}} </h3>
                       <h3 class="tm-h3 mb-3" >Category: {{product.type.name}}</h3>
                       <p class="mb-0 tm-line-height-short">
@@ -98,7 +87,7 @@
               <div class="media tm-person">
                   <img src="img/about-03.jpg" alt="Image" class="img-fluid mr-4">
                   <div class="media-body">
-                      <h2 class="tm-color-primary tm-post-title mb-2">{{comment.updateTime}}</h2>
+                      <h2 class="tm-color-primary tm-post-title mb-2">{{comment.updated}}</h2>
                       <h3 class="tm-h3 mb-3">{{comment.user}}</h3>
                       <p class="mb-0 tm-line-height-short">
                           Quisque in bibendum elit, in egestas turpis. Vestibulum ornare sollicitudin congue.

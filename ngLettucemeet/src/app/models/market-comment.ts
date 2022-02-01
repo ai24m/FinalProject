@@ -4,8 +4,8 @@ import { User } from './user';
 export class MarketComment {
   id: number;
   comment: string;
-  createTime: string | undefined;
-  updateTime: string | undefined;
+  created: string | undefined;
+  updated: string | undefined;
   replyTo: string | undefined;
   user: User | undefined;
   market: Market;
@@ -14,8 +14,8 @@ export class MarketComment {
   constructor(
     id: number = 0,
     comment: string = '',
-    createTime?: string,
-    updateTime?: string,
+    created?: string,
+    updated?: string,
     replyTo?: string,
     user?: User,
     market: Market = new Market(),
@@ -23,8 +23,8 @@ export class MarketComment {
   ) {
     this.id = id;
     this.comment = comment;
-    this.createTime = createTime;
-    this.updateTime = updateTime;
+    this.created = created;
+    this.updated = updated;
     this.replyTo = replyTo;
     this.user = user;
     this.market = market;

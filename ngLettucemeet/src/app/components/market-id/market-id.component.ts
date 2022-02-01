@@ -43,24 +43,28 @@ export class MarketIdComponent implements OnInit {
       let id = Number.parseInt(idString);
       console.log(id);
       if (!isNaN(id)) {
-        this.MarketSev.GetByMarketId(id).subscribe({
-          next: (market) => {
-            this.selected = market;
-            this.myMarketId = id;
-            this.loadComments(id);
-            this.loadingRatings(id);
-          },
-          error: (fail) => {
-            console.error('TodoListComponent.ngoninit()');
-            this.router.navigateByUrl('notfound'); //fall through in app router
-          },
-        });
+       this.reload(id);
       } else {
         this.router.navigateByUrl('notfound');
       }
       this.reload(id);
       this.loadProductsOfUser();
     }
+  }
+
+  reload(id: number){
+    this.MarketSev.GetByMarketId(id).subscribe({
+      next: (market) => {
+        this.selected = market;
+        this.myMarketId = id;
+        this.loadComments(id);
+        this.loadingRatings(id);
+      },
+      error: (fail) => {
+        console.error('TodoListComponent.ngoninit()');
+        this.router.navigateByUrl('notfound'); //fall through in app router
+      },
+    });
   }
 
   loadComments(id: number) {
@@ -72,24 +76,11 @@ export class MarketIdComponent implements OnInit {
   }
 
   loadingRatings(id: number) {
-    // show average of ratings call function by marketid to get average ratings
     this.marketRatingSvc.GetByMarketId(id).subscribe({
       next: (ratings) => {
         console.log('Ratings');
         console.log(ratings);
         this.marketRatings = ratings;
-      },
-    });
-  }
-
-  reload(id: number) {
-    this.MarketSev.GetByMarketId(id).subscribe({
-      next: (m) => {
-        this.selected = m;
-      },
-      error: (err) => {
-        console.error('MarketComponent(): Error retrieving markets');
-        console.error(err);
       },
     });
   }
@@ -117,7 +108,7 @@ export class MarketIdComponent implements OnInit {
     this.product.getUserProduct().subscribe({
       next: (products) => {
         this.products = products;
-        // this.ngOnInit();
+        this.reload(this.selected.id);
       },
       error: (err) => {
         console.error('MarketIdComponent(): Error retrieving markets');
@@ -134,7 +125,7 @@ export class MarketIdComponent implements OnInit {
         this.MarketSev.update(this.selected).subscribe({
           next: (updatedMarketWithProducts) => {
             this.selected = updatedMarketWithProducts;
-            this.ngOnInit();
+            this.reload(this.selected.id);
           },
           error: (err) => {
             console.error('MarketIdComponent(): Error adding product to market');
@@ -147,7 +138,7 @@ export class MarketIdComponent implements OnInit {
         console.error(err);
       },
     });
-    this.ngOnInit();
+    this.reload(this.selected.id);
   }
 
 
