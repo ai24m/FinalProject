@@ -49,7 +49,9 @@ public class ProductComment {
 	@OneToMany(mappedBy = "replyTo")
 	private List <ProductComment> myReplies;
 	
-	@JsonIgnore
+
+//	@JsonIgnoreProperties({"productComments"})
+//	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "product_id")
 	private Product product;

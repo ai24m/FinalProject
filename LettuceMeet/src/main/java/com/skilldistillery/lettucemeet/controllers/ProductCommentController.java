@@ -102,15 +102,14 @@ public class ProductCommentController {
 		} return null; 
 	}
 	
-	@PutMapping("products/{pId}/productcomments/{pcId}")
+	@PutMapping("productcomments/{pcId}")
 	public ProductComment update(HttpServletRequest req, HttpServletResponse res, Principal principal, 
-			@PathVariable Integer pcId, @RequestBody ProductComment productComment, @PathVariable Integer pId) {
+			@PathVariable Integer pcId, @RequestBody ProductComment productComment) {
 		try {
-			Product product = productSvc.findById(pId); 
 			User user = userSvc.findByUserName(principal.getName()); 
-			productComment = pcSvc.update(user, product, pcId, productComment);
+			productComment = pcSvc.update(user, pcId, productComment);
 			if (productComment == null) {
-				res.setStatus(404); // 404 request body does not exisy
+				res.setStatus(404); // 404 request body does not exist
 			} 
 		} catch (Exception e) {
 			res.setStatus(400); // 400 request body is bad data
@@ -120,7 +119,7 @@ public class ProductCommentController {
 		return productComment;
 	}
 	
-	@DeleteMapping("productcomments/{pcId}/comments")
+	@DeleteMapping("productcomments/{pcId}")
 	public void destroy(HttpServletRequest req, HttpServletResponse res, Principal principal, @PathVariable Integer pcId) {
 		try {
 			User user = userSvc.findByUserName(principal.getName()); 
