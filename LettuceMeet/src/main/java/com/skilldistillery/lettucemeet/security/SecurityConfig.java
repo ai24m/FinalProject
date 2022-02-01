@@ -35,34 +35,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.GET, "/api/types").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/markets").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/markets/**").permitAll() // will hit the OPTIONS on the route
+				.antMatchers(HttpMethod.PUT, "/api/markets/**").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/marketcomments").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/sellerRatings").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/productRatings/**").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/productRatings/").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/productratings/**").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/marketcomments/**").permitAll() // will hit the OPTIONS on the route
+				.antMatchers(HttpMethod.GET, "/api/products").permitAll() // will hit the OPTIONS on the route
+				.antMatchers(HttpMethod.GET, "/api/products/**").permitAll() // will hit the OPTIONS on the route
 				.antMatchers(HttpMethod.GET, "/api/market/**").permitAll() 
-				.antMatchers(HttpMethod.PUT, "/api/markets/**").hasAuthority("standard")
-				.antMatchers(HttpMethod.PUT, "/api/markets/**").hasAuthority("user")
+				.antMatchers(HttpMethod.GET, "/api/marketcomments").permitAll() 
 				.antMatchers(HttpMethod.GET, "/api/sellerRatings/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/api/marketratings/**").permitAll() 
 				.antMatchers(HttpMethod.GET, "/api/products").permitAll() 
 				.antMatchers(HttpMethod.GET, "/api/products/**").permitAll() 
 				.antMatchers(HttpMethod.GET, "/api/productcomments").permitAll() 
 				.antMatchers(HttpMethod.GET, "/api/productcomments/**").permitAll() 
-				.antMatchers(HttpMethod.DELETE, "/api/productcomments/**").permitAll()
-				.antMatchers(HttpMethod.GET, "/api/marketratings/avegrating/**").permitAll() 
-				.antMatchers(HttpMethod.PUT, "/api/users/**").hasAuthority("user")
+				.antMatchers(HttpMethod.DELETE, "/api/productcomments/**").permitAll() 
 				.antMatchers(HttpMethod.POST, "/api/productcomments/**").permitAll() 
 				.antMatchers(HttpMethod.PUT, "/api/productcomments/**").permitAll() 
-				.antMatchers(HttpMethod.DELETE, "/api/marketcomments/**").hasAuthority("user")
-				.antMatchers(HttpMethod.DELETE, "/api/marketcomments/**").hasAuthority("standard")
 				.antMatchers(HttpMethod.OPTIONS, "/api/users/*").hasAuthority("admin") // return true or false 
 				.antMatchers(HttpMethod.PUT, "/api/**").hasAuthority("standard") // return true or false 
 				.antMatchers(HttpMethod.POST, "/api/**").hasAuthority("standard") // return true or false 
 				.antMatchers(HttpMethod.POST, "/api/**").hasAuthority("user") // return true or false 
-				.antMatchers(HttpMethod.PUT, "/api/**").hasAuthority("user") // return true or false 
-				.antMatchers(HttpMethod.PUT, "/api/**").hasAuthority("standard") // return true or false 
 				.antMatchers(HttpMethod.DELETE, "/api/**").hasAuthority("user") // return true or false 
 				.antMatchers(HttpMethod.DELETE, "/api/**").hasAuthority("standard") // return true or false 
 				.antMatchers("/api/**").authenticated() // Requests for our REST API must be authorized.

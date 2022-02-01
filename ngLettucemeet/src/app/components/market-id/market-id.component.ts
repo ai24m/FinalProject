@@ -129,12 +129,12 @@ export class MarketIdComponent implements OnInit {
   addProductToMarket(productToAddId: number) {
     this.product.showProduct(productToAddId).subscribe({
       next: (product) => {
-        product = product;
+        product = this.productToAdd;
         product.user = this.user;
+        this.products.push(this.productToAdd);
         this.MarketSev.update(this.selected).subscribe({
           next: (updatedMarketWithProducts) => {
             this.selected = updatedMarketWithProducts;
-            this.ngOnInit();
           },
           error: (err) => {
             console.error('MarketIdComponent(): Error adding product to market');
@@ -147,11 +147,6 @@ export class MarketIdComponent implements OnInit {
         console.error(err);
       },
     });
-    this.ngOnInit();
   }
-
-
-
-
 }
 
