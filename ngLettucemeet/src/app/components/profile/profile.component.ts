@@ -189,14 +189,14 @@ export class ProfileComponent implements OnInit {
   }
 
   deleteUser(user: User) {
-    if (user.disabled == true) {
-      user.disabled = false;
-    } else {
-      user.disabled = true;
-    }
+    // if (user.disabled == true) {
+    //   user.disabled = false;
+    // } else {
+    //   user.disabled = true;
+    // }
     this.userSvc.update(user).subscribe({
       next: () => {
-        this.getUsers();
+        // this.getUsers();
       },
       error: (fail) => {
         console.error('Error deleting user' + fail);
@@ -205,14 +205,14 @@ export class ProfileComponent implements OnInit {
   }
 
   deleteProduct(prod: Product) {
-    if (prod.disabled == true) {
-      prod.disabled = false;
-    } else {
-      prod.disabled = true;
-    }
+    // if (prod.disabled == true) {
+    //   prod.disabled = false;
+    // } else {
+    //   prod.disabled = true;
+    // }
     this.product.updateProduct(prod).subscribe({
       next: () => {
-        this.getProducts();
+        // this.getProducts();
       },
       error: (fail) => {
         console.error('Error deleting user' + fail);
@@ -221,14 +221,14 @@ export class ProfileComponent implements OnInit {
   }
 
   deleteMarket(mrkt: Market) {
-    if (mrkt.disabled == true) {
-      mrkt.disabled = false;
-    } else {
-      mrkt.disabled = true;
-    }
+    // if (mrkt.disabled == true) {
+    //   mrkt.disabled = false;
+    // } else {
+    //   mrkt.disabled = true;
+    // }
     this.market.update(mrkt).subscribe({
       next: () => {
-        this.getMarkets;
+        // this.getMarkets;
       },
       error: (fail) => {
         console.error('Error deleting user' + fail);
