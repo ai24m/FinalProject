@@ -65,7 +65,7 @@ public class MarketServiceImpl implements MarketService {
 			existing.setImageUrl(market.getImageUrl());
 			existing.setMarketDate(market.getMarketDate());
 			existing.setAddress(market.getAddress());
-			;
+			existing.setProducts(market.getProducts());
 			marketRepo.saveAndFlush(existing);
 		}
 		return market;

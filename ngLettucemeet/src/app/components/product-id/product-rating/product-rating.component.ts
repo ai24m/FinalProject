@@ -35,7 +35,7 @@ export class ProductRatingComponent implements OnInit {
         let id = Number.parseInt(idString);
         console.log(id);
         if (!isNaN(id)) {
-          // this.loadRatingsForProduct(id);
+          this.loadRatingsForProduct(id);
         }
       }
     }
@@ -78,7 +78,7 @@ export class ProductRatingComponent implements OnInit {
       (success) => {
         //another way to write: function that has parameters todos next: (todos) => { do this function }, error: (wrong) => { }
         this.newProductRating = new ProductRating();
-        this.ngOnInit();
+        this.loadRatingsForProduct(productId);
       },
       (err) => console.error('Addtodo error' + err)
     );

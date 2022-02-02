@@ -33,14 +33,8 @@ export class ProductIdComponent implements OnInit {
       console.log(id);
       if (!isNaN(id)) {
         this.ProductSev.showProduct(id).subscribe({
-          next: (product) => {
-            this.selected = product;
-            console.log(product);
-            this.myProductId = id;
-            this.loadComments(id);
-            this.loadRatings(id);
-            // this.averageRatings(id);
-
+          next: (product) =>  {
+             this.load(product, id);
           },
           error: (fail) => {
             console.error('TodoListComponent.ngoninit()')
@@ -52,6 +46,16 @@ export class ProductIdComponent implements OnInit {
       } this.reload(id);
 
     }
+  }
+
+  load(product: Product, id: number){
+    this.selected = product;
+    console.log(product);
+    this.myProductId = id;
+    this.loadComments(id);
+    this.loadRatings(id);
+    // this.averageRatings(id);
+
   }
 
   organic(organic: boolean) {

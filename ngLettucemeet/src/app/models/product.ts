@@ -1,8 +1,8 @@
-import { Type } from "./type";
-import { Market } from "./market";
-import { ProductComment } from "./product-comment";
-import { ProductRating } from "./product-rating";
-import { User } from "./user";
+import { Type } from './type';
+import { Market } from './market';
+import { ProductComment } from './product-comment';
+import { ProductRating } from './product-rating';
+import { User } from './user';
 
 export class Product {
   id: number;
@@ -19,40 +19,40 @@ export class Product {
   comments: ProductComment[] = [];
   markets: Market[] = [];
   hide: boolean | undefined;
-  disabled: boolean = false;
+  disabled: boolean;
+  // disabled: boolean = false;
 
   constructor(
     id: number = 0,
-    name: string = "",
-    description: string = "",
+    name: string = '',
+    description: string = '',
     organic: boolean = false,
     unitPrice: number = 0.0,
     imageUrl?: string,
     quantity?: number,
     availableDate?: string,
-    user: User = new User,
-    type: Type = new Type,
+    user: User = new User(),
+    type: Type = new Type(),
     ratings: ProductRating[] = [],
     comments: ProductComment[] = [],
     markets: Market[] = [],
     hide: boolean = false,
     disabled: boolean = false
-) {
-    this.id = id
-    this.name = name
-    this.description = description
-    this.organic = organic
-    this.unitPrice = unitPrice
-    this.imageUrl = imageUrl
-    this.quantity = quantity
-    this.availableDate = availableDate
-    this.user = user
-    this.type = type
-    this.ratings = ratings
-    this.comments = comments
-    this.markets = markets
-    this.hide = hide
-    this.disabled = disabled
+  ) {
+    this.id = id;
+    this.name = name;
+    this.description = description;
+    this.organic = organic;
+    this.unitPrice = unitPrice;
+    this.imageUrl = imageUrl;
+    this.quantity = quantity;
+    this.availableDate = availableDate;
+    this.user = user;
+    this.type = type;
+    this.ratings = ratings;
+    this.comments = comments;
+    this.markets = markets;
+    this.hide = hide;
+    this.disabled = disabled;
   }
-
 }

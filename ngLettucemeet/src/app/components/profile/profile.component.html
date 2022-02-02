@@ -1,5 +1,5 @@
-<div class="container-fluid">
-  <main class="tm-main">
+<div class="container-fluid" >
+  <main class="tm-main" *ngIf="adminLogin == false">
       <div class="row tm-row">
           <div class="col-lg-8 tm-post-col">
               <div class="tm-post-full">
@@ -7,7 +7,7 @@
 <!-- profile  -->
                       <h1 class="pt-2 tm-color-primary tm-post-title">
                         Welcome <span style="text-transform: uppercase;">{{user.username}}</span>
-                        <img class="bioeditbtn" (click)="bioedit = !bioedit" src="/assets/images/profile/profile.png">
+                        <img class="bioeditbtn" (click)="bioedit = !bioedit" src="assets/images/profile/profile.png">
                       </h1>
                       <div>
                       <h4>Address</h4>
@@ -209,16 +209,12 @@
         <hr>
       </footer>
   </main>
-</div>
+
 
 <!-- start of admin page -->
-<div class="container-fluid" *ngIf="adminLogin == true">
-  <main class="tm-main">
-    <div class="row tm-row">
-      <div class="col-lg-8 tm-post-col">
-        <div class="tm-post-full">
-          <div class="mb-4">
-<div class="adminpage">
+<div class=".container-fluid" *ngIf="adminLogin == true" style="margin-top: 10%">
+
+<div class="adminpage" style="width: 75%; margin-bottom: 10%; margin-left: 20%; background-image: url('assets/images/products/carrot1.jpg')">
   <div>
     <button
       name="showUsers"
@@ -231,10 +227,10 @@
       <table class="table table-success table-striped">
         <thead>
           <tr>
-            <th>Username:</th>
-            <th>Email:</th>
-            <th>Role:</th>
-            <th>Disable:</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Disable</th>
           </tr>
         </thead>
         <tbody>
@@ -247,7 +243,7 @@
             <td>{{ user.role }}</td>
             <td>
               <button
-                name="deleteUser"
+                name="deleteUser"id="btnbtn"
                 class="btn btn-danger btn-hover"
                 (click)="deleteUser(user)"
               >
@@ -263,7 +259,7 @@
     <button
       name="showProducts"
       class="tm-btn tm-btn-primary tm-btn-small"
-      (click)="getProducts()"
+      (click)="productIndex()"
     >
       Products
     </button>
@@ -271,10 +267,10 @@
       <table class="table table-success table-striped">
         <thead>
           <tr>
-            <th>Owning User:</th>
-            <th>Name:</th>
-            <th>Type:</th>
-            <th>Disable:</th>
+            <th>Owning User</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Disable</th>
           </tr>
         </thead>
         <tbody>
@@ -287,7 +283,7 @@
             <td>{{ product.type.name }}</td>
             <td>
               <button
-                name="deleteProduct"
+                name="deleteProduct"id="btnbtn"
                 class="btn btn-danger btn-hover"
                 (click)="deleteProduct(product)"
               >
@@ -311,9 +307,9 @@
       <table class="table table-success table-striped">
         <thead>
           <tr>
-            <th>Owning User:</th>
-            <th>Name:</th>
-            <th>Disable:</th>
+            <th>Owning User</th>
+            <th>Name</th>
+            <th>Disable</th>
           </tr>
         </thead>
         <tbody>
@@ -325,7 +321,7 @@
             <td>{{ market.name }}</td>
             <td>
               <button
-                name="deleteMarket"
+                name="deleteMarket" id="btnbtn"
                 class="btn btn-danger btn-hover"
                 (click)="deleteMarket(market)"
                 [(ngModel)]="!market.disabled"
@@ -340,11 +336,4 @@
   </div>
 </div>
 </div>
-<footer class="row tm-row">
-  <hr />
-</footer>
-</div>
-</div>
-</div>
-</main>
 </div>
