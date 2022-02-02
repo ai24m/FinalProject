@@ -55,21 +55,21 @@ export class MarketComponent implements OnInit {
       },
     });
   }
-  updateMarket(market: Market, gotoDetails = true) {
-    this.MarketSev.update(market).subscribe({
-      next: (t) => {
-        this.editMarket = null;
-        if (gotoDetails) {
-          this.selected = t;
-        }
-        this.reload();
-      },
-      error: (err) => {
-        console.error('MarketComponent.updateRoute(): Error update market');
-        console.error(err);
-      },
-    });
-  }
+  // updateMarket(market: Market, gotoDetails = true) {
+  //   this.MarketSev.update(market).subscribe({
+  //     next: (t) => {
+  //       this.editMarket = null;
+  //       if (gotoDetails) {
+  //         this.selected = t;
+  //       }
+  //       this.reload();
+  //     },
+  //     error: (err) => {
+  //       console.error('MarketComponent.updateRoute(): Error update market');
+  //       console.error(err);
+  //     },
+  //   });
+  // }
   setEditMarket() {
     this.editMarket = Object.assign({}, this.selected);
   }
