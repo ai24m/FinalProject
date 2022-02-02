@@ -1,3 +1,6 @@
+body {
+  background-color: #ffcd70;
+}
 .container-fluid{
   background-color: #ffcd70;
   color: black;
@@ -100,4 +103,8 @@ tr.disabled > td {
   background-color: #ffcd70;
   color: black;
   overflow: hidden;
+}
+
+button {
+width: 150px;
 }

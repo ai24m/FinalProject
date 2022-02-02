@@ -3,27 +3,28 @@
       <div class="row tm-row">
           <div class="col-12">
               <hr class="tm-hr-primary tm-mb-55">
-              <img src={{selected.imageUrl}} alt="Image">
+              <img src={{selected.imageUrl}}  alt="Image">
           </div>
       </div>
       <div class="row tm-row">
           <div class="col-lg-8 tm-post-col">
               <div class="tm-post-full">
                   <div class="mb-4">
-                      <h2 class="pt-2 tm-color-primary tm-post-title">About {{selected?.name}}</h2>
+                      <h2 style="font-weight: bold; font-size: 200%; color:rgb(14, 47, 74)">About {{selected.user.businessname}}'s {{selected?.name}}</h2>
+                      <p style="color:black; font-weight: bold; font-size: 110%">
+                        {{organic(selected.organic)}} {{selected.description}}<br>
+                      </p>
+
                       <p class="tm-mb-40">
-                        Provided By User/business info:
-                        {{selected.user.username}}
-                        {{selected.user.businessname}}
-                        {{selected.user.address?.city}}
-                        {{selected.user.address?.state}}</p>
+                        <h2 style="font-weight: bold; font-size: 200%; color:rgb(14, 47, 74)">Business Location & Contact</h2>
+                        <span style="font-weight: bold;color: black; font-size: 110%">Email:</span>{{selected.user.email}}<br>
+                        <span style="font-weight: bold;color: black;font-size: 110%">Business Name:</span>{{selected.user.businessname}}<br>
+                        <span style="font-weight: bold;color: black;font-size: 110%">Address:</span><br>
+                          <p style="font-weight: bold;color: rgb(14, 47, 74); font-size: 120%; font-weight: bold">{{selected.user.address.street1}} {{selected.user.address.street2}}<br>
+                        {{selected.user.address?.city}}, {{selected.user.address?.state}} {{selected.user.address.zip}}</p>
                         <p>
                        </p>
-                      <p>
-                          {{selected?.description}}
-                          {{organic(selected.organic)}}
-                      </p>
-                      <span class="d-block text-right tm-color-primary">{{selected.type.name}}</span>
+
                   </div>
 
                   <!-- Comments -->
@@ -35,11 +36,11 @@
                 <app-product-rating [product]="selected" [productRatings]="productRatings"></app-product-rating>
 
                   <hr class="mb-3 tm-hr-primary">
-                  <h2 class="mb-4 tm-post-title tm-color-primary"  >Find This Product @ The Farmer's Market!</h2>
-                  <ul class="tm-mb-75 pl-5 tm-category-list" *ngFor="let m of selected.markets">
+                  <h2 class="mb-4 tm-post-title tm-color-primary" style="font-weight: bold; font-size: 200%; color:rgb(14, 47, 74)">Find This Product @ The Farmer's Market!</h2>
+                  <ul style="font-weight: bold;color: black;font-size: 110%" class="tm-mb-75 pl-5 tm-category-list" *ngFor="let m of selected.markets">
                       <li><a [routerLink]="['/markets/', m.id]" class="tm-color-primary">{{m.name}}</a></li>
-                      <li><a href="#" class="tm-color-primary">Address: {{m.address.city}}, {{m.address.state}}</a></li>
-                      <li><a href="#" class="tm-color-primary">Date: {{m.marketDate}}</a></li>
+                      <li>Address: {{m.address.city}}, {{m.address.state}}</li>
+                      <li>Date: {{m.marketDate | date}}</li>
                   </ul>
               </div>
           </aside>

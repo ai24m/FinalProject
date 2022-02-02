@@ -323,7 +323,7 @@ video {
 }
 
 .tm-comment {
-    display: flex;
+    /* display: flex; */
     align-items: flex-start;
 }
 
@@ -349,9 +349,11 @@ figcaption { line-height: 1.4; }
 
 /* width of sidebar  */
 .tm-post-sidebar {
-    max-width: 280px;
-    margin-left: auto;
-    margin-right: 0;
+    max-width: 300px;
+    margin-right: 10%;
+    font-weight: bold;
+    /* margin-left: auto; */
+    /* margin-right: 0; */
 }
 
 .tm-pt-20 { padding-top: 20px; }

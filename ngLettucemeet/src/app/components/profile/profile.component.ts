@@ -231,6 +231,7 @@ export class ProfileComponent implements OnInit {
         this.mrktEdit = null;
         this.mrktSelect = mrkt;
         this.getMarkets;
+        this.reloadPage(this.user);
       },
       error: (fail) => {
         console.error('Error deleting user' + fail);

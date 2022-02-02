@@ -3,33 +3,31 @@
   <hr class="tm-hr-primary tm-mb-45">
   <div class="tm-comment tm-mb-45">
       <figure class="tm-comment-figure">
-          <img src="/assets/images/profile/apple.png" style="width: 20%; height: 20%;" alt="Image" class="mb-2 rounded-circle img-thumbnail">
-          <figcaption class="tm-color-primary text-center">{{pc.user?.username}}</figcaption>
+          <img src="/assets/images/profile/apple.png" style="width: 50px; height: 50px" alt="Image" class="mb-2 rounded-circle img-thumbnail">
+          <figcaption style="display: inline; font-weight: bold" class="tm-color-primary text-center">{{pc.user?.username}}</figcaption>
       </figure>
       <div>
-          <p>
+        <span style="color:black; font-weight: bold; font-size: 110%" class="d-block text-right tm-color-primary"><span style="font-weight: bold; font-size: 120%; color: rgb(26, 26, 92)">Posted:</span> {{pc.updated| date:'medium'}}</span>
+        <hr class="tm-hr-primary tm-mb-45">
+          <p style="color:black; font-weight: bold; font-size: 110%">
               {{pc.comment}}
-
-
           </p>
           <div class="d-flex justify-content-between">
-              <!-- <a href="#" class="tm-color-primary" (click)="addReply()">REPLY</a> -->
-              <span class="tm-color-primary">{{pc.updated}}</span>
           </div>
       </div>
   </div>
   <div *ngIf="pc.user?.id === user.id">
     <form name="editPR">
-      <textarea name="comment" [(ngModel)]="editComments[pc.id]" placeholder="update comment. . ."></textarea><br>
+      <textarea style="width: 400px; height: 155px;border-color: #0CC;border-radius: 0;" name="comment" [(ngModel)]="editComments[pc.id]" placeholder="update comment. . ."></textarea><br>
       <!-- <input (click)="addTodo(newTodo)" type="submit" value="Add Item" /> -->
-      <input type="button" value="Update" (click)="updateProductComment(editProductComment, pc.id, pc.product.id)">
-    </form>
+      <input style="width: 130px;" type="button" class="tm-btn tm-btn-primary tm-btn-small" value="Update" (click)="updateProductComment(editProductComment, pc.id, pc.product.id)">
+    </form><br>
 
 
-    <form name="deletePR" >
-        Are you sure ?
-      <!-- <input (click)="addTodo(newTodo)" type="submit" value="Add Item" /> -->
-      <input type="button" value="Delete" (click)="deleteProductComment(pc.id)">
+    <form class="mb-5 tm-comment-form" name="deletePR" >
+      <div class="text-right">
+        <input style="width: 130px;" type="button" class="tm-btn tm-btn-primary tm-btn-small" value="Delete" (click)="deleteProductComment(pc.id)">
+      </div>
     </form>
   </div>
 
@@ -46,7 +44,6 @@
             {{replies.comment}}
           </p>
       </div>
-      <!-- <span class="d-block text-right tm-color-primary">June 21, 2020</span> -->
   </div>
   <form action="" class="mb-5 tm-comment-form">
       <h2 class="tm-color-primary tm-post-title mb-4">Add a comment</h2>
@@ -57,9 +54,4 @@
           <button class="tm-btn tm-btn-primary tm-btn-small" value="Add" (click)="addProductComment(newProductComment, product.id)">Submit</button>
       </div>
   </form>
-
-  <!-- <form name="createPR">
-    <textarea name="comment" [(ngModel)]="newProductComment.comment" placeholder="new comment. . ."></textarea><br> -->
-    <!-- <input type="button" value="Add" (click)="addProductComment(newProductComment, 1)">
-  </form> -->
 

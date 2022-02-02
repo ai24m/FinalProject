@@ -1,9 +1,7 @@
 <footer class="row tm-row">
-  <h2 class="tm-mb-40 tm-post-title tm-color-primary" *ngIf="productRatings.length > 0">Rating {{findAverageRating(productRatings)|number: '1.0-0'}} / 5</h2>
-  <h2 class="tm-mb-40 tm-post-title tm-color-primary" *ngIf="productRatings.length === 0"> Not Rated Yet!</h2>
-  <div class="text-right">
-  <button class="tm-btn tm-btn-primary tm-btn-small" type="submit" value="Add Rating" (click)="addPR = true; destroyPR = false">Add Rating</button>
-    </div>
+  <h2 style="color:black; font-weight: bold; font-size: 130%" class="tm-mb-40 tm-post-title tm-color-primary" *ngIf="productRatings.length > 0">Average Rating {{findAverageRating(productRatings)|number: '1.0-0'}} / 5</h2>
+  <h2  style="margin-bottom: 0; color:black; font-weight: bold; font-size: 130%"class="tm-mb-40 tm-post-title tm-color-primary" *ngIf="productRatings.length === 0"> Not Rated Yet!</h2>
+  <button style="margin-top: 0;" class="tm-btn tm-btn-primary tm-btn-small" type="submit" value="Add Rating" (click)="addPR = true; destroyPR = false">Add Rating</button>
 
   <form *ngIf="addPR" class="mb-5 tm-comment-form">
     <h2 class="tm-color-primary tm-post-title mb-4">Rate Here</h2>
@@ -16,7 +14,6 @@
 </form>
 
   <form *ngIf="destroyPR" class="mb-5 tm-comment-form" name="deletePR">
-    <h2 class="tm-color-primary tm-post-title mb-4">Are you sure ?</h2>
     <input type="button" value="Delete" (click)="deleteProductRating(1)">
   </form>
 <footer class="row tm-row">

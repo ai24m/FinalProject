@@ -12,8 +12,12 @@
               <img src={{selected.imageUrl}} id="headerimage" alt="Image" class="img-fluid">
           </div>
       </div>
+
         <!-- Add Product to Market -->
         <div class="tm-post-sidebar">
+          <div>
+            <app-market-rating [market]="selected" [marketRatings]="marketRatings"></app-market-rating>
+          </div>
           <hr class="mb-3 tm-hr-primary">
           <h2 class="mb-4 tm-post-title tm-color-primary">Feature Your Product!</h2>
             <div class="mb-4">
@@ -34,7 +38,7 @@
               <div class="media-body">
                   <!-- <h2 class="tm-color-primary tm-post-title mb-2">Organizer{{selected?.user}}</h2> -->
                   <!-- <h3 class="tm-h3 mb-3">Organic: {{organic(product.organic)}} </h3> -->
-                  <h3 class="tm-h3 mb-3" >Upcoming Dates: {{selected.marketDate}}</h3>
+                  <h3 class="tm-h3 mb-3" >Upcoming Dates: {{selected.marketDate | date}}</h3>
                   <p class="mb-0 tm-line-height-short">
                     Address:<br>
                     {{selected.address.street1}}{{selected.address.street2}}<br>
@@ -54,10 +58,7 @@
                   <div>
                     <app-market-comment [market]="selected" [marketComments]="marketComments"></app-market-comment>
                   </div>
-                  <div>
-                    <app-market-rating [market]="selected" [marketRatings]="marketRatings"></app-market-rating>
 
-                  </div>
               </div>
           </div>
       </div>
