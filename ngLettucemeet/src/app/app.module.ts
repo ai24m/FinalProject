@@ -14,7 +14,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProductCommentComponent } from './components/product-id/product-comment/product-comment.component';
 import { ProductRatingComponent } from './components/product-id/product-rating/product-rating.component';
 import { ProductComponent } from './components/product/product.component';
-import { SampleTemplateComponent } from './components/sample-template/sample-template.component';
 import { UserComponent } from './components/user/user.component';
 import { KeywordPipe } from './pipes/keyword.pipe';
 import { AuthService } from './services/auth.service';
@@ -29,20 +28,23 @@ import { SellerRatingComponent } from './components/seller-rating/seller-rating.
 import { ProductCommentService } from './services/product-comment.service';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { ContactComponent } from './components/contact/contact.component';
-import { SampleTemplate3Component } from './components/sample-template3/sample-template3.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { MarketIdComponent } from './components/market-id/market-id.component';
 import { MarketCommentComponent } from './components/market-id/market-comment/market-comment.component';
 import { MarketRatingComponent } from './components/market-id/market-rating/market-rating.component';
 import { ProductIdComponent } from './components/product-id/product-id.component';
+import { HomeSearchPipe } from './pipes/homesearch.pipe';
+import { AdminComponent } from './components/admin/admin.component';
+import { UserDeletePipe } from './pipes/user-delete.pipe';
+import { MarketDeletePipe } from './pipes/market-delete.pipe';
+import { ProductDeletePipe } from './pipes/product-delete.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    SampleTemplateComponent,
     CalendarComponent,
     ProductComponent,
     ProductCommentComponent,
@@ -52,13 +54,17 @@ import { ProductIdComponent } from './components/product-id/product-id.component
     UserComponent,
     KeywordPipe,
     ContactComponent,
-    SampleTemplate3Component,
     NotFoundComponent,
     ProfileComponent,
     MarketIdComponent,
     MarketCommentComponent,
     MarketRatingComponent,
     ProductIdComponent,
+    HomeSearchPipe,
+    AdminComponent,
+    UserDeletePipe,
+    MarketDeletePipe,
+    ProductDeletePipe,
   ],
   imports: [
     BrowserModule,
@@ -81,7 +87,7 @@ import { ProductIdComponent } from './components/product-id/product-id.component
     MarketService,
     MarketcommentService,
     MarketRatingService,
-    DatePipe,
+    DatePipe
   ],
   bootstrap: [AppComponent],
 })

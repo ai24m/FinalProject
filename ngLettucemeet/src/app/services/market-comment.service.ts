@@ -17,6 +17,7 @@ export class MarketcommentService {
       headers: {
         Authorization: 'Basic ' + this.auth.getCredentials(),
         'X-Requested-With': 'XMLHttpRequest',
+        'Content-Type': 'application/json'
       },
     };
     return options;
@@ -132,7 +133,7 @@ export class MarketcommentService {
   destroyByMarketCommentId(marketCommentId: number): Observable<void> {
     return this.http
       .delete<void>(
-        this.url + '/' + marketCommentId + '/' + 'comments',
+        this.url + '/' + marketCommentId,
         this.getHttpOptions()
       )
       .pipe(

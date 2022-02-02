@@ -4,17 +4,16 @@
   <hr class="tm-hr-primary tm-mb-45">
   <div class="tm-comment tm-mb-45" *ngFor="let mc of marketComments">
       <figure class="tm-comment-figure">
-          <img src="img/comment-1.jpg" alt="Image" class="mb-2 rounded-circle img-thumbnail">
-          <figcaption class="tm-color-primary text-center">{{mc.user?.username}}</figcaption>
+          <img src="/assets/images/profile/mushroom.png" alt="Image" class="mb-2 rounded-circle img-thumbnail">
+          <figcaption class="tm-color-primary text-center">User: {{mc.user?.username}}</figcaption>
       </figure>
       <div>
-        <span class="d-block text-right tm-color-primary">{{mc.updated | date:'mediumDate'}}</span>
+        <span class="d-block text-right tm-color-primary">Date Posted: {{mc.updated}}</span>
         <hr class="tm-hr-primary tm-mb-45">
           <p  (click)="displayMarketComment(mc)">
               {{mc.comment}}
           </p>
           <div class="d-flex justify-content-between">
-              <!-- <a href="#" class="tm-color-primary" (click)="addReply()">REPLY</a> -->
           </div>
       </div>
 
@@ -44,8 +43,12 @@
   </form>
   <form name="deletePR" *ngIf="selected">
       Are you sure ?
-    <!-- <input (click)="addTodo(newTodo)" type="submit" value="Add Item" /> -->
-    <input type="button" value="Delete" (click)="deletedMarketComment(selected.id)" onClick="window.location.reload();">
+      <div class="text-right">
+        <input type="button" value="Delete" (click)="deletedMarketComment(selected.id)">
+      </div>
+      <div class="text-right">
+        <input type="button" value="Return" (click)="loadMarketComments(selected.id)">
+      </div>
   </form>
 
 

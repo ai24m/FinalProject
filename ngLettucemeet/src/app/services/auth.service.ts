@@ -95,14 +95,10 @@ export class AuthService {
       catchError((err: any) => {
         console.log(err);
         return throwError(
-          () => new Error('AuthService.login(): error logging in user.')
+          () => new Error('AuthService.getCurrentUser(): error logging in user.')
         );
       })
     );
-
-
-
-
-
   }
+
 }

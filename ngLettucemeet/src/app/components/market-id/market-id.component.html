@@ -5,14 +5,30 @@
           <div class="col-12">
           </div>
       </div>
-      <h1>{{selected.name}}</h1>
+
       <div class="row tm-row tm-mb-45">
           <div class="col-12">
               <hr class="tm-hr-primary tm-mb-55">
-              <img src="/assets/images/markets/one.png" id="headerimage" alt="Image" class="img-fluid">
+              <img src={{selected.imageUrl}} id="headerimage" alt="Image" class="img-fluid">
           </div>
       </div>
-      <h2>About :{{selected.description}}</h2>
+        <!-- Add Product to Market -->
+        <div class="tm-post-sidebar">
+          <hr class="mb-3 tm-hr-primary">
+          <h2 class="mb-4 tm-post-title tm-color-primary">Feature Your Product!</h2>
+            <div class="mb-4">
+              <label for="types">Select From Current Listings</label>
+                  <select name="product" [(ngModel)]="productToAdd.id">
+                    <option *ngFor="let p of products" value={{p.id}}>{{p.name}}</option>
+                  </select>
+            </div>
+          <div class="text-right">
+            <button (click)='addProductToMarket(productToAdd.id)' value="Update Product" class="tm-btn tm-btn-primary tm-btn-small">Submit</button>
+          </div>
+        </div>
+        <h1>About {{selected.name}}</h1>
+        <hr class="tm-hr-primary tm-mb-45" style="width: 50%;">
+      <h2>{{selected.description}}</h2>
       <div class="col-lg-6 tm-mb-60 tm-person-col">
           <div class="media tm-person">
               <div class="media-body">
@@ -25,10 +41,10 @@
                   </p>
               </div>
           </div>
+
       </div>
       <div class="col-lg-6 tm-mb-60 tm-person-col">
           <div class="media tm-person">
-              <img src="img/about-03.jpg" alt="Image" class="img-fluid mr-4">
               <div class="media-body">
                   <h2 class="tm-color-primary tm-post-title mb-2"></h2>
                   <h3 class="tm-h3 mb-3"></h3>
@@ -41,7 +57,6 @@
           </div>
       </div>
       <aside class="col-lg-4 tm-aside-col">
-
     </aside>
       <div class="row tm-row tm-mb-120">
           <div class="col-lg-4 tm-about-col">
@@ -56,7 +71,7 @@
               <div class="media tm-person">
                   <img src="assets/images/products/mushroom1.jpg" alt="Image" class="img-fluid mr-4">
                   <div class="media-body">
-                      <h2 class="tm-color-primary tm-post-title mb-2">{{product.user.username}}</h2>
+                      <h2 class="tm-color-primary tm-post-title mb-2">Vendor Owner: {{product.user.firstName}} {{product.user.lastName}}</h2>
                       <h3 class="tm-h3 mb-3">{{organic(product.organic)}} </h3>
                       <h3 class="tm-h3 mb-3" >Category: {{product.type.name}}</h3>
                       <p class="mb-0 tm-line-height-short">
@@ -82,7 +97,6 @@
               </div>
           </div> -->
       </div>
-  </main>
-</div>
-
+    </main>
+  </div>
 

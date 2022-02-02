@@ -71,10 +71,19 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public boolean deleteProduct(String username, int prodId) {
 		boolean deleted = false;
-		Product prod = prodRepo.findByIdAndUserUsername(prodId, username);
-		if (prod != null) {
-			prodRepo.delete(prod);
-			deleted = true;
+		User user = userRepo.findByUsername(username);
+		if (user.getRole() == "admin") {
+			Optional<Product> optProd = prodRepo.findById(prodId);
+			if (optProd.isPresent()) {
+				prodRepo.delete(optProd.get());
+				deleted = true;
+			}
+		} else {
+			Product prod = prodRepo.findByIdAndUserUsername(prodId, username);
+			if (prod != null) {
+				prodRepo.delete(prod);
+				deleted = true;
+			}
 		}
 		return deleted;
 	}

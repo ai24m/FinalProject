@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -36,6 +37,7 @@ public class ProductComment {
 	@Column(name = "create_time")
 	private LocalDateTime created;
 	
+	@JsonFormat(pattern = "MM-dd-yyyy")
 	@UpdateTimestamp
 	@Column(name = "update_time")
 	private LocalDateTime updated;
@@ -49,7 +51,9 @@ public class ProductComment {
 	@OneToMany(mappedBy = "replyTo")
 	private List <ProductComment> myReplies;
 	
-	@JsonIgnore
+
+//	@JsonIgnoreProperties({"productComments"})
+//	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "product_id")
 	private Product product;

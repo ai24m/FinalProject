@@ -16,6 +16,8 @@ export class MarketComponent implements OnInit {
   newMarket: Market = new Market();
   editMarket: Market | null = null;
   address: Address = new Address();
+  keyword: string = '';
+
 
   constructor(
     private MarketSev: MarketService,
