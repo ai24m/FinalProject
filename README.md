@@ -18,6 +18,7 @@ For an intensive ten days, this final project was developed to culminate the Ful
 <img height="400" width="580" src="https://github.com/ai24m/FinalProject/blob/main/DB/lettucemeetERR.png"/>
 
 
+<img width="1273" alt="Screen Shot 2022-02-02 at 4 48 48 PM" src="https://user-images.githubusercontent.com/89150394/152257054-1790c75f-7e17-4807-83b7-b49af603d4f5.png">
 
 
 
