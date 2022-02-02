@@ -49,7 +49,7 @@ public class MarketComment {
 	@OneToMany(mappedBy="replyTo")
 	private List<MarketComment> myReplies; 
 	
-	@JsonIgnore 
+//	@JsonIgnore 
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user; 

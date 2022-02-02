@@ -41,17 +41,7 @@
           </div>
       </div>
       <aside class="col-lg-4 tm-aside-col">
-        <div class="tm-post-sidebar">
-          <app-market-rating [market]="selected" [marketRatings]="marketRatings"></app-market-rating>
 
-            <hr class="mb-3 tm-hr-primary">
-            <h2 class="mb-4 tm-post-title tm-color-primary"  >See Them At The Farmer's Market!</h2>
-            <ul class="tm-mb-75 pl-5 tm-category-list" >
-                <li><a href="#" class="tm-color-primary">{{selected.name}}</a></li>
-                <li><a href="#" class="tm-color-primary">{{selected.address.city}}, {{selected.address.state}}</a></li>
-                <li><a href="#" class="tm-color-primary">{{selected.marketDate}}</a></li>
-            </ul>
-        </div>
     </aside>
       <div class="row tm-row tm-mb-120">
           <div class="col-lg-4 tm-about-col">
@@ -78,11 +68,11 @@
                   </div>
               </div>
           </div>
-          <div class="col-lg-6 tm-mb-60 tm-person-col" *ngFor="let comment of selected?.marketComments">
+          <!-- <div class="col-lg-6 tm-mb-60 tm-person-col" *ngFor="let comment of selected?.marketComments">
               <div class="media tm-person">
                   <img src="img/about-03.jpg" alt="Image" class="img-fluid mr-4">
                   <div class="media-body">
-                      <h2 class="tm-color-primary tm-post-title mb-2">{{comment.updateTime}}</h2>
+                      <h2 class="tm-color-primary tm-post-title mb-2">{{comment.updated}}</h2>
                       <h3 class="tm-h3 mb-3">{{comment.user}}</h3>
                       <p class="mb-0 tm-line-height-short">
                           Quisque in bibendum elit, in egestas turpis. Vestibulum ornare sollicitudin congue.
@@ -90,7 +80,7 @@
                       </p>
                   </div>
               </div>
-          </div>
+          </div> -->
       </div>
   </main>
 </div>

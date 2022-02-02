@@ -54,7 +54,7 @@ public class MarketController {
 	@PostMapping("markets") //must create address with market 
 	public Market create(HttpServletRequest req, HttpServletResponse res, Principal principal, 
 			@RequestBody Market market) {
-		try {
+		try {			
 			User user = userSvc.findByUserName(principal.getName()); 
 			marketSvc.create(market, user, market.getAddress()); 
 			res.setStatus(201);
