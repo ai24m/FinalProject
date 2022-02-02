@@ -18,7 +18,8 @@ export class Market {
   marketRatings: MarketRating[] = [];
   marketComments: MarketComment[] = [];
   hide: boolean | undefined;
-  disabled: boolean = false;
+  disabled: boolean;
+  // disabled: boolean = false;
 
   constructor(
     id: number = 0,

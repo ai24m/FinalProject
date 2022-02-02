@@ -14,7 +14,6 @@
               {{mc.comment}}
           </p>
           <div class="d-flex justify-content-between">
-
           </div>
       </div>
 
@@ -30,7 +29,7 @@
           <input class="form-control" name="comment" [(ngModel)]="newMarketCommet.comment" type="text">
       </div>
       <div class="text-right">
-          <button class="tm-btn tm-btn-primary tm-btn-small" value="Add" (click)="addANewMarketComment(market.id, newMarketCommet)">Submit</button>
+          <button class="tm-btn tm-btn-primary tm-btn-small" value="Add" (click)="addANewMarketComment(market.id, newMarketCommet)" onClick="window.location.reload();">Submit</button>
       </div>
   </form>
   <form action="" class="mb-5 tm-comment-form" *ngIf="selected">
@@ -39,7 +38,7 @@
           <input class="form-control" name="comment" [(ngModel)]="newMarketCommet.comment" type="text">
       </div>
       <div class="text-right">
-          <button class="tm-btn tm-btn-primary tm-btn-small" value="Add" (click)="addAMarketCommentReply(selected.id, newMarketCommet)">Reply</button>
+          <button class="tm-btn tm-btn-primary tm-btn-small" value="Add" (click)="addAMarketCommentReply(selected.id, newMarketCommet)" onClick="window.location.reload();">Reply</button>
       </div>
   </form>
   <form name="deletePR" *ngIf="selected">
