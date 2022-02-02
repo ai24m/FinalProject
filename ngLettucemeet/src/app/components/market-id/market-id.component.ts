@@ -123,6 +123,7 @@ export class MarketIdComponent implements OnInit {
         product = this.productToAdd;
         product.user = this.user;
         this.products.push(this.productToAdd);
+        this.selected.products.push(product);
         this.MarketSev.update(this.selected).subscribe({
           next: (updatedMarketWithProducts) => {
             this.selected = updatedMarketWithProducts;
