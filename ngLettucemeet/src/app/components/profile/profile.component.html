@@ -212,9 +212,9 @@
 
 
 <!-- start of admin page -->
-<div class=".container-fluid" *ngIf="adminLogin == true" style="margin-top: 10%">
+<div class=".container-fluid" *ngIf="adminLogin == true" style="margin-top: 10%; width: 75%; margin-bottom: 10%; margin-left: 30%; background-image: url('assets/images/products/carrot1.jpg')">
 
-<div class="adminpage" style="width: 75%; margin-bottom: 10%; margin-left: 20%; background-image: url('assets/images/products/carrot1.jpg')">
+<div class="adminpage" >
   <div>
     <button
       name="showUsers"
@@ -243,10 +243,9 @@
             <td>{{ user.role }}</td>
             <td>
               <button
-                name="deleteUser"id="btnbtn"
+                id="btnbtn"
                 class="btn btn-danger btn-hover"
-                (click)="deleteUser(user)"
-                [(ngModel)]="user.disabled"
+                (click)="user.disabled = !user.disabled; deleteUser(user)"
               >
                 X
               </button>
@@ -284,11 +283,10 @@
             <td>{{ product.type.name }}</td>
             <td>
               <button
-                name="deleteProduct"id="btnbtn"
+                id="btnbtn"
                 class="btn btn-danger btn-hover"
-                (click)="deleteProduct(product)"
-                [(ngModel)]="!product.disabled"
-              >
+                (click)="product.disabled = !product.disabled; deleteProduct(product)"
+                >
                 X
               </button>
             </td>
@@ -325,8 +323,7 @@
               <button
                 name="deleteMarket" id="btnbtn"
                 class="btn btn-danger btn-hover"
-                (click)="deleteMarket(market)"
-                [(ngModel)]="!market.disabled"
+                (click)="market.disabled = !market.disabled; deleteMarket(market)"
               >
                 X
               </button>
