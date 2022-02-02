@@ -120,13 +120,37 @@ export class MarketIdComponent implements OnInit {
   addProductToMarket(productToAddId: number) {
     this.product.showProduct(productToAddId).subscribe({
       next: (product) => {
-        product = this.productToAdd;
-        product.user = this.user;
-        this.products.push(this.productToAdd);
+        console.log(product);
+        this.productToAdd = product;
+        this.productToAdd.user = this.user;
+        // this.products.push(this.productToAdd);
+        // this.productToAdd.markets.push(this.selected);
+        // this.product.updateProduct(this.productToAdd).subscribe({
+        //   next: () => {
+        //     this.reload(this.selected.id);
+        //   }
+        // })
+        this.selected.products.push(this.productToAdd);
+        console.log(this.selected.products);
+        // this.productToAdd.markets.push(this.selected);
+        // this.product.updateProduct(this.productToAdd).subscribe({
+        //   next: (update) => {
+        //     this.productToAdd = update;
+        //   },
+        //   error: (err) => {
+        //     console.error("failed to update product with market in marketidcomponent");
+        //   }
+        // })
+
+        // this.MarketSev.updateWithNewProducts(this.selected, this.productToAdd).subscribe({
         this.MarketSev.update(this.selected).subscribe({
           next: (updatedMarketWithProducts) => {
+            console.log(this.selected);
             this.selected = updatedMarketWithProducts;
-            this.reload(this.selected.id);
+            console.log(this.selected);
+
+
+            // this.reload(this.selected.id);
           },
           error: (err) => {
             console.error('MarketIdComponent(): Error adding product to market');

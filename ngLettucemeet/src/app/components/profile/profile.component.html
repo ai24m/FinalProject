@@ -34,7 +34,7 @@
           </div>
           <!-- Post Comments -->
           <div>
-            <h2 class="tm-color-primary tm-post-title">Comments</h2>
+            <h2 class="tm-color-primary tm-post-title">Reviews</h2>
             <hr class="tm-hr-primary tm-mb-45" />
             <div class="tm-comment tm-mb-45">
               <figure class="tm-comment-figure">
@@ -116,7 +116,7 @@
           <a class="d-block tm-mb-40" *ngFor="let p of products">
             <figure>
               <h5>
-                <a [routerLink]="['/markets/']"> {{ p.name }}</a>
+                <a [routerLink]="['/home/']"> {{ p.name }}</a>
               </h5>
               <!-- <img src="img/img-05.jpg" alt="Image" class="mb-3 img-fluid"> -->
               <figcaption class="tm-color-primary">
@@ -297,6 +297,9 @@
     </footer>
   </main>
 </div>
+
+
+<!-- start of admin page -->
 <div *ngIf="adminLogin == true" style="margin-left: 50%">
   <div>
     <button

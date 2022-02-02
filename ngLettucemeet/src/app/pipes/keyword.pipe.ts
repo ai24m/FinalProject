@@ -8,11 +8,11 @@ export class KeywordPipe implements PipeTransform {
 
   transform(products: Product[], keyword: string): Product[] {
     const results: Product[] = [];
-    if (keyword === "") {
+    if (keyword.toLowerCase() === "") {
       return products;
     }
     products.forEach((prod) => {
-      if (prod.description.includes(keyword) || prod.name.includes(keyword)) {
+      if (prod.description.toLowerCase().includes(keyword.toLowerCase()) || prod.name.toLowerCase().includes(keyword.toLowerCase())) {
         results.push(prod);
       }
     });
