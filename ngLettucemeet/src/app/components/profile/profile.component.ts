@@ -48,7 +48,7 @@ export class ProfileComponent implements OnInit {
     private market: MarketService,
     private auth: AuthService,
     private typeSvc: TypeService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.auth.getCurrentUser().subscribe({
@@ -160,8 +160,10 @@ export class ProfileComponent implements OnInit {
       next: (prods) => {
         this.products = prods;
       },
+      error: (err) => {
+        throw new Error('Error getting products.');
+      }
     });
-    throw new Error('Function not implemented.');
   }
 
   getMarkets() {
@@ -169,8 +171,10 @@ export class ProfileComponent implements OnInit {
       next: (mrkts) => {
         this.markets = mrkts;
       },
+      error: (err) => {
+        throw new Error('Error getting markets.');
+      }
     });
-    throw new Error('Function not implemented.');
   }
 
   getUsers() {
@@ -192,8 +196,6 @@ export class ProfileComponent implements OnInit {
     }
     this.userSvc.update(user).subscribe({
       next: () => {
-        this.userEdit = null;
-        this.userSelect = user;
         this.getUsers();
       },
       error: (fail) => {
@@ -210,8 +212,6 @@ export class ProfileComponent implements OnInit {
     }
     this.product.updateProduct(prod).subscribe({
       next: () => {
-        this.prodEdit = null;
-        this.prodSelect = prod;
         this.getProducts();
       },
       error: (fail) => {
@@ -228,10 +228,7 @@ export class ProfileComponent implements OnInit {
     }
     this.market.update(mrkt).subscribe({
       next: () => {
-        this.mrktEdit = null;
-        this.mrktSelect = mrkt;
         this.getMarkets;
-        this.reloadPage(this.user);
       },
       error: (fail) => {
         console.error('Error deleting user' + fail);

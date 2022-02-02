@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { User } from '../models/user';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -9,10 +9,8 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class UserService {
-  index() {
-    throw new Error('Method not implemented.');
-  }
-  constructor(private http: HttpClient, private auth: AuthService) {}
+
+  constructor(private http: HttpClient, private auth: AuthService) { }
 
   private url = environment.baseUrl + 'api/users';
 

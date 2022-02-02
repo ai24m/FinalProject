@@ -246,6 +246,7 @@
                 name="deleteUser"id="btnbtn"
                 class="btn btn-danger btn-hover"
                 (click)="deleteUser(user)"
+                [(ngModel)]="user.disabled"
               >
                 X
               </button>
@@ -286,6 +287,7 @@
                 name="deleteProduct"id="btnbtn"
                 class="btn btn-danger btn-hover"
                 (click)="deleteProduct(product)"
+                [(ngModel)]="!product.disabled"
               >
                 X
               </button>
