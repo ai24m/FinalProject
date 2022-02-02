@@ -10,8 +10,10 @@
   color: black;
 }
 
-.img-fluid {
+img {
   border-radius: 10px;
+  width: 60px;
+  height: 60px;
 }
 
 .example-accordion {
@@ -85,12 +87,18 @@ h3 {
 
 h2{
   font-weight: bold;
+  color:black;
+  font-size: 150%;
+}
+
+h1{
+  font-weight: bold;
   color:rgb(58, 99, 75);
-  font-size: 120%;
 }
 
 p {
   font-weight: bold;
-  color:rgb(58, 99, 75);
+  color: black;
   font-size: 120%;
+  width: 70%;
 }

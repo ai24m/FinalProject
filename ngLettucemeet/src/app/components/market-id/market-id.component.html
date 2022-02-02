@@ -71,14 +71,15 @@
           <div class="col-lg-6 tm-mb-60 tm-person-col" *ngFor="let product of selected?.products">
               <div class="media tm-person">
                   <img src={{product.imageUrl}} style="width: 300px; height: 250px" alt="Image" class="img-fluid mr-4">
-                  <div class="media-body" style="width: 50%;">
+                  <div class="media-body" style="width: 100%; text-align: left;">
                       <h2 class="tm-color-primary tm-post-title mb-2">Vendor: {{product.user.firstName}} {{product.user.lastName}}</h2>
-                      <h3 class="tm-h3 mb-3">{{organic(product.organic)}} </h3>
-                      <h3 class="tm-h3 mb-3" >Category: {{product.type.name}}</h3>
-                      <p class="mb-0 tm-line-height-short">
-                        Info: <br>
+                      <h3 class="tm-h3 mb-3"><span style="color: black">Product:</span><a [routerLink]="['/products/find/', product.id]" class="tm-color-primary">{{product.name}}</a></h3>
+                      <h3 class="tm-h3 mb-3" ><span style="color: black">Category:</span> {{product.type.name}}</h3>
+                      <p class="mb-0 tm-line-height-short" >
+                        <br>
+                        {{organic(product.organic)}}
                         {{product.description}}
-                        {{product.name}}
+
                         {{product.unitPrice}}
                       </p>
                   </div>
@@ -89,7 +90,7 @@
                   <img src="img/about-03.jpg" alt="Image" class="img-fluid mr-4">
                   <div class="media-body">
                       <h2 class="tm-color-primary tm-post-title mb-2">{{comment.updated}}</h2>
-                      <h3 class="tm-h3 mb-3">{{comment.user}}</h3>
+                      <h3 class="tm-h3 mb-3" style="font-weight: bold; font-size: 120%">{{comment.user}}</h3>
                       <p class="mb-0 tm-line-height-short">
                           Quisque in bibendum elit, in egestas turpis. Vestibulum ornare sollicitudin congue.
                           Aliquam lorem mi, maximus at iaculis ut.
