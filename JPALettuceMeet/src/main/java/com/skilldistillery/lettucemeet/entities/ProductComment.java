@@ -37,7 +37,7 @@ public class ProductComment {
 	@Column(name = "create_time")
 	private LocalDateTime created;
 	
-	@JsonFormat(pattern = "MM-dd-yyyy")
+//	@JsonFormat(pattern = "MM-dd-yyyy")
 	@UpdateTimestamp
 	@Column(name = "update_time")
 	private LocalDateTime updated;

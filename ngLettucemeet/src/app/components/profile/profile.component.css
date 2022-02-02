@@ -93,3 +93,11 @@ tr.disabled > td {
   color: darkred;
   text-decoration: line-through;
 }
+
+/* admin page */
+
+.adminpage {
+  background-color: #ffcd70;
+  color: black;
+  overflow: hidden;
+}

@@ -7,7 +7,7 @@ import { Product } from '../models/product';
 export class KeywordPipe implements PipeTransform {
   transform(products: Product[], keyword: string): Product[] {
     const results: Product[] = [];
-    if (keyword === '') {
+    if (keyword.toLowerCase() === '') {
       return products;
     }
     products.forEach((prod) => {

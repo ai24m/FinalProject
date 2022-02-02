@@ -61,6 +61,7 @@ public class MarketServiceImpl implements MarketService {
 		if (existing != null) {
 			existing.setName(market.getName());
 			existing.setDescription(market.getDescription());
+			existing.setProducts(market.getProducts());
 			existing.setImageUrl(market.getImageUrl());
 			existing.setMarketDate(market.getMarketDate());
 			existing.setAddress(market.getAddress());

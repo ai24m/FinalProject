@@ -7,7 +7,7 @@ import { Market } from '../models/market';
 export class HomeSearchPipe implements PipeTransform {
   transform(markets: Market[], keyword: string): Market[] {
     const results: Market[] = [];
-    if (keyword === '') {
+    if (keyword.toLowerCase() === '') {
       return markets;
     }
     markets.forEach((market) => {
