@@ -34,7 +34,7 @@
               <span>Lastname:</span><br />
               {{ user.lastName }}<br />
               <span>Business Name: </span><br />
-              {{ user.businessname }}<br />
+              {{ user.businessName }}<br />
               <span>Username: {{ user.username }}</span>
               <p class="bio">
                 Bio: We grow produce all year around, stop by and visit our
@@ -127,8 +127,8 @@
                   ><input
                     type="text"
                     class="form-control"
-                    placeholder="{{ user.businessname }}"
-                    [(ngModel)]="userUpdatingInfo.businessname"
+                    placeholder="{{ user.businessName }}"
+                    [(ngModel)]="userUpdatingInfo.businessName"
                     name="businessname"
                   />
                 </div>

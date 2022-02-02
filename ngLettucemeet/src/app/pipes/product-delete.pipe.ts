@@ -6,11 +6,8 @@ import { Product } from '../models/product';
 })
 export class ProductDeletePipe implements PipeTransform {
 
-  transform(products: Product[], showAll?: boolean): Product[] {
+  transform(products: Product[]): Product[] {
     const result: Product[] = [];
-    if (showAll) {
-      return products;
-    }
     products.forEach(product => {
       if (!product.disabled) {
         result.push(product);

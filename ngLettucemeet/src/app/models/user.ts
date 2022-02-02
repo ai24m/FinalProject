@@ -15,7 +15,7 @@ export class User {
   role: string | undefined;
   firstName: string;
   lastName: string;
-  businessname: string;
+  businessName: string;
   imageurl: string;
   address: Address;
   productratings: ProductRating[] = [];
@@ -36,7 +36,7 @@ export class User {
     role?: string,
     firstName: string = '',
     lastName: string = '',
-    businessname: string = '',
+    businessName: string = '',
     imageurl: string = '',
     address: Address = new Address(),
     productrating: ProductRating[] = [],
@@ -56,7 +56,7 @@ export class User {
     this.role = role;
     this.firstName = firstName;
     this.lastName = lastName;
-    this.businessname = businessname;
+    this.businessName = businessName;
     this.imageurl = imageurl;
     this.address = address;
     this.productratings = productrating;
