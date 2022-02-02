@@ -15,7 +15,7 @@ import { Address } from 'src/app/models/address';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
   user: User = new User();
@@ -53,14 +53,14 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.auth.getCurrentUser().subscribe({
       next: (user) => {
-       this.reloadPage(user);
-      }
-    })
+        this.reloadPage(user);
+      },
+    });
   }
 
-  reloadPage(user: User){
+  reloadPage(user: User) {
     this.user = user;
-    if (this.user.role === "admin") {
+    if (this.user.role === 'admin') {
       this.adminLogin = true;
     }
     this.getProducts();
@@ -86,28 +86,29 @@ export class ProfileComponent implements OnInit {
   addProduct(newProduct: Product) {
     console.log(newProduct);
     this.product.createProduct(newProduct).subscribe(
-      success => { //another way to write: function that has parameters todos next: (todos) => { do this function }, error: (wrong) => { }
+      (success) => {
+        //another way to write: function that has parameters todos next: (todos) => { do this function }, error: (wrong) => { }
         this.newProduct = new Product();
         this.reloadPage(this.user);
       },
-      err => console.error('Add Product error' + err)
+      (err) => console.error('Add Product error' + err)
     );
   }
 
-  editForm(product: Product){
+  editForm(product: Product) {
     this.ProductBeingEdited = product;
   }
 
   updateProduct(ProductBeingEdited: Product) {
     this.product.updateProduct(ProductBeingEdited).subscribe(
-      success => {
+      (success) => {
         window.location.reload();
       },
-      err => console.error('Edit Product error' + err)
+      (err) => console.error('Edit Product error' + err)
     );
   }
 
-  deleteForm(product: Product){
+  deleteForm(product: Product) {
     this.ProductBeingDeleted = product;
   }
 
@@ -127,7 +128,7 @@ export class ProfileComponent implements OnInit {
       },
       error: (error) => {
         console.log(error);
-      }
+      },
     });
   }
 
@@ -138,11 +139,11 @@ export class ProfileComponent implements OnInit {
       },
       error: (error) => {
         console.log(error + 'get types error in profilecomponent');
-      }
+      },
     });
   }
 
-  updateBio(user: User, address: Address){
+  updateBio(user: User, address: Address) {
     this.user.address.id = address.id;
     this.userSvc.update(user).subscribe({
       next: () => {
@@ -150,36 +151,40 @@ export class ProfileComponent implements OnInit {
       },
       error: (err) => {
         console.log(err + 'update bio error in profilecomponent');
-      }
-    })
+      },
+    });
   }
 
   productIndex() {
     this.product.productIndex().subscribe({
       next: (prods) => {
         this.products = prods;
+      },
+      error: (err) => {
+        throw new Error('Error getting products.');
       }
     });
-    throw new Error('Function not implemented.');
   }
 
   getMarkets() {
     this.market.index().subscribe({
       next: (mrkts) => {
         this.markets = mrkts;
+      },
+      error: (err) => {
+        throw new Error('Error getting markets.');
       }
-    })
-    throw new Error('Function not implemented.');
+    });
   }
 
   getUsers() {
-    this.userSvc.index().subscribe({
+    this.userSvc.index1().subscribe({
       next: (user) => {
         this.users = user;
       },
       error: (fail) => {
-        console.error("Error getting users" + fail);
-      }
+        console.error('Error getting users' + fail);
+      },
     });
   }
 
@@ -191,13 +196,11 @@ export class ProfileComponent implements OnInit {
     }
     this.userSvc.update(user).subscribe({
       next: () => {
-        this.userEdit = null;
-        this.userSelect = user;
         this.getUsers();
       },
       error: (fail) => {
-        console.error("Error deleting user" + fail);
-      }
+        console.error('Error deleting user' + fail);
+      },
     });
   }
 
@@ -209,13 +212,11 @@ export class ProfileComponent implements OnInit {
     }
     this.product.updateProduct(prod).subscribe({
       next: () => {
-        this.prodEdit = null;
-        this.prodSelect = prod;
         this.getProducts();
       },
       error: (fail) => {
-        console.error("Error deleting user" + fail);
-      }
+        console.error('Error deleting user' + fail);
+      },
     });
   }
 
@@ -227,14 +228,11 @@ export class ProfileComponent implements OnInit {
     }
     this.market.update(mrkt).subscribe({
       next: () => {
-        this.mrktEdit = null;
-        this.mrktSelect = mrkt;
         this.getMarkets;
       },
       error: (fail) => {
-        console.error("Error deleting user" + fail);
-      }
+        console.error('Error deleting user' + fail);
+      },
     });
   }
-
 }

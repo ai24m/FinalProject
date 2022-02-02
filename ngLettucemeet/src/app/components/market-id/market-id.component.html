@@ -12,8 +12,12 @@
               <img src={{selected.imageUrl}} id="headerimage" alt="Image" class="img-fluid">
           </div>
       </div>
+
         <!-- Add Product to Market -->
         <div class="tm-post-sidebar">
+          <div>
+            <app-market-rating [market]="selected" [marketRatings]="marketRatings"></app-market-rating>
+          </div>
           <hr class="mb-3 tm-hr-primary">
           <h2 class="mb-4 tm-post-title tm-color-primary">Feature Your Product!</h2>
             <div class="mb-4">
@@ -34,10 +38,11 @@
               <div class="media-body">
                   <!-- <h2 class="tm-color-primary tm-post-title mb-2">Organizer{{selected?.user}}</h2> -->
                   <!-- <h3 class="tm-h3 mb-3">Organic: {{organic(product.organic)}} </h3> -->
-                  <h3 class="tm-h3 mb-3" >Upcoming Dates: {{selected.marketDate}}</h3>
+                  <h3 class="tm-h3 mb-3" >Upcoming Dates: {{selected.marketDate | date}}</h3>
                   <p class="mb-0 tm-line-height-short">
-                    Address:
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d100612.89571518767!2d-122.5307028!3d37.9968918!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808599d6d3170783%3A0xd80faf4fa75345c!2sSunday%20Marin%20Farmers&#39;%20Market!5e0!3m2!1sen!2sus!4v1643626263272!5m2!1sen!2sus" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    Address:<br>
+                    {{selected.address.street1}}{{selected.address.street2}}<br>
+                    {{selected.address.city}},{{selected.address.state}} {{selected.address.zip}}<br>
                   </p>
               </div>
           </div>
@@ -53,6 +58,7 @@
                   <div>
                     <app-market-comment [market]="selected" [marketComments]="marketComments"></app-market-comment>
                   </div>
+
               </div>
           </div>
       </div>
@@ -69,33 +75,34 @@
           <h2>Vendors</h2>
           <div class="col-lg-6 tm-mb-60 tm-person-col" *ngFor="let product of selected?.products">
               <div class="media tm-person">
-                  <img src="assets/images/products/mushroom1.jpg" alt="Image" class="img-fluid mr-4">
-                  <div class="media-body">
-                      <h2 class="tm-color-primary tm-post-title mb-2">Vendor Owner: {{product.user.firstName}} {{product.user.lastName}}</h2>
-                      <h3 class="tm-h3 mb-3">{{organic(product.organic)}} </h3>
-                      <h3 class="tm-h3 mb-3" >Category: {{product.type.name}}</h3>
-                      <p class="mb-0 tm-line-height-short">
-                        Info on Product:
+                  <img src={{product.imageUrl}} style="width: 300px; height: 250px" alt="Image" class="img-fluid mr-4">
+                  <div class="media-body" style="width: 100%; text-align: left;">
+                      <h2 class="tm-color-primary tm-post-title mb-2">Vendor: {{product.user.firstName}} {{product.user.lastName}}</h2>
+                      <h3 class="tm-h3 mb-3"><span style="color: black">Product:</span><a [routerLink]="['/products/find/', product.id]" class="tm-color-primary">{{product.name}}</a></h3>
+                      <h3 class="tm-h3 mb-3" ><span style="color: black">Category:</span> {{product.type.name}}</h3>
+                      <p class="mb-0 tm-line-height-short" >
+                        <br>
+                        {{organic(product.organic)}}
                         {{product.description}}
-                        {{product.name}}
+
                         {{product.unitPrice}}
                       </p>
                   </div>
               </div>
           </div>
-          <div class="col-lg-6 tm-mb-60 tm-person-col" *ngFor="let comment of selected?.marketComments">
+          <!-- <div class="col-lg-6 tm-mb-60 tm-person-col" *ngFor="let comment of selected?.marketComments">
               <div class="media tm-person">
                   <img src="img/about-03.jpg" alt="Image" class="img-fluid mr-4">
                   <div class="media-body">
                       <h2 class="tm-color-primary tm-post-title mb-2">{{comment.updated}}</h2>
-                      <h3 class="tm-h3 mb-3">{{comment.user}}</h3>
+                      <h3 class="tm-h3 mb-3" style="font-weight: bold; font-size: 120%">{{comment.user}}</h3>
                       <p class="mb-0 tm-line-height-short">
                           Quisque in bibendum elit, in egestas turpis. Vestibulum ornare sollicitudin congue.
                           Aliquam lorem mi, maximus at iaculis ut.
                       </p>
                   </div>
               </div>
-          </div>
+          </div> -->
       </div>
     </main>
   </div>

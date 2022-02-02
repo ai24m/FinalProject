@@ -3,7 +3,7 @@
   <main class="tm-main">
     <!-- forms ? -->
     <div class="row tm-row">
-      <img class="background" src="/assets/images/productsearchbackground.png" />
+      <img class="background" src="assets/images/productsearchbackground.png" />
       <div class="col-12">Search For Local, Fresh Products Near You</div>
       <article>
         <hr class="tm-hr-primary" />
@@ -56,8 +56,7 @@
             <a [routerLink]="['/products/find/', prd.id]">Learn More About {{prd.name}}</a>
             <!-- <br>Sold By {{prd.user.username}} {{prd.user.businessname}}<br> -->
             {{prd.description}}<br>
-            Quantity and Unit Price: {{prd.quantity}} / {{prd.unitPrice}}<br>
-            Dates Available For Sale: {{prd.availableDate}}
+            Dates Available For Sale: {{prd.availableDate | date}}
           </div>
         </cdk-accordion-item>
       </cdk-accordion>

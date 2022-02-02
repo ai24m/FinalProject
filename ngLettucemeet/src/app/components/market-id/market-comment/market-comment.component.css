@@ -1,5 +1,9 @@
 img {
-  width: 20%;
-  height: 20%;
-
+  width: 40%;
+  height: 40%;
+}
+figcaption {
+  font-weight: bold;
+  font-size: 110%;
+  text-align: left;
 }

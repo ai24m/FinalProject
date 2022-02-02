@@ -54,7 +54,7 @@ public class MarketController {
 	@PostMapping("markets") //must create address with market 
 	public Market create(HttpServletRequest req, HttpServletResponse res, Principal principal, 
 			@RequestBody Market market) {
-		try {
+		try {			
 			User user = userSvc.findByUserName(principal.getName()); 
 			marketSvc.create(market, user, market.getAddress()); 
 			res.setStatus(201);
@@ -71,8 +71,11 @@ public class MarketController {
 	public Market update(HttpServletRequest req, HttpServletResponse res, Principal principal, 
 			@PathVariable Integer mId, @RequestBody Market market) {
 		try {
+//			market.addProduct(product);
+			System.out.print("**********************************" + market.getProducts());
 			User user = userSvc.findByUserName(principal.getName());
 			market = marketSvc.update(user, mId, market);
+			System.out.print("**********************************" + market.getProducts());
 			if (market == null) {
 				res.setStatus(404); // 404 request body does not exisy
 			}

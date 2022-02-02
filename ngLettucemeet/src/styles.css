@@ -323,7 +323,7 @@ video {
 }
 
 .tm-comment {
-    display: flex;
+    /* display: flex; */
     align-items: flex-start;
 }
 
@@ -349,9 +349,11 @@ figcaption { line-height: 1.4; }
 
 /* width of sidebar  */
 .tm-post-sidebar {
-    max-width: 280px;
-    margin-left: auto;
-    margin-right: 0;
+    max-width: 300px;
+    margin-right: 10%;
+    font-weight: bold;
+    /* margin-left: auto; */
+    /* margin-right: 0; */
 }
 
 .tm-pt-20 { padding-top: 20px; }
@@ -359,7 +361,7 @@ figcaption { line-height: 1.4; }
 .tm-pt-45 { padding-top: 45px; }
 .tm-pt-60 { padding-top: 60px; }
 .tm-mb-40 { margin-bottom: 40px; }
-.tm-mb-45 { margin-bottom: 45px; }
+/* .tm-mb-45 { margin-bottom: 45px; } */
 .tm-mb-55 { margin-bottom: 55px; }
 .tm-mb-60 { margin-bottom: 60px; }
 .tm-mb-65 { margin-bottom: 65px; }

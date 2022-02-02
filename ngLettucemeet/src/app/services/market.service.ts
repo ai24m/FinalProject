@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Market } from '../models/market';
+import { Product } from '../models/product';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -18,6 +19,7 @@ export class MarketService {
       headers: {
         Authorization: 'Basic ' + this.auth.getCredentials(),
         'X-Requested-With': 'XMLHttpRequest',
+        'Content-Type': 'application/json'
       },
     };
     return options;
@@ -65,7 +67,7 @@ export class MarketService {
       .put<Market>(this.url + '/' + market.id, market, this.getHttpOptions())
       .pipe(
         catchError((problem: any) => {
-          console.error('MarketService.update(): error deleting Market:');
+          console.error('MarketService.update(): error update Market:');
           console.error(problem);
           return throwError(
             () => new Error('MarketService.update():error update Market')
@@ -73,6 +75,25 @@ export class MarketService {
         })
       );
   }
+  updateWithNewProducts(market: Market, product: Product): Observable<Market> {
+    market.products.push(product);
+    return this.http
+      .put<Market>(this.url + '/' + market.id, market, this.getHttpOptions())
+      .pipe(
+        catchError((problem: any) => {
+          console.error('MarketService.update(): error update Market:');
+          console.error(problem);
+          return throwError(
+            () => new Error('MarketService.update():error update Market')
+          );
+        })
+      );
+  }
+
+
+
+
+
   destroy(marketId: number): Observable<void> {
     return this.http
       .delete<void>(this.url + '/' + marketId, this.getHttpOptions())

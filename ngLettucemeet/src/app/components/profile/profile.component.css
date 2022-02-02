@@ -1,3 +1,6 @@
+body {
+  background-color: #ffcd70;
+}
 .container-fluid{
   background-color: #ffcd70;
   color: black;
@@ -92,4 +95,16 @@ span {
 tr.disabled > td {
   color: darkred;
   text-decoration: line-through;
+}
+
+/* admin page */
+
+.adminpage {
+  background-color: #ffcd70;
+  color: black;
+  overflow: hidden;
+}
+
+button {
+width: 150px;
 }

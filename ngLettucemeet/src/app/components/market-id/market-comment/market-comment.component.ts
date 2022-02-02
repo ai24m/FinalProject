@@ -3,6 +3,8 @@ import { MarketComment } from '../../../models/market-comment';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Market } from 'src/app/models/market';
+import { AuthService } from 'src/app/services/auth.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-market-comment',
@@ -16,31 +18,41 @@ export class MarketCommentComponent implements OnInit {
   marketCommentReply: MarketComment = new MarketComment();
   marketId: number = 0;
   @Input() market: Market = new Market();
+  user: User = new User();
+  hide: boolean = false;
+  showDelete: boolean = false;
 
   constructor(
     private MarketCommentSev: MarketcommentService,
+    private auth: AuthService,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.auth.getCurrentUser().subscribe({
+      next: (user) => {
+        this.user = user;
+      }
+    })
+
     if (this.route.parent != null) {
       let idString = this.route.parent.snapshot.paramMap.get('id');
       if (idString) {
         let id = Number.parseInt(idString);
-        if (!isNaN(id)) {
-         this.loadMarketComments(id);
-        }
+        this.loadMarketComments(id);
       }
     }
     // this.reload();
   }
 
   loadMarketComments(id: number){
-    this.MarketCommentSev.getByMarketId(id).subscribe({
-      next: (comments) => {
-        this.marketComments = comments;
-      },
-    });
+    if (!isNaN(id)) {
+      this.MarketCommentSev.getByMarketId(id).subscribe({
+        next: (comments) => {
+          this.marketComments = comments;
+        },
+      });
+    }
   }
 
   getCommentsByMarketId(marketId: number) {
@@ -74,7 +86,7 @@ export class MarketCommentComponent implements OnInit {
       next: (marketComment) => {
         this.newMarketCommet = new MarketComment();
         // this.ngOnInit();
-        this.loadMarketComments(this.market.id);
+        this.loadMarketComments(marketId);
       },
       error: (err) => {
         console.error('Error creating A new marketComment');
@@ -114,9 +126,7 @@ export class MarketCommentComponent implements OnInit {
       },
     });
   }
-  displayTable() {
-    this.selected = null;
-  }
+
   displayMarketComment(marketComment: MarketComment) {
     this.selected = marketComment;
   }
