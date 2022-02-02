@@ -16,31 +16,19 @@ export class ProductCommentComponent implements OnInit {
   newProductComment: ProductComment = new ProductComment();
   editProductComment: ProductComment = new ProductComment();
   destroyProductComment: ProductComment = new ProductComment();
+  selected: ProductComment | null = null;
   productId: number = 0;
   @Input() product: Product = new Product();
   user: User = new User();
   editComments: string[] = [];
-  // editPC: boolean = false;
-  // addPC: boolean = false;
-  // destroyPC: boolean = false;
-  // selectedProductComment: ProductComment | null = null;
+  hide: boolean = false;
+  showDelete: boolean = false;
 
   constructor(
     private productCommentService: ProductCommentService,
     private route: ActivatedRoute,
     private router: Router,
     private auth: AuthService) { }
-
-  // ngOnInit(): void {
-  //   this._productCommentService.index().subscribe({
-  //     next: (allProductComments) => {
-  //       this.productComments = allProductComments;
-  //       this.reloadProductComment();
-  //     },
-  //     error: (fail) => { console.error('ProductRatingComponent FAIL')}
-  //   })
-  //   this.reloadProductComment();
-  // }
 
   loadCommentsForProduct(productId: number) {
     if (!isNaN(productId)) {
@@ -76,12 +64,12 @@ export class ProductCommentComponent implements OnInit {
     // this.reloadProductComment();
   }
 
-  // reloadProductComment() {
-  //   this.productCommentService.index().subscribe(
-  //     productComment => this.productComments = productComment,
-  //     err => console.error('Reload error' + err)
-  //   );
-  // }
+  reloadProductComment() {
+    this.productCommentService.index().subscribe(
+      productComment => this.productComments = productComment,
+      err => console.error('Reload error' + err)
+    );
+  }
 
   addProductComment(productComment: ProductComment, productId: number) {
     if (productComment.myReplies.length > 0) {
@@ -134,5 +122,9 @@ export class ProductCommentComponent implements OnInit {
         console.error('Destroy component.ts ');
       },
     });
+  }
+
+  displayProductComment(productComment: ProductComment) {
+    this.selected = productComment;
   }
 }
