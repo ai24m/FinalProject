@@ -70,13 +70,13 @@
           <h2>Vendors</h2>
           <div class="col-lg-6 tm-mb-60 tm-person-col" *ngFor="let product of selected?.products">
               <div class="media tm-person">
-                  <img src={{selected.imageUrl}} alt="Image" class="img-fluid mr-4">
-                  <div class="media-body">
-                      <h2 class="tm-color-primary tm-post-title mb-2">Vendor Owner: {{product.user.firstName}} {{product.user.lastName}}</h2>
+                  <img src={{product.imageUrl}} style="width: 300px; height: 250px" alt="Image" class="img-fluid mr-4">
+                  <div class="media-body" style="width: 50%;">
+                      <h2 class="tm-color-primary tm-post-title mb-2">Vendor: {{product.user.firstName}} {{product.user.lastName}}</h2>
                       <h3 class="tm-h3 mb-3">{{organic(product.organic)}} </h3>
                       <h3 class="tm-h3 mb-3" >Category: {{product.type.name}}</h3>
                       <p class="mb-0 tm-line-height-short">
-                        Info on Product:
+                        Info: <br>
                         {{product.description}}
                         {{product.name}}
                         {{product.unitPrice}}
